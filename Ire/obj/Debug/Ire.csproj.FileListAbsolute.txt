@@ -1,0 +1,6 @@
+c:\users\u0159027\documents\visual studio 2013\Projects\Ire\Ire\bin\Debug\Ire.exe.config
+c:\users\u0159027\documents\visual studio 2013\Projects\Ire\Ire\bin\Debug\Ire.exe
+c:\users\u0159027\documents\visual studio 2013\Projects\Ire\Ire\bin\Debug\Ire.pdb
+c:\users\u0159027\documents\visual studio 2013\Projects\Ire\Ire\obj\Debug\Ire.exe
+c:\users\u0159027\documents\visual studio 2013\Projects\Ire\Ire\obj\Debug\Ire.pdb
+C:\Users\U0159027\Documents\Visual Studio 2013\Projects\Ire\Ire\obj\Debug\Ire.csprojResolveAssemblyReference.cache
