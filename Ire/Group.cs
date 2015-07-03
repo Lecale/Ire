@@ -35,5 +35,10 @@ namespace Ire
             pins.Add(i);
         }
 
+        public int count()
+        {
+            return pins.Count;
+        }
+
     }
 }
