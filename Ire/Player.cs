@@ -54,6 +54,16 @@ namespace Ire
             f += MMS;
                 return f;
         }
+
+        public float getMMS(int rnd)
+        {
+            float f = 0;
+            for (int i = 0; i < rnd; i++)
+                f += score[i];
+            f += MMS;
+            return f;
+        }
+
         //Use for SOS calculation
         public int getOpponent(int i)
         {
