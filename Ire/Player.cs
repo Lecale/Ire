@@ -95,8 +95,8 @@ namespace Ire
         {
             MMS = s;
         }
-        public string getPin()
-        { return ""+pin; }
+        public int getPin()//why is this a string?
+        { return pin; }
         public void setTop()
         { topBar = true; }
         public bool isTop()

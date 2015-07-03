@@ -200,6 +200,42 @@ namespace Ire
                 _players.ElementAt(i).setResult(CUR_Round, -1 , (float)0.5);
             }
             //go top down
+            
+        }
+
+        public void MakeGroups(int rnd)
+        {
+            float gLog = -1;
+            _groups.Clear();
+            //create all the groups
+            foreach (Player p in _players)
+            {
+                if (p.getParticipation(rnd - 1))
+                {
+                    if (p.getMMS() != gLog)
+                    {
+                        _groups.Add(new Group(p.getMMS()));
+                        gLog = p.getMMS();
+                    }
+                }
+            }
+            int posn = 0; //add all the players
+            foreach (Player p in _players)
+            {
+                if (p.getParticipation(rnd - 1))
+                {
+                    if (p.getMMS() == _groups.ElementAt(posn).MMS)
+                    {
+                        _groups.ElementAt(posn).add(p.getPin() );
+                    }
+                    else 
+                    {
+                        posn++;
+                        _groups.ElementAt(posn).add(p.getPin());
+                    }
+                }
+            }
+           
         }
 
         // Give bye to lowest n.byes, then lowest ranked
