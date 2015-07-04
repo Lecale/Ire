@@ -14,8 +14,10 @@ namespace Ire
         protected int rating;
         protected float MMS = -1;  //static
         protected float[] score;
-        protected bool[] participation;
-        protected int[] opponent;
+		protected bool[] participation;
+		protected int[] opponent;
+		protected int[] handi;
+		protected int[] BlackWhite;
         protected int pin; //internal id
         protected bool topBar = false; //no handicap
         protected bool botBar = false; 
@@ -34,17 +36,27 @@ namespace Ire
 
             for (int ii = 0; ii < tr; ii++)
             {
-                participation[ii]=true;
-                opponent[ii] = 0;
+				participation[ii]=true;
+				opponent[ii] = 0;
+				handi[ii] = 0;
+				BlackWhite[ii] = 0;
                 score[ii] = -1;
             }
         }
         //Allows Override
-        public void setResult(int rnd, int op, float sc)
-        {
-            score[rnd] = sc;
-            opponent[rnd] = op;
-        }
+		public void setResult(int rnd, int op, float sc)
+		{
+			score[rnd] = sc;
+			opponent[rnd] = op;
+		}
+		//This is the correct method
+		public void setResult(int rnd, int op, float sc, int hnd=0, int BW =1)
+		{
+			score[rnd] = sc;
+			opponent[rnd] = op;
+			handi[rnd] = hnd;
+			BlackWhite[rnd] = BW;
+		}
 
         public float getMMS()
         {
@@ -64,11 +76,16 @@ namespace Ire
             return f;
         }
 
-        //Use for SOS calculation
-        public int getOpponent(int i)
-        {
-            return opponent[i];
-        }
+		//Use for SOS calculation
+		public int getOpponent(int i)
+		{
+			return opponent[i];
+		}//Use for SOS calculation
+		public int getAdjHandi(int i)
+		{
+			//if black substract handicap , if White add handicap to SOS
+			return handi[i] * BlackWhite[i];
+		}
         public void setOpponent(int i, int r)
         {
             opponent[r] = i;

@@ -1,0 +1,6 @@
+/Users/iandavis/Documents/Ire/Ire/obj/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/Users/iandavis/Documents/Ire/Ire/bin/Debug/Ire.exe.config
+/Users/iandavis/Documents/Ire/Ire/bin/Debug/Ire.exe.mdb
+/Users/iandavis/Documents/Ire/Ire/bin/Debug/Ire.exe
+/Users/iandavis/Documents/Ire/Ire/obj/Debug/Ire.exe
+/Users/iandavis/Documents/Ire/Ire/obj/Debug/Ire.exe.mdb
