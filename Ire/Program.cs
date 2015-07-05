@@ -26,6 +26,9 @@ namespace Ire
             //sort players
             //loop until tournament end
 
+
+			Import i = new Import ();
+			i.DownloadMasterZipEGF ();
         }
     }
 }

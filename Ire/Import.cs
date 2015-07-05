@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net;
+using Ionic.Zip;
+
 namespace Ire
 {
 	public class Import
@@ -13,8 +15,12 @@ namespace Ire
 		{
 		}
 
-
-	public void DownloadEGF ()
+	/*
+	 * Download Master file
+	 * List of all World players who ever participated in any included tournament
+	 * Should really download the zipped version to be nice
+	 */ 
+	public void DownloadMasterEGF ()
 	{
 		string uri = "http://www.europeangodatabase.eu/EGD/EGD_2_0/downloads/allworld_lp.html";
 		
@@ -32,6 +38,29 @@ namespace Ire
 			riter.Write (s);
 
 	}
+
+
+
+		public void DownloadMasterZipEGF ()
+		{
+
+			string uri = "http://www.europeangodatabase.eu/EGD/EGD_2_0/downloads/allworld_lp.zip";
+			string egfCopy = "/Users/iandavis/egzipdata.zip";
+			string egfCopyUnZipped = "/Users/iandavis/egzipdata.txt";
+
+//			WebClient client = new WebClient ();
+//			client.DownloadFile (uri, egfCopy);
+
+			Console.WriteLine ("DownloadMasterZipEGF file downloaded");
+
+			FileInfo fi = new FileInfo (egfCopy);
+
+			string unzipdir = "/Users/iandavis/";
+			using (ZipFile zip = ZipFile.Read(fi.FullName))
+			{
+				zip.ExtractAll (unzipdir);
+			}
+		}
 
 		public void GenerateTemplate()
 		{
@@ -64,11 +93,10 @@ namespace Ire
 
 		/*
 		 *  Read raw egf data and write to excel type file
-		 * 
 		 * There are a lot of players from RO Drob who are fake 
 		 */
 
-		public void FormatEGF()
+		public void FormatMasterEGF()
 		{
 			string tTest = "PIN          Name                              Club     Grade P&D";
 			bool faci = false;	
@@ -87,7 +115,7 @@ namespace Ire
 			//using (StreamReader reader = new StreamReader ("/Users/iandavis/egfrawdata.txt")) {
 
 				using (StreamWriter riter = new StreamWriter ("/Users/iandavis/egf.tsv")) {
-					riter.WriteLine ("name"+T+"country"+T+"club"+T+"rating"+T+"grade"+T+"pin");
+					riter.WriteLine ("pin"+T+"name"+T+"rating"+T+"country"+T+"club"+T+"grade");
 					while ((line = reader.ReadLine ()) != null) {
 						if (faci) {
 							line = line.Trim (); 
