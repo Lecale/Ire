@@ -68,6 +68,7 @@ namespace Ire
 
 		public void ReadPlayers (List<Player> _p)
 		{
+			string fin = "/Users/iandavis/players.tsv";
 		}
 
 		public void GenerateTemplate()
