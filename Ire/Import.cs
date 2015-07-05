@@ -9,8 +9,12 @@ using Ionic.Zip;
 
 namespace Ire
 {
-	public class Import
+	class Import
 	{
+		/*
+		 * Directory path flexibility not here yet
+		 */
+
 		public Import ()
 		{
 		}
@@ -62,9 +66,13 @@ namespace Ire
 			}
 		}
 
+		public void ReadPlayers (List<Player> _p)
+		{
+		}
+
 		public void GenerateTemplate()
 		{
-			string fOut = "/Users/iandavis/egfrawdata.txt";
+			string fOut = "/Users/iandavis/players.tsv";
 			Console.WriteLine ("Setting Tournament Information");
 			Console.WriteLine ("Please enter the Tournament Name:");
 			string name  = Console.ReadLine ();

@@ -23,12 +23,12 @@ namespace Ire
         protected bool botBar = false; 
         protected float SOS = -1;
 
-        public void setPlayer(string n, string c, string g, int r, int tr, int p)
+        public void setPlayer(string nom, string cc, string g, int rt, int tr, int p)
         {
-            name = n;
-            country = c;
+            name = nom;
+            country = cc;
             grade = g;
-            rating = r;
+            rating = rt;
             score = new float[tr];
             participation = new bool[tr];
             opponent = new int[tr]; //positive=player //negative=bye //0=?
