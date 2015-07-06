@@ -199,7 +199,20 @@ namespace Ire
                 _byes.Add(b);
                 _players.ElementAt(i).setResult(CUR_Round, -1 , (float)0.5);
             }
+            //make groups
+            MakeGroups(CUR_Round);
             //go top down
+            foreach (Player p in _players)
+                if (p.getParticipation(CUR_Round))
+                    unpaired.Add(p);
+            float gLog;
+            int thePin;
+            foreach (Player p in unpaired)
+            {
+                //look for their group
+                gLog = p.getMMS();
+
+            }
             
         }
 
