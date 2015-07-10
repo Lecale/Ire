@@ -11,7 +11,12 @@ namespace Ire
         protected Round[] _rounds;
         protected List<Player> _players = new List<Player>();
         protected List<Group> _groups = new List<Group>(); //use for pairing
+        protected List<float> _groupIndex = new List<float>();
         protected List<Bye> _byes = new List<Bye>(); //dirty way to track
+
+        protected List<Player> byes = new List<Player>();
+        protected List<Player> paired = new List<Player>();
+        protected List<Player> unpaired = new List<Player>();
         protected string STATE = "NULL";
         protected int CUR_Round = -1;
 
@@ -178,11 +183,12 @@ namespace Ire
            
         }
 
+        //make FoldPairing
         public void MakePairing()
         {
-            List<Player> byes = new List<Player>();
-            List<Player> paired = new List<Player>();
-            List<Player> unpaired = new List<Player>();
+            byes.Clear();
+            paired.Clear();
+            unpaired.Clear();
             //Find n_players participating
             foreach(Player p in _players)
             {
@@ -211,7 +217,10 @@ namespace Ire
             {
                 //look for their group
                 gLog = p.getMMS();
-
+                foreach (Group _g in _groups)
+                {
+                    
+                }
             }
             
         }
@@ -220,6 +229,7 @@ namespace Ire
         {
             float gLog = -1;
             _groups.Clear();
+            _groupIndex.Clear();
             //create all the groups
             foreach (Player p in _players)
             {
@@ -229,6 +239,7 @@ namespace Ire
                     {
                         _groups.Add(new Group(p.getMMS()));
                         gLog = p.getMMS();
+                        _groupIndex.Add(gLog);
                     }
                 }
             }
