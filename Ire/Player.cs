@@ -24,8 +24,15 @@ namespace Ire
         protected bool botBar = false; 
         protected float SOS = -1;
 
-		public Player(string _pin, string _nom , int rat, string ctry, string club, bool[] par) 
+		public Player(string _pin, string _nom , int rat, string ctry, string _club, bool[] par) 
 		{
+			pin = int.Parse(_pin);
+			name = _nom;
+			rating = rat;
+			country = ctry;
+			club = _club;
+			for(int i=0; i<par.Length; i++)
+				participation[i]=par[i];
 		}
 
         public void setPlayer(string nom, string cc, string g, int rt, int tr, int p)
