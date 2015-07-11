@@ -8,8 +8,9 @@ namespace Ire
 {
     class Player : IComparable
     {
-        protected string name = "";
-        protected string country = "";
+		protected string name = "";
+		protected string country = "";
+		protected string club = "";
         protected string grade = "";
         protected int rating;
         protected float MMS = -1;  //static
@@ -22,6 +23,10 @@ namespace Ire
         protected bool topBar = false; //no handicap
         protected bool botBar = false; 
         protected float SOS = -1;
+
+		public Player(string _pin, string _nom , int rat, string ctry, string club, bool[] par) 
+		{
+		}
 
         public void setPlayer(string nom, string cc, string g, int rt, int tr, int p)
         {

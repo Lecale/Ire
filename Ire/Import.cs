@@ -66,9 +66,33 @@ namespace Ire
 			}
 		}
 
+		//		string hdr = "Pin\tName\tRating\tClub\tCountry";
 		public void ReadPlayers (List<Player> _p)
 		{
+			string tLn = "";
 			string fin = "/Users/iandavis/players.tsv";
+			using(StreamReader reader = new StreamReader (fin))
+			{
+				tLn = reader.ReadLine();
+				String [] split = tLn.Split ('\t');
+				int rnd = split.Length - 4;
+				try{
+					int rats = int.Parse(split[2]);
+					bool [] bull = new bool[rnd];
+					for(int i=5; i<split.Length; i++)
+					{
+						if((split[i].Trim()).ToUpper().Equals( "X"))
+							bull[i-5] = false;
+						else
+							bull[i-5] = true;
+					}
+					_p.Add( new Player(split[0],split[1],rats,split[3],split[4],bull) );
+				}
+				catch(Exception e) {
+					Console.WriteLine ("Entry format error");
+					Console.WriteLine (tLn);
+				}
+			}
 		}
 
 		public void GenerateTemplate()
