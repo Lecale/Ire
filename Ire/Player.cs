@@ -24,9 +24,9 @@ namespace Ire
         protected bool botBar = false; 
         protected float SOS = -1;
 
-		public Player(string _pin, string _nom , int rat, string ctry, string _club, bool[] par) 
+		public Player(int _pin, string _nom , int rat, string ctry, string _club, bool[] par) 
 		{
-			pin = int.Parse(_pin);
+			pin = _pin;
 			name = _nom;
 			rating = rat;
 			country = ctry;

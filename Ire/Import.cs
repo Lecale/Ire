@@ -77,6 +77,7 @@ namespace Ire
 				String [] split = tLn.Split ('\t');
 				int rnd = split.Length - 4;
 				try{
+					int pine = int.Parse(split[0]);
 					int rats = int.Parse(split[2]);
 					bool [] bull = new bool[rnd];
 					for(int i=5; i<split.Length; i++)
@@ -86,7 +87,7 @@ namespace Ire
 						else
 							bull[i-5] = true;
 					}
-					_p.Add( new Player(split[0],split[1],rats,split[3],split[4],bull) );
+					_p.Add( new Player(pine,split[1],rats,split[3],split[4],bull) );
 				}
 				catch(Exception e) {
 					Console.WriteLine ("Entry format error");
