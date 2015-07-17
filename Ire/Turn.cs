@@ -213,13 +213,30 @@ namespace Ire
                     unpaired.Add(p);
             float gLog;
             int thePin;
+			bool validMatch = false;
+			Player pTest;
+			int iTest;
+			string test = "";
             foreach (Player p in unpaired)
             {
                 //look for their group
                 gLog = p.getMMS();
-                foreach (Group _g in _groups)
+				validMatch = false;
+
+				for(int gI = _groupIndex.IndexOf (gLog); gI< _groups.Count; gI++) 
                 {
-                    
+					//what is the quickest way to check that the player is not in Paired list?
+					//change below line into a loop
+					iTest = _groups.ElementAt(gI).GetPinAt(0); //add loop
+					//iTest = pTest.getPin();
+					if((iTest == p.getPin()) == false)
+					{
+						if (int.Parse(test) > p.getPin())
+							test = test + p.getPin();
+						else
+							test = p.getPin() + test;
+					}
+						
                 }
             }
             

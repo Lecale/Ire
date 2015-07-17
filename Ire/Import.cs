@@ -66,7 +66,11 @@ namespace Ire
 			}
 		}
 
-		//		string hdr = "Pin\tName\tRating\tClub\tCountry";
+
+		/*	Pin tName tRating tClub tCountry
+		 *
+		 *What if the player already exists, do we have to worry about this?
+		*/
 		public void ReadPlayers (List<Player> _p)
 		{
 			string tLn = "";
@@ -174,11 +178,11 @@ namespace Ire
 									li.Append(T);
 									li.Append(line.Substring(70,4).Trim()); // GoR
 									li.Append(T);
-									li.Append(line.Substring(48,3).Trim()); 
+									li.Append(line.Substring(48,3).Trim()); //Country
 									li.Append(T);
-									li.Append(line.Substring(51,5).Trim());
+									li.Append(line.Substring(51,5).Trim()); //Club
 									li.Append(T);
-									li.Append(line.Substring(59,3).Trim());
+									li.Append(line.Substring(59,3).Trim()); //Grade
 									li.Append(T);
 
 								riter.WriteLine (li);
@@ -187,7 +191,7 @@ namespace Ire
 						} 
 						else {
 							Console.WriteLine (line);
-							line = line.Trim (); //seems not to work?
+							line = line.Trim (); 
 							if (line.StartsWith (tTest)) {
 								faci = true;
 								line = reader.ReadLine ();
@@ -201,11 +205,7 @@ namespace Ire
 
 
 		}
-
-
-
-
-
+			
 	}
 }
 
