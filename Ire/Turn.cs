@@ -226,15 +226,20 @@ namespace Ire
 				for(int gI = _groupIndex.IndexOf (gLog); gI< _groups.Count; gI++) 
                 {
 					//what is the quickest way to check that the player is not in Paired list?
-					//change below line into a loop
-					iTest = _groups.ElementAt(gI).GetPinAt(0); //add loop
-					//iTest = pTest.getPin();
-					if((iTest == p.getPin()) == false)
-					{
-						if (int.Parse(test) > p.getPin())
-							test = test + p.getPin();
-						else
-							test = p.getPin() + test;
+
+
+					for (int i2 = 0; i2 < _groups.ElementAt (gI).count (); i2++) {
+					// Check each player in the current group
+						// find their pin - not us, not paired -> pair
+						iTest = _groups.ElementAt(gI).GetPinAt(i2); //is this the correct direction?
+						if((iTest == p.getPin()) == false)
+						{
+							if (int.Parse(test) > p.getPin())
+								test = test + p.getPin();
+							else
+								test = p.getPin() + test;
+						}
+
 					}
 						
                 }

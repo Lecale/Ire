@@ -24,6 +24,11 @@ namespace Ire
         protected bool botBar = false; 
         protected float SOS = -1;
 
+		public Player(int tPin)
+		{
+			pin = tPin;
+		}
+
 		public Player(int _pin, string _nom , int rat, string ctry, string _club, bool[] par) 
 		{
 			pin = _pin;
