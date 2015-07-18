@@ -145,6 +145,21 @@ namespace Ire
         public bool isbot()
         { return botBar; }
 
+		public override bool Equals(System.Object obj)
+		{
+			if (obj == null)
+				return false;
+			try{
+				Player p = (Player) obj;
+				if(pin==p.pin)
+					return true;
+			}
+			catch(Exception e) {
+				return false;
+			}
+			return false;
+		}
+
         public int CompareTo(Object o)
         {
             Player p = (Player)o; // yuck
