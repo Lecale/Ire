@@ -216,7 +216,7 @@ namespace Ire
 			bool validMatch = false;
 			Player pTest;
 			int iTest;
-			string test = "";
+			string test = ""; //contains 2 pins for pairing
             foreach (Player p in unpaired)
             {
                 //look for their group
@@ -238,6 +238,11 @@ namespace Ire
 								test = test + p.getPin();
 							else
 								test = p.getPin() + test;
+							if (!PlayedPairings.Contains (test))
+							if (!BlockedPairings.Contains (test)) {
+								if(unpaired.Contains(new Player(iTest)))
+									validMatch = true;
+							}
 						}
 
 					}
