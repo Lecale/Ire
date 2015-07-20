@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ire
 {
-    class Player : IComparable
+    class Player : MiniPlayer, IComparable
     {
 		protected string name = "";
 		protected string country = "";
@@ -24,14 +24,16 @@ namespace Ire
         protected bool botBar = false; 
         protected float SOS = -1;
 
-		public Player(int tPin)
+		public Player(int tPin) 
+            : base (tPin)
 		{
-			pin = tPin;
+//			pin = tPin;
 		}
 
 		public Player(int _pin, string _nom , int rat, string ctry, string _club, bool[] par) 
-		{
-			pin = _pin;
+            : base (_pin)
+        {
+//			pin = _pin;
 			name = _nom;
 			rating = rat;
 			country = ctry;
