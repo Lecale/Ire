@@ -223,6 +223,8 @@ namespace Ire
                 gLog = p.getMMS();
 				validMatch = false;
 
+				while (validMatch == false) {
+
 				for(int gI = _groupIndex.IndexOf (gLog); gI< _groups.Count; gI++) 
                 {
 					//what is the quickest way to check that the player is not in Paired list?
@@ -248,6 +250,7 @@ namespace Ire
 					}
 						
                 }
+				}//while(validMatch ==false)
             }
             
         }
