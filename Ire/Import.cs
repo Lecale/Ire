@@ -100,6 +100,19 @@ namespace Ire
 			}
 		}
 
+		public void GenerateRoundResults(int i, List<Pairing> ps)
+		{
+			string fOut = "/Users/iandavis/Round" + i + "Results.tsv";
+
+			using (StreamWriter riter = new StreamWriter (fOut)) {
+				riter.WriteLine ("Results of Round " + i);
+				riter.WriteLine ("white  :  black");
+				foreach (Pairing p in ps)
+					riter.WriteLine (p.BasicOutput());
+			}				
+
+		}
+
 		public void GenerateTemplate()
 		{
 			string fOut = "/Users/iandavis/players.tsv";
