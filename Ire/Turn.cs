@@ -309,6 +309,9 @@ namespace Ire
             return _players.Count -1;
         }
 
-
+        public int CalculateHandicap(Player localWhite, Player localBlack)
+        {
+            return 0;
+        }
     }
 }
