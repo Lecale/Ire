@@ -311,7 +311,13 @@ namespace Ire
 
         public int CalculateHandicap(Player localWhite, Player localBlack)
         {
-            return 0;
+            if( localWhite.isTop() )
+                return 0;
+            if (localBlack.isTop())
+                return 0;
+            float lwMMS = localWhite.getMMS();
+            float lbMMS = localBlack.getMMS();
+            return (int)(lwMMS - lbMMS);
         }
     }
 }
