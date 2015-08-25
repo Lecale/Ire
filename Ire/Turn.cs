@@ -39,6 +39,11 @@ namespace Ire
             TempPairings = new List<string>();
         }
 
+        public void AddPlayersFromImport(List<Player> players)
+        {
+            _players = players;
+        }
+
         // of course his details are read in via file!
         public void AddLatePlayer(Player p)
         {

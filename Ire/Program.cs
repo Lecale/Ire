@@ -28,7 +28,12 @@ namespace Ire
 
 
 			Import i = new Import ();
-			i.DownloadMasterZipEGF ();
+	//		i.DownloadMasterZipEGF ();
+            i.GenerateTemplate();
+            Turn t = new Turn(i._Round);
+            t.AddPlayersFromImport(i.ReadPlayers());
+            
+
         }
     }
 }

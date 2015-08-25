@@ -11,6 +11,8 @@ namespace Ire
 {
 	class Import
 	{
+
+        public int _Round = 0;
 		/*
 		 * Directory path flexibility not here yet
 		 */
@@ -67,17 +69,21 @@ namespace Ire
 		}
 
 
-		/*	Pin tName tRating tClub tCountry
-		 *
+		/*	
+         * Pin tName tRating tClub tCountry
 		 *What if the player already exists, do we have to worry about this?
+         *GIGO
 		*/
-		public void ReadPlayers (List<Player> _p)
+		public List<Player> ReadPlayers ()
 		{
+            List<Player> _p = new List<Player>();
 			string tLn = "";
 			string fin = "/Users/iandavis/players.tsv";
 			using(StreamReader reader = new StreamReader (fin))
 			{
-				tLn = reader.ReadLine();
+                for (int i = 0; i < 5; i++)
+                    tLn = reader.ReadLine(); //trip through headers
+                tLn = reader.ReadLine();
 				String [] split = tLn.Split ('\t');
 				int rnd = split.Length - 4;
 				try{
@@ -98,6 +104,7 @@ namespace Ire
 					Console.WriteLine (tLn);
 				}
 			}
+            return _p;
 		}
 
 		public void GenerateRoundResults(int i, List<Pairing> ps)
@@ -121,6 +128,7 @@ namespace Ire
 			string name  = Console.ReadLine ();
 			Console.WriteLine ("Please enter number of Rounds:");
 			string round  = Console.ReadLine ();
+            _Round = int.Parse(round);
 			/*
 			Console.WriteLine ("Top Group (yes / no )");
 			string top  = Console.ReadLine ();
@@ -128,7 +136,7 @@ namespace Ire
 			string bot  = Console.ReadLine ();
 */
 			using (StreamWriter riter = new StreamWriter (fOut)) {
-				riter.WriteLine ("Tournament Name: " + name);
+				riter.WriteLine ("Tournament Name:\t" + name);
 				riter.WriteLine ("Copy Paste the Player information into the sheet");
 				riter.WriteLine ("PIN , Name, Rating, Club, Country");
 				riter.WriteLine ("type X into the round column to mark a Bye");
