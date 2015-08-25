@@ -309,14 +309,14 @@ namespace Ire
             return _players.Count -1;
         }
 
-        public int CalculateHandicap(Player localWhite, Player localBlack)
+		public int CalculateHandicap(Player localWhite, Player localBlack, int rnd)
         {
             if( localWhite.isTop() )
                 return 0;
             if (localBlack.isTop())
                 return 0;
-            float lwMMS = localWhite.getMMS();
-            float lbMMS = localBlack.getMMS();
+            float lwMMS = localWhite.getMMS(rnd);
+            float lbMMS = localBlack.getMMS(rnd);
             return (int)(lwMMS - lbMMS);
         }
     }
