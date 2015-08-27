@@ -13,9 +13,8 @@ namespace Ire
 	{
 
         public int _Round = 0;
-		/*
-		 * Directory path flexibility not here yet
-		 */
+        public string directoryPath;
+        public bool onMac = true;  //handle directory things
 
 		public Import ()
 		{
@@ -122,7 +121,13 @@ namespace Ire
 
 		public void GenerateTemplate()
 		{
-			string fOut = "/Users/iandavis/players.tsv";
+
+            string fOut = "/Users/iandavis/players.tsv";
+            try {
+                Console.WriteLine("Please enter the fully qualified directory path for the tournament");
+                directoryPath = Console.ReadLine();
+            }
+            catch(Exception e){;}
 			Console.WriteLine ("Setting Tournament Information");
 			Console.WriteLine ("Please enter the Tournament Name:");
 			string name  = Console.ReadLine ();
