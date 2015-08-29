@@ -53,6 +53,7 @@
     <Compile Include="Round.cs" />
     <Compile Include="Turn.cs" />
     <Compile Include="Import.cs" />
+    <Compile Include="MiniPlayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

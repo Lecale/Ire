@@ -324,5 +324,13 @@ namespace Ire
             float lbMMS = localBlack.getMMS(rnd);
             return (int)(lwMMS - lbMMS);
         }
+
+		public void DebugPlayers()
+		{
+			Console.WriteLine ("Debug Players");
+			Console.WriteLine ("");
+			foreach (Player p in _players)
+				Console.WriteLine (p.ToString ());
+		}
     }
 }

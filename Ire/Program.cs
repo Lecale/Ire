@@ -30,9 +30,10 @@ namespace Ire
 			Import i = new Import ();
 	//		i.DownloadMasterZipEGF ();
             i.GenerateTemplate();
+			Console.ReadLine ();
             Turn t = new Turn(i._Round);
             t.AddPlayersFromImport(i.ReadPlayers());
-            
+			t.DebugPlayers ();
 
         }
     }
