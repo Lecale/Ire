@@ -38,6 +38,7 @@ namespace Ire
 			rating = rat;
 			country = ctry;
 			club = _club;
+			//participation does not exist
 			for(int i=0; i<par.Length; i++)
 				participation[i]=par[i];
 		}
