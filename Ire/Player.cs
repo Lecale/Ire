@@ -39,6 +39,7 @@ namespace Ire
 			country = ctry;
 			club = _club;
 			//participation does not exist
+			participation = new bool[par.Length];
 			for(int i=0; i<par.Length; i++)
 				participation[i]=par[i];
 		}
