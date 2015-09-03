@@ -77,37 +77,48 @@ namespace Ire
 		{
             List<Player> _p = new List<Player>();
 			string tLn = "";
-			string fin = "/Users/iandavis/players.csv";
-			using(StreamReader reader = new StreamReader (fin))
+         //   string fin = "/Users/iandavis/players.csv";
+            string fin = "c:\\ire\\players.csv";
+            using (StreamReader reader = new StreamReader(fin))
 			{
                 for (int i = 0; i < 6; i++)
                     tLn = reader.ReadLine(); //trip through headers
-                tLn = reader.ReadLine();
-				String [] split = tLn.Split (',');
-				Console.WriteLine (split.Length);
-				int rnd = split.Length - 5;
-				Console.WriteLine ("rnd" + rnd);
-				try{
-					int pine = int.Parse(split[0]);
-					Console.WriteLine ("pin" + pine);
-					int rats = int.Parse(split[2]);
-					Console.WriteLine ("rat" + rats);
-					bool [] bull = new bool[rnd];
-					for(int i=5; i<rnd+5; i++)
-					{
-						if(split[i].Equals("")==false){
-							if((split[i].Trim()).ToUpper().Equals( "X"))
-								bull[i-5] = false;
-							else
-								bull[i-5] = true;}
-					}
-					_p.Add( new Player(pine,split[1],rats,split[3],split[4],bull) );
-				}
-				catch(Exception e) {
-					Console.WriteLine ("Entry format error");
-					Console.WriteLine (tLn);
-					Console.WriteLine (e.ToString());
-				}
+
+                while ((tLn = reader.ReadLine()) != null)
+                {
+                    //tLn = reader.ReadLine();
+                    String[] split = tLn.Split(',');
+                    Console.WriteLine(split.Length);
+                    int rnd = split.Length - 5;
+                    Console.WriteLine("rnd" + rnd);
+
+
+                    try
+                    {
+                        int pine = int.Parse(split[0]);
+                        Console.WriteLine("pin" + pine);
+                        int rats = int.Parse(split[2]);
+                        Console.WriteLine("rat" + rats);
+                        bool[] bull = new bool[rnd];
+                        for (int i = 5; i < rnd + 5; i++)
+                        {
+                            if (split[i].Equals("") == false)
+                            {
+                                if ((split[i].Trim()).ToUpper().Equals("X"))
+                                    bull[i - 5] = false;
+                                else
+                                    bull[i - 5] = true;
+                            }
+                        }
+                        _p.Add(new Player(pine, split[1], rats, split[3], split[4], bull));
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("Entry format error");
+                        Console.WriteLine(tLn);
+                        Console.WriteLine(e.ToString());
+                    }
+                }
 			}
             return _p;
 		}
@@ -128,7 +139,8 @@ namespace Ire
 		public void GenerateTemplate()
 		{
 
-            string fOut = "/Users/iandavis/players.csv";
+          //  string fOut = "/Users/iandavis/players.csv";
+            string fOut = "c:\\ire\\players.csv";
             try {
                 Console.WriteLine("Please enter the fully qualified directory path for the tournament");
                 directoryPath = Console.ReadLine();

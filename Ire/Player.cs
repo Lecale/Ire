@@ -186,6 +186,10 @@ namespace Ire
             return 1;
         }
 
+        public override string ToString()
+        {
+            return name + " " + rating;
+        }
     }
 
 
