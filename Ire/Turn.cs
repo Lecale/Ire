@@ -351,8 +351,8 @@ namespace Ire
                 lowBar = true;
 
             bool unhappy = true;
-            while(unhappy)
-                if (highBar)
+            if (highBar)
+                while (unhappy)
                 {
                     Console.WriteLine("Please enter the rating for the Upper Bar");
                     fanswer = float.Parse(Console.ReadLine());
@@ -363,6 +363,26 @@ namespace Ire
                     if (answer.ToUpper().StartsWith("Y"))
                         unhappy = false;
            
+                }
+
+            unhappy = true;
+            if (lowBar)
+                while (unhappy)
+                {
+                    Console.WriteLine("Please enter the rating for the Lower Bar");
+                    fanswer = float.Parse(Console.ReadLine());
+                    if (fanswer > RatingBar)
+                        Console.WriteLine("The rating for the Lower Bar must be lower than the rating for the Upper Bar");
+                    else
+                    {
+                        RatingFloor = (int)fanswer;
+                        previewFloor();
+                        Console.WriteLine("Is this acceptable: y/n");
+                        answer = Console.ReadLine();
+                        if (answer.ToUpper().StartsWith("Y"))
+                            unhappy = false;
+                    }
+
                 }
         }
 
