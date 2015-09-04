@@ -340,6 +340,7 @@ namespace Ire
         public void SetBar()
         {
             string answer;
+            float fanswer;
             Console.WriteLine("Do you want to set an Upper Bar?: y/n");
             answer = Console.ReadLine();
             if (answer.ToUpper().StartsWith("Y"))
@@ -348,6 +349,21 @@ namespace Ire
             answer = Console.ReadLine();
             if (answer.ToUpper().StartsWith("Y"))
                 lowBar = true;
+
+            bool unhappy = true;
+            while(unhappy)
+                if (highBar)
+                {
+                    Console.WriteLine("Please enter the rating for the Upper Bar");
+                    fanswer = float.Parse(Console.ReadLine());
+                    RatingBar = (int)fanswer;
+                    previewTopBar();
+                    Console.WriteLine("Is this acceptable: y/n");
+                    answer = Console.ReadLine();
+                    if (answer.ToUpper().StartsWith("Y"))
+                        unhappy = false;
+           
+                }
         }
 
     }
