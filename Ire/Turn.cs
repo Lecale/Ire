@@ -41,7 +41,7 @@ namespace Ire
 
         public void AddPlayersFromImport(List<Player> players)
         {
-            _players = players;
+            _players.AddRange(players);
         }
 
         // of course his details are read in via file!
@@ -329,8 +329,26 @@ namespace Ire
 		{
 			Console.WriteLine ("Debug Players");
 			Console.WriteLine ("");
-			foreach (Player p in _players)
-				Console.WriteLine (p.ToString ());
+            int a = 1;
+            foreach (Player p in _players)
+            {
+                Console.WriteLine(a + " " + p.ToString());
+                a++;
+            }
 		}
+
+        public void SetBar()
+        {
+            string answer;
+            Console.WriteLine("Do you want to set an Upper Bar?: y/n");
+            answer = Console.ReadLine();
+            if (answer.ToUpper().StartsWith("Y"))
+                highBar = true;
+            Console.WriteLine("Do you want to set an Lower Bar?: y/n");
+            answer = Console.ReadLine();
+            if (answer.ToUpper().StartsWith("Y"))
+                lowBar = true;
+        }
+
     }
 }
