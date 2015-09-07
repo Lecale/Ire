@@ -21,6 +21,14 @@ namespace Ire
             result = r;
         }
 
+        public Pairing(Player a, Player b, int HandiPolicy, bool HandiAboveBar)
+        {
+            float rawDiff = a.getMMS() - b.getMMS();
+            rawDiff = (rawDiff * rawDiff) / rawDiff;
+            white = a;
+            black = b;
+        }
+
         public void ChangeSetting(int s)
         { setting = s; }
 

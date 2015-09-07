@@ -32,9 +32,15 @@ namespace Ire
             i.GenerateTemplate();
 			Console.ReadLine ();
             Turn t = new Turn(i._Round);
-            t.AddPlayersFromImport(i.ReadPlayers());
+            Console.WriteLine("importing players 1...");
+            List<Player> pImport = i.ReadPlayers();
+            foreach (Player pp in pImport)
+                Console.WriteLine(pp.ToString());
+            Console.WriteLine("importing players 2...");
+            t.AddPlayersFromImport(pImport);
 			t.DebugPlayers ();
-
+            t.SetBar();
+            t.MakePairing();
         }
     }
 }

@@ -26,10 +26,14 @@ namespace Ire
         protected int lowRating = 9000;
         protected int RatingBar = -1; //set via console
         protected int RatingFloor = -1;
+        protected int HandicapPolicy = 0; //deltaMMS
+        protected bool HandiAboveBar = false; //deltaMMS
 
         private List<string> PlayedPairings;
         private List<string> BlockedPairings;
         private List<string> TempPairings;
+
+        protected List<Pairing> _RoundPairings = new List<Pairing>();
 
         public Turn(int n)
         {
@@ -191,6 +195,7 @@ namespace Ire
         //make FoldPairing
         public void MakePairing()
         {
+            _RoundPairings.Clear();
             byes.Clear();
             paired.Clear();
             unpaired.Clear();
@@ -222,6 +227,7 @@ namespace Ire
 			Player pTest;
 			int iTest;
 			string test = ""; //contains 2 pins for pairing
+
             foreach (Player p in unpaired)
             {
                 //look for their group
@@ -247,8 +253,14 @@ namespace Ire
 								test = p.getPin() + test;
 							if (!PlayedPairings.Contains (test))
 							if (!BlockedPairings.Contains (test)) {
-								if(unpaired.Contains(new Player(iTest)))
-									validMatch = true;
+                                if (unpaired.Contains(new Player(iTest)))
+                                {
+                                    validMatch = true;
+                                    //store suggested pairings
+                                    // p is paired with iTest
+
+                                }
+									
 							}
 						}
 
@@ -258,6 +270,11 @@ namespace Ire
 				}//while(validMatch ==false)
             }
             
+        }
+
+        public Pairing PairGen(Player a, Player b)
+        {
+            return new Pairing(a, b, HandicapPolicy, HandiAboveBar);
         }
 
         public void MakeGroups(int rnd)
