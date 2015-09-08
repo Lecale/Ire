@@ -23,8 +23,24 @@ namespace Ire
 
         public Pairing(Player a, Player b, int HandiPolicy, bool HandiAboveBar)
         {
+            Random r = new Random();
+            int coin = r.Next(0, 1);
             float rawDiff = a.getMMS() - b.getMMS();
             rawDiff = (rawDiff * rawDiff) / rawDiff;
+            if (HandiPolicy == -1) //no handicap
+            {
+                int i = r.Next(0, 1);
+                if (coin > 0)
+                    white = a;
+                black = b;
+            }
+            else
+            { /*handicap_n n=adjustment
+               * n=0 handi from rawDiff=1
+               * n=1 handi from rawDiff=2 etc
+               * except if aboveBar stuff is in place
+                */
+            }
             white = a;
             black = b;
         }
