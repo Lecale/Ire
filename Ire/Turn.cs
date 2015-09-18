@@ -259,6 +259,15 @@ namespace Ire
                                     //store suggested pairings
                                     // p is paired with iTest
 
+                                    pTest = unpaired.Find(z => z.getPin()==iTest);
+                                    Pairing pear1 = PairGen(p,pTest);
+
+                                    unpaired.Remove(pTest);
+                                    unpaired.Remove(p);
+                                    paired.Add(pTest);
+                                    paired.Add(p);
+
+                                    _RoundPairings.Add(pear1);
                                 }
 									
 							}
