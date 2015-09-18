@@ -47,14 +47,36 @@ namespace Ire
                */
                 if(rawDiff>HandiPolicy)
                 {
-                    if (a.getMMS() < b.getMMS())
+                    if (HandiAboveBar)
                     {
-                        white = b;
-                        black = a;
+                        if (a.isTop() || b.isTop())
+                        { //somebody abovebar flipcoin
+                            int i = r.Next(0, 1);
+                            if (coin > 0)
+                            {
+                                white = b;
+                                black = a;
+                            }
+                        }
+                        else
+                        {
+                            if (a.getMMS() < b.getMMS())
+                            {
+                                white = b;
+                                black = a;
+                            }
+                            setting = (int)(rawDiff - HandiPolicy);
+                        }
+                    }
+                    else //handicap allowed above bar
+                    {
+                        if (a.getMMS() < b.getMMS())
+                        {
+                            white = b;
+                            black = a;
+                        }
                         setting = (int)(rawDiff - HandiPolicy);
                     }
-                    else
-                        setting = (int)(rawDiff - HandiPolicy);
                 }
                 else
                 {//coin flip
