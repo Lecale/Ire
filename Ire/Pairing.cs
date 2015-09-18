@@ -27,25 +27,44 @@ namespace Ire
             int coin = r.Next(0, 1);
             float rawDiff = a.getMMS() - b.getMMS();
             rawDiff = (rawDiff * rawDiff) / rawDiff;
-            white = a;
+            white = a; //save time with default assignment
             black = b;
             if (HandiPolicy == -1) //no handicap
-            {
+            {//coin flip
                 int i = r.Next(0, 1);
                 if (coin > 0)
+                {
                     white = b;
-                black = a;
+                    black = a;
+                }
             }
             else
             { /*handicap_n n=adjustment
                * n=0 handi from rawDiff=1
                * n=1 handi from rawDiff=2 etc
                * except if aboveBar stuff is in place
+               * Remember 1.5 is treated as 1 according to tradition
                */
                 if(rawDiff>HandiPolicy)
-                {}
+                {
+                    if (a.getMMS() < b.getMMS())
+                    {
+                        white = b;
+                        black = a;
+                        setting = (int)(rawDiff - HandiPolicy);
+                    }
+                    else
+                        setting = (int)(rawDiff - HandiPolicy);
+                }
                 else
-                {}
+                {//coin flip
+                    int i = r.Next(0, 1);
+                    if (coin > 0)
+                    {
+                        white = b;
+                        black = a;
+                    }
+                }
             }
            
         }
