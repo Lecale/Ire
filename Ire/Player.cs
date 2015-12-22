@@ -20,7 +20,7 @@ namespace Ire
 		protected int[] handi;
 		protected int[] BlackWhite;
         protected int pin; //internal id
-        protected bool topBar = false; //no handicap
+        protected bool topBar = false; //no handicap?
         protected bool botBar = false; 
         protected float SOS = -1;
 
