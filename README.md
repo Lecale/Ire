@@ -14,8 +14,7 @@ Swiss Rules it is based upon are those of FIDE, with some small changes intially
 <ul>
 <li>The number of rounds to be played is declared beforehand
 <li>Two players shall not play each other more than once
-<li>Should the total number of players be (or become) odd, one player is unpaired. He receives a bye: no colour and as many points as are rewarded for a win, unless the regulations of the tournament state otherwise (We set 0.5 for BYE)
-vA player who, for whatever reason, has received any number of points without playing, shall not receive a bye.
+<li>Should the total number of players be (or become) odd, one player is unpaired. He receives a bye: no colour and as many points as are rewarded for a win, unless the regulations of the tournament state otherwise (We always set 0.5 for a BYE) A player who, for whatever reason, has received any number of points without playing (a travelling bye), shall not receive a bye.
 <li>In general, players are paired to others with the same score
 <li>OMITTED: For each player the difference of the number of black and the number of white games shall not be greater than 2 or less than –2. Each system may have exceptions to this rule in the last round of a tournament.
 <li>OMITTED: No player will receive the same colour three times in a row. Each system may have exceptions to this rule in the last round of a tournament.
@@ -23,3 +22,5 @@ vA player who, for whatever reason, has received any number of points without pl
 <li>OMITTED: In general, a player is given the colour other than that he was given the previous round.   
 <li>The pairing rules must be such transparent that the person who is in charge for the pairing can explain them
 </ul>
+
+Tiebreaking is done according to MMS, SOS, MOS where MOS is Most of Opponents Scores (we take away the top and bottom results) 
