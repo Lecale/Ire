@@ -47,6 +47,7 @@
     <Compile Include="Bye.cs" />
     <Compile Include="GameCollection.cs" />
     <Compile Include="Group.cs" />
+    <Compile Include="Jucator.cs" />
     <Compile Include="Pairing.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
