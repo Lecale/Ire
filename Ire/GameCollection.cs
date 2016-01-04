@@ -8,7 +8,7 @@ namespace Ire
 {
     class GameCollection
     {
-        int[] pin;
+       public int[] pin; 
         bool[] isWhite;
         int[] handicap;
         int[] result;
@@ -17,7 +17,7 @@ namespace Ire
 
         public GameCollection(int _NumRounds)
         {
-            pin = new int[_NumRounds];
+            pin = new int[_NumRounds]; 
             handicap = new int[_NumRounds];
             result = new int[_NumRounds];
             isWhite = new bool[_NumRounds];
@@ -29,7 +29,7 @@ namespace Ire
                 handicap[i] = 0;
                 result[i] = 0;
                 isWhite[i] = false;
-                remarks[i] = 0;
+                remarks[i] = 0; //unplayed=0
             }
         }
 
@@ -37,6 +37,15 @@ namespace Ire
         {
             int gt = 0;
             for (int i = 0; i < result.Length; i++)
+                if (remarks[i] != 0)
+                    gt += result[i];
+            return gt;
+        }
+
+        public int getScoreAt(int _rnd)
+        {
+            int gt = 0;
+            for (int i = 0; i < _rnd; i++)
                 if (remarks[i] != 0)
                     gt += result[i];
             return gt;
@@ -54,6 +63,15 @@ namespace Ire
             isWhite[_rnd] = _isW;
             result[_rnd] = _res;//
             remarks[_rnd] = _rem;//
+        }
+
+        public bool hasPlayed(int _pin)
+        {
+            for (int i = 0; i < result.Length; i++)
+                if (remarks[i] != 0)
+                    if(_pin == pin[i] )
+                        return true;
+            return false;
         }
 
         public void TestOutput()
