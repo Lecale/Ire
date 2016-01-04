@@ -65,6 +65,18 @@ namespace Ire
             remarks[_rnd] = _rem;//
         }
 
+        public int HdcpAdjustment(int _rnd)
+        {
+            if (remarks[_rnd] != 0)
+            {
+                if (isWhite[_rnd])
+                    return -1*handicap[_rnd] ; //contributing inflation if white
+                else
+                   return handicap[_rnd]; // contributing deflation if black
+            }
+            return 0;
+        }
+
         public bool hasPlayed(int _pin)
         {
             for (int i = 0; i < result.Length; i++)
