@@ -26,6 +26,7 @@ namespace Ire
             //sort players
             //loop until tournament end
 
+            TournamentBoss TB = new TournamentBoss();
 
 			Import i = new Import ();
 	//		i.DownloadMasterZipEGF ();
