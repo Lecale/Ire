@@ -40,8 +40,8 @@ namespace Ire
         }
 
         /*	
-         * Pin tName tRating tClub tCountry
-         * This method has a GIGO ideology
+         * Pin tName tRating tClub tCountry is the expected input order
+         * GIGO method, checks for already entered player
 		*/
         public void ReadJucatori()
         {
@@ -91,6 +91,59 @@ namespace Ire
                     }
                 }
             }
+        }
+
+        public void GenerateTemplateInputFile()
+        {
+            try
+            {
+                Console.WriteLine("Please enter the name of the working folder for the tournament");
+                if(Macintosh)
+                    workDirectory = exeDirectory + "/"+ Console.ReadLine().Trim();
+                else
+                    workDirectory = exeDirectory + "\\"+ Console.ReadLine().Trim();
+            }
+            catch (Exception e) { GenerateTemplateInputFile(); }
+            string fOut = workDirectory + "players.csv";
+            Console.WriteLine("Setting Tournament Information...");
+            Console.WriteLine("Please enter the Tournament Name:");
+            string name = Console.ReadLine();
+            Console.WriteLine("Please enter number of Rounds:");
+            string round = Console.ReadLine();
+            nRounds = int.Parse(round);
+            /*
+            Console.WriteLine ("Top Group (yes / no )");
+            string top  = Console.ReadLine ();
+            Console.WriteLine ("Lower Group(yes / no )");
+            string bot  = Console.ReadLine ();
+*/
+            if (File.Exists(fOut))
+            {
+                Console.WriteLine("File already exists - Overwrite it? y/n");
+                string s = Console.ReadLine().ToUpper();
+                if (s.StartsWith("N"))
+                    return;
+                else
+                    File.Delete(fOut);
+            }
+            using (StreamWriter riter = new StreamWriter(fOut))
+            {
+                riter.WriteLine("Tournament Name:\t" + name + ",");
+                riter.WriteLine("Copy Paste the Player information into the sheet,");
+                riter.WriteLine("PIN , Name, Rating, Club, Country,");
+                riter.WriteLine("type X into the round column to mark a Bye,");
+                riter.WriteLine(",");
+                string hdr = "Pin,Name,Rating,Club,Country";
+                string bdy = ",,,,";
+                for (int i = 0; i < nRounds; i++)
+                {
+                    hdr = hdr + ",R" + (i + 1);
+                    bdy = bdy + ",";
+                }
+                riter.WriteLine(hdr);
+                riter.WriteLine(bdy);
+            }
+
         }
 #endregion
         #region Export Functions
