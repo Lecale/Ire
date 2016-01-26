@@ -145,8 +145,96 @@ namespace Ire
             }
 
         }
+
+        // the file name this is pointing to is not well defined
+        public void FormatMasterEGF()
+		{
+			string tTest = "PIN          Name                              Club     Grade P&D";
+			bool faci = false;	
+			string egfCopy = workDirectory + "egf.tsv";
+			if(File.Exists(egfCopy))
+			try{
+				File.Delete(egfCopy);
+			}
+			catch(Exception e){ Console.WriteLine (e.ToString ());
+			}
+			string line;
+			string T = "\t";
+			StringBuilder li = new StringBuilder("");
+
+			using (StreamReader reader = new StreamReader ("/Users/iandavis/egfcopi.txt")) {
+			//using (StreamReader reader = new StreamReader ("/Users/iandavis/egfrawdata.txt")) {
+
+				using (StreamWriter riter = new StreamWriter ("/Users/iandavis/egf.tsv")) {
+					riter.WriteLine ("pin"+T+"name"+T+"rating"+T+"country"+T+"club"+T+"grade");
+					while ((line = reader.ReadLine ()) != null) {
+						if (faci) {
+							line = line.Trim (); 
+							if (line.Length < 89) {
+								Console.WriteLine (line); //Drobeta
+							} 
+							else {
+								/* Want to pretty up the data
+								 * 
+								 * pin - 8 digit  0 7
+								 * name - 40 digit 8 47
+								 * club country - 8 digit 48 55
+								 * blank 56 58
+								 * grade 59 61
+								 * blank 62 69
+								 * gor 70 73
+								 * rest not interesting
+								*/ 
+								li.Append(line.Substring(0,8)); // Pin
+									li.Append(T);
+									li.Append(line.Substring(8,40).Trim()); //Name
+									li.Append(T);
+									li.Append(line.Substring(70,4).Trim()); // GoR
+									li.Append(T);
+									li.Append(line.Substring(48,3).Trim()); //Country
+									li.Append(T);
+									li.Append(line.Substring(51,5).Trim()); //Club
+									li.Append(T);
+									li.Append(line.Substring(59,3).Trim()); //Grade
+									li.Append(T);
+
+								riter.WriteLine (li);
+								li.Clear ();
+							}
+						} 
+						else {
+							Console.WriteLine (line);
+							line = line.Trim (); 
+							if (line.StartsWith (tTest)) {
+								faci = true;
+								line = reader.ReadLine ();
+							}
+						}
+					
+					}
+					riter.Flush ();
+				}
+			}
+
+
+		}
+			
 #endregion
         #region Export Functions
+
+        public void GenerateRoundResults(int i, List<Pairing> ps)
+        {
+            string fOut = workDirectory + "Round" + i + "Results.tsv";
+            using (StreamWriter riter = new StreamWriter(fOut))
+            {
+                riter.WriteLine("Results of Round " + i);
+                riter.WriteLine("white  :  black");
+                foreach (Pairing p in ps)
+                    riter.WriteLine(p.BasicOutput());
+            }
+
+        }
+
         #endregion
     }
 }
