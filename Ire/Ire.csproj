@@ -58,6 +58,7 @@
     <Compile Include="Turn.cs" />
     <Compile Include="Import.cs" />
     <Compile Include="MiniPlayer.cs" />
+    <Compile Include="Utility.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
