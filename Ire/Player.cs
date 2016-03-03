@@ -6,14 +6,9 @@ using System.Threading.Tasks;
 
 namespace Ire
 {
-    class Player : MiniPlayer, IComparable
+    class Player : Person, IComparable
     {
-		protected string name = "";
-		protected string country = "";
-		protected string club = "";
-        protected string grade = "";
-        protected int rating;
-        protected float MMS = -1;  //static
+		protected float MMS = -1;  //static
         protected float[] score;
 		protected bool[] participation;
 		protected int[] opponent;
@@ -21,23 +16,13 @@ namespace Ire
 		protected int[] BlackWhite;
         protected int pin; //internal id
         protected bool topBar = false; //no handicap?
-        protected bool botBar = false; 
         protected float SOS = -1;
+		protected int eRating;
 
-		public Player(int tPin) 
-            : base (tPin)
-		{
-//			pin = tPin;
-		}
 
-		public Player(int _pin, string _nom , int rat, string ctry, string _club, bool[] par) 
-            : base (_pin)
+		public Player(int _seed, string _nom , int _rat, string _ctry, string _club, bool[] par) 
+			: base (_nom, _rat, _club, _ctry )
         {
-//			pin = _pin;
-			name = _nom;
-			rating = rat;
-			country = ctry;
-			club = _club;
 			//participation does not exist
 			participation = new bool[par.Length];
 			for(int i=0; i<par.Length; i++)
@@ -46,10 +31,10 @@ namespace Ire
 
         public void setPlayer(string nom, string cc, string g, int rt, int tr, int p)
         {
-            name = nom;
-            country = cc;
-            grade = g;
-            rating = rt;
+            Name = nom;
+            Country = cc;
+            Rank = g;
+            Rating = rt;
             score = new float[tr];
             participation = new bool[tr];
             opponent = new int[tr]; //positive=player //negative=bye //0=?
@@ -125,7 +110,7 @@ namespace Ire
         }
         public string getName()
         {
-            return name;
+            return Name;
         }
         public float getSOS()
         {
@@ -133,7 +118,7 @@ namespace Ire
         }
         public int getRating()
         {
-            return rating;
+            return Rating;
         }
         public void setSOS(float s)
         {
@@ -149,10 +134,11 @@ namespace Ire
         { topBar = true; }
         public bool isTop()
         { return topBar; }
-        public void setbot()
-        { botBar = true; }
-        public bool isbot()
-        { return botBar; }
+
+		public override int GetHashCode ()
+		{ //Evil grin
+			return 11; 
+		}
 
 		public override bool Equals(System.Object obj)
 		{
@@ -188,7 +174,7 @@ namespace Ire
 
         public override string ToString()
         {
-            return name + " " + rating;
+            return Name + " " + Rating;
         }
     }
 
