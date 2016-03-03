@@ -28,6 +28,7 @@ namespace Ire
         protected int RatingFloor = -1;
         protected int HandicapPolicy = 0; //deltaMMS
         protected bool HandiAboveBar = false; //deltaMMS
+		protected int MaxHandicap = 9;
 
         private List<string> PlayedPairings;
         private List<string> BlockedPairings;

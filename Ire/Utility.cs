@@ -8,7 +8,8 @@ namespace Ire
 		private string[] fn = {"al","bob","cal","dar","eoin","fra","ger","hal","io","jo","ken","lor","meg","nim","olli","peg","rach","sue",};
 		private string[] pre = {"O'","Mc","Ker'"};
 		private string[] mid = {"Trah","Row","Land","Sea","Flack","Black","Whit","Red","Ash","Round","Tri"};
-		private string[] end = {"better","lower","water","later","son","morn","mane"};
+		private string[] end = {"better","lower","water","later","son","morn","mane","ston"};
+
 		public Utility ()
 		{
 			r = new Random();
@@ -21,15 +22,17 @@ namespace Ire
 			return surname + " " + first; 
 		}
 
-		public int ProvideRatingBox(int mid,int width)
+		public int RatingByBox(int mid, int width)
 		{
 			double d1 = r.NextDouble ();
 			double d2 = r.NextDouble ();
-			double d = d1 * d2 - 0.5;
+
+			double d = (d1 * d2);
+			if (r.NextDouble () > 0.5)
+				d = d * -1;
 			return (int)(d * width + mid);
 		}
-
-
+			
 	}
 }
 

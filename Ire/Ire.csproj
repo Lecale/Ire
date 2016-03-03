@@ -59,6 +59,7 @@
     <Compile Include="Import.cs" />
     <Compile Include="MiniPlayer.cs" />
     <Compile Include="Utility.cs" />
+    <Compile Include="PairPerson.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
