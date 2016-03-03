@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ire
 {
-    class Player : Person, IComparable
+    class Player : Person, IComparable //Inheritance probably useless
     {
 		protected float MMS = -1;  //static
         protected float[] score;
@@ -14,10 +14,10 @@ namespace Ire
 		protected int[] opponent;
 		protected int[] handi;
 		protected int[] BlackWhite;
-        protected int pin; //internal id
-        protected bool topBar = false; //no handicap?
+        protected bool topBar = false; //potentially no handicap above bar
         protected float SOS = -1;
-		protected int eRating;
+		protected float MOS = -1; //Middle potion of SOS
+		protected int eRating; // effective rating, used for lower bar
 
 
 		public Player(int _seed, string _nom , int _rat, string _ctry, string _club, bool[] par) 
@@ -38,7 +38,7 @@ namespace Ire
             score = new float[tr];
             participation = new bool[tr];
             opponent = new int[tr]; //positive=player //negative=bye //0=?
-            pin = p;
+			Seed = p;
 
             for (int ii = 0; ii < tr; ii++)
             {
@@ -128,8 +128,8 @@ namespace Ire
         {
             MMS = s;
         }
-        public int getPin()//why is this a string?
-        { return pin; }
+        public int getSeed()
+        { return Seed; }
         public void setTop()
         { topBar = true; }
         public bool isTop()
@@ -146,7 +146,7 @@ namespace Ire
 				return false;
 			try{
 				Player p = (Player) obj;
-				if(pin==p.pin)
+				if(Seed==p.Seed)
 					return true;
 			}
 			catch(Exception e) {
