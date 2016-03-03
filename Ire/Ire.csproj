@@ -60,6 +60,7 @@
     <Compile Include="MiniPlayer.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="PairPerson.cs" />
+    <Compile Include="Person.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
