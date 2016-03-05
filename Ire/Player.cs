@@ -20,25 +20,33 @@ namespace Ire
 		protected int eRating; // effective rating, used for lower bar
 
 
+		public Player(int _seed, string _nom="null", int _rat=-1, string _club="null", string _ctry="null")
+			: base (_nom="null", _rat=-1, _club="null", _ctry="null" )
+		{
+			Seed = _seed;
+		}
+
 		public Player(int _seed, string _nom , int _rat, string _ctry, string _club, bool[] par) 
 			: base (_nom, _rat, _club, _ctry )
         {
+			eRating = _rat;
 			//participation does not exist
 			participation = new bool[par.Length];
 			for(int i=0; i<par.Length; i++)
 				participation[i]=par[i];
 		}
 
-        public void setPlayer(string nom, string cc, string g, int rt, int tr, int p)
+        public void setPlayer(string nom, string cc, string g, int _rat, int tr, int p)
         {
             Name = nom;
             Country = cc;
             Rank = g;
-            Rating = rt;
+            Rating = _rat;
             score = new float[tr];
             participation = new bool[tr];
             opponent = new int[tr]; //positive=player //negative=bye //0=?
 			Seed = p;
+			eRating = _rat;
 
             for (int ii = 0; ii < tr; ii++)
             {

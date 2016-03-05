@@ -61,6 +61,7 @@
     <Compile Include="Utility.cs" />
     <Compile Include="PairPerson.cs" />
     <Compile Include="Person.cs" />
+    <Compile Include="TiebreakBox.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

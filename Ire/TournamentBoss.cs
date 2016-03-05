@@ -220,6 +220,8 @@ namespace Ire
 		}
 			
 #endregion
+
+		//In fact we may no longer wish to use Pairing class
         #region Export Functions
 
         public void GenerateRoundResults(int i, List<Pairing> ps)

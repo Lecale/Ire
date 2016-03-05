@@ -246,12 +246,12 @@ namespace Ire
 					// Check each player in the current group
 						// find their pin - not us, not paired -> pair
 						iTest = _groups.ElementAt(gI).GetPinAt(i2); //is this the correct direction?
-						if((iTest == p.getPin()) == false)
+							if((iTest == p.Seed) == false)
 						{
-							if (int.Parse(test) > p.getPin())
-								test = test + p.getPin();
+							if (int.Parse(test) > p.Seed)
+								test = test + p.Seed;
 							else
-								test = p.getPin() + test;
+								test = p.Seed + test;
 							if (!PlayedPairings.Contains (test))
 							if (!BlockedPairings.Contains (test)) {
                                 if (unpaired.Contains(new Player(iTest)))
@@ -260,7 +260,7 @@ namespace Ire
                                     //store suggested pairings
                                     // p is paired with iTest
 
-                                    pTest = unpaired.Find(z => z.getPin()==iTest);
+                                    pTest = unpaired.Find(z => z.Seed==iTest);
                                     Pairing pear1 = PairGen(p,pTest);
 
                                     unpaired.Remove(pTest);
@@ -312,12 +312,12 @@ namespace Ire
                 {
                     if (p.getMMS() == _groups.ElementAt(posn).MMS)
                     {
-                        _groups.ElementAt(posn).add(p.getPin() );
+                        _groups.ElementAt(posn).add(p.Seed );
                     }
                     else 
                     {
                         posn++;
-                        _groups.ElementAt(posn).add(p.getPin());
+                        _groups.ElementAt(posn).add(p.Seed);
                     }
                 }
             }

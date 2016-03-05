@@ -122,7 +122,8 @@ namespace Ire
         //quick way to check
         public string Key()
         {
-            return "" + white.getPin() + black.getPin();
+         //   return "" + white.getPin() + black.getPin();
+			return "NotInUse";
         }
 
         string[] res = {"None","WWin","BWin","Draw","WAdj","BAdj","DAdj","LAdj"};
