@@ -49,7 +49,7 @@ namespace Ire
                 {
                     if (HandiAboveBar)
                     {
-                        if (a.isTop() || b.isTop())
+                        if (a.topBar || b.topBar)
                         { //somebody abovebar flipcoin
                             int i = r.Next(0, 1);
                             if (coin > 0)

@@ -14,7 +14,7 @@ namespace Ire
 		protected int[] opponent;
 		protected int[] handi;
 		protected int[] BlackWhite;
-        protected bool topBar = false; //potentially no handicap above bar
+        public bool topBar = false; //potentially no handicap above bar
         public float SOS = -1;
 		public float MOS = -1; //Middle portion of SOS
 		protected int eRating; // effective rating, used for lower bar
@@ -67,11 +67,11 @@ namespace Ire
 			opponent[rnd] = op;
 		}
 		//This is the correct method
-		public void setResult(int rnd, int op, float sc, int hnd=0, int BW =1)
+		public void setResult(int rnd, int op, float _score, int _handicap=0, int BW =1)
 		{
-			score[rnd] = sc;
+			score[rnd] = _score;
 			opponent[rnd] = op;
-			handi[rnd] = hnd;
+			handi[rnd] = _handicap;
 			BlackWhite[rnd] = BW;
 		}
 
@@ -92,17 +92,17 @@ namespace Ire
             f += MMS;
             return f;
         }
-
-		//Use for SOS calculation
+		#region SOS and MOS Calculation
 		public int getOpponent(int i)
 		{
 			return opponent[i];
-		}//Use for SOS calculation
+		}
 		public int getAdjHandi(int i)
 		{
 			//if black substract handicap , if White add handicap to SOS
 			return handi[i] * BlackWhite[i];
 		}
+		#endregion
         public void setOpponent(int i, int r)
         {
             opponent[r] = i;
@@ -135,9 +135,9 @@ namespace Ire
         { return Seed; }
         public void setTop()
         { topBar = true; }
-        public bool isTop()
-        { return topBar; }
+        
 
+		#region Override Methods
 		public override int GetHashCode ()
 		{ //Evil grin
 			return 11; 
@@ -181,7 +181,7 @@ namespace Ire
 
 					//neither
 					return 1;
-				} else {
+				} else {	
 					if (BreakByMOS) {
 						if (p.MOS > MOS)
 							return -1;
@@ -198,9 +198,9 @@ namespace Ire
 
         public override string ToString()
         {
-            return Name + " " + Rating;
+            return Name + " " + eRating;
         }
     }
-
+	#endregion
 
 }

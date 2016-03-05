@@ -160,7 +160,7 @@ namespace Ire
             //Set initial MMS for everyone else
             foreach (Player peter in _players)
             {
-                if (!peter.isTop())
+                if (!peter.topBar)
                 {
                     int rat = peter.getRating();
                     if (rat >= RatingBar) //no top group
@@ -343,9 +343,9 @@ namespace Ire
 
 		public int CalculateHandicap(Player localWhite, Player localBlack, int rnd)
         {
-            if( localWhite.isTop() )
+            if( localWhite.topBar )
                 return 0;
-            if (localBlack.isTop())
+            if (localBlack.topBar)
                 return 0;
             float lwMMS = localWhite.getMMS(rnd);
             float lbMMS = localBlack.getMMS(rnd);
