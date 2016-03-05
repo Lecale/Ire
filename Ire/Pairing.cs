@@ -13,25 +13,24 @@ namespace Ire
         protected int setting = 0;
         protected int result = 0;
 
-        public Pairing( Player a, Player b, int s, int r)
+        public Pairing( Player a, Player b, int _handicap, int _result)
         {
             white = a;
             black = b;
-            setting = s; //handicap
-            result = r;
+			setting = _handicap;
+            result = _result;
         }
 
         public Pairing(Player a, Player b, int HandiPolicy, bool HandiAboveBar)
         {
             Random r = new Random();
-            int coin = r.Next(0, 1);
+            int coin = r.Next(0, 2) - 1;
             float rawDiff = a.getMMS() - b.getMMS();
             rawDiff = (rawDiff * rawDiff) / rawDiff;
             white = a; //save time with default assignment
             black = b;
             if (HandiPolicy == -1) //no handicap
             {//coin flip
-                int i = r.Next(0, 1);
                 if (coin > 0)
                 {
                     white = b;
@@ -51,7 +50,6 @@ namespace Ire
                     {
                         if (a.topBar || b.topBar)
                         { //somebody abovebar flipcoin
-                            int i = r.Next(0, 1);
                             if (coin > 0)
                             {
                                 white = b;
@@ -80,7 +78,6 @@ namespace Ire
                 }
                 else
                 {//coin flip
-                    int i = r.Next(0, 1);
                     if (coin > 0)
                     {
                         white = b;

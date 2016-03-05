@@ -103,6 +103,7 @@ namespace Ire
 			return handi[i] * BlackWhite[i];
 		}
 		#endregion
+
         public void setOpponent(int i, int r)
         {
             opponent[r] = i;
