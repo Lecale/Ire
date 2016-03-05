@@ -4,18 +4,18 @@ namespace Ire
 {
 	public class McLayer
 	{
-		public int MMSKey;
+		public float MMSKey;
 		private List<int> population;
 		private Random r;
-		public McLayer (int MMS, int Seed)
+		public McLayer (float MMS, int Seed)
 		{
 			MMSKey = MMS;
 			population.Add (Seed);
 		}
 
-		public bool Match(int Seed)
+		public bool Match(float _mms)
 		{
-			if (Seed == MMSKey)
+			if (_mms == MMSKey)
 				return true;
 			return false;
 		}

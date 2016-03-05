@@ -10,7 +10,7 @@ namespace Ire
 		private int AdjHandi;
 		private bool HandiAboveBar;
 		private List<Pairing> Pairs;
-		private McLayer BigM;
+		private List<McLayer> BigM;
 
 		public DrawMachine1 ( List<Player> ply, int _MaxHandi = 9, int _AdjHandi = 1, bool _HandiAboveBar = false)
 		{
@@ -20,6 +20,9 @@ namespace Ire
 			AdjHandi = _AdjHandi;
 			HandiAboveBar = _HandiAboveBar;
 			plys.Sort (); //just in case
+			BigM = new List<McLayer>();
+
+			BigM.Add (new McLayer (plys [0].getMMS (), plys [0].Seed));
 			DRAW ();
 		}
 
