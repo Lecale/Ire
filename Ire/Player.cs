@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ire
 {
-    class Player : Person, IComparable //Inheritance probably useless
+    public class Player : Person, IComparable //Inheritance probably useless
     {
 		protected float MMS = -1;  
         protected float[] score;

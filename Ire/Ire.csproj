@@ -62,6 +62,8 @@
     <Compile Include="PairPerson.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="TiebreakBox.cs" />
+    <Compile Include="DrawMachine1.cs" />
+    <Compile Include="McLayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
