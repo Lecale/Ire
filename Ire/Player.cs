@@ -8,18 +8,21 @@ namespace Ire
 {
     class Player : Person, IComparable //Inheritance probably useless
     {
-		protected float MMS = -1;  //static
+		protected float MMS = -1;  
         protected float[] score;
 		protected bool[] participation;
 		protected int[] opponent;
 		protected int[] handi;
 		protected int[] BlackWhite;
         protected bool topBar = false; //potentially no handicap above bar
-        protected float SOS = -1;
-		protected float MOS = -1; //Middle potion of SOS
+        public float SOS = -1;
+		public float MOS = -1; //Middle portion of SOS
 		protected int eRating; // effective rating, used for lower bar
 
+		private static bool BreakBySOS = true;
+		private static bool BreakByMOS = true;
 
+		//just to allow compilation
 		public Player(int _seed, string _nom="null", int _rat=-1, string _club="null", string _ctry="null")
 			: base (_nom="null", _rat=-1, _club="null", _ctry="null" )
 		{
@@ -120,17 +123,9 @@ namespace Ire
         {
             return Name;
         }
-        public float getSOS()
-        {
-            return SOS;
-        }
-        public int getRating()
+       public int getRating()
         {
             return Rating;
-        }
-        public void setSOS(float s)
-        {
-            SOS = s;
         }
         public void setMMS(float s)
         {
@@ -165,16 +160,37 @@ namespace Ire
 
         public int CompareTo(Object o)
         {
-            Player p = (Player)o; // yuck
+            Player p = (Player)o; // how gross is this?
             if (p.MMS > MMS)
                 return -1;
             if (p.MMS == MMS)
-            {
-                if (p.SOS > SOS)
-                    return -1;
-                if (p.SOS == SOS)
-                    return 0;
-                return 1;
+            {   
+				if (BreakBySOS == true) {
+					if (p.SOS > SOS)
+						return -1;
+					if (p.SOS == SOS) {
+						if (BreakByMOS) {
+							if (p.MOS > MOS)
+								return -1;
+							if (p.MOS == MOS)
+								return 0;
+							return 1;
+						} else
+							return 0;
+					}
+
+					//neither
+					return 1;
+				} else {
+					if (BreakByMOS) {
+						if (p.MOS > MOS)
+							return -1;
+						if (p.MOS == MOS)
+							return 0;
+						return 1;
+					} else //no tiebreaker
+						return 0;
+				}
             }
 
             return 1;
