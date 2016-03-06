@@ -45,6 +45,12 @@ namespace Ire
 			population.Add(_seed);
 			Length++;
 		}
+
+		public void Remove(int _Seed)
+		{
+			population.Remove (_Seed);
+			Length--;
+		}
 	}
 }
 
