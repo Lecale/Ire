@@ -5,12 +5,15 @@ namespace Ire
 	public class McLayer
 	{
 		public float MMSKey;
+		public int Length = 0;
+
 		private List<int> population;
 		private Random r;
 		public McLayer (float MMS, int Seed)
 		{
 			MMSKey = MMS;
 			population.Add (Seed);
+			Length = 1;
 		}
 
 		public bool Match(float _mms)
@@ -20,7 +23,7 @@ namespace Ire
 			return false;
 		}
 
-		private void Shuffle()//not very random but it will do
+		private void Shuffle()//not very random but it will do for now
 		{
 			int hold;
 			int tmp;
@@ -37,7 +40,11 @@ namespace Ire
 			return population[i];
 		}
 
-
+		public void Add(int _seed)
+		{
+			population.Add(_seed);
+			Length++;
+		}
 	}
 }
 
