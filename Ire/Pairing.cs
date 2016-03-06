@@ -13,6 +13,12 @@ namespace Ire
         protected int setting = 0;
         protected int result = 0;
 
+		public Pairing( Player a, Player b)
+		{
+			white = a;
+			black = b;
+		}
+
         public Pairing( Player a, Player b, int _handicap, int _result)
         {
             white = a;
@@ -125,5 +131,16 @@ namespace Ire
 
         string[] res = {"None","WWin","BWin","Draw","WAdj","BAdj","DAdj","LAdj"};
         
+		public override bool Equals (object obj)
+		{
+			Pairing p = (Pairing)obj;
+			if (p.white == white)
+			if (p.black == black)
+				return true;
+			if (p.white == black)
+			if (p.black == white)
+				return true;
+			return false;
+		}
     }
 }

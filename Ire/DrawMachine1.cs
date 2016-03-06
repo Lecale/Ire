@@ -33,7 +33,9 @@ namespace Ire
 					BigM.Add(new McLayer(plys [i].getMMS (), plys [i].Seed));
 				}
 			}
-
+			//Shuffle
+			foreach (McLayer mcl in BigM)
+				mcl.Shuffle ();
 			DRAW ();
 		}
 
@@ -45,7 +47,17 @@ namespace Ire
 		//      Nothing? block and retry
 		public void DRAW()
 		{
-			
+			Player top = plys [0];
+			Pairing tmp;
+			List<Pairing> blocked = new List<Pairing> ();
+			bool found = false;
+			for (int i = 1; i < plys.Count - 1; i++) { //foreachplayer
+				while (found == false) {
+					foreach (McLayer mcl in BigM) {
+					}
+				}
+
+			}//end foreachplayer
 		}
 
 	}

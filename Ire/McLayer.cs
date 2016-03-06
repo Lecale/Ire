@@ -23,7 +23,7 @@ namespace Ire
 			return false;
 		}
 
-		private void Shuffle()//not very random but it will do for now
+		public void Shuffle()//not very random but it will do for now
 		{
 			int hold;
 			int tmp;
