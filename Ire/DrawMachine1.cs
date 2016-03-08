@@ -60,10 +60,16 @@ namespace Ire
 				found =false;
 				while (found == false) {
 					foreach (McLayer mcl in BigM) { //foreachLayer
+                        if(found==false)
 						for (int j = 0; j < mcl.Length; j++) {
 							tmp = new Pairing (plys[mcl.GetAt (j)], top);
-							if (History.Contains (tmp) == false && Blocked.Contains (tmp) == false)
-								found = true;
+                            if (History.Contains(tmp) == false && Blocked.Contains(tmp) == false)
+                            {
+                                holdLastPairing = tmp;
+                                Pairs.Add(tmp);
+                                found = true;
+                                break; //out of j
+                            }
 						}
 					}//foreachLayer
 				}
