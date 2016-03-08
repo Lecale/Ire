@@ -12,6 +12,7 @@ namespace Ire
 		private List<Pairing> Pairs;
 		private List<McLayer> BigM;
 		private List<Pairing> History = new List<Pairing>(); //previous rounds
+        List<Pairing> Blocked = new List<Pairing>();
 		private int[] LookUpTable;
 
 		public DrawMachine1 ( List<Player> ply, int _MaxHandi = 9, int _AdjHandi = 1, bool _HandiAboveBar = false)
@@ -49,14 +50,14 @@ namespace Ire
 		//if valid pair else retry
 		//   Next layer
 		//      Nothing? block and retry
-		public void DRAW()
+		public void DRAW(int start=0)
 		{
-			Player top = plys [0];
+			Player top = plys [start];
 			Pairing tmp;
 			Pairing holdLastPairing;
-			List<Pairing> Blocked = new List<Pairing> ();
+			
 			bool found = false;
-			for (int i = 1; i < plys.Count - 1; i++) { //foreachPlayer
+			for (int i = start+1; i < plys.Count - 1; i++) { //foreachPlayer
 				found =false;
 				while (found == false) {
 					foreach (McLayer mcl in BigM) { //foreachLayer
@@ -72,6 +73,13 @@ namespace Ire
                             }
 						}
 					}//foreachLayer
+                    if (found == false)
+                    {
+                        Console.WriteLine("No valid pairing was found");
+                        //rm
+                        //add to block
+                        //call
+                    }
 				}
 
 			}//end foreachplayer
