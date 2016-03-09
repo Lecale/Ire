@@ -66,7 +66,7 @@ namespace Ire
 							tmp = new Pairing (plys[mcl.GetAt (j)], top);
                             if (History.Contains(tmp) == false && Blocked.Contains(tmp) == false)
                             {
-                                holdLastPairing = tmp;
+                                //holdLastPairing = tmp;
                                 Pairs.Add(tmp);
                                 found = true;
                                 break; //out of j
@@ -76,10 +76,13 @@ namespace Ire
                     if (found == false)
                     {
                         Console.WriteLine("No valid pairing was found");
-                        //rm
                         //add to block
-                        //call
-                    }
+                        Blocked.Add(Pairs[Pairs.Count - 1]);
+                        //rm last pairing added
+                        Pairs.RemoveAt(Pairs.Count - 1);
+                        //call at what level ?
+                        DRAW(); 
+                    }                              
 				}
 
 			}//end foreachplayer
