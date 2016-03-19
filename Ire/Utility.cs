@@ -6,7 +6,7 @@ namespace Ire
 	{
 		private Random r;
 		private string[] fn = {"al","bob","cal","dar","eoin","fra","ger","hal","io","jo","ken","lor","meg","nim","olli","peg","rach","sue",};
-		private string[] pre = {"O'","Mc","Ker'"};
+		private string[] pre = {"O'","Mc","Ker","Ze"};
 		private string[] mid = {"Trah","Row","Land","Sea","Flack","Black","Whit","Red","Ash","Round","Tri"};
 		private string[] end = {"better","lower","water","later","son","morn","mane","ston"};
 

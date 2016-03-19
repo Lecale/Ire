@@ -28,8 +28,10 @@ namespace Ire
 
             TournamentBoss tb = new TournamentBoss(true);
 			tb.GenerateTemplateInputFile ();
-			tb.GeneratePlayers (50);
-
+			tb.GeneratePlayers (21); // this works fine
+			tb.ReadPlayers();
+			tb.SortField(true);
+			tb.ShowField ();
 			/*
 			i.DownloadMasterZipEGF ();
             i.GenerateTemplate();

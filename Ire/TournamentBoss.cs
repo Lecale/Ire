@@ -14,9 +14,9 @@ namespace Ire
     {
         int nRounds = 0;
         string exeDirectory;
-        string workDirectory;
+        private string workDirectory;
         bool Macintosh = false;
-        List<Jucator> AllPlayers = new List<Jucator>();
+        List<Player> AllPlayers = new List<Player>();
 
 
         public TournamentBoss(bool Mac=false)
@@ -25,6 +25,20 @@ namespace Ire
             exeDirectory = Directory.GetCurrentDirectory();
             Console.WriteLine(exeDirectory);
         }
+
+
+		public void SortField(bool init=false)
+		{
+			if (init)
+				Player.SortByRating = true;
+			AllPlayers.Sort ();
+			int i = 1;
+			if (init) { //late players get a different Seed because they were late and that is how it goes
+				Player.SortByRating = false;
+				foreach (Player p in AllPlayers)
+					p.Seed = i++;
+			}
+		}
 
 		#region TestFunctions
 		public void GeneratePlayers(int nPlayers)
@@ -39,9 +53,17 @@ namespace Ire
 					sw.WriteLine (i++ + "," + u.ProvideName() + "," + u.RatingByBox(1500,500) + ",BLF,IE");
 			}
 		}
+		public void ShowField()
+		{
+			using(StreamWriter sw = new StreamWriter(workDirectory +  "dbg.txt"))
+				{
+				foreach(Player p in AllPlayers )
+					sw.WriteLine(p.ToString());			
+				}
+		}
 		#endregion
 
-#region ImportFunctions
+		#region ImportFunctions
         public void DownloadEGFMasterZip()
         {
             string uri = "http://www.europeangodatabase.eu/EGD/EGD_2_0/downloads/allworld_lp.zip";
@@ -67,7 +89,7 @@ namespace Ire
          * Pin tName tRating tClub tCountry is the expected input order
          * GIGO method, checks for already entered player
 		*/
-        public void ReadJucatori()
+        public void ReadPlayers()
         {
            
             string tLn = "";
@@ -102,7 +124,7 @@ namespace Ire
                                     bull[i - 5] = true;
                             }
                         }
-                        Jucator j = new Jucator(pine, split[1], rats, split[3], split[4], bull);
+                        Player j = new Player(pine, split[1], rats, split[3], split[4], bull);
                         if (AllPlayers.Contains(j) == false)
                             AllPlayers.Add(j);
                         else
@@ -128,12 +150,15 @@ namespace Ire
                     workDirectory = exeDirectory + "\\"+ Console.ReadLine().Trim();
             }
             catch (Exception e) { GenerateTemplateInputFile(); }
+			if (Directory.Exists (workDirectory) == false)
+				Directory.CreateDirectory (workDirectory);
 			if(Macintosh)
 				workDirectory += "/";
 			else
 				workDirectory += "\\";
 			Console.WriteLine("Working directory is: "+workDirectory);
             string fOut = workDirectory + "players.txt";
+			Console.WriteLine("Template at: "+fOut);
             Console.WriteLine("Setting Tournament Information...");
             Console.WriteLine("Please enter the Tournament Name:");
             string name = Console.ReadLine();
@@ -154,7 +179,8 @@ namespace Ire
                     return;
                 else
                     File.Delete(fOut);
-            }
+			}
+			Console.WriteLine("GenerateTemplateInputFile() rite");
             using (StreamWriter riter = new StreamWriter(fOut))
             {
                 riter.WriteLine("Tournament Name:\t" + name + ",");
@@ -172,7 +198,7 @@ namespace Ire
                 riter.WriteLine(hdr);
                 riter.WriteLine(bdy);
             }
-
+			Console.WriteLine("GenerateTemplateInputFile() END");
         }
 
         // the file name this is pointing to is not well defined

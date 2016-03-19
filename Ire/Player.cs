@@ -18,20 +18,25 @@ namespace Ire
         public float SOS = -1;
 		public float MOS = -1; //Middle portion of SOS
 		protected int eRating; // effective rating, used for lower bar
+		private int EGDPin;
 
 		private static bool BreakBySOS = true;
 		private static bool BreakByMOS = true;
+		public static bool SortByRating = false;
 
-		//just to allow compilation
+		//this is here just to allow compilation TODELETE
 		public Player(int _seed, string _nom="null", int _rat=-1, string _club="null", string _ctry="null")
 			: base (_nom="null", _rat=-1, _club="null", _ctry="null" )
 		{
 			Seed = _seed;
 		}
+		//                        Player j = new Player(pine, split[1], rats, split[3], split[4], bull);
 
 		public Player(int _seed, string _nom , int _rat, string _ctry, string _club, bool[] par) 
 			: base (_nom, _rat, _club, _ctry )
         {
+			Seed = -1; //When we first read Players in they are not sorted
+			EGDPin = _seed;
 			eRating = _rat;
 			//participation does not exist
 			participation = new bool[par.Length];
@@ -136,7 +141,6 @@ namespace Ire
         { return Seed; }
         public void setTop()
         { topBar = true; }
-        
 
 		#region Override Methods
 		public override int GetHashCode ()
@@ -150,8 +154,15 @@ namespace Ire
 				return false;
 			try{
 				Player p = (Player) obj;
-				if(Seed==p.Seed)
+				if(Seed>0)
+				{
+					if(Seed==p.Seed)
+						return true;
+				}else
+				{
+					if(EGDPin==p.EGDPin)
 					return true;
+				}
 			}
 			catch(Exception e) {
 				return false;
@@ -159,9 +170,17 @@ namespace Ire
 			return false;
 		}
 
+		//the return are the wrong way around here!!!
         public int CompareTo(Object o)
         {
             Player p = (Player)o; // how gross is this?
+			if (SortByRating) {
+				if (p.eRating > eRating)
+					return -1;
+				if (p.eRating == eRating)
+					return 0;
+				return 1;
+			}
             if (p.MMS > MMS)
                 return -1;
             if (p.MMS == MMS)
