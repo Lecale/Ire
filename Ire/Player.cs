@@ -170,50 +170,49 @@ namespace Ire
 			return false;
 		}
 
-		//the return are the wrong way around here!!!
         public int CompareTo(Object o)
         {
             Player p = (Player)o; // how gross is this?
 			if (SortByRating) {
 				if (p.eRating > eRating)
-					return -1;
+					return 1;
 				if (p.eRating == eRating)
 					return 0;
-				return 1;
+				return -1;
 			}
             if (p.MMS > MMS)
-                return -1;
+                return 1;
             if (p.MMS == MMS)
             {   
 				if (BreakBySOS == true) {
 					if (p.SOS > SOS)
-						return -1;
+						return 1;
 					if (p.SOS == SOS) {
 						if (BreakByMOS) {
 							if (p.MOS > MOS)
-								return -1;
+								return 1;
 							if (p.MOS == MOS)
 								return 0;
-							return 1;
+							return -1;
 						} else
 							return 0;
 					}
 
 					//neither
-					return 1;
+					return -1;
 				} else {	
 					if (BreakByMOS) {
 						if (p.MOS > MOS)
-							return -1;
+							return 1;
 						if (p.MOS == MOS)
 							return 0;
-						return 1;
+						return -1;
 					} else //no tiebreaker
 						return 0;
 				}
             }
 
-            return 1;
+            return -1;
         }
 
         public override string ToString()
