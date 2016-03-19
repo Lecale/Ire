@@ -26,10 +26,12 @@ namespace Ire
             //sort players
             //loop until tournament end
 
-            TournamentBoss TB = new TournamentBoss();
+            TournamentBoss tb = new TournamentBoss(true);
+			tb.GenerateTemplateInputFile ();
+			tb.GeneratePlayers (50);
 
-			Import i = new Import ();
-	//		i.DownloadMasterZipEGF ();
+			/*
+			i.DownloadMasterZipEGF ();
             i.GenerateTemplate();
 			Console.ReadLine ();
             Turn t = new Turn(i._Round);
@@ -42,6 +44,7 @@ namespace Ire
 			t.DebugPlayers ();
             t.SetBar();
             t.MakePairing();
+*/
         }
     }
 }

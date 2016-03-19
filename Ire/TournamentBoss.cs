@@ -21,6 +21,7 @@ namespace Ire
 
         public TournamentBoss(bool Mac=false)
         {
+			Macintosh = Mac;
             exeDirectory = Directory.GetCurrentDirectory();
             Console.WriteLine(exeDirectory);
         }
@@ -29,15 +30,11 @@ namespace Ire
 		public void GeneratePlayers(int nPlayers)
 		{
 			Utility u = new Utility ();
-			string fn;
-			if(Macintosh)
-				fn = workDirectory + "/players.csv";
-			else
-				fn = workDirectory + "\\players.csv";
+			string fn = workDirectory + "players.txt";
 
 			// 			riter.WriteLine("PIN , Name, Rating, Club, Country,")
 			int i = 100;
-			using (StreamWriter sw = new StreamWriter (workDirectory + "nPlayers.csv")) {
+			using (StreamWriter sw = new StreamWriter (fn,true)) {
 				for(int np = 0; np<nPlayers; np++)
 					sw.WriteLine (i++ + "," + u.ProvideName() + "," + u.RatingByBox(1500,500) + ",BLF,IE");
 			}
@@ -74,11 +71,7 @@ namespace Ire
         {
            
             string tLn = "";
-			string fin = workDirectory;
-			if (Macintosh)
-				workDirectory+="/players.csv";
-			else
-				workDirectory+="\\players.csv";
+			string fin = workDirectory + "players.txt";
             using (StreamReader reader = new StreamReader(fin))
             {
                 for (int i = 0; i < 6; i++)
@@ -135,7 +128,12 @@ namespace Ire
                     workDirectory = exeDirectory + "\\"+ Console.ReadLine().Trim();
             }
             catch (Exception e) { GenerateTemplateInputFile(); }
-            string fOut = workDirectory + "players.csv";
+			if(Macintosh)
+				workDirectory += "/";
+			else
+				workDirectory += "\\";
+			Console.WriteLine("Working directory is: "+workDirectory);
+            string fOut = workDirectory + "players.txt";
             Console.WriteLine("Setting Tournament Information...");
             Console.WriteLine("Please enter the Tournament Name:");
             string name = Console.ReadLine();
@@ -257,7 +255,11 @@ namespace Ire
 
         public void GenerateRoundResults(int i, List<Pairing> ps)
         {
-            string fOut = workDirectory + "Round" + i + "Results.tsv";
+			string fOut = workDirectory;
+			if(Macintosh)
+				workDirectory += "/Round" + i + "Results.txt";
+			else
+				workDirectory += "\\Round" + i + "Results.txt";
             using (StreamWriter riter = new StreamWriter(fOut))
             {
                 riter.WriteLine("Results of Round " + i);
