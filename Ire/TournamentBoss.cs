@@ -8,7 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Ire
-{ //combine Import and Turn 
+{ 
+	//New Class to combine Import and Turn 
     class TournamentBoss
     {
         int nRounds = 0;
@@ -18,21 +19,47 @@ namespace Ire
         List<Jucator> AllPlayers = new List<Jucator>();
 
 
-        public TournamentBoss()
+        public TournamentBoss(bool Mac=false)
         {
             exeDirectory = Directory.GetCurrentDirectory();
             Console.WriteLine(exeDirectory);
         }
 
-#region Import Functions
+		#region TestFunctions
+		public void GeneratePlayers(int nPlayers)
+		{
+			Utility u = new Utility ();
+			string fn;
+			if(Macintosh)
+				fn = workDirectory + "/players.csv";
+			else
+				fn = workDirectory + "\\players.csv";
+
+			// 			riter.WriteLine("PIN , Name, Rating, Club, Country,")
+			int i = 100;
+			using (StreamWriter sw = new StreamWriter (workDirectory + "nPlayers.csv")) {
+				for(int np = 0; np<nPlayers; np++)
+					sw.WriteLine (i++ + "," + u.ProvideName() + "," + u.RatingByBox(1500,500) + ",BLF,IE");
+			}
+		}
+		#endregion
+
+#region ImportFunctions
         public void DownloadEGFMasterZip()
         {
             string uri = "http://www.europeangodatabase.eu/EGD/EGD_2_0/downloads/allworld_lp.zip";
+			FileInfo fi;
          //   string egfCopyUnZipped = "/Users/iandavis/egzipdata.txt";
             WebClient client = new WebClient ();
-            client.DownloadFile (uri, workDirectory + "egzipdata.zip");
-            Console.WriteLine("DownloadMasterZipEGF file downloaded");
-            FileInfo fi = new FileInfo(workDirectory + "egzipdata.zip");
+			if (Macintosh) {
+				client.DownloadFile (uri, workDirectory + "/egzipdata.zip");
+				Console.WriteLine ("DownloadMasterZipEGF file downloaded");
+				fi = new FileInfo (workDirectory + "/egzipdata.zip");
+			} else {
+				client.DownloadFile (uri, workDirectory + "\\egzipdata.zip");
+				Console.WriteLine ("DownloadMasterZipEGF file downloaded");
+				fi = new FileInfo (workDirectory + "\\egzipdata.zip");
+			}
             using (ZipFile zip = ZipFile.Read(fi.FullName))
             {
                 zip.ExtractAll(workDirectory);
@@ -47,7 +74,11 @@ namespace Ire
         {
            
             string tLn = "";
-            string fin = workDirectory + "players.csv";
+			string fin = workDirectory;
+			if (Macintosh)
+				workDirectory+="/players.csv";
+			else
+				workDirectory+="\\players.csv";
             using (StreamReader reader = new StreamReader(fin))
             {
                 for (int i = 0; i < 6; i++)

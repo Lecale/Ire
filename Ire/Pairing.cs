@@ -12,6 +12,14 @@ namespace Ire
         protected Player black;
         protected int setting = 0;
         protected int result = 0;
+		static int maxHandi;
+		static int defaultPolicy;
+
+		public void setStatics (int _maxHandi = 9, int _defPolicy = -1)
+		{
+			maxHandi = _maxHandi;
+			defaultPolicy = _defPolicy;
+		}
 
 		public Pairing( Player a, Player b)
 		{
