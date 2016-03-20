@@ -32,6 +32,8 @@ namespace Ire
 			tb.ReadPlayers();
 			tb.SortField(true);
 			tb.ShowField ();
+
+
 			/*
 			i.DownloadMasterZipEGF ();
             i.GenerateTemplate();

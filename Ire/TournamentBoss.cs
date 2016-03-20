@@ -16,6 +16,10 @@ namespace Ire
         string exeDirectory;
         private string workDirectory;
         bool Macintosh = false;
+		bool TopBar=true;
+		bool RatingFloor=false;
+		int HandiAdjust=1;
+		int nMaxHandicap = 9;
         List<Player> AllPlayers = new List<Player>();
 
 
@@ -162,15 +166,29 @@ namespace Ire
             Console.WriteLine("Setting Tournament Information...");
             Console.WriteLine("Please enter the Tournament Name:");
             string name = Console.ReadLine();
-            Console.WriteLine("Please enter number of Rounds:");
-            string round = Console.ReadLine();
-            nRounds = int.Parse(round);
-            /*
-            Console.WriteLine ("Top Group (yes / no )");
-            string top  = Console.ReadLine ();
-            Console.WriteLine ("Lower Group(yes / no )");
+           
+			// This information goes into a separate file  
+			Console.WriteLine("Please enter number of Rounds:");
+			string round = Console.ReadLine();
+			nRounds = int.Parse(round); 
+            Console.WriteLine ("Top Group ? (yes / no )");
+			string top  = Console.ReadLine ();
+			if (top.ToUpper ().StartsWith ("Y")) {
+				Console.WriteLine ("Noted. Top Group Rating can be entered in Settings");
+			}
+            Console.WriteLine ("Rating Floor ? (yes / no )");
             string bot  = Console.ReadLine ();
-*/
+			if (bot.ToUpper ().StartsWith ("Y")) {
+				Console.WriteLine ("Noted. Rating Floor can be entered in Settings");
+			}
+			Console.WriteLine ("Handicap Adjustment ? (0 for none)");
+			string adj = Console.ReadLine();
+			int nAdj = int.Parse(adj); 
+			Console.WriteLine ("Maximum Handicap Allowed ?");
+			string maxhan = Console.ReadLine();
+			nMaxHandicap = int.Parse(maxhan); 
+
+
             if (File.Exists(fOut))
             {
                 Console.WriteLine("File already exists - Overwrite it? y/n");
@@ -180,7 +198,7 @@ namespace Ire
                 else
                     File.Delete(fOut);
 			}
-			Console.WriteLine("GenerateTemplateInputFile() rite");
+
             using (StreamWriter riter = new StreamWriter(fOut))
             {
                 riter.WriteLine("Tournament Name:\t" + name + ",");
@@ -198,7 +216,27 @@ namespace Ire
                 riter.WriteLine(hdr);
                 riter.WriteLine(bdy);
             }
-			Console.WriteLine("GenerateTemplateInputFile() END");
+			//write settings
+			string fSettings = workDirectory + "settings.txt";
+			if (File.Exists(fSettings))
+			{
+				Console.WriteLine("File already exists - Overwrite it? y/n");
+				string s = Console.ReadLine().ToUpper();
+				if (s.StartsWith("N"))
+					return;
+				else
+					File.Delete(fSettings);
+			}
+			using (StreamWriter riter = new StreamWriter (fSettings)) {
+				riter.WriteLine ("Tournament Name:\t" + name);
+				riter.WriteLine ("Rounds:\t" + nRounds);
+				if(TopBar)
+					riter.WriteLine ("Top Bar Rating:\t" );
+				if(RatingFloor)
+					riter.WriteLine ("Rating Floor:\t");
+				riter.WriteLine ("Handicap Policy:\t"+HandiAdjust);
+				riter.WriteLine ("Rating Floor:\t"+nMaxHandicap);		
+			}
         }
 
         // the file name this is pointing to is not well defined
