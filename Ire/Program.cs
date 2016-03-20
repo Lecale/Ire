@@ -32,7 +32,11 @@ namespace Ire
 			tb.ReadPlayers();
 			tb.SortField(true);
 			tb.ShowField ();
-
+			Console.WriteLine ("Ready to read in Settings File?");
+			string s = Console.ReadLine();//wait	
+			tb.ReadSettings ();
+			tb.previewTopBar ();
+			tb.previewFloor ();
 
 			/*
 			i.DownloadMasterZipEGF ();

@@ -17,12 +17,13 @@ namespace Ire
 		string TournamentName;
         private string workDirectory;
         bool Macintosh = false;
-		bool TopBar=true;
+		bool TopBar=false;
 		bool RatingFloor=false;
 		int HandiAdjust=1;
 		int nMaxHandicap = 9;
 		int nTopBar = 5000;
 		int nRatingFloor = 100;
+		int nGradeWidth = 100;
         List<Player> AllPlayers = new List<Player>();
 
 
@@ -47,7 +48,7 @@ namespace Ire
 			}
 		}
 
-		#region TestFunctions
+		#region TestPreviewFunctions
 		public void GeneratePlayers(int nPlayers)
 		{
 			Utility u = new Utility ();
@@ -68,6 +69,35 @@ namespace Ire
 					sw.WriteLine(p.ToString());			
 				}
 		}
+		public void previewFloor()
+		{
+			int tCount = 0;
+			foreach (Player p in AllPlayers)
+			{
+				if (p.getRating() < nRatingFloor)
+				{
+					Console.WriteLine(p.getName() + " " + p.getRating());
+					tCount++;
+				}
+			}
+			Console.WriteLine("Provisionally " + tCount + " in bottom group");
+		}
+		public void previewTopBar()
+		{ 
+			int tCount = 0;
+			foreach (Player peter in AllPlayers)
+			{        
+				//if (nTopBar < peter.getRating())
+				//	nTopBar = peter.getRating();
+				if (peter.getRating() > nTopBar)
+				{
+					Console.WriteLine(peter.getName() + " " + peter.getRating());
+					tCount++;
+				}
+			}
+			Console.WriteLine("Provisionally " +tCount +" in top group");
+		}
+
 		#endregion
 
 		#region ImportFunctions
@@ -177,11 +207,13 @@ namespace Ire
             Console.WriteLine ("Top Group ? (yes / no )");
 			string top  = Console.ReadLine ();
 			if (top.ToUpper ().StartsWith ("Y")) {
+				TopBar = true;
 				Console.WriteLine ("Noted. Top Group Rating can be entered in Settings");
 			}
             Console.WriteLine ("Rating Floor ? (yes / no )");
             string bot  = Console.ReadLine ();
 			if (bot.ToUpper ().StartsWith ("Y")) {
+				RatingFloor = true;
 				Console.WriteLine ("Noted. Rating Floor can be entered in Settings");
 			}
 			Console.WriteLine ("Handicap Adjustment ? (0 for none)");
@@ -190,7 +222,9 @@ namespace Ire
 			Console.WriteLine ("Maximum Handicap Allowed ?");
 			string maxhan = Console.ReadLine();
 			nMaxHandicap = int.Parse(maxhan); 
-
+			Console.WriteLine ("Grade Width (default 100)");
+			string GradeWidth = Console.ReadLine();
+			//nGradeWidth = int.Parse(GradeWidth); //Implement later - not essential
 
             if (File.Exists(fOut))
             {
