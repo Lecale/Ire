@@ -14,12 +14,15 @@ namespace Ire
     {
         int nRounds = 0;
         string exeDirectory;
+		string TournamentName;
         private string workDirectory;
         bool Macintosh = false;
 		bool TopBar=true;
 		bool RatingFloor=false;
 		int HandiAdjust=1;
 		int nMaxHandicap = 9;
+		int nTopBar = 5000;
+		int nRatingFloor = 100;
         List<Player> AllPlayers = new List<Player>();
 
 
@@ -183,7 +186,7 @@ namespace Ire
 			}
 			Console.WriteLine ("Handicap Adjustment ? (0 for none)");
 			string adj = Console.ReadLine();
-			int nAdj = int.Parse(adj); 
+			HandiAdjust = int.Parse(adj); 
 			Console.WriteLine ("Maximum Handicap Allowed ?");
 			string maxhan = Console.ReadLine();
 			nMaxHandicap = int.Parse(maxhan); 
@@ -235,9 +238,41 @@ namespace Ire
 				if(RatingFloor)
 					riter.WriteLine ("Rating Floor:\t");
 				riter.WriteLine ("Handicap Policy:\t"+HandiAdjust);
-				riter.WriteLine ("Rating Floor:\t"+nMaxHandicap);		
+				riter.WriteLine ("Max Handicap:\t"+nMaxHandicap);		
 			}
         }
+
+		public void ReadSettings()
+		{
+			char[] ch = { '\t'};
+			string[] s;
+			try{
+			using (StreamReader sr = new StreamReader (workDirectory + "settings.txt")) {
+				while(true)	{
+						s = sr.ReadLine ().Split(ch);
+						if(s[0].Contains("Tournament Name")){
+							TournamentName = s[1];
+						}
+						if(s[0].Contains("Rounds")){
+							nRounds = int.Parse(s[1].Trim());
+						}
+						if(s[0].Contains("Top Bar Rating")){
+							nTopBar = int.Parse(s[1].Trim());
+						}
+						if(s[0].Contains("Rating Floor")){
+							nRatingFloor = int.Parse(s[1].Trim());
+						}
+						if(s[0].Contains("Handicap Policy")){
+							HandiAdjust = int.Parse(s[1].Trim());
+						}
+						if(s[0].Contains("Max Handicap")){
+							nMaxHandicap = int.Parse(s[1].Trim());
+						}
+					}
+				}
+			}
+			catch(Exception e) { Console.WriteLine (e.Message);}
+		}
 
         // the file name this is pointing to is not well defined
         public void FormatMasterEGF()
