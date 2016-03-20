@@ -129,10 +129,18 @@ namespace Ire
         {
             return Name;
         }
-       public int getRating()
+        public int getRating()
         {
             return Rating;
         }
+		public int getERating()
+		{
+			return eRating;
+		}
+		public void setERating(int _rating)
+		{
+			eRating = _rating;
+		}
         public void setMMS(float s)
         {
             MMS = s;
