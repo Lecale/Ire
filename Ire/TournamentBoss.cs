@@ -69,7 +69,7 @@ namespace Ire
 					sw.WriteLine(p.ToString());			
 				}
 		}
-		public void previewFloor()
+		public void previewFloor(bool SetFloor =  false)
 		{
 			int tCount = 0;
 			foreach (Player p in AllPlayers)
@@ -81,6 +81,22 @@ namespace Ire
 				}
 			}
 			Console.WriteLine("Provisionally " + tCount + " in bottom group");
+			if (SetFloor) {
+				Console.WriteLine ("Apply this setting (yes / no )");
+				if (Console.ReadLine ().ToUpper ().StartsWith ("Y")) {
+					foreach (Player pete in AllPlayers) {        
+						if (nRatingFloor < pete.getRating () ) {
+							pete.setERating (nRatingFloor);
+						}
+					}
+				}
+				else
+				{
+					Console.WriteLine ("Enter a new value for the Rating Floor");
+					nRatingFloor = int.Parse(Console.ReadLine ().Trim ());
+					previewFloor(true);
+				}
+			}
 		}
 		public void previewTopBar(bool SetBar = false)
 		{ 
