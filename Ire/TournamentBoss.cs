@@ -25,6 +25,7 @@ namespace Ire
 		int nRatingFloor = 100;
 		int nGradeWidth = 100;
         List<Player> AllPlayers = new List<Player>();
+		List<Player> RoundPlayers;
 
 
         public TournamentBoss(bool Mac=false)
@@ -34,7 +35,7 @@ namespace Ire
             Console.WriteLine(exeDirectory);
         }
 
-
+		#region NormalOperations
 		public void SortField(bool init=false)
 		{
 			if (init)
@@ -47,6 +48,46 @@ namespace Ire
 					p.Seed = i++;
 			}
 		}
+
+		public void MakeDraw(int currentRound = 1)
+		{
+			Console.WriteLine ("We are ready to make the draw for Round "+currentRound);
+			Console.WriteLine ("Do you want to make an update to the players list (yes / no)");
+			string s = Console.ReadLine (); 
+			int i;
+			//Handle this later
+			UpdateParticipation (currentRound);
+			if(RoundPlayers.Count % 2 == 1 )
+				i = AssignBye (currentRound);
+			Console.WriteLine ("MakeDraw prep completed ...");
+		}
+
+		public void UpdateParticipation(int _rnd)
+		{
+			RoundPlayers = new List<Player> ();
+			foreach (Player p in AllPlayers) {
+				if (p.getParticipation (_rnd - 1))
+					RoundPlayers.Add (p);
+			}
+		}
+
+		public int AssignBye(int _rnd, int ByeLevel=1)
+		{ 
+			int found = -1;
+			for (int i = RoundPlayers.Count - 1; i == 0; i++) {
+				if (RoundPlayers [i].nBye() < ByeLevel) {
+					Console.WriteLine ("A bye will be assigned to ...");
+					Console.WriteLine (RoundPlayers [i].ToString ());
+					RoundPlayers [i].AssignBye (i);
+					RoundPlayers.RemoveAt (i);
+					return i;
+				}
+			}
+			//emergency
+			Console.WriteLine("Wow no Bye Candidate found...");
+			return -1;
+		}
+		#endregion
 
 		#region TestPreviewFunctions
 		public void GeneratePlayers(int nPlayers)

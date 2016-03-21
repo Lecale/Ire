@@ -40,6 +40,7 @@ namespace Ire
 			tb.previewTopBar (true);
 			tb.previewFloor (true);
 			//now we can start the tournament
+			tb.MakeDraw();
 
 			/*
 			i.DownloadMasterZipEGF ();

@@ -80,6 +80,11 @@ namespace Ire
 			BlackWhite[rnd] = BW;
 		}
 
+		public void AssignBye(int _rnd)
+		{
+			participation[_rnd-1] = false;
+		}
+
         public float getMMS()
         {
             float f = 0;
