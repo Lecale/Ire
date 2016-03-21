@@ -37,6 +37,9 @@ namespace Ire
 			tb.ReadSettings ();
 			tb.previewTopBar ();
 			tb.previewFloor ();
+			tb.previewTopBar (true);
+			tb.previewFloor (true);
+			//now we can start the tournament
 
 			/*
 			i.DownloadMasterZipEGF ();
