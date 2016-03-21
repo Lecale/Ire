@@ -66,7 +66,7 @@ namespace Ire
 		{
 			RoundPlayers = new List<Player> ();
 			foreach (Player p in AllPlayers) {
-				if (p.getParticipation (_rnd - 1))
+				if (p.getParticipation (_rnd-1))
 					RoundPlayers.Add (p);
 			}
 		}
@@ -90,16 +90,19 @@ namespace Ire
 		#endregion
 
 		#region TestPreviewFunctions
-		public void GeneratePlayers(int nPlayers)
+		public void GeneratePlayers(int nPlayers,int rnd)
 		{
 			Utility u = new Utility ();
+			string end = "";
+			for(int r=0; r<rnd; r++)
+				end += "," + r+1;
 			string fn = workDirectory + "players.txt";
 
 			// 			riter.WriteLine("PIN , Name, Rating, Club, Country,")
 			int i = 100;
 			using (StreamWriter sw = new StreamWriter (fn,true)) {
 				for(int np = 0; np<nPlayers; np++)
-					sw.WriteLine (i++ + "," + u.ProvideName() + "," + u.RatingByBox(1500,500) + ",BLF,IE");
+					sw.WriteLine (i++ + "," + u.ProvideName() + "," + u.RatingByBox(1500,500) + ",BLF,IE" + end);
 			}
 		}
 		public void ShowField()

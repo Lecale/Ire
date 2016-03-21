@@ -40,6 +40,7 @@ namespace Ire
 			eRating = _rat;
 			//participation does not exist
 			participation = new bool[par.Length];
+		//	Console.WriteLine ("Participation length "+par.Length);
 			for(int i=0; i<par.Length; i++)
 				participation[i]=par[i];
 		}
@@ -82,7 +83,7 @@ namespace Ire
 
 		public void AssignBye(int _rnd)
 		{
-			participation[_rnd-1] = false;
+			participation[_rnd] = false;
 		}
 
         public float getMMS()
@@ -120,6 +121,7 @@ namespace Ire
         }
         public bool getParticipation(int i)
         {
+			Console.WriteLine (participation.Length);
             return participation[i];
         }
         public int nBye()

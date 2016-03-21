@@ -28,7 +28,7 @@ namespace Ire
 
             TournamentBoss tb = new TournamentBoss(true);
 			tb.GenerateTemplateInputFile ();
-			tb.GeneratePlayers (21); // this works fine
+			tb.GeneratePlayers (21,3); // this works fine
 			tb.ReadPlayers();
 			tb.SortField(true);
 			tb.ShowField ();
