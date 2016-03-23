@@ -83,6 +83,7 @@ namespace Ire
 
 		public void AssignBye(int _rnd)
 		{
+			Console.WriteLine ("AssignBye rnd " + _rnd + " par.L" + participation.Length);
 			participation[_rnd] = false;
 		}
 

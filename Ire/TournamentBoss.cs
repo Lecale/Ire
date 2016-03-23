@@ -65,22 +65,23 @@ namespace Ire
 		public void UpdateParticipation(int _rnd)
 		{
 			RoundPlayers = new List<Player> ();
-			Console.WriteLine ("for this round we have " + RoundPlayers.Count);
 			foreach (Player p in AllPlayers) {
 				if (p.getParticipation (_rnd-1))
 					RoundPlayers.Add (p);
-			Console.WriteLine ("for this round we have " + RoundPlayers.Count);
 			}
+			Console.WriteLine ("for this round we have " + RoundPlayers.Count);
 		}
 
 		public int AssignBye(int _rnd, int ByeLevel=1)
 		{ 
-			Console.WriteLine("First player bye count is " + RoundPlayers [0].nBye () + "byeLevel is " + ByeLevel);
-			for (int i = RoundPlayers.Count - 1; i == 0; i--) {
+		//	Console.WriteLine("First player bye count is " + RoundPlayers [0].nBye () + "byeLevel is " + ByeLevel);
+		//	Console.WriteLine("Player count is " + RoundPlayers.Count);
+			for (int i = RoundPlayers.Count - 1; i >-1; i--) {
+				Console.WriteLine (i);
 				if (RoundPlayers [i].nBye() < ByeLevel) {
 					Console.WriteLine ("A bye will be assigned to ...");
 					Console.WriteLine (RoundPlayers [i].ToString ());
-					RoundPlayers [i].AssignBye (i);
+					RoundPlayers [i].AssignBye (_rnd);
 					RoundPlayers.RemoveAt (i);
 					return i;
 				}
