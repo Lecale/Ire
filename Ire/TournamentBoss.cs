@@ -54,11 +54,23 @@ namespace Ire
 			Console.WriteLine ("We are ready to make the draw for Round "+currentRound);
 			Console.WriteLine ("Do you want to make an update to the players list (yes / no)");
 			string s = Console.ReadLine (); 
-			int i;
+			int i = -1;
 			//Handle this later
 			UpdateParticipation (currentRound);
 			if(RoundPlayers.Count % 2 == 1 )
 				i = AssignBye (currentRound);
+            while (i == -1)
+            {
+                int retry = 2;
+                Console.WriteLine("No player was found who already had less than " + (retry - 1) + "bye");
+                if (currentRound <= retry)
+                    i = AssignBye(currentRound, retry++);
+                else
+                {
+                    i = 100;
+                    Console.WriteLine("Fatal error encountered. Tournament cannot proceed");
+                }
+            }
 			Console.WriteLine ("MakeDraw prep completed ...");
 		}
 
