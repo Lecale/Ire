@@ -1,0 +1,28 @@
+Tournament Name:	az,
+Copy Paste the Player information into the sheet,
+PIN , Name, Rating, Club, Country,
+type X into the round column to mark a Bye,
+,
+Pin,Name,Rating,Club,Country,R1,R2,R3
+,,,,,,,
+100,ZeRoundlower olli,1336,BLF,IE,1,2,3
+101,O'Flacklater lor,1452,BLF,IE,1,2,3
+102,KerFlackmane fra,1471,BLF,IE,1,2,3
+103,O'Roundson io,1611,BLF,IE,1,2,3
+104,McTriwater rach,1339,BLF,IE,1,2,3
+105,McWhitlater ger,1506,BLF,IE,1,2,3
+106,McAshson jo,1482,BLF,IE,1,2,3
+107,KerRoundston lor,1563,BLF,IE,1,2,3
+108,O'Whitston nim,1454,BLF,IE,1,2,3
+109,McRowlower lor,1232,BLF,IE,1,2,3
+110,ZeFlackbetter eoin,1356,BLF,IE,1,2,3
+111,O'Trahmorn meg,1503,BLF,IE,1,2,3
+112,O'Flackwater meg,1475,BLF,IE,1,2,3
+113,O'Flackston fra,1359,BLF,IE,1,2,3
+114,KerFlackson sue,1507,BLF,IE,1,2,3
+115,KerTriston peg,1644,BLF,IE,1,2,3
+116,KerLandbetter sue,1373,BLF,IE,1,2,3
+117,ZeRoundlater hal,1413,BLF,IE,1,2,3
+118,ZeTrahston nim,1499,BLF,IE,1,2,3
+119,KerRowmorn hal,1468,BLF,IE,1,2,3
+120,McFlacklater jo,1746,BLF,IE,1,2,3

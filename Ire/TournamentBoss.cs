@@ -57,6 +57,7 @@ namespace Ire
 			int i = -1;
 			//Handle this later
 			UpdateParticipation (currentRound);
+			InitMMS ();
 			if(RoundPlayers.Count % 2 == 1 )
 				i = AssignBye (currentRound);
             while (i == -1)
@@ -72,6 +73,25 @@ namespace Ire
                 }
             }
 			Console.WriteLine ("MakeDraw prep completed ...");
+			DrawMachine1 dm1 = new DrawMachine1 (RoundPlayers, 9, 1, true);
+
+			Console.WriteLine ("MakeDraw 1");
+			dm1.DRAW ();
+
+			Console.WriteLine ("MakeDraw 2");
+		}
+
+		public void InitMMS() 
+		{
+			foreach (Player ap in AllPlayers) {
+				int gap = nTopBar - ap.getERating ();
+				gap = gap / 100;
+				if (gap == 0 && ap.topBar == false)
+					gap--;
+				ap.setMMS (100 - gap);
+			}
+
+
 		}
 
 		public void UpdateParticipation(int _rnd)
