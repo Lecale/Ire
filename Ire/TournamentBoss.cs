@@ -65,16 +65,18 @@ namespace Ire
 		public void UpdateParticipation(int _rnd)
 		{
 			RoundPlayers = new List<Player> ();
+			Console.WriteLine ("for this round we have " + RoundPlayers.Count);
 			foreach (Player p in AllPlayers) {
 				if (p.getParticipation (_rnd-1))
 					RoundPlayers.Add (p);
+			Console.WriteLine ("for this round we have " + RoundPlayers.Count);
 			}
 		}
 
 		public int AssignBye(int _rnd, int ByeLevel=1)
 		{ 
-			int found = -1;
-			for (int i = RoundPlayers.Count - 1; i == 0; i++) {
+			Console.WriteLine("First player bye count is " + RoundPlayers [0].nBye () + "byeLevel is " + ByeLevel);
+			for (int i = RoundPlayers.Count - 1; i == 0; i--) {
 				if (RoundPlayers [i].nBye() < ByeLevel) {
 					Console.WriteLine ("A bye will be assigned to ...");
 					Console.WriteLine (RoundPlayers [i].ToString ());
@@ -95,7 +97,7 @@ namespace Ire
 			Utility u = new Utility ();
 			string end = "";
 			for(int r=0; r<rnd; r++)
-				end += "," + r+1;
+				end += "," + (r + 1);
 			string fn = workDirectory + "players.txt";
 
 			// 			riter.WriteLine("PIN , Name, Rating, Club, Country,")
@@ -213,16 +215,16 @@ namespace Ire
                 {
                     //tLn = reader.ReadLine();
                     String[] split = tLn.Split(',');
-                    Console.WriteLine(split.Length);
+                    //Console.WriteLine(split.Length);
                     int rnd = split.Length - 5;
-                    Console.WriteLine("rnd" + rnd);
+                    //Console.WriteLine("rnd" + rnd);
 
                     try
                     {
                         int pine = int.Parse(split[0]);
-                        Console.WriteLine("pin" + pine);
+                  //      Console.WriteLine("pin" + pine);
                         int rats = int.Parse(split[2]);
-                        Console.WriteLine("rat" + rats);
+                    //    Console.WriteLine("rat" + rats);
                         bool[] bull = new bool[rnd];
                         for (int i = 5; i < rnd + 5; i++)
                         {
@@ -246,6 +248,8 @@ namespace Ire
                         Console.WriteLine(tLn);
                     }
                 }
+
+				Console.WriteLine ("Number of players registered is " + AllPlayers.Count);
             }
         }
 

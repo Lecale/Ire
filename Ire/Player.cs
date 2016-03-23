@@ -121,7 +121,7 @@ namespace Ire
         }
         public bool getParticipation(int i)
         {
-			Console.WriteLine (participation.Length);
+		//	Console.WriteLine (participation.Length);
             return participation[i];
         }
         public int nBye()
