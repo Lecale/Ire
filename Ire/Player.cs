@@ -90,6 +90,7 @@ namespace Ire
         public float getMMS()
         {
             float f = 0;
+			if(opponent!=null)
             for (int i = 0; i < opponent.Length; i++)
                 f += score[i];
             f += MMS;

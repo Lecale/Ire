@@ -89,8 +89,8 @@ namespace Ire
 				if (gap == 0 && ap.topBar == false)
 					gap--;
 				ap.setMMS (100 - gap);
+				Console.WriteLine (ap.getERating() + " - " + ap.getMMS());
 			}
-
 
 		}
 
