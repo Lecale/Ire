@@ -12,6 +12,7 @@ namespace Ire
 		public McLayer (float MMS, int Seed)
 		{
 			MMSKey = MMS;
+			population = new List<int> ();
 			population.Add (Seed);
 			Length = 1;
 		}
@@ -48,8 +49,10 @@ namespace Ire
 
 		public void Remove(int _Seed)
 		{
-			population.Remove (_Seed);
-			Length--;
+			if (population.Count > 0) {
+				population.Remove (_Seed);
+				Length--;
+			}
 		}
 	}
 }

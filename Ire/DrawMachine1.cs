@@ -17,6 +17,7 @@ namespace Ire
 
 		public DrawMachine1 ( List<Player> ply, int _MaxHandi = 9, int _AdjHandi = 1, bool _HandiAboveBar = false)
 		{
+			Console.WriteLine ("DrawMachine1");
 			plys = ply;
 			LookUpTable = new int[ply.Count];
 			Pairs = new List<Pairing>();
@@ -24,11 +25,15 @@ namespace Ire
 			AdjHandi = _AdjHandi;
 			HandiAboveBar = _HandiAboveBar;
 			plys.Sort (); //just in case
+			Console.WriteLine ("DrawMachine1 McL");
+			Console.WriteLine ("DrawMachine1 plys count " + plys.Count);
 			BigM = new List<McLayer>();
 			//populate BigM
 			BigM.Add (new McLayer (plys [1].getMMS (), plys [1].Seed));
 			for(int i=2; i<plys.Count; i++)
 			{
+
+				Console.WriteLine ("DrawMachine1 McLoop " + i);
 				if (plys [i].getMMS () == BigM [BigM.Count-1].MMSKey) {
 					BigM [BigM.Count-1].Add (plys [i].Seed);
 				}
@@ -36,11 +41,13 @@ namespace Ire
 					BigM.Add(new McLayer(plys [i].getMMS (), plys [i].Seed));
 				}
 			}
+			Console.WriteLine ("DrawMachine1 Shuffle");
 			//Shuffle
 			foreach (McLayer mcl in BigM)
 				mcl.Shuffle ();
 			for (int j = 0; j < LookUpTable.Length; j++)
 				LookUpTable [plys [j].Seed] = j; 
+			Console.WriteLine ("DrawMachine1 Draw");
 			DRAW ();
 		}
 
@@ -81,7 +88,7 @@ namespace Ire
                         //rm last pairing added
                         Pairs.RemoveAt(Pairs.Count - 1);
                         //call at what level ?
-                        DRAW(); 
+						DRAW(i-2); 
                     }                              
 				}
 

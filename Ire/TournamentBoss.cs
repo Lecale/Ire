@@ -44,7 +44,9 @@ namespace Ire
 			int i = 1;
 			if (init) { //late players get a different Seed because they were late and that is how it goes
 				Player.SortByRating = false;
-				foreach (Player p in AllPlayers)
+				//top group but for bye will then be seeded as if in top group
+				//this should not have any negative effect on the pairings though
+				foreach (Player p in AllPlayers) 
 					p.Seed = i++;
 			}
 		}
@@ -83,16 +85,18 @@ namespace Ire
 
 		public void InitMMS() 
 		{
+			SortField (true);
             Console.WriteLine("InitMMS()");
             Console.WriteLine("eRating - MMS - Rating");
 			foreach (Player ap in AllPlayers) {
 				int gap = nTopBar - ap.getERating ();
 				gap = gap / 100;
-				if (gap == 0 && ap.topBar == false)
-					gap--;
+				if (gap >= 0 && ap.topBar == false)
+					gap++;
 				ap.setMMS (100 - gap);
-				Console.WriteLine (ap.getERating() + " - " + ap.getMMS() + " - " + ap.getRating());
+				Console.WriteLine (ap.getERating() + " - " + ap.getMMS() + " - " + ap.getRating() + " - " + ap.getSeed());
 			}
+
 		}
 
 		public void UpdateParticipation(int _rnd)
