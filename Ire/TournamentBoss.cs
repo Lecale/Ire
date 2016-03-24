@@ -83,15 +83,16 @@ namespace Ire
 
 		public void InitMMS() 
 		{
+            Console.WriteLine("InitMMS()");
+            Console.WriteLine("eRating - MMS - Rating");
 			foreach (Player ap in AllPlayers) {
 				int gap = nTopBar - ap.getERating ();
 				gap = gap / 100;
 				if (gap == 0 && ap.topBar == false)
 					gap--;
 				ap.setMMS (100 - gap);
-				Console.WriteLine (ap.getERating() + " - " + ap.getMMS());
+				Console.WriteLine (ap.getERating() + " - " + ap.getMMS() + " - " + ap.getRating());
 			}
-
 		}
 
 		public void UpdateParticipation(int _rnd)
