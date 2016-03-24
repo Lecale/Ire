@@ -164,7 +164,7 @@ namespace Ire
 				Console.WriteLine ("Apply this setting (yes / no )");
 				if (Console.ReadLine ().ToUpper ().StartsWith ("Y")) {
 					foreach (Player pete in AllPlayers) {        
-						if (nRatingFloor < pete.getRating () ) {
+						if (nRatingFloor > pete.getRating () ) {
 							pete.setERating (nRatingFloor);
 						}
 					}
