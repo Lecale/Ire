@@ -25,28 +25,27 @@ namespace Ire
 			AdjHandi = _AdjHandi;
 			HandiAboveBar = _HandiAboveBar;
 			plys.Sort (); //just in case
-			Console.WriteLine ("DrawMachine1 McL");
-			Console.WriteLine ("DrawMachine1 plys count " + plys.Count);
+			int d=0;
+			foreach (Player pp in plys)
+				pp.Deed = d++;
 			BigM = new List<McLayer>();
 			//populate BigM
-			BigM.Add (new McLayer (plys [1].getMMS (), plys [1].Seed));
+			BigM.Add (new McLayer (plys [1].getMMS (), plys [1].Deed));
 			for(int i=2; i<plys.Count; i++)
 			{
-
-				Console.WriteLine ("DrawMachine1 McLoop " + i);
 				if (plys [i].getMMS () == BigM [BigM.Count-1].MMSKey) {
-					BigM [BigM.Count-1].Add (plys [i].Seed);
+					BigM [BigM.Count-1].Add (plys [i].Deed);
 				}
 				else {
-					BigM.Add(new McLayer(plys [i].getMMS (), plys [i].Seed));
+					BigM.Add(new McLayer(plys [i].getMMS (), plys [i].Deed));
 				}
 			}
-			Console.WriteLine ("DrawMachine1 Shuffle");
 			//Shuffle
 			foreach (McLayer mcl in BigM)
 				mcl.Shuffle ();
+			Console.WriteLine ("DrawMachine1 Make Lookup table");
 			for (int j = 0; j < LookUpTable.Length; j++)
-				LookUpTable [plys [j].Seed] = j; 
+				LookUpTable [plys [j].Deed] = j; //This is not safe actually!
 			Console.WriteLine ("DrawMachine1 Draw");
 			DRAW ();
 		}
@@ -62,23 +61,26 @@ namespace Ire
 			Player top = plys [start];
 			Pairing tmp;
 			Pairing holdLastPairing;
-			
+			Console.WriteLine ("Draw()" + start);
 			bool found = false;
 			for (int i = start+1; i < plys.Count - 1; i++) { //foreachPlayer
+				Console.WriteLine ("looking at i :" + i);
 				found =false;
 				while (found == false) {
 					foreach (McLayer mcl in BigM) { //foreachLayer
                         if(found==false)
-						for (int j = 0; j < mcl.Length; j++) {
-							tmp = new Pairing (plys[mcl.GetAt (j)], top);
-                            if (History.Contains(tmp) == false && Blocked.Contains(tmp) == false)
-                            {
+							for (int j = 0; j < mcl.Length; j++) {
+								Console.WriteLine ("looking at j :" + j);
+								tmp = new Pairing (plys[mcl.GetAt (j)], top); //not correct!
+
+    	                        if (History.Contains(tmp) == false && Blocked.Contains(tmp) == false)
+        	                    {
                                 //holdLastPairing = tmp;
-                                Pairs.Add(tmp);
-                                found = true;
-                                break; //out of j
-                            }
-						}
+            	                    Pairs.Add(tmp);
+                	                found = true;
+                    	            break; //out of j
+                        	    }
+							}
 					}//foreachLayer
                     if (found == false)
                     {
@@ -95,6 +97,11 @@ namespace Ire
 			}//end foreachplayer
 		}
 
+
+		public List<Pairing> GetCurrentPairings()
+		{
+			return Pairs;
+		}
 	}
 }
 

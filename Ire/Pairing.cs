@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ire
 {
-    class Pairing
+    public class Pairing
     {
         protected Player white;
         protected Player black;

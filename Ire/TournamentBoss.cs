@@ -77,17 +77,16 @@ namespace Ire
 			Console.WriteLine ("MakeDraw prep completed ...");
 			DrawMachine1 dm1 = new DrawMachine1 (RoundPlayers, 9, 1, true);
 
-			Console.WriteLine ("MakeDraw 1");
-			dm1.DRAW ();
-
-			Console.WriteLine ("MakeDraw 2");
+			List<Pairing> RndPairings = dm1.GetCurrentPairings ();
+			foreach (Pairing rp in RndPairings)
+				Console.WriteLine (rp.BasicOutput());
 		}
 
 		public void InitMMS() 
 		{
 			SortField (true);
             Console.WriteLine("InitMMS()");
-            Console.WriteLine("eRating - MMS - Rating");
+            Console.WriteLine("eRating - MMS - Rating - Seed");
 			foreach (Player ap in AllPlayers) {
 				int gap = nTopBar - ap.getERating ();
 				gap = gap / 100;

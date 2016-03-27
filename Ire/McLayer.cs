@@ -8,7 +8,7 @@ namespace Ire
 		public int Length = 0;
 
 		private List<int> population;
-		private Random r;
+		private Random r = new Random();
 		public McLayer (float MMS, int Seed)
 		{
 			MMSKey = MMS;
@@ -26,13 +26,18 @@ namespace Ire
 
 		public void Shuffle()//not very random but it will do for now
 		{
-			int hold;
-			int tmp;
-			for (int i = 0; i < population.Count; i++) {
-				tmp = r.Next (0, population.Count);
-				hold = population[tmp];
-				population [tmp] = population [i];
-				population [i] = hold;
+			if (population.Count < 1)
+				Console.WriteLine ("Shuffle() but nothing to shuffle"); 
+			else {
+				Console.WriteLine ("Shuffle()"); 
+				int hold;
+				int tmp;
+				for (int i = 0; i < population.Count; i++) {
+					tmp = r.Next (0, population.Count);
+					hold = population [tmp];
+					population [tmp] = population [i];
+					population [i] = hold;
+				}
 			}
 		}
 
@@ -45,6 +50,7 @@ namespace Ire
 		{
 			population.Add(_seed);
 			Length++;
+			Console.WriteLine ("Added " + _seed + " to " + MMSKey);
 		}
 
 		public void Remove(int _Seed)

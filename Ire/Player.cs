@@ -19,6 +19,8 @@ namespace Ire
 		public float MOS = -1; //Middle portion of SOS
 		protected int eRating; // effective rating, used for lower bar
 		private int EGDPin;
+		public int Deed = -1; //Deed is the draw seeding for a particular round
+
 
 		private static bool BreakBySOS = true;
 		private static bool BreakByMOS = true;
