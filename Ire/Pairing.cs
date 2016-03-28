@@ -23,12 +23,6 @@ namespace Ire
 			handAboveBar = _handAboveBar;
 		}
 
-		public Pairing( Player a, Player b)
-		{
-			if(a.topBar || b.topBar)
-				;//Pairing(a,b,defaultPolicy,
-		}
-
         public Pairing( Player a, Player b, int _handicap, int _result)
         {
             white = a;
@@ -37,7 +31,7 @@ namespace Ire
             result = _result;
         }
 
-        public Pairing(Player a, Player b, int HandiPolicy, bool HandiAboveBar)
+        public Pairing(Player a, Player b)
         {
             Random r = new Random();
             int coin = r.Next(0, 2) - 1;
@@ -45,7 +39,7 @@ namespace Ire
             rawDiff = (rawDiff * rawDiff) / rawDiff;
             white = a; //save time with default assignment
             black = b;
-            if (HandiPolicy == -1) //no handicap
+            if (defaultPolicy == -1) //no handicap
             {//coin flip
                 if (coin > 0)
                 {
@@ -60,9 +54,9 @@ namespace Ire
                * except if aboveBar stuff is in place
                * Remember 1.5 is treated as 1 according to tradition
                */
-                if(rawDiff>HandiPolicy)
+				if(rawDiff>defaultPolicy)
                 {
-                    if (HandiAboveBar)
+					if (handAboveBar==false)
                     {
                         if (a.topBar || b.topBar)
                         { //somebody abovebar flipcoin
@@ -79,7 +73,7 @@ namespace Ire
                                 white = b;
                                 black = a;
                             }
-                            setting = (int)(rawDiff - HandiPolicy);
+							setting = (int)(rawDiff - defaultPolicy);
                         }
                     }
                     else //handicap allowed above bar
@@ -89,7 +83,7 @@ namespace Ire
                             white = b;
                             black = a;
                         }
-                        setting = (int)(rawDiff - HandiPolicy);
+						setting = (int)(rawDiff - defaultPolicy);
                     }
                 }
                 else
@@ -101,7 +95,9 @@ namespace Ire
                     }
                 }
             }
-           
+			if (maxHandi != -1)
+			if (setting > maxHandi)
+				setting = maxHandi;
         }
 
         public void ChangeSetting(int s)

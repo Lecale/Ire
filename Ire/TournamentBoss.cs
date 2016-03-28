@@ -381,8 +381,10 @@ namespace Ire
 			using (StreamWriter riter = new StreamWriter (fSettings)) {
 				riter.WriteLine ("Tournament Name:\t" + name);
 				riter.WriteLine ("Rounds:\t" + nRounds);
-				if(TopBar)
-					riter.WriteLine ("Top Bar Rating:\t" );
+				if (TopBar) {
+					riter.WriteLine ("Top Bar Rating:\t");
+					riter.WriteLine ("Permit handicap above bar:\t");
+				}
 				if(RatingFloor)
 					riter.WriteLine ("Rating Floor:\t");
 				riter.WriteLine ("Handicap Policy:\t"+HandiAdjust);
@@ -415,6 +417,9 @@ namespace Ire
 						}
 						if(s[0].Contains("Max Handicap")){
 							nMaxHandicap = int.Parse(s[1].Trim());
+						}
+						if(s[0].Contains("MPermit handicap above bar")){
+							;//not handled yet
 						}
 					}
 				}
