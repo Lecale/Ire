@@ -14,17 +14,19 @@ namespace Ire
         protected int result = 0;
 		static int maxHandi;
 		static int defaultPolicy;
+		static bool handAboveBar = false;
 
-		public void setStatics (int _maxHandi = 9, int _defPolicy = -1)
+		public void setStatics (int _maxHandi = 9, int _defPolicy = -1, bool _handAboveBar=false)
 		{
 			maxHandi = _maxHandi;
 			defaultPolicy = _defPolicy;
+			handAboveBar = _handAboveBar;
 		}
 
 		public Pairing( Player a, Player b)
 		{
-			white = a;
-			black = b;
+			if(a.topBar || b.topBar)
+				;//Pairing(a,b,defaultPolicy,
 		}
 
         public Pairing( Player a, Player b, int _handicap, int _result)

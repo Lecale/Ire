@@ -68,9 +68,9 @@ namespace Ire
 			bool found = false;
 			for (int i = start+1; i <= plys.Count -1; i++) { //foreachPlayer
 				// but this is not the good loop?
-				Console.WriteLine ("looking at i :" + i);
+				//Console.WriteLine ("looking at i :" + i);
 				if (LookUpBull [i] == true) {
-					Console.WriteLine (i + " had been paired previously");
+					//Console.WriteLine (i + " had been paired previously");
 					found = true;
 				}else
 					found =false;
