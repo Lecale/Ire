@@ -14,20 +14,24 @@ namespace Ire
 		private List<Pairing> History = new List<Pairing>(); //previous rounds
         List<Pairing> Blocked = new List<Pairing>();
 		private int[] LookUpTable;
+		private bool[] LookUpBull;
 
 		public DrawMachine1 ( List<Player> ply, int _MaxHandi = 9, int _AdjHandi = 1, bool _HandiAboveBar = false)
 		{
 			Console.WriteLine ("DrawMachine1");
 			plys = ply;
 			LookUpTable = new int[ply.Count];
+			LookUpBull = new bool[ply.Count];
 			Pairs = new List<Pairing>();
 			MaxHandi = _MaxHandi;
 			AdjHandi = _AdjHandi;
 			HandiAboveBar = _HandiAboveBar;
 			plys.Sort (); //just in case
 			int d=0;
-			foreach (Player pp in plys)
+			foreach (Player pp in plys) {
+				LookUpBull[d] = false;
 				pp.Deed = d++;
+			}
 			BigM = new List<McLayer>();
 			//populate BigM
 			BigM.Add (new McLayer (plys [1].getMMS (), plys [1].Deed));
@@ -43,7 +47,6 @@ namespace Ire
 			//Shuffle
 			foreach (McLayer mcl in BigM)
 				mcl.Shuffle ();
-			Console.WriteLine ("DrawMachine1 Make Lookup table");
 			for (int j = 0; j < LookUpTable.Length; j++)
 				LookUpTable [plys [j].Deed] = j; //This is not safe actually!
 			Console.WriteLine ("DrawMachine1 Draw");
@@ -63,21 +66,34 @@ namespace Ire
 			Pairing holdLastPairing;
 			Console.WriteLine ("Draw()" + start);
 			bool found = false;
-			for (int i = start+1; i < plys.Count - 1; i++) { //foreachPlayer
+			for (int i = start+1; i <= plys.Count -1; i++) { //foreachPlayer
+				// but this is not the good loop?
 				Console.WriteLine ("looking at i :" + i);
-				found =false;
+				if (LookUpBull [i] == true) {
+					Console.WriteLine (i + " had been paired previously");
+					found = true;
+				}else
+					found =false;
 				while (found == false) {
 					foreach (McLayer mcl in BigM) { //foreachLayer
                         if(found==false)
 							for (int j = 0; j < mcl.Length; j++) {
-								Console.WriteLine ("looking at j :" + j);
-								tmp = new Pairing (plys[mcl.GetAt (j)], top); //not correct!
-
-    	                        if (History.Contains(tmp) == false && Blocked.Contains(tmp) == false)
+								Console.WriteLine ("  trying at j :" + j);
+								tmp = new Pairing (plys[mcl.GetAt (j)], top); //not correct?
+								//how to set above line well
+								if (History.Contains(tmp) == false && Blocked.Contains(tmp) == false 
+									&& LookUpBull[plys[mcl.GetAt (j)].Deed] ==false && plys[mcl.GetAt (j)].Deed != top.Deed)
         	                    {
-                                //holdLastPairing = tmp;
+									LookUpBull[top.Deed ] = true;
+									LookUpBull[plys[mcl.GetAt (j)].Deed] = true;
             	                    Pairs.Add(tmp);
                 	                found = true;
+									top = plys[0]; 
+									for (int k = 0; k < LookUpBull.Length; k++)
+										if ( LookUpBull[k] == false) {
+											top = plys [k];
+											k = LookUpBull.Length + 1;
+										}
                     	            break; //out of j
                         	    }
 							}
@@ -87,6 +103,9 @@ namespace Ire
                         Console.WriteLine("No valid pairing was found");
                         //add to block
                         Blocked.Add(Pairs[Pairs.Count - 1]);
+						//update lookups
+						LookUpBull [Pairs [Pairs.Count - 1].black.Deed]=false;
+						LookUpBull[Pairs [Pairs.Count - 1].white.Deed]=false;
                         //rm last pairing added
                         Pairs.RemoveAt(Pairs.Count - 1);
                         //call at what level ?

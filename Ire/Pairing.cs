@@ -8,8 +8,8 @@ namespace Ire
 {
     public class Pairing
     {
-        protected Player white;
-        protected Player black;
+        public Player white;
+        public Player black;
         protected int setting = 0;
         protected int result = 0;
 		static int maxHandi;

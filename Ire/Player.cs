@@ -236,7 +236,7 @@ namespace Ire
 
         public override string ToString()
         {
-            return Name + " " + eRating;
+			return Name + " " + eRating + "("+MMS+")";
         }
     }
 	#endregion

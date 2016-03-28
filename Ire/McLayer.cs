@@ -27,9 +27,9 @@ namespace Ire
 		public void Shuffle()//not very random but it will do for now
 		{
 			if (population.Count < 1)
-				Console.WriteLine ("Shuffle() but nothing to shuffle"); 
+				;//Console.WriteLine ("Shuffle() but nothing to shuffle"); 
 			else {
-				Console.WriteLine ("Shuffle()"); 
+				//Console.WriteLine ("Shuffle()"); 
 				int hold;
 				int tmp;
 				for (int i = 0; i < population.Count; i++) {
