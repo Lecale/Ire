@@ -79,8 +79,12 @@ namespace Ire
 
 			List<Pairing> RndPairings = dm1.GetCurrentPairings ();
 			foreach (Pairing rp in RndPairings)
-				Console.WriteLine (rp.BasicOutput());
-		}
+                Console.WriteLine(rp.BasicOutput());
+            Console.WriteLine();
+            Console.WriteLine("When you are ready to read in the results, press any key");
+            Console.WriteLine("Remember that the draw can be overwritten in the input file");
+            string anyKey = Console.ReadLine();
+        }
 
 		public void InitMMS() 
 		{
@@ -418,7 +422,7 @@ namespace Ire
 						if(s[0].Contains("Max Handicap")){
 							nMaxHandicap = int.Parse(s[1].Trim());
 						}
-						if(s[0].Contains("MPermit handicap above bar")){
+						if(s[0].Contains("Permit handicap above bar")){
 							;//not handled yet
 						}
 					}
@@ -499,6 +503,10 @@ namespace Ire
 
 
 		}
+
+        public void ReadRresults(int round)
+        { 
+        }
 			
 #endregion
 
