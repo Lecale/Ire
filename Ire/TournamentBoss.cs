@@ -97,6 +97,7 @@ namespace Ire
 				gap = gap / 100;
 				if (gap >= 0 && ap.topBar == false)
 					gap++;
+                gap++;
 				ap.setMMS (100 - gap);
 				Console.WriteLine (ap.getERating() + " - " + ap.getMMS() + " - " + ap.getRating() + " - " + ap.getSeed());
 			}
@@ -505,8 +506,11 @@ namespace Ire
 
 		}
 
-        public void ReadResults(int round)
-        { 
+        public void ReadResults(int rnd)
+        {
+            using (StreamReader sr = new StreamReader(workDirectory + "Round" + rnd + "Results.txt"))
+            { 
+            }
         }
 			
 #endregion
@@ -514,12 +518,12 @@ namespace Ire
 		//In fact we may no longer wish to use Pairing class
         #region Export Functions
 
-        public void GenerateRoundResults(int i, List<Pairing> ps)
+        public void GenerateRoundResults(int rnd, List<Pairing> ps)
         {
-			string fOut = workDirectory + "Round" + i + "Results.txt";
+			string fOut = workDirectory + "Round" + rnd + "Results.txt";
             using (StreamWriter riter = new StreamWriter(fOut))
             {
-                riter.WriteLine("Results of Round " + i);
+                riter.WriteLine("Results of Round " + rnd);
                 riter.WriteLine("white  :  black");
                 foreach (Pairing p in ps)
                     riter.WriteLine(p.BasicOutput());
