@@ -80,6 +80,7 @@ namespace Ire
 			List<Pairing> RndPairings = dm1.GetCurrentPairings ();
 			foreach (Pairing rp in RndPairings)
                 Console.WriteLine(rp.BasicOutput());
+            GenerateRoundResults(currentRound, RndPairings);
             Console.WriteLine();
             Console.WriteLine("When you are ready to read in the results, press any key");
             Console.WriteLine("Remember that the draw can be overwritten in the input file");
@@ -504,7 +505,7 @@ namespace Ire
 
 		}
 
-        public void ReadRresults(int round)
+        public void ReadResults(int round)
         { 
         }
 			
@@ -515,11 +516,7 @@ namespace Ire
 
         public void GenerateRoundResults(int i, List<Pairing> ps)
         {
-			string fOut = workDirectory;
-			if(Macintosh)
-				workDirectory += "/Round" + i + "Results.txt";
-			else
-				workDirectory += "\\Round" + i + "Results.txt";
+			string fOut = workDirectory + "Round" + i + "Results.txt";
             using (StreamWriter riter = new StreamWriter(fOut))
             {
                 riter.WriteLine("Results of Round " + i);
