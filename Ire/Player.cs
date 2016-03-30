@@ -238,6 +238,13 @@ namespace Ire
         {
 			return Name + " " + eRating + "("+MMS+")";
         }
+
+		public string ToFile()
+		{
+			char[] c = { ' '};
+			string[] split = Name.Split (c);
+			return Name + "(" + Seed + ")";
+		}
     }
 	#endregion
 

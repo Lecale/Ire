@@ -128,6 +128,28 @@ namespace Ire
             return white.ToString() + s + black.ToString() + " h"+setting;
         }
 
+		public string ToFile()
+		{
+			string s;
+			switch (result){
+			case 0:
+			default:
+				s = "    ?:?   "; break;
+			case 1:
+			case 4:
+				s = "   1:0   ";  break;
+			case 2:
+			case 5:
+				s = "   0:1   ";  break;
+			case 3:
+			case 6:
+				s = " 0.5:0.5 "; break;
+			case 7:
+				s = "   0:0   "; break;
+			}
+			return "";
+		}
+
         //quick way to check
         public string Key()
         {
