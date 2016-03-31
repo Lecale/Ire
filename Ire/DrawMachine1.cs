@@ -121,6 +121,11 @@ namespace Ire
 		{
 			return Pairs;
 		}
+
+		public void AddPairing (List<Pairing> completedRnd)
+		{
+			History.AddRange (completedRnd);
+		}
 	}
 }
 

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Ire
 { 
 	//New Class to combine Import and Turn 
-    class TournamentBoss
+    public class TournamentBoss
     {
         int nRounds = 0;
         string exeDirectory;
@@ -26,7 +26,8 @@ namespace Ire
 		int nGradeWidth = 100;
         List<Player> AllPlayers = new List<Player>();
 		List<Player> RoundPlayers;
-
+		List<Pairing> AllPairings = new List<Pairing> ();
+		List<Pairing> RoundPairings = new List<Pairing> ();
 
         public TournamentBoss(bool Mac=false)
         {
@@ -515,6 +516,7 @@ Bd	White	Result	Black	Handicap
 			char[] c = { '	'};
 			char[] c1 = { '(',')','?'};
 			int[] LUT = new int[AllPlayers.Count];
+			int[] CNT = new int[AllPlayers.Count];
 			for (int i = 0; i < AllPlayers.Count; i++)
 				LUT [i] = AllPlayers [i].Seed;
             using (StreamReader sr = new StreamReader(workDirectory + "Round" + rnd + "Results.txt"))
@@ -541,7 +543,19 @@ Bd	White	Result	Black	Handicap
 					if(split [2].Equals("0.5:0.5")) result = 3;
 					if(split [2].Equals("0:0")) result = 7;
 					Pairing p = new Pairing (AllPlayers[LUT[white]],AllPlayers[LUT[black]],handicap,result);
+					CNT[LUT[white]]++;
+					CNT[LUT[black]]++;
+					if (actualPairs.Contains (p) == false)
+					if (CNT [LUT [white]] == 1 && CNT [LUT [black]]==1)
+						actualPairs.Add (p);
+					else
+						throw new Exception ("Player played more than one game");
+					else
+						Console.WriteLine ("A duplicate result was detected " + p.ToFile());
 				}
+				//and if we did not hit an exception
+				RoundPairings = actualPairs;
+				AllPairings.AddRange(actualPairs);
             }
         }
 			
