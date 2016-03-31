@@ -503,13 +503,17 @@ namespace Ire
 				}
 			}
 
-
 		}
 
         public void ReadResults(int rnd)
         {
             using (StreamReader sr = new StreamReader(workDirectory + "Round" + rnd + "Results.txt"))
-            { 
+            {
+				sr.ReadLine ();
+				sr.ReadLine ();
+				while (sr.EndOfStream == false) {
+					
+				}
             }
         }
 			
