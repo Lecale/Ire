@@ -505,14 +505,42 @@ namespace Ire
 
 		}
 
+		/*
+Bd	White	Result	Black	Handicap  
+1	Davis.A(1)	?:?	Jones.B(2)	0  
+		 */ 
         public void ReadResults(int rnd)
         {
+			List<Pairing> actualPairs = new List<Pairing> ();
+			char[] c = { '	'};
+			char[] c1 = { '(',')','?'};
+			int[] LUT = new int[AllPlayers.Count];
+			for (int i = 0; i < AllPlayers.Count; i++)
+				LUT [i] = AllPlayers [i].Seed;
             using (StreamReader sr = new StreamReader(workDirectory + "Round" + rnd + "Results.txt"))
             {
 				sr.ReadLine ();
 				sr.ReadLine ();
+				string tab = "\t";
+				string space = " ";
 				while (sr.EndOfStream == false) {
-					
+					string s = sr.ReadLine ().Trim();
+					s.Replace (space, tab);
+					string[] split = s.Split (c);
+					string[] split2 = split [1].Split (c1);
+					int white = int.Parse(split2[1]);
+					 split2 = split [3].Split (c1);
+					int black = int.Parse(split2[1]);
+					int handicap = int.Parse(split[4]);
+					//split2 = split [2].Split (c1);
+					//float whiteScore = float.Parse(split2[0]);
+					//float blackScore = float.Parse(split2[0]);
+					int result = 0;
+					if(split [2].Equals("1:0")) result = 1;
+					if(split [2].Equals("0:1")) result = 2;
+					if(split [2].Equals("0.5:0.5")) result = 3;
+					if(split [2].Equals("0:0")) result = 7;
+					Pairing p = new Pairing (AllPlayers[LUT[white]],AllPlayers[LUT[black]],handicap,result);
 				}
             }
         }
