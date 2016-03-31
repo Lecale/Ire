@@ -133,6 +133,15 @@ namespace Ire
 			Console.WriteLine("Wow no Bye Candidate found...");
 			return -1;
 		}
+
+		public void ProcessResults(int rnd)
+		{
+			foreach (Pairing p in RoundPairings) {
+				Player white = p.white;
+				Player black = p.black;
+				//white.setResult ();
+			}
+		}
 		#endregion
 
 		#region TestPreviewFunctions
