@@ -100,7 +100,10 @@ namespace Ire
 				setting = maxHandi;
         }
 
-        public void ChangeSetting(int s)
+		public int GetHandi(){
+			return setting;
+		}
+        public void ChangeHandi(int s)
         { setting = s; }
 
         public void SetResult(int r)
@@ -148,6 +151,30 @@ namespace Ire
 				s = "   0:0   "; break;
 			}
 			return "";
+		}
+
+		public float WhiteScore()
+		{
+			if (result == 3 || result == 6)
+				return 0.5f;
+			if (result == 1 || result == 4)
+				return 1;
+			if (result == 5 || result ==2||result ==7)
+				return 0;
+			Console.WriteLine("No result yet");
+			return - 1;
+			
+		}
+
+		public float BlackScore()
+		{if (result == 3 || result == 6)
+			return 0.5f;
+			if (result == 1 || result == 4)
+				return 0;
+			if (result == 5 || result ==2||result ==7)
+				return 1;
+			Console.WriteLine("No result yet");
+			return - 1;
 		}
 
         //quick way to check

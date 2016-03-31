@@ -139,7 +139,8 @@ namespace Ire
 			foreach (Pairing p in RoundPairings) {
 				Player white = p.white;
 				Player black = p.black;
-				//white.setResult ();
+				white.setResult (rnd, black.Seed, p.WhiteScore (), p.GetHandi (), 1);
+				black.setResult (rnd, white.Seed, p.BlackScore (), p.GetHandi (), 1);
 			}
 		}
 		#endregion

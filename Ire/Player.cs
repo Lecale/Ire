@@ -13,7 +13,7 @@ namespace Ire
 		protected bool[] participation;
 		protected int[] opponent;
 		protected int[] handi;
-		protected int[] BlackWhite;
+		protected int[] BlackWhite; //Black0White1
         public bool topBar = false; //potentially no handicap above bar
         public float SOS = -1;
 		public float MOS = -1; //Middle portion of SOS
