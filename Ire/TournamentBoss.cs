@@ -12,7 +12,8 @@ namespace Ire
 	//New Class to combine Import and Turn 
     public class TournamentBoss
     {
-        int nRounds = 0;
+        public int nRounds = 0;
+        public int currentRound = 0;
         string exeDirectory;
 		string TournamentName;
         private string workDirectory;
@@ -226,7 +227,11 @@ namespace Ire
 				}
 			}
 		}
-
+        public void GenerateResultsForRound(int rnd)
+        { 
+            Utility u = new Utility();
+            u.EnterResults(workDirectory, rnd);
+        }
 		#endregion
 
 		#region ImportFunctions

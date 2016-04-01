@@ -37,10 +37,14 @@ namespace Ire
 			tb.ReadSettings ();
 			tb.previewTopBar ();
 			tb.previewFloor ();
+
 			tb.previewTopBar (true);
 			tb.previewFloor (true);
+            int rounds = tb.nRounds;
 			//now we can start the tournament
 			tb.MakeDraw();
+            tb.GenerateResultsForRound(1);
+            tb.ShowField();
 
 			/*
 			i.DownloadMasterZipEGF ();
