@@ -43,7 +43,7 @@ namespace Ire
                 while (sr.EndOfStream == false)
                     allLines.Add(sr.ReadLine());
             }
-            using (StreamWriter sw = new StreamWriter(dir + "Round" + rnd + "Results.txt"))
+            using (StreamWriter sw = new StreamWriter(dir + "Round" + rnd + "Results.txt",false))
             {
                 int counter = 0;
                 foreach (string al in allLines)
