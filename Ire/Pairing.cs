@@ -23,6 +23,7 @@ namespace Ire
 			handAboveBar = _handAboveBar;
 		}
 
+		//should contain some kind of sneaky bye allocation thing
         public Pairing( Player a, Player b, int _handicap, int _result)
         {
             white = a;

@@ -82,7 +82,7 @@ namespace Ire
 			List<Pairing> RndPairings = dm1.GetCurrentPairings ();
 			foreach (Pairing rp in RndPairings)
                 Console.WriteLine(rp.BasicOutput());
-            GenerateRoundResults(currentRound, RndPairings);
+            GenerateRoundResultsFile(currentRound, RndPairings);
             Console.WriteLine();
             Console.WriteLine("When you are ready to read in the results, press any key");
             Console.WriteLine("Remember that the draw can be overwritten in the input file");
@@ -135,14 +135,22 @@ namespace Ire
 			return -1;
 		}
 
+		//It should be possible to reverse Byes using this method
 		public void ProcessResults(int rnd)
 		{
+			using (StreamReader sr = new StreamReader(workDirectory + "Round" + rnd + "Results.txt"))
+			{
+				while (sr.EndOfStream == false) {
+				}
+			}
+			Console.WriteLine ("ProcessResults: rnd " + rnd + " pairings" + RoundPairings.Count);
 			foreach (Pairing p in RoundPairings) {
 				Player white = p.white;
 				Player black = p.black;
 				white.setResult (rnd, black.Seed, p.WhiteScore (), p.GetHandi (), 1);
 				black.setResult (rnd, white.Seed, p.BlackScore (), p.GetHandi (), 1);
 			}
+			//now need to update MMS and SOS and MOS for all players in the tournament!
 		}
 		#endregion
 
@@ -579,7 +587,7 @@ Bd	White	Result	Black	Handicap
 		//In fact we may no longer wish to use Pairing class
         #region Export Functions
 
-        public void GenerateRoundResults(int rnd, List<Pairing> ps)
+        public void GenerateRoundResultsFile(int rnd, List<Pairing> ps)
         {
 			string fOut = workDirectory + "Round" + rnd + "Results.txt";
             using (StreamWriter riter = new StreamWriter(fOut))

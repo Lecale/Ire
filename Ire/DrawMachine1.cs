@@ -78,7 +78,7 @@ namespace Ire
 					foreach (McLayer mcl in BigM) { //foreachLayer
                         if(found==false)
 							for (int j = 0; j < mcl.Length; j++) {
-								Console.WriteLine ("  trying at j :" + j);
+								//Console.WriteLine ("  trying at j :" + j);
 								tmp = new Pairing (plys[mcl.GetAt (j)], top); //not correct?
 								//how to set above line well
 								if (History.Contains(tmp) == false && Blocked.Contains(tmp) == false 

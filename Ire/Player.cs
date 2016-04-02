@@ -81,6 +81,8 @@ namespace Ire
 			opponent[rnd] = op;
 			handi[rnd] = _handicap;
 			BlackWhite[rnd] = BW;
+			Console.WriteLine ("Setting result");
+			setMMS(getMMS ());
 		}
 
 		public void AssignBye(int _rnd)
