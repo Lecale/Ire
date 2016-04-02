@@ -367,7 +367,7 @@ namespace Ire
 
             if (File.Exists(fOut))
             {
-                Console.WriteLine("File already exists - Overwrite it? y/n");
+                Console.WriteLine("Players file already exists - Overwrite it? y/n");
                 string s = Console.ReadLine().ToUpper();
                 if (s.StartsWith("N"))
                     return;
@@ -396,7 +396,7 @@ namespace Ire
 			string fSettings = workDirectory + "settings.txt";
 			if (File.Exists(fSettings))
 			{
-				Console.WriteLine("File already exists - Overwrite it? y/n");
+				Console.WriteLine("Settings file already exists - Overwrite it? y/n");
 				string s = Console.ReadLine().ToUpper();
 				if (s.StartsWith("N"))
 					return;
