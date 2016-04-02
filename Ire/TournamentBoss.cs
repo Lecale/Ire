@@ -138,11 +138,6 @@ namespace Ire
 		//It should be possible to reverse Byes using this method
 		public void ProcessResults(int rnd)
 		{
-			using (StreamReader sr = new StreamReader(workDirectory + "Round" + rnd + "Results.txt"))
-			{
-				while (sr.EndOfStream == false) {
-				}
-			}
 			Console.WriteLine ("ProcessResults: rnd " + rnd + " pairings" + RoundPairings.Count);
 			foreach (Pairing p in RoundPairings) {
 				Player white = p.white;
@@ -536,7 +531,7 @@ Bd	White	Result	Black	Handicap
         public void ReadResults(int rnd)
         {
 			List<Pairing> actualPairs = new List<Pairing> ();
-			char[] c = { '	'};
+			char[] c = { '\t','\v'};
 			char[] c1 = { '(',')','?'};
 			int[] LUT = new int[AllPlayers.Count];
 			int[] CNT = new int[AllPlayers.Count];
@@ -546,17 +541,24 @@ Bd	White	Result	Black	Handicap
             {
 				sr.ReadLine ();
 				sr.ReadLine ();
-				string tab = "\t";
-				string space = " ";
+			//	string[] tab = {"\t"};
+			//	string space = " ";
 				while (sr.EndOfStream == false) {
 					string s = sr.ReadLine ().Trim();
-					s.Replace (space, tab);
+					Console.WriteLine ("Reading: " + s);
+					//s.Replace (space, tab);
 					string[] split = s.Split (c);
+
+					Console.WriteLine ("Split string into : " + split.Length);
 					string[] split2 = split [1].Split (c1);
+					Console.WriteLine ("Split2 string into : " + split2.Length);
 					int white = int.Parse(split2[1]);
+					Console.WriteLine ("White seed is " + white);
 					 split2 = split [3].Split (c1);
 					int black = int.Parse(split2[1]);
+					Console.WriteLine ("Black seed is " + black);
 					int handicap = int.Parse(split[4]);
+					Console.WriteLine ("Handicap is " + handicap);
 					//split2 = split [2].Split (c1);
 					//float whiteScore = float.Parse(split2[0]);
 					//float blackScore = float.Parse(split2[0]);

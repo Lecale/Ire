@@ -44,6 +44,7 @@ namespace Ire
 			//now we can start the tournament
 			tb.MakeDraw();
             tb.GenerateResultsForRound(1);
+			tb.ReadResults (1);
 			tb.ProcessResults (1);
 			tb.ShowField ();
 
