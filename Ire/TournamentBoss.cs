@@ -542,11 +542,13 @@ Bd	White	Result	Black	Handicap
             {
 				sr.ReadLine ();
 				sr.ReadLine ();
-			//	string[] tab = {"\t"};
-			//	string space = " ";
+				string s;
 				while (sr.EndOfStream == false) {
-					string s = sr.ReadLine ().Trim();
-					if (s != "") {						
+					try{
+						s = sr.ReadLine (); s.Trim (); }
+					catch(Exception e){ s = "";
+					}
+					if (s.Length >2 ) {	
 						Console.WriteLine ("Reading: " + s);
 						//s.Replace (space, tab);
 						string[] split = s.Split (c);
@@ -565,14 +567,17 @@ Bd	White	Result	Black	Handicap
 							result = 3;
 						if (split [2].Equals ("0:0"))
 							result = 7;
+						Console.WriteLine ("adding pairing");
 						Pairing p = new Pairing (AllPlayers [LUT [white]], AllPlayers [LUT [black]], handicap, result);
-						CNT [LUT [white]]++;
-						CNT [LUT [black]]++;
+						Console.WriteLine ("added pairing");
+						CNT [LUT [white-1]]++;
+						CNT [LUT [black-1]]++;
+						Console.WriteLine ("updated stats");
 						if (actualPairs.Contains (p) == false)
-						if (CNT [LUT [white]] == 1 && CNT [LUT [black]] == 1)
-							actualPairs.Add (p);
-						else
-							throw new Exception ("Player played more than one game");
+							if (CNT [LUT [white-1]] == 1 && CNT [LUT [black-1]] == 1)
+								actualPairs.Add (p);
+							else
+								throw new Exception ("Player played more than one game in this round");
 						else
 							Console.WriteLine ("A duplicate result was detected " + p.ToFile ());
 					}
