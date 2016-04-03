@@ -553,9 +553,9 @@ Bd	White	Result	Black	Handicap
 						//s.Replace (space, tab);
 						string[] split = s.Split (c);
 						string[] split2 = split [1].Split (c1);
-						int white = int.Parse (split2 [1]);
+						int white = int.Parse (split2 [1]) -1;
 						split2 = split [3].Split (c1);
-						int black = int.Parse (split2 [1]);
+						int black = int.Parse (split2 [1]) -1;
 						int handicap = int.Parse (split [4].Replace ("h", ""));
 						//split2 = split [2].Split (c1);
 						int result = 0;
@@ -567,14 +567,11 @@ Bd	White	Result	Black	Handicap
 							result = 3;
 						if (split [2].Equals ("0:0"))
 							result = 7;
-						Console.WriteLine ("adding pairing");
 						Pairing p = new Pairing (AllPlayers [LUT [white]], AllPlayers [LUT [black]], handicap, result);
-						Console.WriteLine ("added pairing");
-						CNT [LUT [white-1]]++;
-						CNT [LUT [black-1]]++;
-						Console.WriteLine ("updated stats");
+						CNT [LUT [white]]++;
+						CNT [LUT [black]]++;
 						if (actualPairs.Contains (p) == false)
-							if (CNT [LUT [white-1]] == 1 && CNT [LUT [black-1]] == 1)
+							if (CNT [LUT [white]] == 1 && CNT [LUT [black]] == 1)
 								actualPairs.Add (p);
 							else
 								throw new Exception ("Player played more than one game in this round");
