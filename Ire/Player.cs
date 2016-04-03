@@ -8,6 +8,7 @@ namespace Ire
 {
     public class Player : Person, IComparable //Inheritance probably useless
     {
+		#region variable
 		protected float MMS = -1;  
         protected float[] score;
 		protected bool[] participation;
@@ -21,11 +22,10 @@ namespace Ire
 		private int EGDPin;
 		public int Deed = -1; //Deed is the draw seeding for a particular round
 
-
 		private static bool BreakBySOS = true;
 		private static bool BreakByMOS = true;
 		public static bool SortByRating = false;
-
+		#endregion
 		//this is here just to allow compilation TODELETE
 		public Player(int _seed, string _nom="null", int _rat=-1, string _club="null", string _ctry="null")
 			: base (_nom="null", _rat=-1, _club="null", _ctry="null" )
@@ -120,11 +120,12 @@ namespace Ire
 			//if black substract handicap , if White add handicap to SOS
 			return handi[i] * BlackWhite[i];
 		}
+		//SOS is public?
 		#endregion
 
-        public void setOpponent(int i, int r)
+        public void setOpponent(int i, int rnd)
         {
-            opponent[r] = i;
+            opponent[rnd] = i;
         }
         public bool getParticipation(int i)
         {
@@ -191,6 +192,7 @@ namespace Ire
 			}
 			return false;
 		}
+		#endregion
 
         public int CompareTo(Object o)
         {
@@ -236,7 +238,7 @@ namespace Ire
 
             return -1;
         }
-
+		#region output
         public override string ToString()
         {
 			return Name + " " + eRating + "("+MMS+")";
@@ -251,7 +253,8 @@ namespace Ire
 			else
 				return split[0] + "(" + Seed + ")";
 		}
+		#endregion
     }
-	#endregion
+
 
 }

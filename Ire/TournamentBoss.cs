@@ -139,17 +139,13 @@ namespace Ire
 		public void ProcessResults(int rnd)
 		{
 			Console.WriteLine ("ProcessResults: rnd " + rnd + " pairings " + RoundPairings.Count);
+			//lookuptable
 			foreach (Pairing p in RoundPairings) {
-				if (p.white == null)
-					Console.WriteLine ("white is null");
-				if (p.black == null)
-					Console.WriteLine ("black is null");
-				Console.WriteLine (p.white.ToString ());
-				Console.WriteLine (p.black.ToString ());
 				p.white.setResult (rnd, p.black.Seed, p.WhiteScore (), p.GetHandi (), 1);
 				p.black.setResult (rnd, p.white.Seed, p.BlackScore (), p.GetHandi (), 0);
 			}
 			//now need to update MMS and SOS and MOS for all players in the tournament!
+			//for opponents update SOS
 		}
 		#endregion
 

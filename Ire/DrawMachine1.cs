@@ -18,7 +18,7 @@ namespace Ire
 
 		public DrawMachine1 ( List<Player> ply, int _MaxHandi = 9, int _AdjHandi = 1, bool _HandiAboveBar = false)
 		{
-			Console.WriteLine ("DrawMachine1");
+		//	Console.WriteLine ("DrawMachine1");
 			plys = ply;
 			LookUpTable = new int[ply.Count];
 			LookUpBull = new bool[ply.Count];
@@ -49,7 +49,7 @@ namespace Ire
 				mcl.Shuffle ();
 			for (int j = 0; j < LookUpTable.Length; j++)
 				LookUpTable [plys [j].Deed] = j; //This is not safe actually!
-			Console.WriteLine ("DrawMachine1 Draw");
+		//	Console.WriteLine ("DrawMachine1 Draw");
 			DRAW ();
 		}
 
@@ -64,7 +64,7 @@ namespace Ire
 			Player top = plys [start];
 			Pairing tmp;
 			Pairing holdLastPairing;
-			Console.WriteLine ("Draw()" + start);
+		//	Console.WriteLine ("Draw()" + start);
 			bool found = false;
 			for (int i = start+1; i <= plys.Count -1; i++) { //foreachPlayer
 				// but this is not the good loop?
