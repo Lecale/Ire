@@ -604,6 +604,10 @@ Bd	White	Result	Black	Handicap
 
         }
 
+		public void GenerateStandingsFile(int rnd, bool EGF=true)
+		{
+		}
+
         #endregion
     }
 }
