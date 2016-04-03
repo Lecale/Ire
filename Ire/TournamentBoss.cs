@@ -551,7 +551,7 @@ Bd	White	Result	Black	Handicap
 
 					Console.WriteLine ("Split string into : " + split.Length);
 					string[] split2 = split [1].Split (c1);
-					Console.WriteLine ("Split2 string into : " + split2.Length);
+					Console.WriteLine (split [1] + " Split2 string into : " + split2.Length);
 					int white = int.Parse(split2[1]);
 					Console.WriteLine ("White seed is " + white);
 					 split2 = split [3].Split (c1);
@@ -595,9 +595,10 @@ Bd	White	Result	Black	Handicap
             using (StreamWriter riter = new StreamWriter(fOut))
             {
                 riter.WriteLine("Results of Round " + rnd);
-                riter.WriteLine("white  :  black");
+                riter.WriteLine("Bd\twhite\t:\tblack");
+				int count = 0;
                 foreach (Pairing p in ps)
-                    riter.WriteLine(p.BasicOutput());
+                    riter.WriteLine(++count + "\t" + p.ToFile());
             }
 
         }
