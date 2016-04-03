@@ -29,10 +29,7 @@ namespace Ire
 		//this is here just to allow compilation TODELETE
 		public Player(int _seed, string _nom="null", int _rat=-1, string _club="null", string _ctry="null")
 			: base (_nom="null", _rat=-1, _club="null", _ctry="null" )
-		{
-			Seed = _seed;
-		}
-		//                        Player j = new Player(pine, split[1], rats, split[3], split[4], bull);
+		{Seed = _seed;}
 
 		public Player(int _seed, string _nom , int _rat, string _ctry, string _club, bool[] par) 
 			: base (_nom, _rat, _club, _ctry )
@@ -42,6 +39,10 @@ namespace Ire
 			eRating = _rat;
 			//participation does not exist
 			participation = new bool[par.Length];
+			score = new float[par.Length];
+			BlackWhite = new int[par.Length];
+			handi = new int[par.Length];
+			opponent = new int[par.Length];
 		//	Console.WriteLine ("Participation length "+par.Length);
 			for(int i=0; i<par.Length; i++)
 				participation[i]=par[i];
@@ -73,15 +74,15 @@ namespace Ire
 		{
 			score[rnd] = sc; opponent[rnd] = op;
 		}
+		//		p.white.setResult (rnd, p.black.Seed, p.WhiteScore (), p.GetHandi (), 1);
+
 		//This is the correct method
 		public void setResult(int rnd, int op, float _score, int _handicap=0, int BW =1)
 		{
-			Console.WriteLine ("SetResult" + score.Length + ":" + opponent.Length + ":" + handi.Length + ":" + BlackWhite.Length);
 			score[rnd] = _score;
 			opponent[rnd] = op;
 			handi[rnd] = _handicap;
 			BlackWhite[rnd] = BW;
-			Console.WriteLine ("Setting result");
 			setMMS(getMMS ());
 		}
 
