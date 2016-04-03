@@ -246,7 +246,7 @@ namespace Ire
 			char[] c = { ' '};
 			string[] split = Name.Split (c);
 			if(split.Length ==2)
-				return split[0]+"."+split[1].Substring(0,1) + "(" + Seed + ")";
+				return split[0]+"."+split[1].Substring(0,1).ToUpper() + "(" + Seed + ")";
 			else
 				return split[0] + "(" + Seed + ")";
 		}

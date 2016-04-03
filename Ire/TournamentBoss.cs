@@ -12,6 +12,7 @@ namespace Ire
 	//New Class to combine Import and Turn 
     public class TournamentBoss
     {
+		#region variables
         public int nRounds = 0;
         public int currentRound = 0;
         string exeDirectory;
@@ -29,7 +30,7 @@ namespace Ire
 		List<Player> RoundPlayers;
 		List<Pairing> AllPairings = new List<Pairing> ();
 		List<Pairing> RoundPairings = new List<Pairing> ();
-
+		#endregion
         public TournamentBoss(bool Mac=false)
         {
 			Macintosh = Mac;
@@ -549,15 +550,15 @@ Bd	White	Result	Black	Handicap
 					//s.Replace (space, tab);
 					string[] split = s.Split (c);
 
-					Console.WriteLine ("Split string into : " + split.Length);
+				//	Console.WriteLine ("Split string into : " + split.Length);
 					string[] split2 = split [1].Split (c1);
-					Console.WriteLine (split [1] + " Split2 string into : " + split2.Length);
+				//	Console.WriteLine (split [1] + " Split2 string into : " + split2.Length);
 					int white = int.Parse(split2[1]);
-					Console.WriteLine ("White seed is " + white);
+				//	Console.WriteLine ("White seed is " + white);
 					 split2 = split [3].Split (c1);
 					int black = int.Parse(split2[1]);
-					Console.WriteLine ("Black seed is " + black);
-					int handicap = int.Parse(split[4]);
+				//	Console.WriteLine ("Black seed is " + black);
+					int handicap = int.Parse(split[4].Substring(1));
 					Console.WriteLine ("Handicap is " + handicap);
 					//split2 = split [2].Split (c1);
 					//float whiteScore = float.Parse(split2[0]);
