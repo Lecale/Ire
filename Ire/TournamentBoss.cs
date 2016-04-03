@@ -607,7 +607,7 @@ Bd	White	Result	Black	Handicap
 		/*
 ; TC[T160130A]
 ; CL[C]
-; EV[BelfastHandicap]
+; EV[BelfastHandicap] YES
 ; PC[IE, Belfast]
 ; DT[2016-01-30,2016-01-30]	
 ; HA[h9]   
@@ -621,6 +621,11 @@ Bd	White	Result	Black	Handicap
 		*/
 		public void GenerateStandingsFile(int rnd, bool EGF=true)
 		{
+			//if file exists , delete it
+			using(StreamWriter sw = new StreamWriter(workDirectory + "Round"+rnd+"GenerateStandingsFile.txt"))
+			{
+				
+			}
 		}
 
         #endregion
