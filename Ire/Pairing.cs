@@ -135,23 +135,28 @@ namespace Ire
 		public string ToFile()
 		{
 			string s;
-			switch (result){
+			switch (result) {
 			case 0:
 			default:
-				s = "    ?:?   "; break;
+				s = "?:?";
+				break;
 			case 1:
 			case 4:
-				s = "   1:0   ";  break;
+				s = "1:0";
+				break;
 			case 2:
 			case 5:
-				s = "   0:1   ";  break;
+				s = "0:1";
+				break;
 			case 3:
 			case 6:
-				s = " 0.5:0.5 "; break;
+				s = "0.5:0.5";
+				break;
 			case 7:
-				s = "   0:0   "; break;
+				s = "0:0";
+				break;
 			}
-			return "";
+			return white.ToFile() + "\t" + s + "\t" + black.ToFile() + "\t" + " h"+setting;
 		}
 
 		public float WhiteScore()

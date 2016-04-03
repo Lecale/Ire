@@ -245,8 +245,10 @@ namespace Ire
 		{
 			char[] c = { ' '};
 			string[] split = Name.Split (c);
-			//need to check length
-			return split[0]+"."+split[1].Substring(0,1) + "(" + Seed + ")";
+			if(split.Length ==2)
+				return split[0]+"."+split[1].Substring(0,1) + "(" + Seed + ")";
+			else
+				return split[0] + "(" + Seed + ")";
 		}
     }
 	#endregion
