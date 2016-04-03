@@ -35,9 +35,6 @@ namespace Ire
 			Console.WriteLine ("Ready to read in Settings File?");
 			string s = Console.ReadLine();//wait	
 			tb.ReadSettings ();
-			tb.previewTopBar ();
-			tb.previewFloor ();
-
 			tb.previewTopBar (true);
 			tb.previewFloor (true);
             int rounds = tb.nRounds;

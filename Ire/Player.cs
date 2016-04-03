@@ -71,12 +71,12 @@ namespace Ire
         //Allows Override
 		public void setResult(int rnd, int op, float sc)
 		{
-			score[rnd] = sc;
-			opponent[rnd] = op;
+			score[rnd] = sc; opponent[rnd] = op;
 		}
 		//This is the correct method
 		public void setResult(int rnd, int op, float _score, int _handicap=0, int BW =1)
 		{
+			Console.WriteLine ("SetResult" + score.Length + ":" + opponent.Length + ":" + handi.Length + ":" + BlackWhite.Length);
 			score[rnd] = _score;
 			opponent[rnd] = op;
 			handi[rnd] = _handicap;

@@ -139,12 +139,16 @@ namespace Ire
 		//It should be possible to reverse Byes using this method
 		public void ProcessResults(int rnd)
 		{
-			Console.WriteLine ("ProcessResults: rnd " + rnd + " pairings" + RoundPairings.Count);
+			Console.WriteLine ("ProcessResults: rnd " + rnd + " pairings " + RoundPairings.Count);
 			foreach (Pairing p in RoundPairings) {
-				Player white = p.white;
-				Player black = p.black;
-				white.setResult (rnd, black.Seed, p.WhiteScore (), p.GetHandi (), 1);
-				black.setResult (rnd, white.Seed, p.BlackScore (), p.GetHandi (), 1);
+				if (p.white == null)
+					Console.WriteLine ("white is null");
+				if (p.black == null)
+					Console.WriteLine ("black is null");
+				Console.WriteLine (p.white.ToString ());
+				Console.WriteLine (p.black.ToString ());
+				p.white.setResult (rnd, p.black.Seed, p.WhiteScore (), p.GetHandi (), 1);
+				p.black.setResult (rnd, p.white.Seed, p.BlackScore (), p.GetHandi (), 1);
 			}
 			//now need to update MMS and SOS and MOS for all players in the tournament!
 		}
