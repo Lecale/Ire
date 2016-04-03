@@ -546,40 +546,39 @@ Bd	White	Result	Black	Handicap
 			//	string space = " ";
 				while (sr.EndOfStream == false) {
 					string s = sr.ReadLine ().Trim();
-					Console.WriteLine ("Reading: " + s);
-					//s.Replace (space, tab);
-					string[] split = s.Split (c);
-
-				//	Console.WriteLine ("Split string into : " + split.Length);
-					string[] split2 = split [1].Split (c1);
-				//	Console.WriteLine (split [1] + " Split2 string into : " + split2.Length);
-					int white = int.Parse(split2[1]);
-				//	Console.WriteLine ("White seed is " + white);
-					 split2 = split [3].Split (c1);
-					int black = int.Parse(split2[1]);
-				//	Console.WriteLine ("Black seed is " + black);
-					int handicap = int.Parse(split[4].Substring(1));
-					Console.WriteLine ("Handicap is " + handicap);
-					//split2 = split [2].Split (c1);
-					//float whiteScore = float.Parse(split2[0]);
-					//float blackScore = float.Parse(split2[0]);
-					int result = 0;
-					if(split [2].Equals("1:0")) result = 1;
-					if(split [2].Equals("0:1")) result = 2;
-					if(split [2].Equals("0.5:0.5")) result = 3;
-					if(split [2].Equals("0:0")) result = 7;
-					Pairing p = new Pairing (AllPlayers[LUT[white]],AllPlayers[LUT[black]],handicap,result);
-					CNT[LUT[white]]++;
-					CNT[LUT[black]]++;
-					if (actualPairs.Contains (p) == false)
-					if (CNT [LUT [white]] == 1 && CNT [LUT [black]]==1)
-						actualPairs.Add (p);
-					else
-						throw new Exception ("Player played more than one game");
-					else
-						Console.WriteLine ("A duplicate result was detected " + p.ToFile());
+					if (s != "") {						
+						Console.WriteLine ("Reading: " + s);
+						//s.Replace (space, tab);
+						string[] split = s.Split (c);
+						string[] split2 = split [1].Split (c1);
+						int white = int.Parse (split2 [1]);
+						split2 = split [3].Split (c1);
+						int black = int.Parse (split2 [1]);
+						int handicap = int.Parse (split [4].Replace ("h", ""));
+						//split2 = split [2].Split (c1);
+						int result = 0;
+						if (split [2].Equals ("1:0"))
+							result = 1;
+						if (split [2].Equals ("0:1"))
+							result = 2;
+						if (split [2].Equals ("0.5:0.5"))
+							result = 3;
+						if (split [2].Equals ("0:0"))
+							result = 7;
+						Pairing p = new Pairing (AllPlayers [LUT [white]], AllPlayers [LUT [black]], handicap, result);
+						CNT [LUT [white]]++;
+						CNT [LUT [black]]++;
+						if (actualPairs.Contains (p) == false)
+						if (CNT [LUT [white]] == 1 && CNT [LUT [black]] == 1)
+							actualPairs.Add (p);
+						else
+							throw new Exception ("Player played more than one game");
+						else
+							Console.WriteLine ("A duplicate result was detected " + p.ToFile ());
+					}
 				}
 				//and if we did not hit an exception
+				Console.WriteLine("Finished reading in results");
 				RoundPairings = actualPairs;
 				AllPairings.AddRange(actualPairs);
             }
