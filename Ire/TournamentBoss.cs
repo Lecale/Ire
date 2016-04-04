@@ -151,8 +151,20 @@ namespace Ire
 			//for opponents update SOS
 		}
 
-        public void UpdateTiebreaks()
-        { 
+        public void UpdateTiebreaks(int rnd)
+        {
+            int[] lookUp = new int[AllPlayers.Count];
+            for (int i = 0; i < lookUp.Length; i++)
+                lookUp[i] = AllPlayers[i].Seed;
+            foreach (Player ap in AllPlayers)
+            {
+                float _SOS = -1;
+                float _MOS = -1;
+                for (int i = 0; i < rnd; i++)
+                {
+
+                }
+            }
         }
 		#endregion
 
