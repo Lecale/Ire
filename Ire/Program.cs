@@ -45,6 +45,7 @@ namespace Ire
 			tb.ProcessResults (1);
 			tb.SortField ();
 			tb.ShowField ();
+            tb.GenerateStandingsfile(1);
 
 			/*
 			i.DownloadMasterZipEGF ();

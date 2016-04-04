@@ -50,7 +50,7 @@ namespace Ire
 		{
 			population.Add(_seed);
 			Length++;
-			Console.WriteLine ("Added " + _seed + " to " + MMSKey);
+//			Console.WriteLine ("Added " + _seed + " to " + MMSKey);
 		}
 
 		public void Remove(int _Seed)

@@ -74,11 +74,11 @@ namespace Ire
 		{
 			score[rnd] = sc; opponent[rnd] = op;
 		}
-		//		p.white.setResult (rnd, p.black.Seed, p.WhiteScore (), p.GetHandi (), 1);
 
 		//This is the correct method
 		public void setResult(int rnd, int op, float _score, int _handicap=0, int BW =1)
 		{
+            rnd--; //0 based arrary as always
 			score[rnd] = _score;
 			opponent[rnd] = op;
 			handi[rnd] = _handicap;

@@ -150,6 +150,10 @@ namespace Ire
 			//now need to update MMS and SOS and MOS for all players in the tournament!
 			//for opponents update SOS
 		}
+
+        public void UpdateTiebreaks()
+        { 
+        }
 		#endregion
 
 		#region TestPreviewFunctions
@@ -638,7 +642,7 @@ Bd	White	Result	Black	Handicap
                 Console.WriteLine("Warning - Overwriting Round" + rnd + "Standings.txt");
                 File.Delete(workDirectory + "Round" + rnd + "Standings.txt");
             }
-            string hdr = "Pl\tName\tRating\tRank\tWins\tMMS\t";
+            string hdr = "Pl\tName\tRank\tRating\tWins\tMMS\t";
             for (int i = 0; i < rnd; i++)
                 hdr = hdr + rnd + "\t";
             foreach(string t in Tiebreakers)
@@ -646,7 +650,7 @@ Bd	White	Result	Black	Handicap
 
             using (StreamWriter sw = new StreamWriter(workDirectory + "Round" + rnd + "Standings.txt"))
             {
-                sw.WriteLine("Tournament: " + TournamentName + "]");
+                sw.WriteLine("Tournament: " + TournamentName);
                 sw.WriteLine("");
                 sw.WriteLine(hdr);
                 int cnt = 1; 
@@ -654,7 +658,7 @@ Bd	White	Result	Black	Handicap
                 // add tied method to Players
                 foreach (Player ap in AllPlayers)
                 {
-                    sw.WriteLine(cnt + t + ap.ToStanding(rnd) + t  ); // + tiebreak
+                    sw.WriteLine(cnt + t + ap.ToStanding(rnd) + t  + ap.SOS + ap.MOS); // + tiebreak
                 }
             }
 		}
