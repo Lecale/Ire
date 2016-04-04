@@ -102,11 +102,16 @@ namespace Ire
                 return f;
         }
 
-        public float getMMS(int rnd)
+        public float getScore(int rnd)
         {
             float f = 0;
             for (int i = 0; i < rnd; i++)
                 f += score[i];
+            return f;
+        }
+        public float getMMS(int rnd)
+        {
+            float f = getScore(rnd);
             f += MMS;
             return f;
         }
@@ -253,6 +258,21 @@ namespace Ire
 			else
 				return split[0] + "(" + Seed + ")";
 		}
+
+        public string ToStanding(int rnd)
+        {// sw.WriteLine(cnt + t + ap.ToFile() + t + ap.Rank + t + ap.Rating + t + );
+            string s = ToFile() ;
+            s = s + "\t(" + Rank + ")\t(" + Rating + ")\t";
+            s = s + getMMS(rnd) + "\t" + getScore(rnd) + "\t";
+            for(int i=0; i<rnd; i++)
+            {
+                s = s + opponent[i];
+                if (score[i] == 0) s = s + "-";
+                if (score[i] == 1) s = s + "+";
+                if (score[i] == 0.5) s = s + "=";
+            }
+            return s;
+        }
 		#endregion
     }
 

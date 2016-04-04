@@ -638,18 +638,25 @@ Bd	White	Result	Black	Handicap
                 Console.WriteLine("Warning - Overwriting Round" + rnd + "Standings.txt");
                 File.Delete(workDirectory + "Round" + rnd + "Standings.txt");
             }
-            string hdr = "Pl\tName\tRating\tRank\tClub Country\tWins\tMMS\t";
+            string hdr = "Pl\tName\tRating\tRank\tWins\tMMS\t";
             for (int i = 0; i < rnd; i++)
                 hdr = hdr + rnd + "\t";
             foreach(string t in Tiebreakers)
                 hdr = hdr + t + "\t";
 
             using (StreamWriter sw = new StreamWriter(workDirectory + "Round" + rnd + "Standings.txt"))
+            {
+                sw.WriteLine("Tournament: " + TournamentName + "]");
+                sw.WriteLine("");
+                sw.WriteLine(hdr);
+                int cnt = 1; 
+                string t = "\t";
+                // add tied method to Players
+                foreach (Player ap in AllPlayers)
                 {
-                    sw.WriteLine("Tournament: " + TournamentName + "]");
-                    sw.WriteLine("");
-                    sw.WriteLine(hdr);
+                    sw.WriteLine(cnt + t + ap.ToStanding(rnd) + t  ); // + tiebreak
                 }
+            }
 		}
 
         #endregion
