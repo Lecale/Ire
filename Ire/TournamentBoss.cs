@@ -25,17 +25,20 @@ namespace Ire
 		int nMaxHandicap = 9;
 		int nTopBar = 5000;
 		int nRatingFloor = 100;
-		int nGradeWidth = 100;
+		int nGradeWidth = 100; //to take from Settings
         List<Player> AllPlayers = new List<Player>();
 		List<Player> RoundPlayers;
 		List<Pairing> AllPairings = new List<Pairing> ();
 		List<Pairing> RoundPairings = new List<Pairing> ();
+        List<string> Tiebreakers = new List<string>(); //to take from Settings
 		#endregion
         public TournamentBoss(bool Mac=false)
         {
 			Macintosh = Mac;
             exeDirectory = Directory.GetCurrentDirectory();
             Console.WriteLine(exeDirectory);
+            Tiebreakers.Add("SOS");
+            Tiebreakers.Add("MOS");
         }
 
 		#region NormalOperations
@@ -619,13 +622,34 @@ Bd	White	Result	Black	Handicap
 ; Pl Name                            Rk Co Club  CAT  NBW  EXT  EXR
 		1 Gociu Tiberiu      5k IE  Belf  1    3    7    7    2+/b7  4+/w6  5+/w1  0-      |12850431
 		*/
-		public void GenerateStandingsFile(int rnd, bool EGF=true)
+        public void GenerateEGFExport()
+        {
+            if (File.Exists(workDirectory + TournamentName.Trim().Replace(" ","") + ".h9"))
+            {
+                File.Delete(workDirectory + TournamentName.Trim().Replace(" ","") + ".h9");
+            }
+        }
+
+		public void GenerateStandingsfile(int rnd)
 		{
 			//if file exists , delete it
-			using(StreamWriter sw = new StreamWriter(workDirectory + "Round"+rnd+"GenerateStandingsFile.txt"))
-			{
-				
-			}
+            if (File.Exists(workDirectory + "Round" + rnd + "Standings.txt"))
+            {
+                Console.WriteLine("Warning - Overwriting Round" + rnd + "Standings.txt");
+                File.Delete(workDirectory + "Round" + rnd + "Standings.txt");
+            }
+            string hdr = "Pl\tName\tRating\tRank\tClub Country\tWins\tMMS\t";
+            for (int i = 0; i < rnd; i++)
+                hdr = hdr + rnd + "\t";
+            foreach(string t in Tiebreakers)
+                hdr = hdr + t + "\t";
+
+            using (StreamWriter sw = new StreamWriter(workDirectory + "Round" + rnd + "Standings.txt"))
+                {
+                    sw.WriteLine("Tournament: " + TournamentName + "]");
+                    sw.WriteLine("");
+                    sw.WriteLine(hdr);
+                }
 		}
 
         #endregion
