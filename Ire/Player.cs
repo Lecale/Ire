@@ -70,6 +70,7 @@ namespace Ire
                 score[ii] = -1;
             }
         }
+        #region ResultsByesMMS
         //Allows Override
 		public void setResult(int rnd, int op, float sc)
 		{
@@ -116,6 +117,16 @@ namespace Ire
             f += MMS;
             return f;
         }
+        public void setMMS(float s)
+        {
+            MMS = s;
+        }
+        public void setInitMMS(float s)
+        {
+            initMMS = s;
+        }
+#endregion
+
 		#region SOS and MOS Calculation
 		public int getOpponent(int i)
 		{
@@ -163,14 +174,7 @@ namespace Ire
 		{
 			eRating = _rating;
 		}
-        public void setMMS(float s)
-        {
-            MMS = s;
-        }
-        public void setInitMMS(float s)
-        {
-            initMMS = s;
-        }
+
         public int getSeed()
         { return Seed; }
         public void setTop()
@@ -266,16 +270,29 @@ namespace Ire
 		}
 
         public string ToStanding(int rnd)
-        {// sw.WriteLine(cnt + t + ap.ToFile() + t + ap.Rank + t + ap.Rating + t + );
+        {
             string s = ToFile() ;
             s = s + "\t(" + Rank + ")\t(" + Rating + ")\t";
             s = s + getMMS(rnd) + "\t" + getScore(rnd) + "\t";
             for(int i=0; i<rnd; i++)
             {
                 s = s + opponent[i];
-                if (score[i] == 0) s = s + "-";
-                if (score[i] == 1) s = s + "+";
-                if (score[i] == 0.5) s = s + "=";
+                if (score[i] == 0) s = s + "-\t";
+                if (score[i] == 1) s = s + "+\t";
+                if (score[i] == 0.5) s = s + "=\t";
+            }
+            return s;
+        }
+
+        public string ToEGF()
+        {// http://europeangodatabase.eu/EGD/EGF_rating_system.php#Submissions 
+            string s = Name + " " + Rank + " " + Country + " " + Club + " "; //EGD identifiers
+            for (int i = 0; i < opponent.Length; i++)
+            {
+                s = s + opponent[i];
+                if (score[i] == 0) s = s + "-h" + getAdjHandi(i) + " ";
+                if (score[i] == 1) s = s + "+h" + getAdjHandi(i) + " "; 
+                if (score[i] == 0.5) s = s + "=h" + getAdjHandi(i) + " ";  
             }
             return s;
         }
