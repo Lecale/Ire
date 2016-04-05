@@ -130,7 +130,6 @@ namespace Ire
 		#region SOS and MOS Calculation
 		public int getOpponent(int i)
 		{
-            
 			return opponent[i];
 		}
 		public int getAdjHandi(int i)
@@ -253,6 +252,7 @@ namespace Ire
 
             return -1;
         }
+
 		#region output
         public override string ToString()
         {

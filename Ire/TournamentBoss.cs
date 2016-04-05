@@ -157,9 +157,13 @@ namespace Ire
         {
             int[] lookUp = new int[AllPlayers.Count];
             for (int i = 0; i < lookUp.Length; i++)
+            {
                 lookUp[i] = AllPlayers[i].Seed;
+                Console.WriteLine("i: " + i + " seed " + AllPlayers[i].Seed);
+            }
             foreach (Player ap in AllPlayers)
             {
+                Console.WriteLine("Processing seed " + ap.Seed);
                 float _SOS = 0;
                 float _MOS = 0; //do not calculate if rnd <3
                 float maxSOS = -999;
@@ -168,18 +172,24 @@ namespace Ire
                 int nGame = 0;
                 for (int i = 0; i < rnd; i++)
                 {
-                    if (ap.getParticipation(i) == true)
+                    try
                     {
-                        nGame++;
-                        int op = ap.getOpponent(i);
-                        //check opponent is not a bye
-                        float f = AllPlayers[lookUp[op]].getMMS(rnd) + ap.getAdjHandi(i);
-                        _SOS += f;
-                        if (f > maxSOS)
-                            maxSOS = f;
-                        if (f < minSOS)
-                            minSOS = f;
+                        if (ap.getParticipation(i) == true)
+                        {
+                            nGame++;
+                            int op = ap.getOpponent(i) - 1; //take away 1 to adjust for seed(1)
+                            //check opponent is not a bye?
+                            Console.WriteLine("op: " + op);
+                            Console.WriteLine("lookUp index: " + lookUp[op]);
+                            float f = AllPlayers[lookUp[op]].getMMS(rnd) + ap.getAdjHandi(i);
+                            _SOS += f;
+                            if (f > maxSOS)
+                                maxSOS = f;
+                            if (f < minSOS)
+                                minSOS = f;
+                        }
                     }
+                    catch (Exception e) { Console.WriteLine(e.Message); }
                 }
                 if (nGame < rnd && nGame != 0)
                     _SOS = _SOS * rnd / nGame;
