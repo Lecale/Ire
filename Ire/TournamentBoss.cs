@@ -629,7 +629,6 @@ Bd	White	Result	Black	Handicap
 			
 #endregion
 
-		//In fact we may no longer wish to use Pairing class
         #region Export Functions
 
         public void GenerateRoundResultsFile(int rnd, List<Pairing> ps)
@@ -685,7 +684,7 @@ Bd	White	Result	Black	Handicap
 
             using (StreamWriter sw = new StreamWriter(workDirectory + "Round" + rnd + "Standings.txt"))
             {
-                sw.WriteLine("Tournament: " + TournamentName);
+                sw.WriteLine("Tournament: " + TournamentName + " Round: " + rnd);
                 sw.WriteLine("");
                 sw.WriteLine(hdr);
                 int cnt = 1; 

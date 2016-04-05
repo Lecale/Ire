@@ -43,6 +43,7 @@ namespace Ire
             tb.GenerateResultsForRound(1);
 			tb.ReadResults (1);
 			tb.ProcessResults (1);
+            tb.UpdateTiebreaks(1);
 			tb.SortField ();
 			tb.ShowField ();
             tb.GenerateStandingsfile(1);
