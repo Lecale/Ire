@@ -618,6 +618,7 @@ Bd	White	Result	Black	Handicap
 							result = 3;
 						if (split [2].Equals ("0:0"))
 							result = 7;
+                        Console.WriteLine("Read Pairing: " + AllPlayers[LUT[white]].Seed + ":" + AllPlayers[LUT[black]].Seed);
 						Pairing p = new Pairing (AllPlayers [LUT [white]], AllPlayers [LUT [black]], handicap, result);
 						CNT [LUT [white]]++;
 						CNT [LUT [black]]++;
@@ -632,6 +633,7 @@ Bd	White	Result	Black	Handicap
 				}
 				//and if we did not hit an exception
 				Console.WriteLine("Finished reading in results");
+                string nimic = Console.ReadLine();
 				RoundPairings = actualPairs;
 				AllPairings.AddRange(actualPairs);
             }
