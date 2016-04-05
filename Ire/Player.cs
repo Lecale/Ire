@@ -9,6 +9,7 @@ namespace Ire
     public class Player : Person, IComparable //Inheritance probably useless
     {
 		#region variable
+        public float initMMS = -1;
 		protected float MMS = -1;  
         protected float[] score;
 		protected bool[] participation;
@@ -94,7 +95,7 @@ namespace Ire
 
         public float getMMS()
         {
-            float f = 0;
+            float f = initMMS;
 			if(opponent!=null)
             for (int i = 0; i < opponent.Length; i++)
                 f += score[i];
@@ -111,13 +112,14 @@ namespace Ire
         }
         public float getMMS(int rnd)
         {
-            float f = getScore(rnd);
+            float f = initMMS + getScore(rnd);
             f += MMS;
             return f;
         }
 		#region SOS and MOS Calculation
 		public int getOpponent(int i)
 		{
+            
 			return opponent[i];
 		}
 		public int getAdjHandi(int i)
@@ -164,6 +166,10 @@ namespace Ire
         public void setMMS(float s)
         {
             MMS = s;
+        }
+        public void setInitMMS(float s)
+        {
+            initMMS = s;
         }
         public int getSeed()
         { return Seed; }

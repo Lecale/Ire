@@ -158,12 +158,31 @@ namespace Ire
                 lookUp[i] = AllPlayers[i].Seed;
             foreach (Player ap in AllPlayers)
             {
-                float _SOS = -1;
-                float _MOS = -1;
+                float _SOS = 0;
+                float _MOS = 0; //do not calculate if rnd <3
+                float maxSOS = -999;
+                float minSOS = 999;
+                //find actual games played from participation
+                int nGame = 0;
                 for (int i = 0; i < rnd; i++)
                 {
-
+                    if (ap.getParticipation(i) == true)
+                    {
+                        nGame++;
+                        int op = ap.getOpponent(i);
+                        //check opponent is not a bye
+                        float f = AllPlayers[lookUp[op]].getMMS(rnd) + ap.getAdjHandi(i);
+                        _SOS += f;
+                        if (f > maxSOS)
+                            maxSOS = f;
+                        if (f < minSOS)
+                            minSOS = f;
+                    }
                 }
+                if (nGame < rnd && nGame != 0)
+                    _SOS = _SOS * rnd / nGame;
+                if (nGame == 0)
+                    _SOS = ap.getMMS(0);
             }
         }
 		#endregion
