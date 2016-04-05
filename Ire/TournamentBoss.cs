@@ -103,8 +103,9 @@ namespace Ire
 				gap = gap / 100;
 				if (gap >= 0 && ap.topBar == false)
 					gap++;
-				ap.setMMS (100 - gap);
-				Console.WriteLine (ap.getERating() + " - " + ap.getMMS() + " - " + ap.getRating() + " - " + ap.getSeed());
+                ap.setMMS(100 - gap); 
+                ap.setInitMMS(100 - gap);
+				//Console.WriteLine (ap.getERating() + " - " + ap.getMMS() + " - " + ap.getRating() + " - " + ap.getSeed());
 			}
 
 		}
@@ -151,6 +152,7 @@ namespace Ire
 			//for opponents update SOS
 		}
 
+        //Should have some if SOS if MOS if SODOS logic
         public void UpdateTiebreaks(int rnd)
         {
             int[] lookUp = new int[AllPlayers.Count];
@@ -182,7 +184,9 @@ namespace Ire
                 if (nGame < rnd && nGame != 0)
                     _SOS = _SOS * rnd / nGame;
                 if (nGame == 0)
-                    _SOS = ap.getMMS(0);
+                    _SOS = ap.initMMS;
+                if (rnd > 2)
+                    _MOS = _SOS - maxSOS - minSOS;
             }
         }
 		#endregion
