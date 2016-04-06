@@ -726,7 +726,7 @@ Bd	White	Result	Black	Handicap
                 // add tied method to Players
                 foreach (Player ap in AllPlayers)
                 {
-                    sw.WriteLine(cnt + t + ap.ToStanding(rnd) + ap.SOS + t + ap.MOS); // + tiebreak
+                    sw.WriteLine(cnt++ + t + ap.ToStanding(rnd) + ap.SOS + t + ap.MOS); // + tiebreak
                 }
             }
 		}
