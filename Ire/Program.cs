@@ -39,7 +39,20 @@ namespace Ire
 			tb.previewFloor (true);
             int rounds = tb.nRounds;
 			//now we can start the tournament
-			tb.MakeDraw();
+
+            for (int i = 1; i < rounds+1; i++)
+            {
+                tb.MakeDraw(i);
+                tb.GenerateResultsForRound(i);
+                tb.ReadResults(i);
+                tb.ProcessResults(i);
+                tb.UpdateTiebreaks(i);
+                tb.SortField();
+                tb.ShowField(); //just a debug method
+                tb.GenerateStandingsfile(i);
+            }
+            
+/*            tb.MakeDraw();
             tb.GenerateResultsForRound(1);
 			tb.ReadResults (1);
 			tb.ProcessResults (1);
@@ -47,6 +60,7 @@ namespace Ire
 			tb.SortField ();
 			tb.ShowField ();
             tb.GenerateStandingsfile(1);
+            */
 
 			/*
 			i.DownloadMasterZipEGF ();

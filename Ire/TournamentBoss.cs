@@ -159,7 +159,7 @@ namespace Ire
             for (int i = 0; i < lookUp.Length; i++)
             {
                 lookUp[i] = AllPlayers[i].Seed -1;
-                Console.WriteLine("i: " + i + " seed " + AllPlayers[i].Seed);
+            //    Console.WriteLine("i: " + i + " seed " + AllPlayers[i].Seed);
             }
             foreach (Player ap in AllPlayers)
             {
@@ -623,7 +623,7 @@ Bd	White	Result	Black	Handicap
 							result = 3;
 						if (split [2].Equals ("0:0"))
 							result = 7;
-                        Console.WriteLine("Read Pairing: " + AllPlayers[LUT[white]].Seed + ":" + AllPlayers[LUT[black]].Seed);
+                //        Console.WriteLine("Read Pairing: " + AllPlayers[LUT[white]].Seed + ":" + AllPlayers[LUT[black]].Seed);
 						Pairing p = new Pairing (AllPlayers [LUT [white]], AllPlayers [LUT [black]], handicap, result);
 						CNT [LUT [white]]++;
 						CNT [LUT [black]]++;

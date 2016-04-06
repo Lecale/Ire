@@ -76,6 +76,11 @@ namespace Ire
             }
 
         }
+
+        public void ConvertStandingsToHTML()
+        {//todo
+            
+        }
 	}
 }
 
