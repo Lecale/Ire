@@ -179,13 +179,17 @@ namespace Ire
                             nGame++;
                             int op = ap.getOpponent(i); //take away 1 to adjust for seed(1)
                             //check opponent is not a bye?
-            //                Console.WriteLine("op: " + op + " lookUp index: " + lookUp[op]);
+                            //                Console.WriteLine("op: " + op + " lookUp index: " + lookUp[op]);
                             float f = AllPlayers[lookUp[op]].getMMS(rnd) + ap.getAdjHandi(i);
                             _SOS += f;
                             if (f > maxSOS)
                                 maxSOS = f;
                             if (f < minSOS)
                                 minSOS = f;
+                        }
+                        else
+                        {
+                            //handle bye
                         }
                     }
                     catch (Exception e) { Console.WriteLine(e.Message); }

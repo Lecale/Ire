@@ -88,10 +88,13 @@ namespace Ire
 			setMMS(getMMS (rnd));
 		}
 
-		public void AssignBye(int _rnd)
+		public void AssignBye(int rnd)
 		{
-			Console.WriteLine ("AssignBye rnd " + _rnd + " par.L" + participation.Length);
-			participation[_rnd] = false;
+            rnd--; //0 based arrary as always
+			Console.WriteLine ("AssignBye rnd " + rnd + " par.L" + participation.Length);
+			participation[rnd] = false;
+            score[rnd] = 0.5f;
+            setMMS(getMMS(rnd));
 		}
 
         public float getMMS()
