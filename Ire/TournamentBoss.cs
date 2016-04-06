@@ -158,12 +158,12 @@ namespace Ire
             int[] lookUp = new int[AllPlayers.Count];
             for (int i = 0; i < lookUp.Length; i++)
             {
-                lookUp[i] = AllPlayers[i].Seed;
+                lookUp[i] = AllPlayers[i].Seed -1;
                 Console.WriteLine("i: " + i + " seed " + AllPlayers[i].Seed);
             }
             foreach (Player ap in AllPlayers)
             {
-                Console.WriteLine("Processing seed " + ap.Seed);
+          //      Console.WriteLine("Processing seed " + ap.Seed);
                 float _SOS = 0;
                 float _MOS = 0; //do not calculate if rnd <3
                 float maxSOS = -999;
@@ -177,10 +177,9 @@ namespace Ire
                         if (ap.getParticipation(i) == true)
                         {
                             nGame++;
-                            int op = ap.getOpponent(i) - 1; //take away 1 to adjust for seed(1)
+                            int op = ap.getOpponent(i); //take away 1 to adjust for seed(1)
                             //check opponent is not a bye?
-                            Console.WriteLine("op: " + op);
-                            Console.WriteLine("lookUp index: " + lookUp[op]);
+            //                Console.WriteLine("op: " + op + " lookUp index: " + lookUp[op]);
                             float f = AllPlayers[lookUp[op]].getMMS(rnd) + ap.getAdjHandi(i);
                             _SOS += f;
                             if (f > maxSOS)
@@ -588,7 +587,7 @@ Bd	White	Result	Black	Handicap
 			int[] LUT = new int[AllPlayers.Count];
 			int[] CNT = new int[AllPlayers.Count];
 			for (int i = 0; i < AllPlayers.Count; i++)
-				LUT [i] = AllPlayers [i].Seed;
+				LUT [i] = AllPlayers [i].Seed -1;
             using (StreamReader sr = new StreamReader(workDirectory + "Round" + rnd + "Results.txt"))
             {
 				sr.ReadLine ();
@@ -633,7 +632,7 @@ Bd	White	Result	Black	Handicap
 				}
 				//and if we did not hit an exception
 				Console.WriteLine("Finished reading in results");
-                string nimic = Console.ReadLine();
+//                string nimic = Console.ReadLine();
 				RoundPairings = actualPairs;
 				AllPairings.AddRange(actualPairs);
             }
