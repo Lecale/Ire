@@ -177,8 +177,7 @@ namespace Ire
                         if (ap.getParticipation(i) == true)
                         {
                             nGame++;
-                            int op = ap.getOpponent(i); //take away 1 to adjust for seed(1)
-                            //check opponent is not a bye?
+                            int op = ap.getOpponent(i) -1; 
                             //                Console.WriteLine("op: " + op + " lookUp index: " + lookUp[op]);
                             float f = AllPlayers[lookUp[op]].getMMS(rnd) + ap.getAdjHandi(i);
                             _SOS += f;
@@ -189,10 +188,16 @@ namespace Ire
                         }
                         else
                         {
-                            //handle bye
+                            Console.WriteLine("a bye detected for " +ap.Seed + " in round "+i);
                         }
                     }
-                    catch (Exception e) { Console.WriteLine(e.Message); }
+                    catch (Exception e) 
+                    {
+                        Console.WriteLine(e.Message);
+                        Console.WriteLine("Seed was " + ap.Seed);
+                        for (int ie = 0; ie < rnd; ie++ )
+                            Console.WriteLine("Opponent " + ie + " was " + ap.getOpponent(ie));
+                    }
                 }
                 if (nGame < rnd && nGame != 0)
                     _SOS = _SOS * rnd / nGame;
@@ -691,8 +696,8 @@ Bd	White	Result	Black	Handicap
                 sw.WriteLine("; ");
                 int i = 1;
                 foreach (Player ap in AllPlayers)
-                { 
-
+                {
+                    sw.WriteLine(ap.ToEGF());
                 }
             }
         }
@@ -707,9 +712,9 @@ Bd	White	Result	Black	Handicap
             }
             string hdr = "Pl\tName\tRank\tRating\tMMS\tWins\t";
             for (int i = 0; i < rnd; i++)
-                hdr = hdr + rnd + "\t";
-            foreach(string t in Tiebreakers)
-                hdr = hdr + t + "\t";
+                hdr = hdr + (i+1) + "\t";
+            foreach(string tb in Tiebreakers)
+                hdr = hdr + tb + "\t";
 
             using (StreamWriter sw = new StreamWriter(workDirectory + "Round" + rnd + "Standings.txt"))
             {
@@ -721,7 +726,7 @@ Bd	White	Result	Black	Handicap
                 // add tied method to Players
                 foreach (Player ap in AllPlayers)
                 {
-                    sw.WriteLine(cnt + t + ap.ToStanding(rnd) + t + ap.SOS + t + ap.MOS); // + tiebreak
+                    sw.WriteLine(cnt + t + ap.ToStanding(rnd) + ap.SOS + t + ap.MOS); // + tiebreak
                 }
             }
 		}

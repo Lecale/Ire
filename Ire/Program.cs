@@ -51,6 +51,7 @@ namespace Ire
                 tb.ShowField(); //just a debug method
                 tb.GenerateStandingsfile(i);
             }
+            tb.GenerateEGFExport();
             
 /*            tb.MakeDraw();
             tb.GenerateResultsForRound(1);
