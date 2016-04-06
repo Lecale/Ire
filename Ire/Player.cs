@@ -85,7 +85,7 @@ namespace Ire
 			opponent[rnd] = op;
 			handi[rnd] = _handicap;
 			BlackWhite[rnd] = BW;
-			setMMS(getMMS ());
+			setMMS(getMMS (rnd));
 		}
 
 		public void AssignBye(int _rnd)
@@ -113,9 +113,7 @@ namespace Ire
         }
         public float getMMS(int rnd)
         {
-            float f = initMMS + getScore(rnd);
-            f += MMS;
-            return f;
+            return initMMS + getScore(rnd);
         }
         public void setMMS(float s)
         {

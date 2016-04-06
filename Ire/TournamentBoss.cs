@@ -196,6 +196,8 @@ namespace Ire
                     _SOS = ap.initMMS;
                 if (rnd > 2)
                     _MOS = _SOS - maxSOS - minSOS;
+                ap.SOS = _SOS;
+                ap.MOS = _MOS;
             }
         }
 		#endregion
