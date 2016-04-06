@@ -699,7 +699,7 @@ Bd	White	Result	Black	Handicap
                 Console.WriteLine("Warning - Overwriting Round" + rnd + "Standings.txt");
                 File.Delete(workDirectory + "Round" + rnd + "Standings.txt");
             }
-            string hdr = "Pl\tName\tRank\tRating\tWins\tMMS\t";
+            string hdr = "Pl\tName\tRank\tRating\tMMS\tWins\t";
             for (int i = 0; i < rnd; i++)
                 hdr = hdr + rnd + "\t";
             foreach(string t in Tiebreakers)
@@ -715,7 +715,7 @@ Bd	White	Result	Black	Handicap
                 // add tied method to Players
                 foreach (Player ap in AllPlayers)
                 {
-                    sw.WriteLine(cnt + t + ap.ToStanding(rnd) + t  + ap.SOS + ap.MOS); // + tiebreak
+                    sw.WriteLine(cnt + t + ap.ToStanding(rnd) + t + ap.SOS + t + ap.MOS); // + tiebreak
                 }
             }
 		}
