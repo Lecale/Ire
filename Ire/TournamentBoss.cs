@@ -101,7 +101,7 @@ namespace Ire
             Console.WriteLine("eRating - MMS - Rating - Seed");
 			foreach (Player ap in AllPlayers) {
 				int gap = nTopBar - ap.getERating ();
-				gap = gap / 100;
+				gap = gap / nGradeWidth;
 				if (gap >= 0 && ap.topBar == false)
 					gap++;
                 ap.setMMS(100 - gap); 
@@ -123,8 +123,6 @@ namespace Ire
 
 		public int AssignBye(int _rnd, int ByeLevel=1)
 		{ 
-		//	Console.WriteLine("First player bye count is " + RoundPlayers [0].nBye () + "byeLevel is " + ByeLevel);
-		//	Console.WriteLine("Player count is " + RoundPlayers.Count);
 			for (int i = RoundPlayers.Count - 1; i >-1; i--) {
 				Console.WriteLine (i);
 				if (RoundPlayers [i].nBye() < ByeLevel) {
@@ -171,8 +169,10 @@ namespace Ire
                 float minSOS = 999;
                 //find actual games played from participation
                 int nGame = 0;
+				int dbg = -1;
                 for (int i = 0; i < rnd; i++)
                 {
+					dbg = i;
                     try
                     {
                         if (ap.getParticipation(i) == true)
@@ -194,7 +194,7 @@ namespace Ire
                     }
                     catch (Exception e) 
                     {
-                        Console.WriteLine(e.Message);
+						Console.WriteLine("rnd:" + dbg + " " + e.Message);
                         Console.WriteLine("Seed was " + ap.Seed);
                         for (int ie = 0; ie < rnd; ie++ )
                             Console.WriteLine("Opponent " + ie + " was " + ap.getOpponent(ie));
@@ -220,8 +220,6 @@ namespace Ire
 			for(int r=0; r<rnd; r++)
 				end += "," + (r + 1);
 			string fn = workDirectory + "players.txt";
-
-			// 			riter.WriteLine("PIN , Name, Rating, Club, Country,")
 			int i = 100;
 			using (StreamWriter sw = new StreamWriter (fn,true)) {
 				for(int np = 0; np<nPlayers; np++)
