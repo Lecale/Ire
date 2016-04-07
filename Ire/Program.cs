@@ -43,12 +43,16 @@ namespace Ire
             for (int i = 1; i < rounds+1; i++)
             {
                 tb.MakeDraw(i);
+                tb.ShowField("Round" + i + "AfterDraw"); //just a debug method
                 tb.GenerateResultsForRound(i);
                 tb.ReadResults(i);
+                tb.ShowField("Round" + i + "AfterReadResults"); //just a debug method
                 tb.ProcessResults(i);
+         //       tb.ShowField("Round" + i + "AfterProcessResults"); //just a debug method
                 tb.UpdateTiebreaks(i);
+       //         tb.ShowField("Round" + i + "AfterTiebreaker"); //just a debug method
                 tb.SortField();
-                tb.ShowField(); //just a debug method
+                tb.ShowField("Round" + i + "AfterSortField"); //just a debug method
                 tb.GenerateStandingsfile(i);
             }
             tb.GenerateEGFExport();

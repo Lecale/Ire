@@ -257,7 +257,7 @@ namespace Ire
 		#region output
         public override string ToString()
         {
-			return Name + " " + eRating + "("+MMS+")";
+            return Name + " " + eRating + "(" + MMS + ")" + "S(" + Seed + ")"; 
         }
 
 		public string ToFile()

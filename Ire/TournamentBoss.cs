@@ -65,7 +65,8 @@ namespace Ire
 			int i = -1;
 			//Handle this later
 			UpdateParticipation (currentRound);
-			InitMMS ();
+			if(currentRound == 1)
+                InitMMS ();
 			if(RoundPlayers.Count % 2 == 1 )
 				i = AssignBye (currentRound);
             while (i == -1)
@@ -227,10 +228,11 @@ namespace Ire
 					sw.WriteLine (i++ + "," + u.ProvideName() + "," + u.RatingByBox(1500,500) + ",BLF,IE" + end);
 			}
 		}
-		public void ShowField()
+		public void ShowField(string info="")
 		{
-			using(StreamWriter sw = new StreamWriter(workDirectory +  "dbg.txt"))
+			using(StreamWriter sw = new StreamWriter(workDirectory +  "dbg.txt",true))
 				{
+                    sw.WriteLine(info);
 				foreach(Player p in AllPlayers )
 					sw.WriteLine(p.ToString());			
 				}
