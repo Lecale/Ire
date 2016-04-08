@@ -210,6 +210,14 @@ namespace Ire
                 ap.MOS = _MOS;
             }
         }
+
+		public void HandleLatePlayers(int rnd)
+		{
+			Console.WriteLine ("Late entrants should be added to the file players.txt");
+			//read file
+			//init mms
+			//give byes
+		}
 		#endregion
 
 		#region TestPreviewFunctions
