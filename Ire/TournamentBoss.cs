@@ -214,7 +214,10 @@ namespace Ire
 		public void HandleLatePlayers(int rnd)
 		{
 			Console.WriteLine ("Late entrants should be added to the file players.txt");
+			int before = AllPlayers.Count;
 			//read file
+			ReadPlayers();
+			int after = AllPlayers.Count;
 			//init mms
 			//give byes
 		}
