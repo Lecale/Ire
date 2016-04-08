@@ -48,9 +48,7 @@ namespace Ire
                 tb.ReadResults(i);
                 tb.ShowField("Round" + i + "AfterReadResults"); //just a debug method
                 tb.ProcessResults(i);
-         //       tb.ShowField("Round" + i + "AfterProcessResults"); //just a debug method
                 tb.UpdateTiebreaks(i);
-       //         tb.ShowField("Round" + i + "AfterTiebreaker"); //just a debug method
                 tb.SortField();
                 tb.ShowField("Round" + i + "AfterSortField"); //just a debug method
                 tb.GenerateStandingsfile(i);
@@ -58,16 +56,6 @@ namespace Ire
             tb.GenerateEGFExport();
             tb.ConvertStandingsToHTML(rounds);
             
-/*            tb.MakeDraw();
-            tb.GenerateResultsForRound(1);
-			tb.ReadResults (1);
-			tb.ProcessResults (1);
-            tb.UpdateTiebreaks(1);
-			tb.SortField ();
-			tb.ShowField ();
-            tb.GenerateStandingsfile(1);
-            */
-
 			/*
 			i.DownloadMasterZipEGF ();
             i.GenerateTemplate();

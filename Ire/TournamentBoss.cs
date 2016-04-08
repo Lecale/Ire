@@ -61,7 +61,11 @@ namespace Ire
 		{
 			Console.WriteLine ("We are ready to make the draw for Round "+currentRound);
 			Console.WriteLine ("Do you want to make an update to the players list (yes / no)");
-			string s = Console.ReadLine (); 
+			string s = Console.ReadLine ();
+            if (s.ToUpper().Trim().StartsWith("Y"))
+            {
+                HandleLatePlayers(currentRound);
+            }
 			int i = -1;
 			//Handle this later
 			UpdateParticipation (currentRound);
