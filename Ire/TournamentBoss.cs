@@ -336,7 +336,7 @@ namespace Ire
          * Pin tName tRating tClub tCountry is the expected input order
          * GIGO method, checks for already entered player
 		*/
-        public void ReadPlayers()
+        public void ReadPlayers(bool Supression=false)
         {
            
             string tLn = "";
@@ -348,18 +348,13 @@ namespace Ire
 
                 while ((tLn = reader.ReadLine()) != null)
                 {
-                    //tLn = reader.ReadLine();
                     String[] split = tLn.Split(',');
-                    //Console.WriteLine(split.Length);
                     int rnd = split.Length - 5;
-                    //Console.WriteLine("rnd" + rnd);
 
                     try
                     {
                         int pine = int.Parse(split[0]);
-                  //      Console.WriteLine("pin" + pine);
                         int rats = int.Parse(split[2]);
-                    //    Console.WriteLine("rat" + rats);
                         bool[] bull = new bool[rnd];
                         for (int i = 5; i < rnd + 5; i++)
                         {
@@ -375,7 +370,8 @@ namespace Ire
                         if (AllPlayers.Contains(j) == false)
                             AllPlayers.Add(j);
                         else
-                            Console.WriteLine("Duplicate Entry detected");
+                            if (Supression == false)
+                                Console.WriteLine("Duplicate Entry detected");
                     }
                     catch (Exception e)
                     {
@@ -383,8 +379,7 @@ namespace Ire
                         Console.WriteLine(tLn);
                     }
                 }
-
-				Console.WriteLine ("Number of players registered is " + AllPlayers.Count);
+				Console.WriteLine ("Number of players now registered is " + AllPlayers.Count);
             }
         }
 
@@ -742,8 +737,9 @@ Bd	White	Result	Black	Handicap
             }
 		}
 
-		public void ConvertStandingsToHTML(string fName)
+		public void ConvertStandingsToHTML(int rnd)
 		{//todo
+            string fName = workDirectory + "Round" + rnd + "Standings.txt";
 			List <string> AllLines = new List<string>();
 			using (StreamReader sr = new StreamReader (fName)) {
 				sr.ReadLine ();sr.ReadLine ();

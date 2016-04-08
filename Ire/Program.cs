@@ -56,6 +56,7 @@ namespace Ire
                 tb.GenerateStandingsfile(i);
             }
             tb.GenerateEGFExport();
+            tb.ConvertStandingsToHTML(rounds);
             
 /*            tb.MakeDraw();
             tb.GenerateResultsForRound(1);
