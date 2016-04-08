@@ -32,7 +32,8 @@ namespace Ire
 		List<Pairing> RoundPairings = new List<Pairing> ();
         List<string> Tiebreakers = new List<string>(); //to take from Settings
 		#endregion
-        public TournamentBoss(bool Mac=false)
+
+		public TournamentBoss(bool Mac=false)
         {
 			Macintosh = Mac;
             exeDirectory = Directory.GetCurrentDirectory();
@@ -226,13 +227,16 @@ namespace Ire
             for (int i = after; i > before; i--)
             {
                 AllPlayers[i - 1].SetSeed(i);
+				AllPlayers [i - 1].topBar = false; //should already be false?
+				if (AllPlayers [i - 1].getERating () > nTopBar)
+					AllPlayers [i - 1].setERating (nTopBar);
                 //set initial mms
                 int gap = nTopBar - AllPlayers[i-1].getERating();
                 gap = gap / nGradeWidth;
                 if (gap >= 0 && AllPlayers[i - 1].topBar == false)
                     gap++;
-             //   AllPlayers[i - 1].setMMS((100 - gap)*rnd);//is this valid?
                 AllPlayers[i - 1].setInitMMS(100 - gap);
+
                 //assign bye
                 for (int j = 1; j < rnd; j++)
                     AllPlayers[i - 1].AssignBye(j);
