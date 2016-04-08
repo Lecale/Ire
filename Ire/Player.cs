@@ -257,7 +257,12 @@ namespace Ire
 		#region output
         public override string ToString()
         {
-            return Name + " " + eRating + "(" + MMS + ")" + "S(" + Seed + ")"; 
+            return Name + " " + eRating + "(" + MMS + ")";
+        }
+
+        public string ToDebug()
+        {
+            return ToString() + "S(" + Seed + ")";
         }
 
 		public string ToFile()

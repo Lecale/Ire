@@ -219,11 +219,14 @@ namespace Ire
 		{
 			Console.WriteLine ("Late entrants should be added to the file players.txt");
 			int before = AllPlayers.Count;
-			//read file
-			ReadPlayers();
+			ReadPlayers(true);
 			int after = AllPlayers.Count;
 			//init mms
 			//give byes
+            for (int i = 0; i < after - before; i++)
+            {
+                //need new method?
+            }
 		}
 		#endregion
 
