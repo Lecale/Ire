@@ -223,9 +223,19 @@ namespace Ire
 			int after = AllPlayers.Count;
 			//init mms
 			//give byes
-            for (int i = 0; i < after - before; i++)
+            for (int i = after; i > before; i--)
             {
-                //need new method?
+                AllPlayers[i - 1].SetSeed(i);
+                //set initial mms
+                int gap = nTopBar - AllPlayers[i-1].getERating();
+                gap = gap / nGradeWidth;
+                if (gap >= 0 && AllPlayers[i - 1].topBar == false)
+                    gap++;
+             //   AllPlayers[i - 1].setMMS((100 - gap)*rnd);//is this valid?
+                AllPlayers[i - 1].setInitMMS(100 - gap);
+                //assign bye
+                for (int j = 1; j < rnd; j++)
+                    AllPlayers[i - 1].AssignBye(j);
             }
 		}
 		#endregion
