@@ -731,6 +731,24 @@ Bd	White	Result	Black	Handicap
             }
 		}
 
+		public void ConvertStandingsToHTML(string fName)
+		{//todo
+			List <string> AllLines = new List<string>();
+			using (StreamReader sr = new StreamReader (fName)) {
+				sr.ReadLine ();sr.ReadLine ();
+				while (sr.EndOfStream == false) {
+					AllLines.Add (sr.ReadLine ());
+				}
+			}
+			using (StreamWriter sw = new StreamWriter (fName.Replace(".h9",".html"))) {
+				sw.WriteLine ("<html><table>");
+				foreach (string al in AllLines) {
+					sw.WriteLine("<tr><td>" + al.Replace("\t","</td><td>") + "</td></tr>");
+
+				}
+				sw.WriteLine ("</html></table>");
+			}
+		}
         #endregion
     }
 }
