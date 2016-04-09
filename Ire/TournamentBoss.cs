@@ -111,7 +111,6 @@ namespace Ire
 					gap++;
                 ap.setMMS(100 - gap); 
                 ap.setInitMMS(100 - gap);
-				//Console.WriteLine (ap.getERating() + " - " + ap.getMMS() + " - " + ap.getRating() + " - " + ap.getSeed());
 			}
 
 		}
@@ -219,8 +218,10 @@ namespace Ire
 		public void HandleLatePlayers(int rnd)
 		{
 			Console.WriteLine ("Late entrants should be added to the file players.txt");
+			Console.WriteLine ("Press any key to proceed");
+			string s = Console.ReadLine ();
 			int before = AllPlayers.Count;
-			ReadPlayers(true);
+			ReadPlayers(false); //later true
 			int after = AllPlayers.Count;
 			//init mms
 			//give byes
@@ -230,6 +231,8 @@ namespace Ire
 				AllPlayers [i - 1].topBar = false; //should already be false?
 				if (AllPlayers [i - 1].getERating () > nTopBar)
 					AllPlayers [i - 1].setERating (nTopBar);
+				if (AllPlayers [i - 1].getERating () < nRatingFloor)
+					AllPlayers [i - 1].setERating (nRatingFloor);
                 //set initial mms
                 int gap = nTopBar - AllPlayers[i-1].getERating();
                 gap = gap / nGradeWidth;
