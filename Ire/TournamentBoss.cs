@@ -50,9 +50,9 @@ namespace Ire
 			AllPlayers.Sort ();
 			int i = 1;
 			if (init) { //late players get a different Seed because they were late and that is how it goes
-				Player.SortByRating = false;
 				//top group but for bye will then be seeded as if in top group
 				//this should not have any negative effect on the pairings though
+				Player.SortByRating = false;
 				foreach (Player p in AllPlayers) 
 					p.Seed = i++;
 			}
@@ -183,7 +183,7 @@ namespace Ire
                         {
                             nGame++;
                             int op = ap.getOpponent(i) -1; 
-                            //                Console.WriteLine("op: " + op + " lookUp index: " + lookUp[op]);
+                            Console.WriteLine("op: " + op + " lookUp index: " + lookUp[op]);
                             float f = AllPlayers[lookUp[op]].getMMS(rnd) + ap.getAdjHandi(i);
                             _SOS += f;
                             if (f > maxSOS)
@@ -518,8 +518,8 @@ namespace Ire
 					riter.WriteLine ("Rating Floor:\t");
 				riter.WriteLine ("Handicap Policy:\t"+HandiAdjust);
 				riter.WriteLine ("Max Handicap:\t"+nMaxHandicap);		
-				riter.WriteLine ("Tiebreak 1:\t"+nMaxHandicap);		
-				riter.WriteLine ("Tiebreak 2:\t"+nMaxHandicap);		
+				riter.WriteLine ("Tiebreak 1:\t");		
+				riter.WriteLine ("Tiebreak 2:\t");		
 			}
         }
 

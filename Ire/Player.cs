@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ire
 {
-    public class Player : Person, IComparable //Inheritance probably useless
+	public class Player : Person, IComparable<Player> //Inheritance probably useless
     {
 		#region variable
         public float initMMS = -1;
@@ -68,13 +68,7 @@ namespace Ire
             }
         }
         #region ResultsByesMMS
-        //Allows Override
-		public void setResult(int rnd, int op, float sc)
-		{
-			score[rnd] = sc; opponent[rnd] = op;
-		}
 
-		//This is the correct method
 		public void setResult(int rnd, int op, float _score, int _handicap=0, int BW =1)
 		{
             rnd--; //0 based arrary as always
@@ -100,8 +94,8 @@ namespace Ire
 			if(opponent!=null)
             for (int i = 0; i < opponent.Length; i++)
                 f += score[i];
-            f += MMS;
-                return f;
+           // f += MMS;
+           return f;
         }
 
         public float getScore(int rnd)
@@ -213,9 +207,9 @@ namespace Ire
 		{
 			Tiebreaker = _tie;
 		}
-        public int CompareTo(Object o)
+		public int CompareTo(Player p)
         {
-            Player p = (Player)o; // how gross is this?
+//            Player p = (Player)o; // how gross is this?
 			if (SortByRating) {
 				if (p.eRating > eRating)
 					return 1;
@@ -223,9 +217,11 @@ namespace Ire
 					return 0;
 				return -1;
 			}
+		//	Console.WriteLine ("Sorting by McMahonites" + MMS + " p." + p.MMS);
 			//Sort by MMS
             if (p.MMS > MMS)
                 return 1;
+		//	Console.WriteLine ("Sorting by McMahonites" + MMS + " p." + p.MMS + "did not return 1");
 			if (p.MMS == MMS) {
 				foreach(string tie in Tiebreaker)
 				{
