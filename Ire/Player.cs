@@ -23,6 +23,7 @@ namespace Ire
 		private int EGDPin;
 		public int Deed = -1; //Deed is the draw seeding for a particular round
 
+		private static List<string> Tiebreaker = new List<string> ();
 		private static bool BreakBySOS = true;
 		private static bool BreakByMOS = true;
 		public static bool SortByRating = false;
@@ -208,6 +209,10 @@ namespace Ire
 		}
 		#endregion
 
+		public void SetTiebreakers(List<string> _tie)
+		{
+			Tiebreaker = _tie;
+		}
         public int CompareTo(Object o)
         {
             Player p = (Player)o; // how gross is this?
@@ -218,38 +223,12 @@ namespace Ire
 					return 0;
 				return -1;
 			}
+			//Sort by MMS
             if (p.MMS > MMS)
                 return 1;
-            if (p.MMS == MMS)
-            {   
-				if (BreakBySOS == true) {
-					if (p.SOS > SOS)
-						return 1;
-					if (p.SOS == SOS) {
-						if (BreakByMOS) {
-							if (p.MOS > MOS)
-								return 1;
-							if (p.MOS == MOS)
-								return 0;
-							return -1;
-						} else
-							return 0;
-					}
-
-					//neither
-					return -1;
-				} else {	
-					if (BreakByMOS) {
-						if (p.MOS > MOS)
-							return 1;
-						if (p.MOS == MOS)
-							return 0;
-						return -1;
-					} else //no tiebreaker
-						return 0;
-				}
-            }
-
+			if (p.MMS == MMS) {
+				return 0;
+			}
             return -1;
         }
 

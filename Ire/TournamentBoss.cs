@@ -61,12 +61,13 @@ namespace Ire
 		public void MakeDraw(int currentRound = 1)
 		{
 			Console.WriteLine ("We are ready to make the draw for Round "+currentRound);
-			Console.WriteLine ("Do you want to make an update to the players list (yes / no)");
-			string s = Console.ReadLine ();
-            if (s.ToUpper().Trim().StartsWith("Y"))
-            {
-                HandleLatePlayers(currentRound);
-            }
+			if (currentRound > 1) {
+				Console.WriteLine ("Do you want to make an update to the players list (yes / no)");
+				string s = Console.ReadLine ();
+				if (s.ToUpper ().Trim ().StartsWith ("Y")) {
+					HandleLatePlayers (currentRound);
+				}
+			}
 			int i = -1;
 			//Handle this later
 			UpdateParticipation (currentRound);
@@ -514,6 +515,8 @@ namespace Ire
 					riter.WriteLine ("Rating Floor:\t");
 				riter.WriteLine ("Handicap Policy:\t"+HandiAdjust);
 				riter.WriteLine ("Max Handicap:\t"+nMaxHandicap);		
+				riter.WriteLine ("Tiebreak 1:\t"+nMaxHandicap);		
+				riter.WriteLine ("Tiebreak 2:\t"+nMaxHandicap);		
 			}
         }
 
@@ -546,6 +549,13 @@ namespace Ire
 						if(s[0].Contains("Permit handicap above bar")){
 							;//not handled yet
 						}
+						if(s[0].Contains("Tiebreak 1") && s.Length > 1){
+							Tiebreakers.Add(s[1].ToUpper());//not handled yet
+						}
+						if(s[0].Contains("Tiebreak 2") && s.Length > 1){
+							Tiebreakers.Add(s[1].ToUpper());//not handled yet
+						}
+
 					}
 				}
 			}

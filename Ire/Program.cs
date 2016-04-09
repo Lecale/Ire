@@ -39,7 +39,6 @@ namespace Ire
 			tb.previewFloor (true);
             int rounds = tb.nRounds;
 			//now we can start the tournament
-
             for (int i = 1; i < rounds+1; i++)
             {
                 tb.MakeDraw(i);
