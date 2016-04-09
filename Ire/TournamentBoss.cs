@@ -276,7 +276,7 @@ namespace Ire
 				{
                     sw.WriteLine(info);
 				foreach(Player p in AllPlayers )
-					sw.WriteLine(p.ToString());			
+					sw.WriteLine(p.ToDebug());			
 				}
 		}
 		public void previewFloor(bool SetFloor =  false)

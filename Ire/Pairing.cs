@@ -195,12 +195,12 @@ namespace Ire
 		public override bool Equals (object obj)
 		{
 			Pairing p = (Pairing)obj;
-			if (p.white == white)
-			if (p.black == black)
-				return true;
-			if (p.white == black)
-			if (p.black == white)
-				return true;
+			if (p.white.getSeed() == white.getSeed())
+				if (p.black.getSeed() == black.getSeed())
+					return true;
+			if (p.white.getSeed() == black.getSeed())
+				if (p.black.getSeed() == white.getSeed())
+					return true;
 			return false;
 		}
     }

@@ -47,6 +47,7 @@ namespace Ire
                 tb.ReadResults(i);
                 tb.ShowField("Round" + i + "AfterReadResults"); //just a debug method
                 tb.ProcessResults(i);
+				tb.ShowField("Round" + i + "AfterProcess"); //just a debug method
                 tb.UpdateTiebreaks(i);
                 tb.SortField();
                 tb.ShowField("Round" + i + "AfterSortField"); //just a debug method

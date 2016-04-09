@@ -108,7 +108,7 @@ namespace Ire
         {
             float f = 0;
             for (int i = 0; i < rnd; i++)
-                f += score[i];
+                f += score[i] ;
             return f;
         }
         public float getMMS(int rnd)
@@ -259,7 +259,7 @@ namespace Ire
 
         public string ToDebug()
         {
-            return ToString() + "S(" + Seed + ")";
+			return ToString() + ".IM."+ initMMS + " S(" + Seed + ")";
         }
 
 		public string ToFile()
