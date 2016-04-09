@@ -227,6 +227,28 @@ namespace Ire
             if (p.MMS > MMS)
                 return 1;
 			if (p.MMS == MMS) {
+				foreach(string tie in Tiebreaker)
+				{
+					if(tie.Equals("SOS"))
+					{
+						if(p.SOS > SOS)
+							return 1;
+						if(p.SOS < SOS)
+							return -1;	
+					}if(tie.Equals("MOS"))
+					{
+						if(p.MOS > MOS)
+							return 1;
+						if(p.MOS < MOS)
+							return -1;	
+					}if(tie.Equals("SODOS"))
+					{
+/*						if(p.MOS > MOS)
+							return 1;
+						if(p.MOS < MOS)
+							return -1;	
+*/					}
+				}
 				return 0;
 			}
             return -1;
