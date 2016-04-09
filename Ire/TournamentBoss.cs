@@ -72,20 +72,19 @@ namespace Ire
 			UpdateParticipation (currentRound);
 			if(currentRound == 1)
                 InitMMS ();
-			if(RoundPlayers.Count % 2 == 1 )
+			if (RoundPlayers.Count % 2 == 1) {
 				i = AssignBye (currentRound);
-            while (i == -1)
-            {
-                int retry = 2;
-                Console.WriteLine("No player was found who already had less than " + (retry - 1) + "bye");
-                if (currentRound <= retry)
-                    i = AssignBye(currentRound, retry++);
-                else
-                {
-                    i = 100;
-                    Console.WriteLine("Fatal error encountered. Tournament cannot proceed");
-                }
-            }
+				while (i == -1) {
+					int retry = 2;
+					Console.WriteLine ("No player was found who already had less than " + (retry - 1) + "bye");
+					if (currentRound <= retry)
+						i = AssignBye (currentRound, retry++);
+					else {
+						i = 100;
+						Console.WriteLine ("Fatal error encountered. Tournament cannot proceed");
+					}
+				}
+			}
 			Console.WriteLine ("MakeDraw prep completed ...");
 			DrawMachine1 dm1 = new DrawMachine1 (RoundPlayers, 9, 1, true);
 
@@ -248,9 +247,10 @@ namespace Ire
 					AllPlayers [i - 1].AssignBye (j);
 				}
 				for (int k = 0; k < nRounds; k++)
-					if (AllPlayers [i - 1].getParticipation (i - 1))
+					if (AllPlayers [i - 1].getParticipation (k))
 						Console.WriteLine (AllPlayers [i - 1].ToString () + " plays in "+ (k + 1));
             }
+			Console.WriteLine ("sort field again");
 			SortField ();
 		}
 		#endregion
@@ -779,11 +779,12 @@ Bd	White	Result	Black	Handicap
 					AllLines.Add (sr.ReadLine ());
 				}
 			}
-			using (StreamWriter sw = new StreamWriter (fName.Replace(".h9",".html"))) {
+			string fOut = fName.Replace (".txt", ".html");
+			Console.WriteLine (fOut);
+			using (StreamWriter sw = new StreamWriter (fOut)) {
 				sw.WriteLine ("<html><table>");
 				foreach (string al in AllLines) {
 					sw.WriteLine("<tr><td>" + al.Replace("\t","</td><td>") + "</td></tr>");
-
 				}
 				sw.WriteLine ("</html></table>");
 			}

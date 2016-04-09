@@ -1,0 +1,13 @@
+Results of Round 3
+Bd	white	:	black
+1	O'Landwater.E(3)	0:1	O'Ashwater.G(4)	 h0
+2	ZeSeason.C(5)	0:1	ZeLandbetter.S(1)	 h0
+3	KerTrilater.L(7)	0:1	KerBlackwater.C(2)	 h0
+4	PopLandston.K(9)	0:1	O'Tribetter.N(6)	 h0
+5	Zebra.G(22)	0.5:0.5	McLandlater.H(11)	 h0
+6	O'Landlower.J(15)	1:0	ZeAshson.E(8)	 h0
+7	McRedlater.K(12)	0:1	ZeLandbetter.S(10)	 h0
+8	KerLandmane.R(14)	0:1	KerRedston.B(13)	 h0
+9	ZeLandmane.R(17)	1:0	KerWhitmorn.D(16)	 h0
+10	ZeFlackwater.K(21)	1:0	PopWhitston.O(20)	 h0
+11	KerLandson.K(19)	1:0	O'Redston.C(18)	 h0

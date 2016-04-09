@@ -1,12 +1,12 @@
 Results of Round 1
 Bd	white	:	black
-1	KerSealower.A(2)	0:1	O'Trahmane.R(1)	 h0
-2	McAshwater.C(6)	0:1	McTrison.C(3)	 h0
-3	McLandson.H(5)	0:1	PopWhitmane.G(4)	 h0
-4	O'Ashlower.R(7)	1:0	KerRedson.D(8)	 h0
-5	McRedmorn.D(12)	1:0	KerLandlower.M(15)	 h0
-6	O'Redmane.A(13)	0:1	KerTriston.D(14)	 h0
-7	ZeTrimorn.S(9)	0:1	ZeSeamane.D(11)	 h0
-8	PopRoundbetter.E(19)	0:1	KerTrahson.D(10)	 h0
-9	PopTrimane.N(20)	1:0	McTrahmorn.P(18)	 h0
-10	PopWhitmane.C(16)	1:0	O'Whitmane.S(17)	 h0
+1	KerBlackwater.C(2)	0:1	ZeLandbetter.S(1)	 h0
+2	ZeSeason.C(5)	0:1	O'Landwater.E(3)	 h0
+3	O'Tribetter.N(6)	0:1	O'Ashwater.G(4)	 h0
+4	McLandlater.H(11)	1:0	McRedlater.K(12)	 h0
+5	PopLandston.K(9)	1:0	ZeLandbetter.S(10)	 h0
+6	KerTrilater.L(7)	1:0	ZeAshson.E(8)	 h0
+7	O'Landlower.J(15)	1:0	KerWhitmorn.D(16)	 h0
+8	KerRedston.B(13)	1:0	KerLandmane.R(14)	 h0
+9	O'Redston.C(18)	0:1	ZeLandmane.R(17)	 h0
+10	PopWhitston.O(20)	1:0	KerLandson.K(19)	 h0

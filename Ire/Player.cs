@@ -87,7 +87,7 @@ namespace Ire
 		public void AssignBye(int rnd)
 		{
             rnd--; //0 based arrary as always
-			Console.WriteLine ("AssignBye rnd " + rnd + " par.L" + participation.Length);
+		//	Console.WriteLine ("AssignBye rnd " + rnd + " par.L" + participation.Length);
 			participation[rnd] = false;
             score[rnd] = 0.5f;
             setMMS(getMMS(rnd));
