@@ -244,6 +244,7 @@ namespace Ire
                 for (int j = 1; j < rnd; j++)
                     AllPlayers[i - 1].AssignBye(j);
             }
+			SortField ();
 		}
 		#endregion
 
@@ -394,7 +395,7 @@ namespace Ire
                         if (AllPlayers.Contains(j) == false)
                             AllPlayers.Add(j);
                         else
-                            if (Supression == false)
+                        //    if (Supression == false)
                                 Console.WriteLine("Duplicate Entry detected");
                     }
                     catch (Exception e)

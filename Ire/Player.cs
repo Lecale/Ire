@@ -27,16 +27,12 @@ namespace Ire
 		private static bool BreakByMOS = true;
 		public static bool SortByRating = false;
 		#endregion
-		//this is here just to allow compilation TODELETE
-		public Player(int _seed, string _nom="null", int _rat=-1, string _club="null", string _ctry="null")
-			: base (_nom="null", _rat=-1, _club="null", _ctry="null" )
-		{Seed = _seed;}
 
 		public Player(int _seed, string _nom , int _rat, string _ctry, string _club, bool[] par) 
 			: base (_nom, _rat, _club, _ctry )
         {
 			Seed = -1; //When we first read Players in they are not sorted
-			EGDPin = _seed;
+			EGDPin = _seed; 
 			eRating = _rat;
 			//participation does not exist
 			participation = new bool[par.Length];
@@ -181,10 +177,10 @@ namespace Ire
         { topBar = true; }
 
 		#region Override Methods
-		public override int GetHashCode ()
-		{ //Evil grin
-			return 11; 
-		}
+//		public override int GetHashCode ()
+//		{ //Evil grin
+//			return 11; 
+//		}
 
 		public override bool Equals(System.Object obj)
 		{
@@ -192,15 +188,18 @@ namespace Ire
 				return false;
 			try{
 				Player p = (Player) obj;
+
+			//	Console.WriteLine ("Equals()" + EGDPin + "," + p.EGDPin);
 				if(Seed>0)
 				{
 					if(Seed==p.Seed)
 						return true;
-				}else
-				{
+				}
+				//else //EGDPin is also a unique key
+				//{
 					if(EGDPin==p.EGDPin)
 					return true;
-				}
+				//}
 			}
 			catch(Exception e) {
 				return false;
