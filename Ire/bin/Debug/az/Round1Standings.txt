@@ -1,0 +1,24 @@
+Tournament: az Round: 1
+
+Pl	Name	Rank	Rating	MMS	Wins	1	SOS	MOS	
+1	McAshwater.C(6)	(1k)	(1797)	100	0	3-	101	0
+2	KerSealower.A(2)	(1k)	(1625)	100	0	1-	101	0
+3	McLandson.H(5)	(1k)	(1783)	100	0	4-	101	0
+4	O'Trahmane.R(1)	(1k)	(1809)	101	1	2+	100	0
+5	PopWhitmane.G(4)	(1k)	(1778)	101	1	5+	100	0
+6	McTrison.C(3)	(1k)	(1646)	101	1	6+	100	0
+7	KerRedson.D(8)	(1k)	(1560)	99	0	7-	100	0
+8	O'Ashlower.R(7)	(1k)	(1586)	100	1	8+	99	0
+9	ZeTrimorn.S(9)	(1k)	(1489)	98	0	11-	99	0
+10	KerLandlower.M(15)	(1k)	(1416)	98	0	12-	99	0
+11	O'Redmane.A(13)	(1k)	(1464)	98	0	14-	99	0
+12	KerTriston.D(14)	(1k)	(1439)	99	1	13+	98	0
+13	McRedmorn.D(12)	(1k)	(1467)	99	1	15+	98	0
+14	ZeSeamane.D(11)	(1k)	(1484)	99	1	9+	98	0
+15	KerTrahson.D(10)	(1k)	(1487)	99	1	19+	97	0
+16	PopRoundbetter.E(19)	(1k)	(1354)	97	0	10-	99	0
+17	O'Whitmane.S(17)	(1k)	(1390)	97	0	16-	98	0
+18	McTrahmorn.P(18)	(1k)	(1365)	97	0	20-	98	0
+19	PopTrimane.N(20)	(1k)	(1342)	98	1	18+	97	0
+20	PopWhitmane.C(16)	(1k)	(1395)	98	1	17+	97	0
+21	KerTrahbetter.L(21)	(1k)	(1134)	95.5	0.5	0=	95	0

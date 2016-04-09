@@ -227,7 +227,9 @@ namespace Ire
 			//give byes
             for (int i = after; i > before; i--)
             {
+				Console.WriteLine ("Late Loop player:" + i);
                 AllPlayers[i - 1].SetSeed(i);
+				Console.WriteLine ("Late Loop set seed");
 				AllPlayers [i - 1].topBar = false; //should already be false?
 				if (AllPlayers [i - 1].getERating () > nTopBar)
 					AllPlayers [i - 1].setERating (nTopBar);
@@ -241,8 +243,13 @@ namespace Ire
                 AllPlayers[i - 1].setInitMMS(100 - gap);
 
                 //assign bye
-                for (int j = 1; j < rnd; j++)
-                    AllPlayers[i - 1].AssignBye(j);
+				for (int j = 1; j < rnd; j++) {
+					Console.WriteLine ("Late Loop assign bye round:" + j);
+					AllPlayers [i - 1].AssignBye (j);
+				}
+				for (int k = 0; k < nRounds; k++)
+					if (AllPlayers [i - 1].getParticipation (i - 1))
+						Console.WriteLine (AllPlayers [i - 1].ToString () + " plays in "+ (k + 1));
             }
 			SortField ();
 		}
