@@ -464,8 +464,11 @@ namespace Ire
 			nMaxHandicap = int.Parse(maxhan); 
 			Console.WriteLine ("Grade Width (default 100)");
 			string GradeWidth = Console.ReadLine();
-			//nGradeWidth = int.Parse(GradeWidth); //Implement later - not essential
-
+			try{
+				nGradeWidth = int.Parse(GradeWidth); //Implement later - not essential
+			}
+			catch(Exception e)
+			{Console.WriteLine("Grade width could not be read " + e.Message);}
             if (File.Exists(fOut))
             {
                 Console.WriteLine("Players file already exists - Overwrite it? y/n");
@@ -555,7 +558,7 @@ namespace Ire
 						if(s[0].Contains("Tiebreak 2") && s.Length > 1){
 							Tiebreakers.Add(s[1].ToUpper());//not handled yet
 						}
-
+						Player.SetTiebreakers(Tiebreakers);
 					}
 				}
 			}

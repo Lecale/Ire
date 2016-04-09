@@ -209,7 +209,7 @@ namespace Ire
 		}
 		#endregion
 
-		public void SetTiebreakers(List<string> _tie)
+		public static void SetTiebreakers(List<string> _tie)
 		{
 			Tiebreaker = _tie;
 		}
@@ -243,10 +243,7 @@ namespace Ire
 							return -1;	
 					}if(tie.Equals("SODOS"))
 					{
-/*						if(p.MOS > MOS)
-							return 1;
-						if(p.MOS < MOS)
-							return -1;	
+/*						
 */					}
 				}
 				return 0;
