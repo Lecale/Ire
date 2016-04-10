@@ -16,9 +16,9 @@ namespace Ire
 		private int[] LookUpTable;
 		private bool[] LookUpBull;
 
-		public DrawMachine1 ( List<Player> ply, int _MaxHandi = 9, int _AdjHandi = 1, bool _HandiAboveBar = false)
+		public DrawMachine1 ( List<Player> ply, List<Pairing> _History, 
+			int _MaxHandi = 9, int _AdjHandi = 1, bool _HandiAboveBar = false)
 		{
-		//	Console.WriteLine ("DrawMachine1");
 			plys = ply;
 			LookUpTable = new int[ply.Count];
 			LookUpBull = new bool[ply.Count];

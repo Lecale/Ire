@@ -71,8 +71,10 @@ namespace Ire
 			int i = -1;
 			//Handle this later
 			UpdateParticipation (currentRound);
-			if(currentRound == 1)
-                InitMMS ();
+			if (currentRound == 1)
+				InitMMS ();
+			else
+				SortField ();
 			if (RoundPlayers.Count % 2 == 1) {
 				i = AssignBye (currentRound);
 				while (i == -1) {
@@ -87,8 +89,7 @@ namespace Ire
 				}
 			}
 			Console.WriteLine ("MakeDraw prep completed ...");
-			DrawMachine1 dm1 = new DrawMachine1 (RoundPlayers, 9, 1, true);
-
+			DrawMachine1 dm1 = new DrawMachine1 (RoundPlayers, AllPairings, 9, 1, true);
 			List<Pairing> RndPairings = dm1.GetCurrentPairings ();
 			foreach (Pairing rp in RndPairings)
                 Console.WriteLine(rp.BasicOutput());
@@ -158,11 +159,11 @@ namespace Ire
         //Should have some if SOS if MOS if SODOS logic
         public void UpdateTiebreaks(int rnd)
         {
-            int[] lookUp = new int[AllPlayers.Count];
+            int[] lookUp = new int[AllPlayers.Count]; //yuck
             for (int i = 0; i < lookUp.Length; i++)
             {
                 lookUp[i] = AllPlayers[i].Seed -1;
-            //    Console.WriteLine("i: " + i + " seed " + AllPlayers[i].Seed);
+                Console.WriteLine("i: " + i + " seed " + AllPlayers[i].Seed);
             }
             foreach (Player ap in AllPlayers)
             {
@@ -183,7 +184,7 @@ namespace Ire
                         {
                             nGame++;
                             int op = ap.getOpponent(i) -1; 
-                            Console.WriteLine("op: " + op + " lookUp index: " + lookUp[op]);
+            //                Console.WriteLine("op: " + op + " lookUp index: " + lookUp[op]);
                             float f = AllPlayers[lookUp[op]].getMMS(rnd) + ap.getAdjHandi(i);
                             _SOS += f;
                             if (f > maxSOS)
@@ -795,11 +796,15 @@ Bd	White	Result	Black	Handicap
 			string fOut = fName.Replace (".txt", ".html");
 			Console.WriteLine (fOut);
 			using (StreamWriter sw = new StreamWriter (fOut)) {
-				sw.WriteLine ("<html><table>");
+				sw.WriteLine ("<html><table border=1>");
 				foreach (string al in AllLines) {
 					sw.WriteLine("<tr><td>" + al.Replace("\t","</td><td>") + "</td></tr>");
 				}
-				sw.WriteLine ("</html></table>");
+				sw.WriteLine ("</table>");
+				sw.WriteLine ("<p>Rating Bar: " + nTopBar);
+				sw.WriteLine ("<p>Rating Floor: " + nRatingFloor);
+				sw.WriteLine ("<p>Handicap Adjustment: " + HandiAdjust);
+				sw.WriteLine ("</html>");
 			}
 		}
         #endregion

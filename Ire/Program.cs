@@ -10,21 +10,6 @@ namespace Ire
     {
         static void Main(string[] args)
         {
-            // Ask if you want to update the Rating list
-            // Ask for details about the tournament (final)
-            // Start entering players (late arrivals can be added afterwards)
-            // request confirmation on bar groups
-            // ask for top bar : show preliminary assign
-            // ask for low bar : show preliminary assign
-            // ask if want to remove from top bar = *bye
-            // make draw for first round
-            // - any late players? read from file
-            // - do you want to set a bye? read from file
-            // make pairing
-            // -output file
-            //read results 
-            //sort players
-            //loop until tournament end
 
             TournamentBoss tb = new TournamentBoss(true);
 			tb.GenerateTemplateInputFile ();

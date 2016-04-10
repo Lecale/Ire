@@ -24,8 +24,6 @@ namespace Ire
 		public int Deed = -1; //Deed is the draw seeding for a particular round
 
 		private static List<string> Tiebreaker = new List<string> ();
-		private static bool BreakBySOS = true;
-		private static bool BreakByMOS = true;
 		public static bool SortByRating = false;
 		#endregion
 
@@ -76,8 +74,9 @@ namespace Ire
 			opponent[rnd] = op;
 			handi[rnd] = _handicap;
 			BlackWhite[rnd] = BW;
-			setMMS(getMMS (rnd));
-		}
+			//setMMS(getMMS (rnd));
+			setMMS(getMMS ());
+			}
 
 		public void AssignBye(int rnd)
 		{
