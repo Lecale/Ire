@@ -201,6 +201,12 @@ namespace Ire
 			if (p.white.getSeed() == black.getSeed())
 				if (p.black.getSeed() == white.getSeed())
 					return true;
+			if (p.white.Equals(white) )
+				if (p.black.Equals(black))
+					return true;
+			if (p.white.Equals(black))
+				if (p.black.Equals(white))
+					return true;
 			return false;
 		}
     }
