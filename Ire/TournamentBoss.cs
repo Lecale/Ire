@@ -163,7 +163,8 @@ namespace Ire
             int[] lookUp = new int[AllPlayers.Count]; //yuck
             for (int i = 0; i < AllPlayers.Count; i++)
             {
-                lookUp[i] = AllPlayers[i].Seed -1;
+             //   lookUp[i] = AllPlayers[i].Seed -1;
+                lookUp[AllPlayers[i].Seed - 1] = i;
                 Console.WriteLine("i: " + i + " maps to seed " + AllPlayers[i].Seed);
             }
             foreach (Player ap in AllPlayers)
@@ -186,7 +187,7 @@ namespace Ire
                             nGame++;
                             int op = ap.getOpponent(i) -1; 
                             Console.WriteLine("op: " + op + " lookUp index: " + lookUp[op]);
-							float f = AllPlayers[lookUp[op]].getMMS(rnd) ;
+							float f = AllPlayers[lookUp[op]].getMMS() ;
 							Console.WriteLine("get handi step now...");
 							f = f + ap.getAdjHandi(i);
                             Console.WriteLine("get handi step done");
@@ -653,8 +654,9 @@ Bd	White	Result	Black	Handicap
 			char[] c1 = { '(',')','?'};
 			int[] LUT = new int[AllPlayers.Count];
 			int[] CNT = new int[AllPlayers.Count];
-			for (int i = 0; i < AllPlayers.Count; i++)
-				LUT [i] = AllPlayers [i].Seed -1;
+            for (int i = 0; i < AllPlayers.Count; i++)
+                //LUT[i] = AllPlayers[i].Seed - 1; //Seed is not 0 based
+                LUT[AllPlayers[i].Seed - 1] = i; //Seed is not 0 based
             using (StreamReader sr = new StreamReader(workDirectory + "Round" + rnd + "Results.txt"))
             {
 				sr.ReadLine ();
@@ -684,7 +686,7 @@ Bd	White	Result	Black	Handicap
 							result = 3;
 						if (split [2].Equals ("0:0"))
 							result = 7;
-                //        Console.WriteLine("Read Pairing: " + AllPlayers[LUT[white]].Seed + ":" + AllPlayers[LUT[black]].Seed);
+                        Console.WriteLine("Read Pairing: " + AllPlayers[LUT[white]].Seed + ":" + AllPlayers[LUT[black]].Seed);
 						Pairing p = new Pairing (AllPlayers [LUT [white]], AllPlayers [LUT [black]], handicap, result);
 						CNT [LUT [white]]++;
 						CNT [LUT [black]]++;
@@ -694,7 +696,7 @@ Bd	White	Result	Black	Handicap
 							else
 								throw new Exception ("Player played more than one game in this round");
 						else
-							Console.WriteLine ("A duplicate result was detected " + p.ToFile ());
+							Console.WriteLine ("A duplicate pairing result was detected " + p.ToFile ());
 					}
 				}
 				//and if we did not hit an exception
