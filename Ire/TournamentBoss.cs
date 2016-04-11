@@ -184,8 +184,10 @@ namespace Ire
                         {
                             nGame++;
                             int op = ap.getOpponent(i) -1; 
-            //                Console.WriteLine("op: " + op + " lookUp index: " + lookUp[op]);
-                            float f = AllPlayers[lookUp[op]].getMMS(rnd) + ap.getAdjHandi(i);
+                            Console.WriteLine("op: " + op + " lookUp index: " + lookUp[op]);
+							float f = AllPlayers[lookUp[op]].getMMS(rnd) ;
+							Console.WriteLine("get handi step now...");
+							f = f+ ap.getAdjHandi(i);
                             _SOS += f;
                             if (f > maxSOS)
                                 maxSOS = f;

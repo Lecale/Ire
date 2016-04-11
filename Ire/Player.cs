@@ -20,7 +20,7 @@ namespace Ire
         public float SOS = -1;
 		public float MOS = -1; //Middle portion of SOS
 		protected int eRating; // effective rating, used for lower bar
-		private int EGDPin;
+		public int EGDPin;
 		public int Deed = -1; //Deed is the draw seeding for a particular round
 
 		private static List<string> Tiebreaker = new List<string> ();
@@ -126,19 +126,34 @@ namespace Ire
 		public int getAdjHandi(int i)
 		{
 			//if black substract handicap , if White add handicap to SOS
-			return handi[i] * BlackWhite[i];
+			try{
+				return handi[i] * BlackWhite[i];
+			}
+			catch(Exception e) {
+				Console.WriteLine ("EXCEPTION in getAdjHandi rnd " + i);
+				Console.WriteLine (e.Message);
+				Console.WriteLine ("handi " + handi.Length);
+				Console.WriteLine ("BlackWhite " + BlackWhite.Length);
+				return 0;
+			}
 		}
 		//SOS is public?
 		#endregion
 
+		public bool getParticipation(int i)
+		{
+			try{
+			return participation[i];}
+			catch(Exception e) {
+				Console.WriteLine ("EXCEPTION in getParticipation rnd " + i);
+				Console.WriteLine (e.Message);
+				Console.WriteLine ("par " + participation.Length);
+				return false;
+			}
+		}
         public void setOpponent(int i, int rnd)
         {
             opponent[rnd] = i;
-        }
-        public bool getParticipation(int i)
-        {
-		//	Console.WriteLine (participation.Length);
-            return participation[i];
         }
         public int nBye()
         {
