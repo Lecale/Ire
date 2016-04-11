@@ -151,6 +151,7 @@ namespace Ire
 			foreach (Pairing p in RoundPairings) {
 				p.white.setResult (rnd, p.black.Seed, p.WhiteScore (), p.GetHandi (), 1);
 				p.black.setResult (rnd, p.white.Seed, p.BlackScore (), p.GetHandi (), 0);
+                Console.WriteLine("W" + p.white.Seed + ": B " + p.black.Seed);
 			}
 			//now need to update MMS and SOS and MOS for all players in the tournament!
 			//for opponents update SOS
@@ -160,10 +161,10 @@ namespace Ire
         public void UpdateTiebreaks(int rnd)
         {
             int[] lookUp = new int[AllPlayers.Count]; //yuck
-            for (int i = 0; i < lookUp.Length; i++)
+            for (int i = 0; i < AllPlayers.Count; i++)
             {
                 lookUp[i] = AllPlayers[i].Seed -1;
-                Console.WriteLine("i: " + i + " seed " + AllPlayers[i].Seed);
+                Console.WriteLine("i: " + i + " maps to seed " + AllPlayers[i].Seed);
             }
             foreach (Player ap in AllPlayers)
             {
@@ -187,7 +188,8 @@ namespace Ire
                             Console.WriteLine("op: " + op + " lookUp index: " + lookUp[op]);
 							float f = AllPlayers[lookUp[op]].getMMS(rnd) ;
 							Console.WriteLine("get handi step now...");
-							f = f+ ap.getAdjHandi(i);
+							f = f + ap.getAdjHandi(i);
+                            Console.WriteLine("get handi step done");
                             _SOS += f;
                             if (f > maxSOS)
                                 maxSOS = f;
