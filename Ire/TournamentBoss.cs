@@ -165,7 +165,7 @@ namespace Ire
             {
              //   lookUp[i] = AllPlayers[i].Seed -1;
                 lookUp[AllPlayers[i].Seed - 1] = i;
-                Console.WriteLine("i: " + i + " maps to seed " + AllPlayers[i].Seed);
+            //    Console.WriteLine("i: " + i + " maps to seed " + AllPlayers[i].Seed);
             }
             foreach (Player ap in AllPlayers)
             {
@@ -186,11 +186,9 @@ namespace Ire
                         {
                             nGame++;
                             int op = ap.getOpponent(i) -1; 
-                            Console.WriteLine("op: " + op + " lookUp index: " + lookUp[op]);
+              //              Console.WriteLine("op: " + op + " lookUp index: " + lookUp[op]);
 							float f = AllPlayers[lookUp[op]].getMMS() ;
-							Console.WriteLine("get handi step now...");
 							f = f + ap.getAdjHandi(i);
-                            Console.WriteLine("get handi step done");
                             _SOS += f;
                             if (f > maxSOS)
                                 maxSOS = f;
@@ -703,7 +701,8 @@ Bd	White	Result	Black	Handicap
 				Console.WriteLine("Finished reading in results");
 //                string nimic = Console.ReadLine();
 				RoundPairings = actualPairs;
-				AllPairings.AddRange(actualPairs);
+                AllPairings.AddRange(actualPairs);
+                Console.WriteLine("Total pairings count now " + AllPairings.Count);
             }
         }
 			
