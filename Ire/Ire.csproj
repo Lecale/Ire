@@ -47,8 +47,6 @@
     <Compile Include="Bye.cs" />
     <Compile Include="GameCollection.cs" />
     <Compile Include="Group.cs" />
-    <Compile Include="Joc.cs" />
-    <Compile Include="Jucator.cs" />
     <Compile Include="Pairing.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
@@ -57,7 +55,6 @@
     <Compile Include="TournamentBoss.cs" />
     <Compile Include="Turn.cs" />
     <Compile Include="Import.cs" />
-    <Compile Include="MiniPlayer.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="PairPerson.cs" />
     <Compile Include="Person.cs" />

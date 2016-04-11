@@ -1,6 +1,0 @@
-Tournament Name:	Bip
-Rounds:	4
-Top Bar Rating:	1600
-Rating Floor:	1100
-Handicap Policy:	2
-Max Handicap:	9
