@@ -89,7 +89,7 @@ namespace Ire
 				}
 			}
 			Console.WriteLine ("MakeDraw prep completed ...");
-			DrawMachine1 dm1 = new DrawMachine1 (RoundPlayers, AllPairings, 9, 1, true);
+			DrawMachine1 dm1 = new DrawMachine1 (RoundPlayers, AllPairings, nMaxHandicap, HandiAdjust, true);
 			List<Pairing> RndPairings = dm1.GetCurrentPairings ();
 			foreach (Pairing rp in RndPairings)
                 Console.WriteLine(rp.BasicOutput());

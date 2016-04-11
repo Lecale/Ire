@@ -65,7 +65,7 @@ namespace Ire
 			Player top = plys [start];
 			Pairing tmp;
 			Pairing holdLastPairing;
-		//	Console.WriteLine ("Draw()" + start);
+			Console.WriteLine ("Calling Draw() start:" + start);
 			bool found = false;
 			for (int i = start+1; i <= plys.Count -1; i++) { //foreachPlayer
 				// but this is not the good loop?
