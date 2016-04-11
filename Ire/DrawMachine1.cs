@@ -20,6 +20,7 @@ namespace Ire
 			int _MaxHandi = 9, int _AdjHandi = 1, bool _HandiAboveBar = false)
 		{
 			plys = ply;
+            History = _History;
 			LookUpTable = new int[ply.Count];
 			LookUpBull = new bool[ply.Count];
 			Pairs = new List<Pairing>();
