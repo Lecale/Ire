@@ -262,7 +262,7 @@ namespace Ire
 		#endregion
 
 		#region TestPreviewFunctions
-		public void GeneratePlayers(int nPlayers,int rnd)
+		public void GeneratePlayers(int nPlayers, int rnd, int midpoint=1500, int spread=500 )
 		{
 			Utility u = new Utility ();
 			string end = "";
@@ -272,7 +272,7 @@ namespace Ire
 			int i = 100;
 			using (StreamWriter sw = new StreamWriter (fn,true)) {
 				for(int np = 0; np<nPlayers; np++)
-					sw.WriteLine (i++ + "," + u.ProvideName() + "," + u.RatingByBox(1500,500) + ",BLF,IE" + end);
+					sw.WriteLine (i++ + "," + u.ProvideName() + "," + u.RatingByBox(midpoint,spread) + ",BLF,IE" + end);
 			}
 		}
 		public void ShowField(string info="")
@@ -448,7 +448,13 @@ namespace Ire
 			// This information goes into a separate file  
 			Console.WriteLine("Please enter number of Rounds:");
 			string round = Console.ReadLine();
-			nRounds = int.Parse(round); 
+            try {
+                nRounds = int.Parse(round);
+            }
+            catch (Exception e) {
+                Console.WriteLine("Number of rounds set to 3 as it could not be read: " + e.Message);
+                nRounds = 3; 
+            }
             Console.WriteLine ("Top Group ? (yes / no )");
 			string top  = Console.ReadLine ();
 			if (top.ToUpper ().StartsWith ("Y")) {
@@ -463,8 +469,14 @@ namespace Ire
 			}
 			Console.WriteLine ("Handicap Adjustment ? (0 for none)");
 			string adj = Console.ReadLine();
-			HandiAdjust = int.Parse(adj); 
-			Console.WriteLine ("Maximum Handicap Allowed ?");
+            try{
+                HandiAdjust = int.Parse(adj);
+            }
+            catch (Exception e){
+                Console.WriteLine("Handicap Adjustment set to 1 as it could not be read: " + e.Message);
+                HandiAdjust = 1;
+            }
+            Console.WriteLine("Maximum Handicap Allowed ?");
 			string maxhan = Console.ReadLine();
 			nMaxHandicap = int.Parse(maxhan); 
 			Console.WriteLine ("Grade Width (default 100)");

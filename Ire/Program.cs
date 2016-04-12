@@ -13,7 +13,7 @@ namespace Ire
 
             TournamentBoss tb = new TournamentBoss(true);
 			tb.GenerateTemplateInputFile ();
-			tb.GeneratePlayers (17,3); // this works fine
+			tb.GeneratePlayers (17,3); // Cut to become auto
 			tb.ReadPlayers();
 			tb.SortField(true);
 			tb.ShowField ();
