@@ -478,14 +478,21 @@ namespace Ire
             }
             Console.WriteLine("Maximum Handicap Allowed ?");
 			string maxhan = Console.ReadLine();
-			nMaxHandicap = int.Parse(maxhan); 
+            try {
+                nMaxHandicap = int.Parse(maxhan);
+            }
+            catch (Exception e){
+                Console.WriteLine("Maximum Handicap set to 9 as it could not be read: " + e.Message);
+                nMaxHandicap = 9;
+            }
 			Console.WriteLine ("Grade Width (default 100)");
 			string GradeWidth = Console.ReadLine();
 			try{
-				nGradeWidth = int.Parse(GradeWidth); //Implement later - not essential
+				nGradeWidth = int.Parse(GradeWidth); 
 			}
-			catch(Exception e)
-			{Console.WriteLine("Grade width could not be read " + e.Message);}
+			catch(Exception e){
+                Console.WriteLine("Grade width set to 100 as it could not be read " + e.Message);
+            }
             if (File.Exists(fOut))
             {
                 Console.WriteLine("Players file already exists - Overwrite it? y/n");
