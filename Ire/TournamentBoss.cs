@@ -21,6 +21,7 @@ namespace Ire
         bool Macintosh = false;
 		bool TopBar=false;
 		bool RatingFloor=false;
+        bool HandiAboveBar = false;
 		int HandiAdjust=1;
 		int nMaxHandicap = 9;
 		int nTopBar = 5000;
@@ -89,7 +90,7 @@ namespace Ire
 				}
 			}
 			Console.WriteLine ("MakeDraw prep completed ...");
-			DrawMachine1 dm1 = new DrawMachine1 (RoundPlayers, AllPairings, nMaxHandicap, HandiAdjust, true);
+			DrawMachine1 dm1 = new DrawMachine1 (RoundPlayers, AllPairings, nMaxHandicap, HandiAdjust, HandiAboveBar);
 			List<Pairing> RndPairings = dm1.GetCurrentPairings ();
 			foreach (Pairing rp in RndPairings)
                 Console.WriteLine(rp.BasicOutput());
@@ -554,7 +555,8 @@ namespace Ire
 							nMaxHandicap = int.Parse(s[1].Trim());
 						}
 						if(s[0].Contains("Permit handicap above bar")){
-							;//not handled yet
+                            if (s[1].ToUpper().StartsWith("Y"))
+                                HandiAboveBar = true;
 						}
 						if(s[0].Contains("Tiebreak 1") && s.Length > 1){
 							Tiebreakers.Add(s[1].ToUpper());//not handled yet
