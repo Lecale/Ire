@@ -99,6 +99,11 @@ namespace Ire
             Console.WriteLine("When you are ready to read in the results, press any key");
             Console.WriteLine("Remember that the draw can be overwritten in the input file");
             string anyKey = Console.ReadLine();
+            if (anyKey.ToUpper().Equals("AUTO"))
+            {
+                Console.WriteLine("Result autogeneration was selected");
+                GenerateResultsForRound(currentRound);
+            }
         }
 
 		public void InitMMS() 

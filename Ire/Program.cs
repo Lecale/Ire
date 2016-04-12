@@ -27,8 +27,7 @@ namespace Ire
             for (int i = 1; i < rounds+1; i++)
             {
                 tb.MakeDraw(i);
-                tb.ShowField("Round" + i + "AfterDraw"); //just a debug method
-                tb.GenerateResultsForRound(i);
+         //       tb.GenerateResultsForRound(i);
                 tb.ReadResults(i);
                 tb.ShowField("Round" + i + "AfterReadResults"); //just a debug method
                 tb.ProcessResults(i);
