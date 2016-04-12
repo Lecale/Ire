@@ -61,6 +61,7 @@
     <Compile Include="TiebreakBox.cs" />
     <Compile Include="DrawMachine1.cs" />
     <Compile Include="McLayer.cs" />
+    <Compile Include="AbstractDrawMachina.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
