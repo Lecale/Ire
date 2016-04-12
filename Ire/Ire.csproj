@@ -62,6 +62,7 @@
     <Compile Include="DrawMachine1.cs" />
     <Compile Include="McLayer.cs" />
     <Compile Include="AbstractDrawMachina.cs" />
+    <Compile Include="DrawMachine2.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

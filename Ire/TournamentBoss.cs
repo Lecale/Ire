@@ -27,6 +27,7 @@ namespace Ire
 		int nTopBar = 5000;
 		int nRatingFloor = 100;
 		int nGradeWidth = 100; //to take from Settings
+		string PairingStrategy = "Simple";
         List<Player> AllPlayers = new List<Player>();
 		List<Player> RoundPlayers;
 		List<Pairing> AllPairings = new List<Pairing> ();
@@ -514,8 +515,14 @@ namespace Ire
 				nGradeWidth = int.Parse(GradeWidth); 
 			}
 			catch(Exception e){
-                Console.WriteLine("Grade width set to 100 as it could not be read " + e.Message);
-            }
+				Console.WriteLine("Grade width set to 100 as it could not be read " + e.Message);
+			}
+			Console.WriteLine ("Pairing Strategy (Fold/Simple/Split)");
+			string pst = Console.ReadLine().ToUpper().Trim();
+			if(pst.Equals("FOLD"))
+				PairingStrategy = "Fold";
+			if(pst.Equals("SPLIT"))
+				PairingStrategy = "Split";
             if (File.Exists(fOut))
             {
                 Console.WriteLine("Players file already exists - Overwrite it? y/n");
