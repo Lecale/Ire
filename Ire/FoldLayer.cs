@@ -39,7 +39,32 @@ namespace Ire
         //Push is only used for re-injection
         public void Push(int _Seed)
         {
-            stack.Insert(0,_Seed);
+            int origin = -1;
+            bool found = false;
+            for (int i = population.Count; i > -1; i--)
+                if (population[i] == _Seed)
+                {
+                    origin = i;
+                    break;
+                }
+            int nigiro = 99999;
+            for (int j = stack.Count; j > -1; j--)
+            {
+                for (int i = population.Count; i > -1; i--)
+                    if (population[i] == stack[j])
+                    {
+                        nigiro = i;
+                        break;
+                    }
+                if (nigiro < origin)
+                {
+                    stack.Insert(j + 1, _Seed);
+                    found = true;
+                    j = -2;
+                }
+            }
+            if(found==false)
+                stack.Add(_Seed);
         }
 
 
