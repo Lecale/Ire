@@ -36,10 +36,10 @@ namespace Ire
             return -1;
 		}
 
+        //Push is only used for re-injection
         public void Push(int _Seed)
         {
-
-            return -1;
+            stack.Insert(0,_Seed);
         }
 
 
