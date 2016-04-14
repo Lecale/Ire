@@ -2,14 +2,14 @@
 
 namespace Ire
 {
-	public class FoldLayer
+	public class McLayer
 	{
 		public float MMSKey;
 		public int Length = 0;
 
 		private List<int> population;
 		private Random r = new Random();
-		public FoldLayer (float MMS, int Seed)
+		public McLayer (float MMS, int Seed)
 		{
 			MMSKey = MMS;
 			population = new List<int> ();
