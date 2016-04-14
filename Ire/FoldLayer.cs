@@ -32,8 +32,21 @@ namespace Ire
 
 		public int Pop(int _Seed, int[] opp)
 		{
-
-            return -1;
+            bool popIt = true;
+            int hold = -1;
+            for (int i = stack.Count; i > -1; i--)
+                for (int o = 0; o < opp.Length; o++) {
+                    if (opp[o] == population[i])
+                        popIt = false;
+                    if (popIt)
+                    {
+                        hold =  population[i];
+                        population.RemoveAt(i);
+                        return hold;
+                    }
+                    
+                }                     
+            return -1; //NoMatch
 		}
 
         //Push is only used for re-injection
@@ -41,16 +54,16 @@ namespace Ire
         {
             int origin = -1;
             bool found = false;
-            for (int i = population.Count; i > -1; i--)
+            for (int i = population.Count-1; i > -1; i--)
                 if (population[i] == _Seed)
                 {
                     origin = i;
                     break;
                 }
             int nigiro = 99999;
-            for (int j = stack.Count; j > -1; j--)
+            for (int j = stack.Count-1; j > -1; j--)
             {
-                for (int i = population.Count; i > -1; i--)
+                for (int i = population.Count-1; i > -1; i--)
                     if (population[i] == stack[j])
                     {
                         nigiro = i;
