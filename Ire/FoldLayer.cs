@@ -41,7 +41,7 @@ namespace Ire
                     if (popIt)
                     {
                         hold =  population[i];
-                        population.RemoveAt(i);
+                        stack.RemoveAt(i); //population always static
                         return hold;
                     }
                     
