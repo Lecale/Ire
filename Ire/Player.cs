@@ -186,6 +186,11 @@ namespace Ire
         public void setTop()
         { topBar = true; }
 
+        public int[] GetOpposition() //we could make it so that this skips byes and not played...
+        {
+           return opponent;
+        }
+
 		#region Override Methods
 //		public override int GetHashCode ()
 //		{ //Evil grin
