@@ -51,6 +51,9 @@ namespace Ire
 			DRAW ();
 		}
 
+        // two things
+        // maybe we can add self to the GetOpponent call 
+        // if blocked list is populated, we should also add those numbers (only on the first pass)(?)
 		public void DRAW(int start=0)
 		{
 			Player top = plys [start];
@@ -90,7 +93,6 @@ namespace Ire
 						lookUpBull[Pairs [Pairs.Count - 1].white.Seed]=false;
                         //rm last pairing added
                         Pairs.RemoveAt(Pairs.Count - 1);
-                        //call at what level ?
 						DRAW(i-2); 
                     }                              
 				}
