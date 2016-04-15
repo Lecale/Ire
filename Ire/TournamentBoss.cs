@@ -179,6 +179,7 @@ namespace Ire
           //      Console.WriteLine("Processing seed " + ap.Seed);
                 float _SOS = 0;
                 float _MOS = 0; //do not calculate if rnd <3
+                float _SODOS = 0;
                 float maxSOS = -999;
                 float minSOS = 999;
                 //find actual games played from participation
@@ -197,6 +198,7 @@ namespace Ire
 							float f = AllPlayers[lookUp[op]].getMMS() ;
 							f = f + ap.getAdjHandi(i);
                             _SOS += f;
+                            _SODOS += f * ap.getScore(i);
                             if (f > maxSOS)
                                 maxSOS = f;
                             if (f < minSOS)
@@ -223,6 +225,7 @@ namespace Ire
                     _MOS = _SOS - maxSOS - minSOS;
                 ap.SOS = _SOS;
                 ap.MOS = _MOS;
+                ap.SODOS = _SODOS;
             }
         }
 
