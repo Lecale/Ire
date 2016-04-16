@@ -12,7 +12,8 @@ namespace Ire
 		private List<Pairing> Pairs;
 		private List<FoldLayer> Fold;
 		private List<Pairing> History = new List<Pairing>(); //previous rounds
-        List<Pairing> Blocked = new List<Pairing>();
+        private List<Pairing> Blocked = new List<Pairing>();
+		private Pairing lastPair = null;
 		private int[] lookUpTable;
 		private bool[] lookUpBull;
 
@@ -54,7 +55,7 @@ namespace Ire
         // two things
         // maybe we can add self to the GetOpponent call 
         // if blocked list is populated, we should also add those numbers (only on the first pass)(?)
-		public void DRAW(int start=0)
+		public void DRAW(int start=0, bool BLOCK = false)
 		{
 			Player top = plys [start];
 			Pairing tmp;
@@ -71,10 +72,19 @@ namespace Ire
 							for (int j = 0; j < mcl.Length; j++) {
                                 int suggestion = -1;
                                 //request a number 
-                                suggestion = mcl.Pop(top.Seed, top.GetOpposition()); // new method here
+								if (BLOCK) { //if we were blocked
+									int[] hiraki = top.GetOpposition ();
+									Array.Resize (ref hiraki, hiraki.Length + 2);
+									hiraki [hiraki.Length - 1] = lastPair.black.Seed;
+									hiraki [hiraki.Length - 2] = lastPair.white.Seed;
+									suggestion = mcl.Pop (top.Seed, hiraki);
+								}else
+                                	suggestion = mcl.Pop(top.Seed, top.GetOpposition()); 
                                 if (suggestion != -1)
                                 {
                                     Pairs.Add(new Pairing(top,plys[lookUpTable[suggestion]]));
+									lastPair = Pairs[Pairs.Count-1];
+									BLOCK = false;
                                     found = true; //exit while
                                     break; //out of j
                                 }
@@ -93,7 +103,7 @@ namespace Ire
 						lookUpBull[Pairs [Pairs.Count - 1].white.Seed]=false;
                         //rm last pairing added
                         Pairs.RemoveAt(Pairs.Count - 1);
-						DRAW(i-2); 
+						DRAW(i-2,true); 
                     }                              
 				}
 
