@@ -259,8 +259,11 @@ namespace Ire
 							return -1;	
 					}if(tie.Equals("SODOS"))
 					{
-/*						
-*/					}
+						if(p.SODOS > SODOS)
+							return 1;
+						if(p.SODOS < SODOS)
+							return -1;
+					}
 				}
 				return 0;
 			}

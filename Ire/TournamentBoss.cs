@@ -577,6 +577,7 @@ namespace Ire
 				riter.WriteLine ("Max Handicap:\t"+nMaxHandicap);		
 				riter.WriteLine ("Tiebreak 1:\t");		
 				riter.WriteLine ("Tiebreak 2:\t");		
+				riter.WriteLine ("Tiebreak 3:\t");		
 			}
         }
 
@@ -614,6 +615,9 @@ namespace Ire
 							Tiebreakers.Add(s[1].ToUpper());//not handled yet
 						}
 						if(s[0].Contains("Tiebreak 2") && s.Length > 1){
+							Tiebreakers.Add(s[1].ToUpper());//not handled yet
+						}
+						if(s[0].Contains("Tiebreak 3") && s.Length > 1){
 							Tiebreakers.Add(s[1].ToUpper());//not handled yet
 						}
 						Player.SetTiebreakers(Tiebreakers);
@@ -837,7 +841,7 @@ Bd	White	Result	Black	Handicap
                 // add tied method to Players
                 foreach (Player ap in AllPlayers)
                 {
-                    sw.WriteLine(cnt++ + t + ap.ToStanding(rnd) + ap.SOS + t + ap.MOS); // + tiebreak
+					sw.WriteLine(cnt++ + t + ap.ToStanding(rnd) + ap.SOS + t + ap.MOS + t + ap.SODOS); // + tiebreak
                 }
             }
 		}
