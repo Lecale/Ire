@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Ire
 {
-	public class DrawMachine1 : AbstractDrawMachina//Aka simple pairing
+	public class DrawMachine1 //Aka simple pairing
 	{
 		private List<Player> plys;
 		private int MaxHandi;

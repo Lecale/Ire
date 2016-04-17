@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 
 namespace Ire
@@ -12,7 +12,7 @@ namespace Ire
 		 public AbstractDrawMachina (List<Player> ply, List<Pairing> _History, 
 			int _MaxHandi = 9, int _AdjHandi = 1, bool _HandiAboveBar = false)
 		{
-		}*/
+		}
 	}
 
 	public static class DrawFactory
@@ -36,4 +36,5 @@ namespace Ire
 		}
 	}
 }
+*/
 

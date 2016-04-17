@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Ire
 {
-	public class DrawMachine2 : AbstractDrawMachina//Aka fold pairing
+	public class DrawMachine2 //Aka fold pairing
 	{
 		private List<Player> plys; //this will be all players for convenience of LookUp
 		private int MaxHandi;
@@ -74,7 +74,7 @@ namespace Ire
                                 //request a number 
 								if (BLOCK) { //if we were blocked
 									int[] hiraki = top.GetOpposition ();
-									Array.Resize (ref hiraki, hiraki.Length + 2);
+									Array.Resize (ref hiraki, hiraki.Length + 2); //what is this line really doing
 									hiraki [hiraki.Length - 1] = lastPair.black.Seed;
 									hiraki [hiraki.Length - 2] = lastPair.white.Seed;
 									suggestion = mcl.Pop (top.Seed, hiraki);

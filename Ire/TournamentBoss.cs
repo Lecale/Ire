@@ -40,8 +40,6 @@ namespace Ire
 			Macintosh = Mac;
             exeDirectory = Directory.GetCurrentDirectory();
             Console.WriteLine(exeDirectory);
-            Tiebreakers.Add("SOS");
-            Tiebreakers.Add("MOS");
         }
 
 		#region NormalOperations
@@ -841,10 +839,25 @@ Bd	White	Result	Black	Handicap
                 // add tied method to Players
                 foreach (Player ap in AllPlayers)
                 {
-					sw.WriteLine(cnt++ + t + ap.ToStanding(rnd) + ap.SOS + t + ap.MOS + t + ap.SODOS); // + tiebreak
+					sw.WriteLine(cnt++ + t + ap.ToStanding(rnd) + TiebreakerOut(ap)); // + tiebreak
                 }
             }
 		}
+
+		private string TiebreakerOut(Player p)
+		{
+			string s = "";
+			foreach (string tb in Tiebreakers) {
+				if (tb.Equals ("SOS"))
+					s += (p.SOS + "\t");
+				if (tb.Equals ("SODOS"))
+					s += (p.SODOS + "\t");
+				if (tb.Equals ("MOS"))
+					s += (p.MOS + "\t");
+			}
+			return s;
+		}
+
 
 		public void ConvertStandingsToHTML(int rnd)
 		{//todo
