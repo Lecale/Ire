@@ -285,7 +285,7 @@ namespace Ire
                     nPlayers = int.Parse(split[0]);
                     rnd = int.Parse(split[1]);
                     midpoint = int.Parse(split[2]);
-                    spread = int.Parse(split[0]);
+                    spread = int.Parse(split[3]);
                     Utility u = new Utility();
                     string end = "";
                     for (int r = 0; r < rnd; r++)
