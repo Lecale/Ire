@@ -88,10 +88,19 @@ namespace Ire
 					}
 				}
 			}
+            List<Pairing> RndPairings = new List<Pairing>();
 			Console.WriteLine ("MakeDraw prep completed ...");
-			DrawMachine1 dm1 = new DrawMachine1 (RoundPlayers, AllPairings, nMaxHandicap, HandiAdjust, HandiAboveBar);
-			List<Pairing> RndPairings = dm1.GetCurrentPairings ();
-			foreach (Pairing rp in RndPairings)
+            if (PairingStrategy.ToUpper().Equals("SIMPLE"))
+            {
+                DrawMachine1 dm1 = new DrawMachine1(RoundPlayers, AllPairings, nMaxHandicap, HandiAdjust, HandiAboveBar);
+                RndPairings = dm1.GetCurrentPairings();
+            }
+            if (PairingStrategy.ToUpper().Equals("FOLD"))
+            {
+                DrawMachine2 dm2 = new DrawMachine2(AllPlayers, AllPairings, nMaxHandicap, HandiAdjust, HandiAboveBar);
+                RndPairings = dm2.GetCurrentPairings();
+            }
+            foreach (Pairing rp in RndPairings)
                 Console.WriteLine(rp.BasicOutput());
             GenerateRoundResultsFile(currentRound, RndPairings);
             Console.WriteLine();
@@ -243,10 +252,12 @@ namespace Ire
                 AllPlayers[i - 1].SetSeed(i);
 				Console.WriteLine ("Late Loop set seed");
 				AllPlayers [i - 1].topBar = false; //should already be false?
-				if (AllPlayers [i - 1].getERating () > nTopBar)
-					AllPlayers [i - 1].setERating (nTopBar);
-				if (AllPlayers [i - 1].getERating () < nRatingFloor)
-					AllPlayers [i - 1].setERating (nRatingFloor);
+                if(TopBar)
+    				if (AllPlayers [i - 1].getERating () > nTopBar)
+	    				AllPlayers [i - 1].setERating (nTopBar);
+                if(RatingFloor)
+    				if (AllPlayers [i - 1].getERating () < nRatingFloor)
+	    				AllPlayers [i - 1].setERating (nRatingFloor);
                 //set initial mms
                 int gap = nTopBar - AllPlayers[i-1].getERating();
                 gap = gap / nGradeWidth;
