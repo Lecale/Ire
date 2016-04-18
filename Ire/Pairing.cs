@@ -16,7 +16,7 @@ namespace Ire
 		static int defaultPolicy;
 		static bool handAboveBar = false;
 
-		public void setStatics (int _maxHandi = 9, int _defPolicy = -1, bool _handAboveBar=false)
+		public static void setStatics (int _maxHandi = 9, int _defPolicy = -1, bool _handAboveBar=false)
 		{
 			maxHandi = _maxHandi;
 			defaultPolicy = _defPolicy;
