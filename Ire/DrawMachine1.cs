@@ -79,6 +79,7 @@ namespace Ire
 							for (int j = 0; j < mcl.Length; j++) {
 								//Console.WriteLine ("  trying at j :" + j);
 								tmp = new Pairing (plys[mcl.GetAt (j)], top);
+								//Is this path really accurate?
                                 tryPath = path + " " + top.Deed + "," + plys[mcl.GetAt(j)].Deed;
                                 if (History.Contains(tmp) == false 
                                     && Paths.Contains(tryPath) == false
