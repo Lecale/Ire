@@ -56,7 +56,7 @@ namespace Ire
 				mcl.Shuffle ();
 			for (int j = 0; j < LookUpTable.Length; j++)
 				LookUpTable [plys [j].Deed] = j; 
-		//	Console.WriteLine ("DrawMachine1 Draw");
+			Console.WriteLine ("DrawMachine1 History.Count:"+History.Count);
 			DRAW ();
 		}
 
@@ -123,17 +123,9 @@ namespace Ire
                         Pairs.RemoveAt(Pairs.Count - 1);
                         //Now we check the path to see if we need to go deeper
                         Console.WriteLine("Number of Blocked Paths is now " + Paths.Count);
-                        if (retry > depth)
-                        {
-                            Console.WriteLine("Retry is greater than depth");
-                            LookUpBull[Pairs[Pairs.Count - 1].black.Deed] = false;
-                            LookUpBull[Pairs[Pairs.Count - 1].white.Deed] = false;
-                            Pairs.RemoveAt(Pairs.Count - 1);
-                            penultimateSpace = path.LastIndexOf(" ");
-                            path = path.Remove(penultimateSpace);
-							Console.WriteLine("newpath:" + path);                        
-                            Console.ReadLine();                        
-                        }
+						foreach (string ppp in Paths)
+							Console.WriteLine (ppp);
+					//	Console.ReadLine ();
                         
                         //why don't we call at highest false
                         for (int re = 0; re < LookUpBull.Length; re++ )
