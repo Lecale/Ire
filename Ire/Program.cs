@@ -17,7 +17,7 @@ namespace Ire
 			tb.ReadPlayers();
 			tb.SortField(true);
 			tb.ShowField ();
-			Console.WriteLine ("Ready to read in Settings File?");
+			Console.WriteLine ("Ready to read in Settings File? (yes/no)");
 			string s = Console.ReadLine();//wait	
 			tb.ReadSettings ();
 			tb.previewTopBar (true);
@@ -29,12 +29,12 @@ namespace Ire
                 tb.MakeDraw(i);
          //       tb.GenerateResultsForRound(i);
                 tb.ReadResults(i);
-                tb.ShowField("Round" + i + "AfterReadResults"); //just a debug method
+          //      tb.ShowField("Round" + i + "AfterReadResults"); //just a debug method
                 tb.ProcessResults(i);
-				tb.ShowField("Round" + i + "AfterProcess"); //just a debug method
+			//	tb.ShowField("Round" + i + "AfterProcess"); //just a debug method
                 tb.UpdateTiebreaks(i);
                 tb.SortField();
-                tb.ShowField("Round" + i + "AfterSortField"); //just a debug method
+           //     tb.ShowField("Round" + i + "AfterSortField"); //just a debug method
                 tb.GenerateStandingsfile(i);
             }
             tb.GenerateEGFExport();

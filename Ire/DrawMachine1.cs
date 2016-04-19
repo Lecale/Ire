@@ -13,8 +13,7 @@ namespace Ire
 		private List<Pairing> Pairs;
 		private List<McLayer> BigM;
 		private List<Pairing> History = new List<Pairing>(); //previous rounds
-        List<Pairing> Blocked = new List<Pairing>();
-		private int[] LookUpTable;
+        private int[] LookUpTable;
 		private bool[] LookUpBull;
         private List<string> Paths = new List<string>();
         private string path = "";
@@ -33,7 +32,7 @@ namespace Ire
 			MaxHandi = _MaxHandi;
 			AdjHandi = _AdjHandi;
 			HandiAboveBar = _HandiAboveBar;
-            Pairing.setStatics(_MaxHandi, _AdjHandi, _HandiAboveBar);
+            Pairing.setStatics(MaxHandi, AdjHandi, HandiAboveBar);
 			plys.Sort (); //just in case
 			int d=0;
 			foreach (Player pp in plys) {
@@ -61,12 +60,6 @@ namespace Ire
 			DRAW ();
 		}
 
-		//find top player
-		//take layer
-		//take player 'at random'
-		//if valid pair else retry
-		//   Next layer
-		//      Nothing? block and retry
 		public void DRAW(int start=0)
 		{
 			Player top = plys [start];
@@ -74,7 +67,6 @@ namespace Ire
 			Console.WriteLine ("Calling Draw() start:" + start + ":depth:" + depth + ":retry:" + retry);
 			bool found = false;
 			for (int i = start+1; i <= plys.Count -1; i++) { //foreachPlayer
-				// but this is not the good loop?
 				//Console.WriteLine ("looking at i :" + i);
 				if (LookUpBull [i] == true) {
 //					Console.WriteLine (i + " had been paired previously");
@@ -92,10 +84,7 @@ namespace Ire
                                     && Paths.Contains(tryPath) == false
                                     && LookUpBull[plys[mcl.GetAt(j)].Deed] == false
                                     && plys[mcl.GetAt(j)].Deed != top.Deed)
-/*OldLogicUsingBlockedPairs     if (History.Contains(tmp) == false && Blocked.Contains(tmp) == false
-                                    && LookUpBull[plys[mcl.GetAt(j)].Deed] == false
-                                    && plys[mcl.GetAt(j)].Deed != top.Deed)
-*/                                    {
+                                    {
 									LookUpBull[top.Deed ] = true;
 									LookUpBull[plys[mcl.GetAt (j)].Deed] = true;
                                     path += " " + top.Deed + "," + plys[mcl.GetAt(j)].Deed;
@@ -108,6 +97,10 @@ namespace Ire
 											top = plys [k];
 											k = LookUpBull.Length + 1;
 										}
+									if ((Pairs.Count + Pairs.Count) == plys.Count) {
+										Console.WriteLine ("All pairings made");
+										i = plys.Count + 99;
+									}
                     	            break; //out of j
                         	    }//end if
 							}//end j
@@ -115,9 +108,10 @@ namespace Ire
                     if (found == false)
                     {
                         Console.WriteLine("No valid pairing was found");
-                        Paths.Add(path);
+						string sp = path;
+                        Paths.Add(sp);
                         Console.WriteLine("Blocked Path:"+path);
-                        OutputBlocked();
+						CleanBlocked(sp);
                         int penultimateSpace = path.LastIndexOf(" ");
                         path = path.Remove(penultimateSpace);
                         //Console.WriteLine("newpath:" + path);
@@ -128,34 +122,17 @@ namespace Ire
                         //rm last pairing added
                         Pairs.RemoveAt(Pairs.Count - 1);
                         //Now we check the path to see if we need to go deeper
-                        while (Paths.Contains(path))
-                        {
-                            Console.WriteLine("After mandatory removal we are still in a blocked state");
-                            Console.ReadLine();
-//                            Blocked.Add(Pairs[Pairs.Count - 1]);
-                            //update lookups
-                            LookUpBull[Pairs[Pairs.Count - 1].black.Deed] = false;
-                            LookUpBull[Pairs[Pairs.Count - 1].white.Deed] = false;
-                            //rm last pairing added
-                            Pairs.RemoveAt(Pairs.Count - 1);
-                            penultimateSpace = path.LastIndexOf(" ");
-                            path = path.Remove(penultimateSpace);
-                            //Console.WriteLine("newpath:" + path);                        
-                        }
                         Console.WriteLine("Number of Blocked Paths is now " + Paths.Count);
                         if (retry > depth)
                         {
-                            //Console.WriteLine("Retry is greater than depth");
-                            //Console.ReadLine();
-                            //                            Blocked.Add(Pairs[Pairs.Count - 1]);
-                            //update lookups
+                            Console.WriteLine("Retry is greater than depth");
                             LookUpBull[Pairs[Pairs.Count - 1].black.Deed] = false;
                             LookUpBull[Pairs[Pairs.Count - 1].white.Deed] = false;
-                            //rm last pairing added
                             Pairs.RemoveAt(Pairs.Count - 1);
                             penultimateSpace = path.LastIndexOf(" ");
                             path = path.Remove(penultimateSpace);
-                           // Console.WriteLine("newpath:" + path);                        
+							Console.WriteLine("newpath:" + path);                        
+                            Console.ReadLine();                        
                         }
                         
                         //why don't we call at highest false
@@ -166,7 +143,7 @@ namespace Ire
                                 retry++;
                                 DRAW(re);
                             }
-                        //used to be DRAW(1-2);
+                        //used to be DRAW(i-2);
                     }                              
 				}
 
@@ -183,13 +160,16 @@ namespace Ire
 			History.AddRange (completedRnd);
 		}
 
-        public void OutputBlocked()
+		public void CleanBlocked(string END)
         {
-            using (StreamWriter sw = new StreamWriter("c:\\xamarin\\dbg.txt"))
-            {
-                sw.WriteLine(Paths[Paths.Count - 1]);
-                sw.Flush();
-            }
+			List<int> iHold = new List<int> ();
+			for (int i = 0; i < Paths.Count - 1; i++)
+				if(Paths[i].StartsWith(END))
+					iHold.Add (i);
+			if(iHold.Count>0)
+				Console.WriteLine ("cleanBlocked() rm " + iHold.Count);
+			for(int j=iHold.Count-1; j>-1; j--)
+				Paths.RemoveAt(iHold[j]);
         }
 	}
 }
