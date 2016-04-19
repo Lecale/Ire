@@ -117,8 +117,6 @@ namespace Ire
 		public void InitMMS() 
 		{
 			SortField (true);
-            Console.WriteLine("InitMMS()");
-            Console.WriteLine("eRating - MMS - Rating - Seed");
 			foreach (Player ap in AllPlayers) {
 				int gap = nTopBar - ap.getERating ();
 				gap = gap / nGradeWidth;

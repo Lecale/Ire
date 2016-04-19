@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Ire
 {
@@ -15,6 +16,11 @@ namespace Ire
         List<Pairing> Blocked = new List<Pairing>();
 		private int[] LookUpTable;
 		private bool[] LookUpBull;
+        private List<string> Paths = new List<string>();
+        private string path = "";
+        private string tryPath = "";
+        private int depth = 0;
+        private int retry = 0;
 
 		public DrawMachine1 ( List<Player> ply, List<Pairing> _History, 
 			int _MaxHandi = 9, int _AdjHandi = 1, bool _HandiAboveBar = false)
@@ -27,6 +33,7 @@ namespace Ire
 			MaxHandi = _MaxHandi;
 			AdjHandi = _AdjHandi;
 			HandiAboveBar = _HandiAboveBar;
+            Pairing.setStatics(_MaxHandi, _AdjHandi, _HandiAboveBar);
 			plys.Sort (); //just in case
 			int d=0;
 			foreach (Player pp in plys) {
@@ -49,7 +56,7 @@ namespace Ire
 			foreach (McLayer mcl in BigM)
 				mcl.Shuffle ();
 			for (int j = 0; j < LookUpTable.Length; j++)
-				LookUpTable [plys [j].Deed] = j; //This is not safe actually!
+				LookUpTable [plys [j].Deed] = j; 
 		//	Console.WriteLine ("DrawMachine1 Draw");
 			DRAW ();
 		}
@@ -64,14 +71,13 @@ namespace Ire
 		{
 			Player top = plys [start];
 			Pairing tmp;
-			Pairing holdLastPairing;
-			Console.WriteLine ("Calling Draw() start:" + start);
+			Console.WriteLine ("Calling Draw() start:" + start + ":depth:" + depth + ":retry:" + retry);
 			bool found = false;
 			for (int i = start+1; i <= plys.Count -1; i++) { //foreachPlayer
 				// but this is not the good loop?
 				//Console.WriteLine ("looking at i :" + i);
 				if (LookUpBull [i] == true) {
-					//Console.WriteLine (i + " had been paired previously");
+//					Console.WriteLine (i + " had been paired previously");
 					found = true;
 				}else
 					found =false;
@@ -80,43 +86,92 @@ namespace Ire
                         if(found==false)
 							for (int j = 0; j < mcl.Length; j++) {
 								//Console.WriteLine ("  trying at j :" + j);
-								tmp = new Pairing (plys[mcl.GetAt (j)], top); //not correct?
-								//how to set above line well
-								if (History.Contains(tmp) == false && Blocked.Contains(tmp) == false 
-									&& LookUpBull[plys[mcl.GetAt (j)].Deed] ==false && plys[mcl.GetAt (j)].Deed != top.Deed)
-        	                    {
+								tmp = new Pairing (plys[mcl.GetAt (j)], top);
+                                tryPath = path + " " + top.Deed + "," + plys[mcl.GetAt(j)].Deed;
+                                if (History.Contains(tmp) == false 
+                                    && Paths.Contains(tryPath) == false
+                                    && LookUpBull[plys[mcl.GetAt(j)].Deed] == false
+                                    && plys[mcl.GetAt(j)].Deed != top.Deed)
+/*OldLogicUsingBlockedPairs     if (History.Contains(tmp) == false && Blocked.Contains(tmp) == false
+                                    && LookUpBull[plys[mcl.GetAt(j)].Deed] == false
+                                    && plys[mcl.GetAt(j)].Deed != top.Deed)
+*/                                    {
 									LookUpBull[top.Deed ] = true;
 									LookUpBull[plys[mcl.GetAt (j)].Deed] = true;
+                                    path += " " + top.Deed + "," + plys[mcl.GetAt(j)].Deed;
+                                    //  Console.WriteLine(path);
             	                    Pairs.Add(tmp);
                 	                found = true;
 									top = plys[0]; 
-									for (int k = 0; k < LookUpBull.Length; k++)
+									for (int k = 0; k < LookUpBull.Length; k++) //update top
 										if ( LookUpBull[k] == false) {
 											top = plys [k];
 											k = LookUpBull.Length + 1;
 										}
                     	            break; //out of j
-                        	    }
-							}
+                        	    }//end if
+							}//end j
 					}//foreachLayer
                     if (found == false)
                     {
                         Console.WriteLine("No valid pairing was found");
-                        //add to block
-                        Blocked.Add(Pairs[Pairs.Count - 1]);
+                        Paths.Add(path);
+                        Console.WriteLine("Blocked Path:"+path);
+                        OutputBlocked();
+                        int penultimateSpace = path.LastIndexOf(" ");
+                        path = path.Remove(penultimateSpace);
+                        //Console.WriteLine("newpath:" + path);
+                        //Mandatory removal of last pair
 						//update lookups
 						LookUpBull [Pairs [Pairs.Count - 1].black.Deed]=false;
-						LookUpBull[Pairs [Pairs.Count - 1].white.Deed]=false;
+						LookUpBull [Pairs [Pairs.Count - 1].white.Deed]=false;
                         //rm last pairing added
                         Pairs.RemoveAt(Pairs.Count - 1);
-                        //call at what level ?
-						DRAW(i-2); 
+                        //Now we check the path to see if we need to go deeper
+                        while (Paths.Contains(path))
+                        {
+                            Console.WriteLine("After mandatory removal we are still in a blocked state");
+                            Console.ReadLine();
+//                            Blocked.Add(Pairs[Pairs.Count - 1]);
+                            //update lookups
+                            LookUpBull[Pairs[Pairs.Count - 1].black.Deed] = false;
+                            LookUpBull[Pairs[Pairs.Count - 1].white.Deed] = false;
+                            //rm last pairing added
+                            Pairs.RemoveAt(Pairs.Count - 1);
+                            penultimateSpace = path.LastIndexOf(" ");
+                            path = path.Remove(penultimateSpace);
+                            //Console.WriteLine("newpath:" + path);                        
+                        }
+                        Console.WriteLine("Number of Blocked Paths is now " + Paths.Count);
+                        if (retry > depth)
+                        {
+                            //Console.WriteLine("Retry is greater than depth");
+                            //Console.ReadLine();
+                            //                            Blocked.Add(Pairs[Pairs.Count - 1]);
+                            //update lookups
+                            LookUpBull[Pairs[Pairs.Count - 1].black.Deed] = false;
+                            LookUpBull[Pairs[Pairs.Count - 1].white.Deed] = false;
+                            //rm last pairing added
+                            Pairs.RemoveAt(Pairs.Count - 1);
+                            penultimateSpace = path.LastIndexOf(" ");
+                            path = path.Remove(penultimateSpace);
+                           // Console.WriteLine("newpath:" + path);                        
+                        }
+                        
+                        //why don't we call at highest false
+                        for (int re = 0; re < LookUpBull.Length; re++ )
+                            if (LookUpBull[re] == false)
+                            {
+                                depth = Pairs.Count;
+                                retry++;
+                                DRAW(re);
+                            }
+                        //used to be DRAW(1-2);
                     }                              
 				}
 
 			}//end foreachplayer
 		}
-
 
 		public List<Pairing> GetCurrentPairings()
 		{
@@ -127,6 +182,15 @@ namespace Ire
 		{
 			History.AddRange (completedRnd);
 		}
+
+        public void OutputBlocked()
+        {
+            using (StreamWriter sw = new StreamWriter("c:\\xamarin\\dbg.txt"))
+            {
+                sw.WriteLine(Paths[Paths.Count - 1]);
+                sw.Flush();
+            }
+        }
 	}
 }
 
