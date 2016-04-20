@@ -203,7 +203,7 @@ namespace Ire
 							float f = AllPlayers[lookUp[op]].getMMS() ;
 							f = f + ap.getAdjHandi(i);
                             _SOS += f;
-                            _SODOS = _SODOS + (f * ap.getScore(i));
+                            _SODOS += (f * ap.getResult(i));
                             if (f > maxSOS)
                                 maxSOS = f;
                             if (f < minSOS)
@@ -223,7 +223,10 @@ namespace Ire
                     }
                 }
                 if (nGame < rnd && nGame != 0)
+                {
                     _SOS = _SOS * rnd / nGame;
+                    _SODOS = _SODOS * rnd / nGame;
+                }
                 if (nGame == 0)
                     _SOS = ap.initMMS;
                 if (rnd > 2)

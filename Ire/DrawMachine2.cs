@@ -13,9 +13,11 @@ namespace Ire
 		private List<FoldLayer> Fold;
 		private List<Pairing> History = new List<Pairing>(); //previous rounds
         private List<Pairing> Blocked = new List<Pairing>();
+        private List<string> Paths = new List<string>();
 		private Pairing lastPair = null;
 		private int[] lookUpTable;
 		private bool[] lookUpBull;
+        private string path = "";
 
 		public DrawMachine2 ( List<Player> ply, List<Pairing> _History, 
 			int _MaxHandi = 9, int _AdjHandi = 1, bool _HandiAboveBar = false)
@@ -29,7 +31,7 @@ namespace Ire
 			AdjHandi = _AdjHandi;
 			HandiAboveBar = _HandiAboveBar;
 			plys.Sort (); //just in case
-            //DO WE NEED THIS LOOK UP TABLE AND DEED
+            //Here we use Deed just to construct paths
 			int d=0;
             for (int i = 0; i < plys.Count; i++)
             {
