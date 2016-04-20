@@ -93,10 +93,12 @@ namespace Ire
                                 if (suggestion != -1)
                                 {
                                     Pairs.Add(new Pairing(top,plys[lookUpTable[suggestion]]));
+                                    path += " " + top.Deed + "," + plys[lookUpTable[suggestion]].Deed; 
 									lastPair = Pairs[Pairs.Count-1];
 									BLOCK = false;
                                     found = true; //exit while
-                                    break; //out of j
+                                    if (Pairs.Count == totalPairs)
+                                        return; //best way to exit
                                 }
 							}
 					}//foreachLayer
@@ -113,7 +115,7 @@ namespace Ire
 						lookUpBull[Pairs [Pairs.Count - 1].white.Seed]=false;
                         //rm last pairing added
                         Pairs.RemoveAt(Pairs.Count - 1);
-						DRAW(i-2,true); 
+						DRAW(i-2,true); //not correct 
                     }                              
 				}
 
@@ -130,6 +132,28 @@ namespace Ire
 		{
 			History.AddRange (completedRnd);
 		}
+
+        public void CleanBlocked(string END)
+        {
+            List<int> iHold = new List<int>();
+            for (int i = 0; i < Paths.Count - 1; i++)
+                if (Paths[i].StartsWith(END))
+                    iHold.Add(i);
+            //			if(iHold.Count>0)
+            //				Console.WriteLine ("cleanBlocked() rm " + iHold.Count);
+            for (int j = iHold.Count - 1; j > -1; j--)
+                Paths.RemoveAt(iHold[j]);
+        }
+
+        public bool ValidPath(string vp)
+        {
+            foreach (string p in Paths)
+            {
+                if (p.StartsWith(vp))
+                    return false;
+            }
+            return true;
+        }
 	}
 }
 
