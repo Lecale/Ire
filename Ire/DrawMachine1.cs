@@ -56,7 +56,7 @@ namespace Ire
 				mcl.Shuffle ();
 			for (int j = 0; j < LookUpTable.Length; j++)
 				LookUpTable [plys [j].Deed] = j; 
-			Console.WriteLine ("DrawMachine1 History.Count:"+History.Count);
+//			Console.WriteLine ("DrawMachine1 History.Count:"+History.Count);
 			DRAW ();
 		}
 
@@ -99,8 +99,8 @@ namespace Ire
 											k = LookUpBull.Length + 1;
 										}
 									if ((Pairs.Count + Pairs.Count) == plys.Count) {
-										Console.WriteLine ("All pairings made");
-                                        Console.ReadLine();
+//										Console.WriteLine ("All pairings made");
+//                                        Console.ReadLine();
                                         found = true;
                                         return;
                                     }
@@ -115,7 +115,7 @@ namespace Ire
                         Console.WriteLine("No valid pairing was found. Depth" + Pairs.Count + ":Players:"+plys.Count);
 						string sp = path;
                         Paths.Add(sp);
-                        Console.WriteLine("Blocked Path:"+path);
+//                        Console.WriteLine("Blocked Path:"+path);
 						CleanBlocked(sp);
                         int penultimateSpace = path.LastIndexOf(" ");
                         path = path.Remove(penultimateSpace);
@@ -127,10 +127,10 @@ namespace Ire
                         //rm last pairing added
                         Pairs.RemoveAt(Pairs.Count - 1);
                         //Now we check the path to see if we need to go deeper
-                        Console.WriteLine("Number of Blocked Paths is now " + Paths.Count);
-						foreach (string ppp in Paths)
-							Console.WriteLine (ppp);
-						Console.ReadLine ();
+//                        Console.WriteLine("Number of Blocked Paths is now " + Paths.Count);
+//						foreach (string ppp in Paths)
+//							Console.WriteLine (ppp);
+//						Console.ReadLine ();
                         
                         //why don't we call at highest false
                         for (int re = 0; re < LookUpBull.Length; re++ )
@@ -163,8 +163,8 @@ namespace Ire
 			for (int i = 0; i < Paths.Count - 1; i++)
 				if(Paths[i].StartsWith(END))
 					iHold.Add (i);
-			if(iHold.Count>0)
-				Console.WriteLine ("cleanBlocked() rm " + iHold.Count);
+//			if(iHold.Count>0)
+//				Console.WriteLine ("cleanBlocked() rm " + iHold.Count);
 			for(int j=iHold.Count-1; j>-1; j--)
 				Paths.RemoveAt(iHold[j]);
         }

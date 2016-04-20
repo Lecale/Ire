@@ -7,8 +7,8 @@ namespace Ire
 	public class Utility
 	{
 		private Random r;
-		private string[] fn = {"Al","Bob","Cal","dar","eoin","fra","ger","hal","io","jo","ken","lor","meg","nim","olli","peg","rach","sue",};
-		private string[] pre = {"O'","Mc","Ker","Ze","Van","Herr"};
+		private string[] fn = {"Al","Bob","Cal","Dar","Eoin","Fra","ger","hal","io","jo","ken","lor","meg","nim","olli","peg","rach","sue",};
+		private string[] pre = {"O'","Mc","Ker","Ze","Van","Herr","Mac"};
 		private string[] mid = {"Trah","Row","Land","Sea","Flack","Black","Whit","Red","Ash","Round","Tri"};
 		private string[] end = {"better","lower","water","later","son","morn","mane","ston"};
 

@@ -98,6 +98,10 @@ namespace Ire
            return f;
         }
 
+        public float getResult(int rnd)
+        {
+            return score[rnd];
+        }
         public float getScore(int rnd)
         {
             float f = 0;
