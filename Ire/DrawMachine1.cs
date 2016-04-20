@@ -71,25 +71,25 @@ namespace Ire
 				if (LookUpBull [i] == true) {
 //					Console.WriteLine (i + " had been paired previously");
 					found = true;
-				}else
+				}
+                else
 					found =false;
 				while (found == false) {
 					foreach (McLayer mcl in BigM) { //foreachLayer
                         if(found==false)
 							for (int j = 0; j < mcl.Length; j++) {
-								//Console.WriteLine ("  trying at j :" + j);
 								tmp = new Pairing (plys[mcl.GetAt (j)], top);
 								//Is this path really accurate?
                                 tryPath = path + " " + top.Deed + "," + plys[mcl.GetAt(j)].Deed;
-                                if (History.Contains(tmp) == false 
-                                    && Paths.Contains(tryPath) == false
-                                    && LookUpBull[plys[mcl.GetAt(j)].Deed] == false
-                                    && plys[mcl.GetAt(j)].Deed != top.Deed)
+                                if (plys[mcl.GetAt(j)].Deed != top.Deed)
+                                if (LookUpBull[plys[mcl.GetAt(j)].Deed] == false)
+                        //        if( Paths.Contains(tryPath) == false) //already tried this path
+                                if(ValidPath(tryPath)==true)
+                                if (History.Contains(tmp) == false) //cannot allow repeat pairing
                                     {
 									LookUpBull[top.Deed ] = true;
 									LookUpBull[plys[mcl.GetAt (j)].Deed] = true;
                                     path += " " + top.Deed + "," + plys[mcl.GetAt(j)].Deed;
-                                    //  Console.WriteLine(path);
             	                    Pairs.Add(tmp);
                 	                found = true;
 									top = plys[0]; 
@@ -100,15 +100,19 @@ namespace Ire
 										}
 									if ((Pairs.Count + Pairs.Count) == plys.Count) {
 										Console.WriteLine ("All pairings made");
-										i = plys.Count + 99;
-									}
+                                        Console.ReadLine();
+                                        found = true;
+                                        return;
+                                    }
                     	            break; //out of j
                         	    }//end if
 							}//end j
 					}//foreachLayer
                     if (found == false)
                     {
-                        Console.WriteLine("No valid pairing was found");
+                        if (Pairs.Count == plys.Count - Pairs.Count)
+                            return;
+                        Console.WriteLine("No valid pairing was found. Depth" + Pairs.Count + ":Players:"+plys.Count);
 						string sp = path;
                         Paths.Add(sp);
                         Console.WriteLine("Blocked Path:"+path);
@@ -126,7 +130,7 @@ namespace Ire
                         Console.WriteLine("Number of Blocked Paths is now " + Paths.Count);
 						foreach (string ppp in Paths)
 							Console.WriteLine (ppp);
-					//	Console.ReadLine ();
+						Console.ReadLine ();
                         
                         //why don't we call at highest false
                         for (int re = 0; re < LookUpBull.Length; re++ )
@@ -164,6 +168,20 @@ namespace Ire
 			for(int j=iHold.Count-1; j>-1; j--)
 				Paths.RemoveAt(iHold[j]);
         }
+
+        public bool ValidPath(string vp)
+        {
+            foreach (string p in Paths)
+            {
+                if (p.StartsWith(vp))
+                    return false;
+            }
+            return true;
+        }
+
+
+        //Do we need to make sure that we retain VALID matches for the last player?
+        
 	}
 }
 
