@@ -97,7 +97,7 @@ namespace Ire
             }
             if (PairingStrategy.ToUpper().Equals("FOLD"))
             {
-                DrawMachine2 dm2 = new DrawMachine2(AllPlayers, AllPairings, nMaxHandicap, HandiAdjust, HandiAboveBar);
+                DrawMachine2 dm2 = new DrawMachine2(AllPlayers, AllPairings, currentRound, nMaxHandicap, HandiAdjust, HandiAboveBar);
                 RndPairings = dm2.GetCurrentPairings();
             }
             foreach (Pairing rp in RndPairings)

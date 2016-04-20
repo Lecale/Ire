@@ -18,8 +18,9 @@ namespace Ire
 		private int[] lookUpTable;
 		private bool[] lookUpBull;
         private string path = "";
+        int totalPairs;
 
-		public DrawMachine2 ( List<Player> ply, List<Pairing> _History, 
+		public DrawMachine2 ( List<Player> ply, List<Pairing> _History, int _Rnd,
 			int _MaxHandi = 9, int _AdjHandi = 1, bool _HandiAboveBar = false)
 		{
 			plys = ply;
@@ -33,6 +34,13 @@ namespace Ire
 			plys.Sort (); //just in case
             //Here we use Deed just to construct paths
 			int d=0;
+            foreach (Player pd in plys)
+            {
+                if (pd.getParticipation(_Rnd))
+                    totalPairs++;
+                pd.Deed = d++;
+            }
+            totalPairs = totalPairs / 2;
             for (int i = 0; i < plys.Count; i++)
             {
                 lookUpTable[plys[i].Seed - 1] = i;
