@@ -36,9 +36,7 @@ namespace Ire
         {
             Random r = new Random();
             int coin = r.Next(0, 2) - 1;
-            float rawDiff = a.getMMS() - b.getMMS();
-            if(rawDiff != 0)
-                rawDiff = (rawDiff * rawDiff) / rawDiff;
+            float rawDiff = Math.Abs(a.getMMS() - b.getMMS());
             white = a; //save default assignment
             black = b;
             if (defaultPolicy == 0) //no handicap
@@ -56,9 +54,9 @@ namespace Ire
                * except if aboveBar stuff is in place
                * Remember 1.5 is treated as 1 according to tradition
                */
-                Console.WriteLine("Pairing:Raw:" + rawDiff + ":DP:" + defaultPolicy);
 				if(rawDiff>defaultPolicy)
                 {
+                    Console.WriteLine("Pairing:Raw:" + rawDiff + ":DP:" + defaultPolicy);
 					if (handAboveBar==false)
                     {
                         if (a.topBar || b.topBar)
