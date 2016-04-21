@@ -50,15 +50,24 @@ namespace Ire
             return -1; //NoMatch
 		}
 
+		//use this after Offer
+		// stack is available 
+		//  population is original
+		public int Eject(int Request)
+		{
+			return Request;
+		}
+
 		//this is an ordered list of available opponents in the Fold Layer
+		//can only return opponents in the Stack (the active list)
 		public List<int> Offer(int _Target , int []opp)
 		{
 			List<int> Offrage = new List<int> ();
 			for (int i = stack.Count; i > -1; i--)
 				for (int o = 0; o < opp.Length; o++) {
-					if (opp[o] != population[i])
+					if (opp[o] != stack[i])
 						if (opp[o] != _Target)
-							Offrage.Add(population[i]);
+							Offrage.Add(stack[i]);
 				}
 			return Offrage;
 		}
