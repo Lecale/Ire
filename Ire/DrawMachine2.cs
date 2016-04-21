@@ -10,15 +10,16 @@ namespace Ire
 		private int AdjHandi;
 		private bool HandiAboveBar;
 		private List<Pairing> Pairs;
+		private List<int> lSuggestions = new List<int>();
 		private List<FoldLayer> Fold;
 		private List<Pairing> History = new List<Pairing>(); //previous rounds
-        private List<Pairing> Blocked = new List<Pairing>();
         private List<string> Paths = new List<string>();
 		private Pairing lastPair = null;
 		private int[] lookUpTable;
 		private bool[] lookUpBull;
         private string path = "";
         int totalPairs;
+
 
 		public DrawMachine2 ( List<Player> ply, List<Pairing> _History, int _Rnd,
 			int _MaxHandi = 9, int _AdjHandi = 1, bool _HandiAboveBar = false)
@@ -87,25 +88,23 @@ namespace Ire
 								// request suggestions and browse for valid
 								// if find valid, Eject it
 								// 
-
-								if (BLOCK) { //if we were blocked
-									int[] hiraki = top.GetOpposition ();
-									Array.Resize (ref hiraki, hiraki.Length + 2); //what is this line really doing
-									hiraki [hiraki.Length - 1] = lastPair.black.Seed;
-									hiraki [hiraki.Length - 2] = lastPair.white.Seed;
-									suggestion = mcl.Pop (top.Seed, hiraki);
-								}else
-                                	suggestion = mcl.Pop(top.Seed, top.GetOpposition()); 
-                                if (suggestion != -1)
-                                {
-                                    Pairs.Add(new Pairing(top,plys[lookUpTable[suggestion]]));
-                                    path += " " + top.Deed + "," + plys[lookUpTable[suggestion]].Deed; 
-									lastPair = Pairs[Pairs.Count-1];
-									BLOCK = false;
-                                    found = true; //exit while
-                                    if (Pairs.Count == totalPairs)
-                                        return; //best way to exit
-									break; // from j
+								string test;
+								lSuggestions = mcl.Offer(top.Seed,top.GetOpposition()); //not self, not history
+								foreach (int ls in lSuggestions) {
+									test = path + " " + top.Seed + "," + ls; 
+									if (Paths.Contains (test) == false) {
+										found = true;
+										j = mcl.Length + 1;
+										Pairs.Add(new Pairing(top,plys[lookUpTable[ls]]));
+										path += " " + top.Seed + "," + plys[lookUpTable[ls]].Seed;
+										mcl.Eject (ls);
+										if (Pairs.Count == totalPairs)
+											return; //best way to exit
+										break;
+									}
+									//else
+									// we go to next mcl 
+								
                                 }
 							}
 					}//foreachLayer
@@ -114,15 +113,27 @@ namespace Ire
                     // remove a blocked pair, but when we restart it will be given back as a suggestion automatically?
                     if (found == false)
                     {
+						if (Pairs.Count == totalPairs) //should be unreachable
+							return;
                         Console.WriteLine("No valid pairing was found");
                         //add to block
-                        Blocked.Add(Pairs[Pairs.Count - 1]);
+						string sp = path;
+						Paths.Add(sp);
+						CleanBlocked(sp);
+						int penultimateSpace = path.LastIndexOf(" ");
+						path = path.Remove(penultimateSpace);
+
 						//update lookups
 						lookUpBull [Pairs [Pairs.Count - 1].black.Seed]=false;
 						lookUpBull[Pairs [Pairs.Count - 1].white.Seed]=false;
-                        //rm last pairing added
                         Pairs.RemoveAt(Pairs.Count - 1);
-						DRAW(i-2,true); //not correct 
+
+						for (int re = 0; re < lookUpBull.Length; re++ )
+							if (lookUpBull[re] == false)
+							{
+								DRAW(re);
+							}
+						//DRAW(i-2,true); //not correct 
                     }                              
 				}
 
