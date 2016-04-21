@@ -99,6 +99,7 @@ namespace Ire
                                     found = true; //exit while
                                     if (Pairs.Count == totalPairs)
                                         return; //best way to exit
+									break; // from j
                                 }
 							}
 					}//foreachLayer

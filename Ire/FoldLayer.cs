@@ -16,7 +16,7 @@ namespace Ire
 			population.Add (Seed);
             stack.Add(Seed);
 		}
-
+		//this method is never used i think...
 		public bool Match(float _mms)
 		{
 			if (_mms == MMSKey)
@@ -30,6 +30,7 @@ namespace Ire
             stack.Add(_seed);
 		}
 
+		//_Seed is not used here ??
 		public int Pop(int _Seed, int[] opp)
 		{
             bool popIt = true;
@@ -47,6 +48,19 @@ namespace Ire
                     
                 }                     
             return -1; //NoMatch
+		}
+
+		//this is an ordered list of available opponents in the Fold Layer
+		public List<int> Offer(int _Target , int []opp)
+		{
+			List<int> Offrage = new List<int> ();
+			for (int i = stack.Count; i > -1; i--)
+				for (int o = 0; o < opp.Length; o++) {
+					if (opp[o] != population[i])
+						if (opp[o] != _Target)
+							Offrage.Add(population[i]);
+				}
+			return Offrage;
 		}
 
         //Push is only used for re-injection
