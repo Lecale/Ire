@@ -82,6 +82,12 @@ namespace Ire
 							for (int j = 0; j < mcl.Length; j++) {
                                 int suggestion = -1;
                                 //request a number 
+
+								// NEW LOGIC
+								// request suggestions and browse for valid
+								// if find valid, Eject it
+								// 
+
 								if (BLOCK) { //if we were blocked
 									int[] hiraki = top.GetOpposition ();
 									Array.Resize (ref hiraki, hiraki.Length + 2); //what is this line really doing
