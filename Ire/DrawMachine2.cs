@@ -81,7 +81,6 @@ namespace Ire
 					foreach (FoldLayer mcl in Fold) { //foreachLayer
                         if(found==false)
 							for (int j = 0; j < mcl.Length; j++) {
-                                int suggestion = -1;
                                 //request a number 
 
 								// NEW LOGIC
@@ -104,7 +103,6 @@ namespace Ire
 									}
 									//else
 									// we go to next mcl 
-								
                                 }
 							}
 					}//foreachLayer
@@ -161,16 +159,6 @@ namespace Ire
             //				Console.WriteLine ("cleanBlocked() rm " + iHold.Count);
             for (int j = iHold.Count - 1; j > -1; j--)
                 Paths.RemoveAt(iHold[j]);
-        }
-
-        public bool ValidPath(string vp)
-        {
-            foreach (string p in Paths)
-            {
-                if (p.StartsWith(vp))
-                    return false;
-            }
-            return true;
         }
 	}
 }
