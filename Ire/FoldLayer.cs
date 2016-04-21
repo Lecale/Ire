@@ -55,7 +55,13 @@ namespace Ire
 		//  population is original
 		public int Eject(int Request)
 		{
-			return Request;
+			for (int i = stack.Count; i > -1; i--)
+				if (stack [i] == Request) {
+					stack.RemoveAt (i);
+					return Request;
+				}
+			Console.WriteLine ("Horrid error in FoldLayer:Eject()"); 
+			return -1;
 		}
 
 		//this is an ordered list of available opponents in the Fold Layer
