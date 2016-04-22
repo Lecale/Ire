@@ -56,7 +56,7 @@ namespace Ire
 		//  population is original
 		public int Eject(int Request)
 		{
-			for (int i = stack.Count; i > -1; i--)
+			for (int i = stack.Count-1; i > -1; i--)
 				if (stack [i] == Request) {
 					stack.RemoveAt (i);
 					return Request;
