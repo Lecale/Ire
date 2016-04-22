@@ -34,7 +34,14 @@ namespace Ire
             {
                 if (pd.getParticipation(_Rnd))
                     totalPairs++;
-                pd.Deed = d++;
+            }
+            foreach (Player pd in plys)
+            {
+                if (pd.getParticipation(_Rnd) == false)
+                {
+                    Console.WriteLine("rm a player with a bye");
+                    plys.Remove(pd);
+                }
             }
             totalPairs = totalPairs / 2;
             for (int i = 0; i < plys.Count; i++)
@@ -65,7 +72,6 @@ namespace Ire
 		public void DRAW(int start=0, bool BLOCK = false)
 		{
 			Player top = plys [start];
-			Pairing tmp;
 			Console.WriteLine ("Calling Draw() start:" + start);
 			bool found = false;
 			for (int i = start+1; i <= plys.Count -1; i++) { //foreachPlayer
@@ -75,8 +81,8 @@ namespace Ire
 					found =false;
 				while (found == false) {
 					foreach (FoldLayer mcl in Fold) { //foreachLayer
-                        if(found==false)
-							for (int j = 0; j < mcl.Length; j++) {
+                        if (found == false) { 
+//							for (int j = 0; j < mcl.Length; j++) { //why this loop?
                                 //request a number 
 
 								// NEW LOGIC
@@ -85,12 +91,12 @@ namespace Ire
 								// 
 								string test;
 								lSuggestions = mcl.Offer(top.Seed,top.GetOpposition()); //not self, not history
-                                Console.WriteLine("j:"+j+":n.sug:"+lSuggestions.Count);
+                                Console.WriteLine(":n.sug:"+lSuggestions.Count);
                                 foreach (int ls in lSuggestions) {
 									test = path + " " + top.Seed + "," + ls; 
 									if (Paths.Contains (test) == false) {
 										found = true;
-										j = mcl.Length + 1;
+										//j = mcl.Length + 1;
 										Pairs.Add(new Pairing(top,plys[lookUpTable[ls]]));
 										path += " " + top.Seed + "," + plys[lookUpTable[ls]].Seed;
                                         Console.WriteLine("pathupdate"+path);
@@ -102,7 +108,8 @@ namespace Ire
 									//else
 									// we go to next mcl 
                                 }
-							}
+	//						}
+                        }
 					}//foreachLayer
 
                     //This might be more complex
@@ -117,7 +124,10 @@ namespace Ire
 						Paths.Add(sp);
 						CleanBlocked(sp);
 						int penultimateSpace = path.LastIndexOf(" ");
-						path = path.Remove(penultimateSpace);
+                        if (penultimateSpace > 1)
+                            path = path.Remove(penultimateSpace);
+                        else
+                            Console.WriteLine("path cannot be removed as too small");
 
 						//update lookups
 						lookUpBull [Pairs [Pairs.Count - 1].black.Seed]=false;

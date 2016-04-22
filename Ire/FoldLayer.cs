@@ -70,19 +70,28 @@ namespace Ire
 		public List<int> Offer(int _Target , int []opp)
 		{
 			List<int> Offrage = new List<int> ();
-			for (int i = stack.Count; i > -1; i--)
-				for (int o = 0; o < opp.Length; o++) {
-					if (opp[o] != stack[i])
-						if (opp[o] != _Target)
-							Offrage.Add(stack[i]);
-				}
+			for (int i = stack.Count-1; i > -1; i--)
+                if (opp == null || opp.Length == 0)
+                {
+                    if (stack[i] != _Target)
+                        Offrage.Add(stack[i]);
+                }
+                else
+                {
+                    for (int o = 0; o < opp.Length; o++)
+                    {
+                        if (opp[o] != stack[i])
+                            if (stack[i] != _Target)
+                                Offrage.Add(stack[i]);
+                    }
+                }
 			return Offrage;
 		}
 
         //Push is only used for re-injection
         public void Push(int _Seed)
         {
-            int origin = -1;
+            int origin = -1; 
             bool found = false;
             for (int i = population.Count-1; i > -1; i--)
                 if (population[i] == _Seed)
