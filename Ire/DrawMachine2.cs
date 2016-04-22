@@ -21,7 +21,7 @@ namespace Ire
 		public DrawMachine2 ( List<Player> ply, List<Pairing> _History, int _Rnd,
 			int _MaxHandi = 9, int _AdjHandi = 1, bool _HandiAboveBar = false)
 		{
-			plys = ply;
+			plys = ply; //We forgot to handle Byes
             History = _History;
 			lookUpTable = new int[ply.Count];
 		    lookUpBull = new bool[ply.Count];
@@ -55,6 +55,7 @@ namespace Ire
 					Fold.Add(new FoldLayer(plys [i].getMMS (), plys [i].Seed));
 				}
 			}
+            Console.WriteLine("FoldLayers.Count:" + Fold.Count);
 			DRAW ();
 		}
 
@@ -84,13 +85,15 @@ namespace Ire
 								// 
 								string test;
 								lSuggestions = mcl.Offer(top.Seed,top.GetOpposition()); //not self, not history
-								foreach (int ls in lSuggestions) {
+                                Console.WriteLine("j:"+j+":n.sug:"+lSuggestions.Count);
+                                foreach (int ls in lSuggestions) {
 									test = path + " " + top.Seed + "," + ls; 
 									if (Paths.Contains (test) == false) {
 										found = true;
 										j = mcl.Length + 1;
 										Pairs.Add(new Pairing(top,plys[lookUpTable[ls]]));
 										path += " " + top.Seed + "," + plys[lookUpTable[ls]].Seed;
+                                        Console.WriteLine("pathupdate"+path);
 										mcl.Eject (ls);
 										if (Pairs.Count == totalPairs)
 											return; //best way to exit
