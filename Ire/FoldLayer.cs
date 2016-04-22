@@ -12,7 +12,8 @@ namespace Ire
 		public FoldLayer (float MMS, int Seed)
 		{
 			MMSKey = MMS;
-			population = new List<int> ();
+            stack = new List<int>();
+            population = new List<int> ();
 			population.Add (Seed);
             stack.Add(Seed);
 		}
