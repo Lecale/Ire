@@ -5,21 +5,18 @@ namespace Ire
 {
 	public class DrawMachine2 //Aka fold pairing
 	{
+		#region variables
 		private List<Player> plys; //this will be all players for convenience of LookUp
-		private int MaxHandi;
-		private int AdjHandi;
-		private bool HandiAboveBar;
 		private List<Pairing> Pairs;
 		private List<int> lSuggestions = new List<int>();
 		private List<FoldLayer> Fold;
 		private List<Pairing> History = new List<Pairing>(); //previous rounds
         private List<string> Paths = new List<string>();
-		private Pairing lastPair = null;
 		private int[] lookUpTable;
 		private bool[] lookUpBull;
         private string path = "";
-        int totalPairs;
-
+        private int totalPairs = -1;
+		#endregion
 
 		public DrawMachine2 ( List<Player> ply, List<Pairing> _History, int _Rnd,
 			int _MaxHandi = 9, int _AdjHandi = 1, bool _HandiAboveBar = false)
@@ -29,9 +26,7 @@ namespace Ire
 			lookUpTable = new int[ply.Count];
 		    lookUpBull = new bool[ply.Count];
 			Pairs = new List<Pairing>();
-			MaxHandi = _MaxHandi;
-			AdjHandi = _AdjHandi;
-			HandiAboveBar = _HandiAboveBar;
+			Pairing.setStatics(_MaxHandi, _AdjHandi, _HandiAboveBar);
 			plys.Sort (); //just in case
             //Here we use Deed just to construct paths
 			int d=0;
@@ -113,7 +108,7 @@ namespace Ire
                     {
 						if (Pairs.Count == totalPairs) //should be unreachable
 							return;
-                        Console.WriteLine("No valid pairing was found");
+                        Console.WriteLine("No valid pairing was found. Retry.");
                         //add to block
 						string sp = path;
 						Paths.Add(sp);
