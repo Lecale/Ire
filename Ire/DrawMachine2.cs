@@ -87,7 +87,8 @@ namespace Ire
 								// 
 								string test;
 								lSuggestions = mcl.Offer(top.Seed,top.GetOpposition()); //not self, not history
-                                Console.WriteLine(":n.sug:"+lSuggestions.Count);
+							Console.WriteLine(":n.sug:"+lSuggestions.Count);
+							Console.WriteLine(":n.reg:"+Registry.Count);
                                 foreach (int ls in lSuggestions) {
 									test = path + " " + top.Seed + "," + ls; 
 								//if not a blocked path AND not a registered suggestion

@@ -423,6 +423,9 @@ namespace Ire
             }
         }
 
+		public void ReadByesFromFile(int rnd){
+		}
+
         /*	
          * Pin tName tRating tClub tCountry is the expected input order
          * GIGO method, checks for already entered player
@@ -637,20 +640,15 @@ namespace Ire
                             if (s[1].ToUpper().StartsWith("Y"))
                                 HandiAboveBar = true;
 						}
-						if(s[0].Contains("Tiebreak 1") && s.Length > 1){
-							Tiebreakers.Add(s[1].ToUpper());//not handled yet
+						if(s[0].Contains("Tiebreak ") && s.Length > 1){
+							if(s[1].Trim()!="")
+								Tiebreakers.Add(s[1].ToUpper());
 						}
-						if(s[0].Contains("Tiebreak 2") && s.Length > 1){
-							Tiebreakers.Add(s[1].ToUpper());//not handled yet
-						}
-						if(s[0].Contains("Tiebreak 3") && s.Length > 1){
-							Tiebreakers.Add(s[1].ToUpper());//not handled yet
-						}
-						Player.SetTiebreakers(Tiebreakers);
 					}
 				}
 			}
 			catch(Exception e) { Console.WriteLine (e.Message);}
+			Player.SetTiebreakers(Tiebreakers);
 		}
 
         // the file name this is pointing to is not well defined
