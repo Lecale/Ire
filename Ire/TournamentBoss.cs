@@ -423,7 +423,7 @@ namespace Ire
             }
         }
 
-		public void ReadByesFromFile(){
+		public void ReadByesFromFile(int nextRound){
 			//read players file
 			//if player already registered
 			//check if his participation changed
@@ -451,7 +451,12 @@ namespace Ire
 						}
 						Player j = new Player (pine, split [1], rats, split [3], split [4], bull);
 						if (AllPlayers.Contains (j) == true) {
-							;
+							for(int ap = 0; ap<AllPlayers.Count; ap++)
+							{
+								if(j.Equals(AllPlayers[ap])){
+									;//new handling of byes needed
+								}
+							}
 						}
 					} catch (Exception e) {
 						Console.WriteLine ("An exception was encountered in ReadByesFromFile" + e.Message);
@@ -489,10 +494,12 @@ namespace Ire
                         {
                             if (split[i].Equals("") == false)
                             {
+								/*
                                 if ((split[i].Trim()).ToUpper().Equals("X"))
                                     bull[i - 5] = false;
                                 else
                                     bull[i - 5] = true;
+								*/
                             }
                         }
                         Player j = new Player(pine, split[1], rats, split[3], split[4], bull);
