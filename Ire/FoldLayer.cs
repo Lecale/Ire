@@ -5,7 +5,6 @@ namespace Ire
 	public class FoldLayer
 	{
 		public float MMSKey;
-		public int Length = 0;
 		private List<int> population;
         private List<int> stack;
 
@@ -24,11 +23,13 @@ namespace Ire
 				return true;
 			return false;
 		}
-
+		// 1 2 3 (4)
 		public void Add(int _seed)
 		{
-			population.Add(_seed);
-            stack.Add(_seed);
+			if (population.Contains (_seed) == false) {
+				population.Add (_seed);
+				stack.Add (_seed);
+			}
 		}
 
 		//_Seed is not used here ??
@@ -36,7 +37,7 @@ namespace Ire
 		{
             bool popIt = true;
             int hold = -1;
-            for (int i = stack.Count; i > -1; i--)
+            for (int i = stack.Count - 1; i > -1; i--)
                 for (int o = 0; o < opp.Length; o++) {
                     if (opp[o] == population[i])
                         popIt = false;
@@ -69,6 +70,7 @@ namespace Ire
 		//can only return opponents in the Stack (the active list)
 		public List<int> Offer(int _Target , int []opp)
 		{
+			string dbg = " ";
 			List<int> Offrage = new List<int> ();
 			for (int i = stack.Count-1; i > -1; i--)
                 if (opp == null || opp.Length == 0)
@@ -78,13 +80,18 @@ namespace Ire
                 }
                 else
                 {
-                    for (int o = 0; o < opp.Length; o++)
-                    {
-                        if (opp[o] != stack[i])
-                            if (stack[i] != _Target)
-                                Offrage.Add(stack[i]);
-                    }
+					bool good = true;
+                    for (int o = 0; o < opp.Length; o++)	
+						if (opp [o] == stack [i])
+							good = false;
+					if (stack [i] != _Target)
+						good = false;
+					if(good)
+                       Offrage.Add(stack[i]);
                 }
+			foreach (int eye in Offrage)
+				dbg += eye + " ";
+			Console.WriteLine ("Offrage" + dbg); 
 			return Offrage;
 		}
 
