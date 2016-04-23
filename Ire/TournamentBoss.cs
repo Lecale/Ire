@@ -423,8 +423,42 @@ namespace Ire
             }
         }
 
-		public void ReadByesFromFile(int rnd){
-			//to do
+		public void ReadByesFromFile(){
+			//read players file
+			//if player already registered
+			//check if his participation changed
+
+			string tLn = "";
+			string fin = workDirectory + "players.txt";
+			using (StreamReader reader = new StreamReader (fin)) {
+				for (int i = 0; i < 6; i++)
+					tLn = reader.ReadLine(); //trip through headers
+				while ((tLn = reader.ReadLine ()) != null) {
+					String[] split = tLn.Split (',');
+					int rnd = split.Length - 5;
+
+					try {
+						int pine = int.Parse (split [0]);
+						int rats = int.Parse (split [2]);
+						bool[] bull = new bool[rnd];
+						for (int i = 5; i < rnd + 5; i++) {
+							if (split [i].Equals ("") == false) {
+								if ((split [i].Trim ()).ToUpper ().Equals ("X"))
+									bull [i - 5] = false;
+								else
+									bull [i - 5] = true;
+							}
+						}
+						Player j = new Player (pine, split [1], rats, split [3], split [4], bull);
+						if (AllPlayers.Contains (j) == true) {
+							;
+						}
+					} catch (Exception e) {
+						Console.WriteLine ("An exception was encountered in ReadByesFromFile" + e.Message);
+						Console.WriteLine (tLn);
+					}
+				}
+			}
 		}
 
         /*	
