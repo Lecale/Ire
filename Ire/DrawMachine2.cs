@@ -11,7 +11,8 @@ namespace Ire
 		private List<int> lSuggestions = new List<int>();
 		private List<FoldLayer> Fold;
 		private List<Pairing> History = new List<Pairing>(); //previous rounds
-        private List<string> Paths = new List<string>();
+		private List<string> Paths = new List<string>();
+		private List<int> Registry = new List<int>();
 		private int[] lookUpTable;
 		private bool[] lookUpBull;
         private string path = "";
@@ -28,8 +29,6 @@ namespace Ire
 			Pairs = new List<Pairing>();
 			Pairing.setStatics(_MaxHandi, _AdjHandi, _HandiAboveBar);
 			plys.Sort (); //just in case
-            //Here we use Deed just to construct paths
-			int d=0;
             foreach (Player pd in plys)
             {
                 if (pd.getParticipation(_Rnd))
@@ -69,22 +68,19 @@ namespace Ire
         // two things
         // maybe we can add self to the GetOpponent call 
         // if blocked list is populated, we should also add those numbers (only on the first pass)(?)
-		public void DRAW(int start=0, bool BLOCK = false)
+		public void DRAW(int start=0)
 		{
 			Player top = plys [start];
 			Console.WriteLine ("Calling Draw() start:" + start);
 			bool found = false;
 			for (int i = start+1; i <= plys.Count -1; i++) { //foreachPlayer
-				if (lookUpBull [i] == true) {
-					found = true;
+				if (Registry.Contains(plys [i].Seed) == true) {
+					found = true; //should be unreachable
 				}else
 					found =false;
 				while (found == false) {
 					foreach (FoldLayer mcl in Fold) { //foreachLayer
                         if (found == false) { 
-//							for (int j = 0; j < mcl.Length; j++) { //why this loop?
-                                //request a number 
-
 								// NEW LOGIC
 								// request suggestions and browse for valid
 								// if find valid, Eject it
@@ -94,7 +90,8 @@ namespace Ire
                                 Console.WriteLine(":n.sug:"+lSuggestions.Count);
                                 foreach (int ls in lSuggestions) {
 									test = path + " " + top.Seed + "," + ls; 
-									if (Paths.Contains (test) == false) {
+								//if not a blocked path AND not a registered suggestion
+								if (Paths.Contains (test) == false && Registry.Contains(ls)==false) { 
 										found = true;
 										//j = mcl.Length + 1;
 										Pairs.Add(new Pairing(top,plys[lookUpTable[ls]]));
@@ -103,12 +100,18 @@ namespace Ire
 										mcl.Eject (ls);
 										if (Pairs.Count == totalPairs)
 											return; //best way to exit
-										break;
-									}
-									//else
-									// we go to next mcl 
-                                }
-	//						}
+									//Set to true the registered state of top and choice
+									Registry.Add(top.Seed);
+									Registry.Add (plys [lookUpTable [ls]].Seed);
+									//find next top
+									for (int rp = 0; rp < plys.Count; rp++)
+										if (Registry.Contains (plys[rp].Seed) == false) {
+											top = plys [rp];
+											rp = plys.Count + 4;
+										}
+									break;
+									} 
+                                }//end foreach suggestion
                         }
 					}//foreachLayer
 
@@ -130,16 +133,15 @@ namespace Ire
                             Console.WriteLine("path cannot be removed as too small");
 
 						//update lookups
-						lookUpBull [Pairs [Pairs.Count - 1].black.Seed]=false;
-						lookUpBull[Pairs [Pairs.Count - 1].white.Seed]=false;
+						Registry.Remove (Pairs [Pairs.Count - 1].black.Seed);
+						Registry.Remove (Pairs[Pairs.Count - 1].white.Seed);
                         Pairs.RemoveAt(Pairs.Count - 1);
 
-						for (int re = 0; re < lookUpBull.Length; re++ )
-							if (lookUpBull[re] == false)
-							{
-								DRAW(re);
+						for (int rp = 0; rp < plys.Count; rp++)
+							if (Registry.Contains (plys[rp].Seed) == false) {
+								DRAW(rp);
 							}
-						//DRAW(i-2,true); //not correct 
+							//DRAW(i-2,true); //not correct 
                     }                              
 				}
 
