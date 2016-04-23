@@ -39,9 +39,10 @@ namespace Ire
                 }
             }
             totalPairs = totalPairs / 2;
+			//i want to search for Seed and see player 
             for (int i = 0; i < plys.Count; i++)
             {
-                lookUpTable[plys[i].Seed - 1] = i;
+				lookUpTable[plys[i].Seed - 1] = i;
             }
             //end DO WE NEED
 			Fold = new List<FoldLayer>();
@@ -56,9 +57,9 @@ namespace Ire
 					Fold.Add(new FoldLayer(plys [i].getMMS (), plys [i].Seed));
 				}
 			}
-            Console.WriteLine("FoldLayers.Count:" + Fold.Count);
-			foreach (FoldLayer _FL in Fold)
-				Console.WriteLine ("MMS:"+_FL.MMSKey+" "+_FL.StackSize());
+ //           Console.WriteLine("FoldLayers.Count:" + Fold.Count);
+//			foreach (FoldLayer _FL in Fold)
+//				Console.WriteLine ("MMS:"+_FL.MMSKey+" "+_FL.StackSize());
 			DRAW ();
 		}
 
@@ -73,7 +74,7 @@ namespace Ire
 				}else
 					found =false;
 				while (found == false) {
-					foreach (FoldLayer mcl in Fold) { //foreachLayer
+					foreach (FoldLayer mcl in Fold) { //for each Layer
                         if (found == false) { 
 								// NEW LOGIC
 								// request suggestions and browse for valid
@@ -81,7 +82,7 @@ namespace Ire
 								// 
 								string test;
 								lSuggestions = mcl.Offer(top.Seed,top.GetOpposition()); //not self, not history
-							Console.WriteLine(mcl.MMSKey+":n.sug:"+lSuggestions.Count+":n.reg:"+Registry.Count);
+//								Console.WriteLine(mcl.MMSKey+":n.sug:"+lSuggestions.Count+":n.reg:"+Registry.Count);
                                 foreach (int ls in lSuggestions) {
 									test = path + " " + top.Seed + "," + ls; 
 								//if not a blocked path AND not a registered suggestion
@@ -90,7 +91,7 @@ namespace Ire
 									found = true;
 									Pairs.Add(new Pairing(top,plys[lookUpTable[ls-1]]));
 									path += " " + top.Seed + "," + plys[lookUpTable[ls-1]].Seed;
-                                    Console.WriteLine("pathupdate"+path);
+                                    Console.WriteLine("pathupdate"+path); //seeds match
 									mcl.Eject (ls);
 									if (Pairs.Count == totalPairs)
 										return; //best way to exit
