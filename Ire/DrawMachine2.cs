@@ -25,7 +25,7 @@ namespace Ire
 			plys = ply; //We forgot to handle Byes
             History = _History;
 			lookUpTable = new int[ply.Count];
-		    lookUpBull = new bool[ply.Count];
+//		    lookUpBull = new bool[ply.Count];
 			Pairs = new List<Pairing>();
 			Pairing.setStatics(_MaxHandi, _AdjHandi, _HandiAboveBar);
 			plys.Sort (); //just in case
@@ -33,7 +33,9 @@ namespace Ire
             {
                 if (pd.getParticipation(_Rnd))
                     totalPairs++;
+				Console.WriteLine (pd.Seed);
             }
+			Console.ReadLine ();
             foreach (Player pd in plys)
             {
                 if (pd.getParticipation(_Rnd) == false)
@@ -46,13 +48,13 @@ namespace Ire
             for (int i = 0; i < plys.Count; i++)
             {
                 lookUpTable[plys[i].Seed - 1] = i;
-                lookUpBull[plys[i].Seed - 1] = false;
+//                lookUpBull[plys[i].Seed - 1] = false;
             }
             //end DO WE NEED
 			Fold = new List<FoldLayer>();
 			//populate Fold layers which use Seed and not Deed
-			Fold.Add (new FoldLayer (plys [1].getMMS (), plys [1].Seed));
-			for(int i=2; i<plys.Count; i++)
+			Fold.Add (new FoldLayer (plys [0].getMMS (), plys [0].Seed));
+			for(int i=1; i<plys.Count; i++)
 			{
 				if (plys [i].getMMS () == Fold [Fold.Count-1].MMSKey) {
 					Fold [Fold.Count-1].Add (plys [i].Seed);
@@ -62,12 +64,11 @@ namespace Ire
 				}
 			}
             Console.WriteLine("FoldLayers.Count:" + Fold.Count);
+			foreach (FoldLayer _FL in Fold)
+				Console.WriteLine ("MMS:"+_FL.MMSKey+" "+_FL.StackSize());
 			DRAW ();
 		}
 
-        // two things
-        // maybe we can add self to the GetOpponent call 
-        // if blocked list is populated, we should also add those numbers (only on the first pass)(?)
 		public void DRAW(int start=0)
 		{
 			Player top = plys [start];
@@ -87,20 +88,19 @@ namespace Ire
 								// 
 								string test;
 								lSuggestions = mcl.Offer(top.Seed,top.GetOpposition()); //not self, not history
-							Console.WriteLine(":n.sug:"+lSuggestions.Count);
-							Console.WriteLine(":n.reg:"+Registry.Count);
+							Console.WriteLine(mcl.MMSKey+":n.sug:"+lSuggestions.Count+":n.reg:"+Registry.Count);
                                 foreach (int ls in lSuggestions) {
 									test = path + " " + top.Seed + "," + ls; 
 								//if not a blocked path AND not a registered suggestion
 								if (Paths.Contains (test) == false && Registry.Contains(ls)==false) { 
-										found = true;
-										//j = mcl.Length + 1;
-										Pairs.Add(new Pairing(top,plys[lookUpTable[ls]]));
-										path += " " + top.Seed + "," + plys[lookUpTable[ls]].Seed;
-                                        Console.WriteLine("pathupdate"+path);
-										mcl.Eject (ls);
-										if (Pairs.Count == totalPairs)
-											return; //best way to exit
+									Console.WriteLine ("Found valid pairing:" + test);
+									found = true;
+									Pairs.Add(new Pairing(top,plys[lookUpTable[ls]]));
+									path += " " + top.Seed + "," + plys[lookUpTable[ls]].Seed;
+                                    Console.WriteLine("pathupdate"+path);
+									mcl.Eject (ls);
+									if (Pairs.Count == totalPairs)
+										return; //best way to exit
 									//Set to true the registered state of top and choice
 									Registry.Add(top.Seed);
 									Registry.Add (plys [lookUpTable [ls]].Seed);
@@ -116,8 +116,6 @@ namespace Ire
                         }
 					}//foreachLayer
 
-                    //This might be more complex
-                    // remove a blocked pair, but when we restart it will be given back as a suggestion automatically?
                     if (found == false)
                     {
 						if (Pairs.Count == totalPairs) //should be unreachable

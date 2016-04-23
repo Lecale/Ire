@@ -56,7 +56,7 @@ namespace Ire
                */
 				if(rawDiff>defaultPolicy)
                 {
-                    Console.WriteLine("Pairing:Raw:" + rawDiff + ":DP:" + defaultPolicy);
+                   // Console.WriteLine("Pairing:Raw:" + rawDiff + ":DP:" + defaultPolicy);
 					if (handAboveBar==false)
                     {
                         if (a.topBar || b.topBar)
