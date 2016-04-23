@@ -14,9 +14,8 @@ namespace Ire
 		private List<string> Paths = new List<string>();
 		private List<int> Registry = new List<int>();
 		private int[] lookUpTable;
-		private bool[] lookUpBull;
         private string path = "";
-        private int totalPairs = -1;
+        private int totalPairs = 0; 
 		#endregion
 
 		public DrawMachine2 ( List<Player> ply, List<Pairing> _History, int _Rnd,
@@ -25,17 +24,12 @@ namespace Ire
 			plys = ply; //We forgot to handle Byes
             History = _History;
 			lookUpTable = new int[ply.Count];
-//		    lookUpBull = new bool[ply.Count];
 			Pairs = new List<Pairing>();
 			Pairing.setStatics(_MaxHandi, _AdjHandi, _HandiAboveBar);
 			plys.Sort (); //just in case
             foreach (Player pd in plys)
-            {
                 if (pd.getParticipation(_Rnd))
                     totalPairs++;
-				Console.WriteLine (pd.Seed);
-            }
-			Console.ReadLine ();
             foreach (Player pd in plys)
             {
                 if (pd.getParticipation(_Rnd) == false)
@@ -48,7 +42,6 @@ namespace Ire
             for (int i = 0; i < plys.Count; i++)
             {
                 lookUpTable[plys[i].Seed - 1] = i;
-//                lookUpBull[plys[i].Seed - 1] = false;
             }
             //end DO WE NEED
 			Fold = new List<FoldLayer>();
@@ -95,15 +88,15 @@ namespace Ire
 								if (Paths.Contains (test) == false && Registry.Contains(ls)==false) { 
 									Console.WriteLine ("Found valid pairing:" + test);
 									found = true;
-									Pairs.Add(new Pairing(top,plys[lookUpTable[ls]]));
-									path += " " + top.Seed + "," + plys[lookUpTable[ls]].Seed;
+									Pairs.Add(new Pairing(top,plys[lookUpTable[ls-1]]));
+									path += " " + top.Seed + "," + plys[lookUpTable[ls-1]].Seed;
                                     Console.WriteLine("pathupdate"+path);
 									mcl.Eject (ls);
 									if (Pairs.Count == totalPairs)
 										return; //best way to exit
 									//Set to true the registered state of top and choice
 									Registry.Add(top.Seed);
-									Registry.Add (plys [lookUpTable [ls]].Seed);
+									Registry.Add (plys [lookUpTable [ls-1]].Seed);
 									//find next top
 									for (int rp = 0; rp < plys.Count; rp++)
 										if (Registry.Contains (plys[rp].Seed) == false) {
