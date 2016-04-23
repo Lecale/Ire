@@ -424,6 +424,7 @@ namespace Ire
         }
 
 		public void ReadByesFromFile(int rnd){
+			//to do
 		}
 
         /*	

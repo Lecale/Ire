@@ -70,7 +70,7 @@ namespace Ire
 		//can only return opponents in the Stack (the active list)
 		public List<int> Offer(int _Target , int []opp)
 		{
-			string dbg = " ";
+			//string dbg = " ";
 			List<int> Offrage = new List<int> ();
 			for (int i = stack.Count-1; i > -1; i--)
                 if (opp == null || opp.Length == 0)
@@ -84,14 +84,14 @@ namespace Ire
                     for (int o = 0; o < opp.Length; o++)	
 						if (opp [o] == stack [i])
 							good = false;
-					if (stack [i] != _Target)
+					if (stack [i] == _Target)
 						good = false;
 					if(good)
                        Offrage.Add(stack[i]);
                 }
-			foreach (int eye in Offrage)
-				dbg += eye + " ";
-			Console.WriteLine ("Offrage" + dbg); 
+		//	foreach (int eye in Offrage)
+		//		dbg += eye + " ";
+		//	Console.WriteLine ("Offrage" + dbg); 
 			return Offrage;
 		}
 

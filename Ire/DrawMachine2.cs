@@ -21,7 +21,7 @@ namespace Ire
 		public DrawMachine2 ( List<Player> ply, List<Pairing> _History, int _Rnd,
 			int _MaxHandi = 9, int _AdjHandi = 1, bool _HandiAboveBar = false)
 		{
-			plys = ply; //We forgot to handle Byes
+			plys = ply; //Careful with Byes
             History = _History;
 			lookUpTable = new int[ply.Count];
 			Pairs = new List<Pairing>();
@@ -32,9 +32,9 @@ namespace Ire
                     totalPairs++;
             foreach (Player pd in plys)
             {
-                if (pd.getParticipation(_Rnd) == false)
+                if (pd.getParticipation(_Rnd-1) == false) //0 based
                 {
-                    Console.WriteLine("rm a player with a bye");
+                    Console.WriteLine("removing a player with a bye");
                     plys.Remove(pd);
                 }
             }
@@ -87,11 +87,11 @@ namespace Ire
 									test = path + " " + top.Seed + "," + ls; 
 								//if not a blocked path AND not a registered suggestion
 								if (Paths.Contains (test) == false && Registry.Contains(ls)==false) { 
-									Console.WriteLine ("Found valid pairing:" + test);
+							//		Console.WriteLine ("Found valid pairing:" + test);
 									found = true;
 									Pairs.Add(new Pairing(top,plys[lookUpTable[ls-1]]));
 									path += " " + top.Seed + "," + plys[lookUpTable[ls-1]].Seed;
-                                    Console.WriteLine("pathupdate"+path); //seeds match
+                           //         Console.WriteLine("pathupdate"+path); //seeds match
 									mcl.Eject (ls);
 									if (Pairs.Count == totalPairs)
 										return; //best way to exit
@@ -123,7 +123,7 @@ namespace Ire
                         if (penultimateSpace > 1)
                             path = path.Remove(penultimateSpace);
                         else
-                            Console.WriteLine("path cannot be removed as too small");
+							Console.WriteLine("path cannot be removed as too small");//should be unreachable
 
 						//update lookups
 						Registry.Remove (Pairs [Pairs.Count - 1].black.Seed);
