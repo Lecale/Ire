@@ -466,13 +466,12 @@ namespace Ire
 			}
 		}
 
-        /*	
-         * Pin tName tRating tClub tCountry is the expected input order
-         * GIGO method, checks for already entered player
-		*/
+        //	
+        //  Pin tName tRating tClub tCountry is the expected input order
+        // GIGO method, checks for already entered player
+		//
         public void ReadPlayers(bool Supression=false)
         {
-           
             string tLn = "";
 			string fin = workDirectory + "players.txt";
             using (StreamReader reader = new StreamReader(fin))
@@ -489,17 +488,23 @@ namespace Ire
                     {
                         int pine = int.Parse(split[0]);
                         int rats = int.Parse(split[2]);
-                        bool[] bull = new bool[rnd];
+						bool[] bull = new bool[nRounds]; //not set via input file
+						for(int k=0; k<bull.Length; k++)
+							bull[k]=true;
                         for (int i = 5; i < rnd + 5; i++)
                         {
                             if (split[i].Equals("") == false)
                             {
-								/*
-                                if ((split[i].Trim()).ToUpper().Equals("X"))
-                                    bull[i - 5] = false;
-                                else
-                                    bull[i - 5] = true;
-								*/
+								try{
+									int byeRound = int.Parse(split[i].Trim());
+									if(byeRound > nRounds){
+										Console.WriteLine("Bye allocated for round which does not exist");
+										Console.WriteLine(tLn);
+									}
+									else
+										bull[byeRound]=false;
+								}
+								catch(Exception e){Console.WriteLine(e.Message);}
                             }
                         }
                         Player j = new Player(pine, split[1], rats, split[3], split[4], bull);
