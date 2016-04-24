@@ -651,6 +651,7 @@ namespace Ire
 					riter.WriteLine ("Rating Floor:\t");
 				riter.WriteLine ("Handicap Policy:\t"+HandiAdjust);
 				riter.WriteLine ("Max Handicap:\t"+nMaxHandicap);		
+				riter.WriteLine ("Grade Width:\t"+nGradeWidth);		
 				riter.WriteLine ("Tiebreak 1:\t");		
 				riter.WriteLine ("Tiebreak 2:\t");		
 				riter.WriteLine ("Tiebreak 3:\t");		
@@ -682,6 +683,9 @@ namespace Ire
 						}
 						if(s[0].Contains("Max Handicap")){
 							nMaxHandicap = int.Parse(s[1].Trim());
+						}
+						if(s[0].Contains("Grade Width")){
+							nGradeWidth = int.Parse(s[1].Trim());
 						}
 						if(s[0].Contains("Permit handicap above bar")){
                             if (s[1].ToUpper().StartsWith("Y"))
