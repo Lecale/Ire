@@ -498,11 +498,11 @@ namespace Ire
 								try{
 									int byeRound = int.Parse(split[i].Trim());
 									if(byeRound > nRounds){
-										Console.WriteLine("Bye allocated for round which does not exist");
+										Console.WriteLine("Bye cannot be allocated for round which does not exist");
 										Console.WriteLine(tLn);
 									}
 									else
-										bull[byeRound]=false;
+										bull[byeRound-1]=false; //0 based
 								}
 								catch(Exception e){Console.WriteLine(e.Message);}
                             }
