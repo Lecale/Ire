@@ -67,6 +67,11 @@ namespace Ire
 				if (s.ToUpper ().Trim ().StartsWith ("Y")) {
 					HandleLatePlayers (currentRound);
 				}
+				Console.WriteLine ("Do you want to update player participation (byes) in the players list (yes / no)");
+			 s = Console.ReadLine ();
+				if (s.ToUpper ().Trim ().StartsWith ("Y")) {
+					ReadByesFromFile (currentRound);
+				}
 			}
 			int i = -1;
 			//Handle this later
