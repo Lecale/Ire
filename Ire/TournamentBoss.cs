@@ -434,27 +434,32 @@ namespace Ire
 				while ((tLn = reader.ReadLine ()) != null) {
 					String[] split = tLn.Split (',');
 					int rnd = split.Length - 5;
-
 					try {
 						int pine = int.Parse (split [0]);
 						int rats = int.Parse (split [2]);
-						bool[] bull = new bool[rnd];
+						bool[] bull = new bool[nRounds]; //not set via input file
+						for(int k=0; k<bull.Length; k++)
+							bull[k]=true;
 						for (int i = 5; i < rnd + 5; i++) {
 							if (split [i].Equals ("") == false) {
-								if ((split [i].Trim ()).ToUpper ().Equals ("X"))
-									bull [i - 5] = false;
-								else
-									bull [i - 5] = true;
+								try{
+									int byeRound = int.Parse(split[i].Trim());
+									if(byeRound > nRounds){
+										Console.WriteLine("Bye cannot be allocated for round which does not exist");
+										Console.WriteLine(tLn);
+									}
+									else
+										bull[byeRound-1]=false; //0 based
+								}
+								catch(Exception e){Console.WriteLine(e.Message);}
 							}
 						}
 						Player j = new Player (pine, split [1], rats, split [3], split [4], bull);
 						if (AllPlayers.Contains (j) == true) {
 							for(int ap = 0; ap<AllPlayers.Count; ap++)
-							{
-								if(j.Equals(AllPlayers[ap])){
-									;//new handling of byes needed
-								}
-							}
+								if(j.Equals(AllPlayers[ap]))
+									for(int i2=nextRound-1; i2<nRounds; i2++) //0 based
+										AllPlayers[ap].SetParticipation(i2);
 						}
 					} catch (Exception e) {
 						Console.WriteLine ("An exception was encountered in ReadByesFromFile" + e.Message);
@@ -660,10 +665,12 @@ namespace Ire
 		{
 			char[] ch = { '\t'};
 			string[] s;
+			string dbg="";
 			try{
 			using (StreamReader sr = new StreamReader (workDirectory + "settings.txt")) {
 				while(true)	{
-						s = sr.ReadLine ().Split(ch);
+						dbg = sr.ReadLine ();
+						s =dbg.Split(ch);
 						if(s[0].Contains("Tournament Name")){
 							TournamentName = s[1];
 						}
@@ -696,7 +703,7 @@ namespace Ire
 					}
 				}
 			}
-			catch(Exception e) { Console.WriteLine (e.Message);}
+			catch(Exception e) { Console.WriteLine (e.Message); Console.WriteLine ("exception from: "+dbg);}
 			Player.SetTiebreakers(Tiebreakers);
 		}
 

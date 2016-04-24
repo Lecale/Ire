@@ -28,7 +28,7 @@ namespace Ire
 			Pairing.setStatics(_MaxHandi, _AdjHandi, _HandiAboveBar);
 			plys.Sort (); //just in case
             foreach (Player pd in plys)
-                if (pd.getParticipation(_Rnd))
+                if (pd.getParticipation(_Rnd-1))
                     totalPairs++;
 			List<Player> takingABye = new List<Player> ();
 			foreach (Player pd in plys)

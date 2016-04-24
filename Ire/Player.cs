@@ -79,6 +79,10 @@ namespace Ire
 			setMMS(getMMS ());
 			}
 
+		public void SetParticipation(int rnd)
+		{
+			participation[rnd] = false;
+		}
 		public void AssignBye(int rnd)
 		{
             rnd--; //0 based arrary as always
