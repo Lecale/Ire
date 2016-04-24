@@ -62,7 +62,7 @@ namespace Ire
 		{
 			Console.WriteLine ("We are ready to make the draw for Round "+currentRound);
 			if (currentRound > 1) {
-				Console.WriteLine ("Do you want to make an update to the players list (yes / no)");
+				Console.WriteLine ("Do you want to add a new player to the players list (yes / no)");
 				string s = Console.ReadLine ();
 				if (s.ToUpper ().Trim ().StartsWith ("Y")) {
 					HandleLatePlayers (currentRound);
@@ -132,8 +132,10 @@ namespace Ire
 		{
 			RoundPlayers = new List<Player> ();
 			foreach (Player p in AllPlayers) {
-				if (p.getParticipation (_rnd-1))
+				if (p.getParticipation (_rnd - 1))
 					RoundPlayers.Add (p);
+				else
+					p.AssignBye (_rnd);
 			}
 			Console.WriteLine ("for this round we have " + RoundPlayers.Count);
 		}
