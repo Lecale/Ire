@@ -61,6 +61,7 @@
     <Compile Include="AbstractDrawMachina.cs" />
     <Compile Include="DrawMachine2.cs" />
     <Compile Include="FoldLayer.cs" />
+    <Compile Include="SplitLayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
