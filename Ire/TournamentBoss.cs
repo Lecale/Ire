@@ -281,25 +281,25 @@ namespace Ire
 		#endregion
 
 		#region TestPreviewFunctions
-		public void GeneratePlayers(int nPlayers, int rnd, int midpoint=1500, int spread=500 )
+		public void GeneratePlayers(int nPlayers=17, int midpoint=1500, int spread=500 )
 		{
             Console.WriteLine("Generate Dummy Players? (Yes/No)");
             string s = Console.ReadLine();
             if (s.ToUpper().StartsWith("Y"))
             {
-                Console.WriteLine("Enter 4 comma separated params (nPlayers,nRnds,Midpoint,Spread)");
+                Console.WriteLine("Enter 3 comma separated params (nPlayers,Midpoint,Spread)");
                 string auto = Console.ReadLine();
                 string[] split = auto.Split(new char[] {','});
                 if (split.Length == 4)
                 {
                     nPlayers = int.Parse(split[0]);
-                    rnd = int.Parse(split[1]);
-                    midpoint = int.Parse(split[2]);
-                    spread = int.Parse(split[3]);
+                   // rnd = int.Parse(split[1]);
+                    midpoint = int.Parse(split[1]);
+                    spread = int.Parse(split[2]);
                     Utility u = new Utility();
                     string end = "";
-                    for (int r = 0; r < rnd; r++)
-                        end += "," + (r + 1);
+                  //  for (int r = 0; r < rnd; r++)
+                  //      end += "," + (r + 1);
                     string fn = workDirectory + "players.txt";
                     int i = 100; //fake EGD pin
                     using (StreamWriter sw = new StreamWriter(fn, true))
