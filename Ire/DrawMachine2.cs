@@ -30,14 +30,12 @@ namespace Ire
             foreach (Player pd in plys)
                 if (pd.getParticipation(_Rnd))
                     totalPairs++;
-            foreach (Player pd in plys)
-            {
-                if (pd.getParticipation(_Rnd-1) == false) //0 based
-                {
-                    Console.WriteLine("removing a player with a bye");
-                    plys.Remove(pd);
-                }
-            }
+			List<Player> takingABye = new List<Player> ();
+			foreach (Player pd in plys)
+				if (pd.getParticipation(_Rnd-1) == false) //0 based
+					takingABye.Add(pd); 
+			foreach (Player tab in takingABye)
+				plys.Remove (tab);
             totalPairs = totalPairs / 2;
 			//i want to search for Seed and see player 
             for (int i = 0; i < plys.Count; i++)

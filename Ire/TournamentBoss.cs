@@ -290,7 +290,7 @@ namespace Ire
                 Console.WriteLine("Enter 3 comma separated params (nPlayers,Midpoint,Spread)");
                 string auto = Console.ReadLine();
                 string[] split = auto.Split(new char[] {','});
-                if (split.Length == 4)
+                if (split.Length == 3)
                 {
                     nPlayers = int.Parse(split[0]);
                    // rnd = int.Parse(split[1]);
@@ -298,8 +298,6 @@ namespace Ire
                     spread = int.Parse(split[2]);
                     Utility u = new Utility();
                     string end = "";
-                  //  for (int r = 0; r < rnd; r++)
-                  //      end += "," + (r + 1);
                     string fn = workDirectory + "players.txt";
                     int i = 100; //fake EGD pin
                     using (StreamWriter sw = new StreamWriter(fn, true))
