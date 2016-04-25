@@ -57,10 +57,19 @@ namespace Ire
                 if (okayToAdd)
                     Filtered.Add(i);
             }
-            if (Filtered.Count % 2 == 1) 
-            { ;}
-            else
-            { ;}
+            if (Filtered.Count % 2 == 1)  //even :)
+            {
+                //mid
+                for (int fc = 0; fc < ((Filtered.Count + 1) / 2); fc++)
+                {
+                    Construct.Add(Filtered[(Filtered.Count + 1) / 2]);
+                    Construct.Add(Filtered[(Filtered.Count + 1) / 2]);
+                }
+            }
+            else //odd
+            {
+                ;
+            }
             return Construct;
 		}
 
