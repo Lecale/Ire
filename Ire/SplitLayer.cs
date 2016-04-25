@@ -44,8 +44,24 @@ namespace Ire
 		public List<int> Offer(int _Target , int []opp)
 		{
 			//string dbg = " ";
-			List<int> Offrage = new List<int> ();
-			return Offrage;
+			List<int> Construct = new List<int> ();
+            List<int> Filtered = new List<int>();
+            foreach (int i in stack)
+            {
+                bool okayToAdd = true;
+                if (i == _Target)
+                    okayToAdd = false;
+                for (int i2 = 0; i2 < opp.Length; i2++)
+                    if (i == opp[i2])
+                        okayToAdd = false;
+                if (okayToAdd)
+                    Filtered.Add(i);
+            }
+            if (Filtered.Count % 2 == 1) 
+            { ;}
+            else
+            { ;}
+            return Construct;
 		}
 
         //Push is only used for re-injection
