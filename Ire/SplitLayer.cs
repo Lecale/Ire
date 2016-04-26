@@ -59,11 +59,16 @@ namespace Ire
             }
             if (Filtered.Count % 2 == 1)  //even :)
             {
-                //mid
-                for (int fc = 0; fc < ((Filtered.Count + 1) / 2); fc++)
+                //fc+1 = 4  then loop is 1, 2, 3
+                //<1> + actually 2 3 4 (5) 6 7 8
+
+                //first add the midpoint, then alternate 
+                Construct.Add(Filtered[(Filtered.Count + 1) / 2]);
+
+                for (int fc = 1; fc < ((Filtered.Count + 1) / 2); fc++)
                 {
-                    Construct.Add(Filtered[(Filtered.Count + 1) / 2]);
-                    Construct.Add(Filtered[(Filtered.Count + 1) / 2]);
+                    Construct.Add(Filtered[fc + ((Filtered.Count + 1) / 2)]);
+                    Construct.Add(Filtered[((Filtered.Count + 1) / 2) - fc ]);
                 }
             }
             else //odd
