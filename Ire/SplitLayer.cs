@@ -61,10 +61,8 @@ namespace Ire
             {
                 //fc+1 = 4  then loop is 1, 2, 3
                 //<1> + actually 2 3 4 (5) 6 7 8
-
                 //first add the midpoint, then alternate 
                 Construct.Add(Filtered[(Filtered.Count + 1) / 2]);
-
                 for (int fc = 1; fc < ((Filtered.Count + 1) / 2); fc++)
                 {
                     Construct.Add(Filtered[fc + ((Filtered.Count + 1) / 2)]);
@@ -73,7 +71,13 @@ namespace Ire
             }
             else //odd
             {
-                ;
+                //fc/2 = 3   loops runs over 0,1,2
+                //<1> 2 3  (4mid)  5 6 7
+                for (int fc = 0; fc < (Filtered.Count / 2); fc++)
+                {
+                    Construct.Add(Filtered[fc  + (Filtered.Count / 2)]);
+                    Construct.Add(Filtered[(Filtered.Count / 2) - 1 - fc]);
+                }
             }
             return Construct;
 		}
