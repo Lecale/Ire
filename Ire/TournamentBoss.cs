@@ -94,7 +94,7 @@ namespace Ire
 				}
 			}
             List<Pairing> RndPairings = new List<Pairing>();
-			Console.WriteLine ("MakeDraw prep completed ...");
+			Console.WriteLine ("The draw will now be made ...");
             if (PairingStrategy.ToUpper().Equals("SIMPLE"))
             {
                 DrawMachine1 dm1 = new DrawMachine1(RoundPlayers, AllPairings, nMaxHandicap, HandiAdjust, HandiAboveBar);
@@ -104,6 +104,11 @@ namespace Ire
             {
                 DrawMachine2 dm2 = new DrawMachine2(AllPlayers, AllPairings, currentRound, nMaxHandicap, HandiAdjust, HandiAboveBar);
                 RndPairings = dm2.GetCurrentPairings();
+            }
+            if (PairingStrategy.ToUpper().Equals("SPLIT"))
+            {
+                DrawMachine3 dm3 = new DrawMachine3(AllPlayers, AllPairings, currentRound, nMaxHandicap, HandiAdjust, HandiAboveBar);
+                RndPairings = dm3.GetCurrentPairings();
             }
             foreach (Pairing rp in RndPairings)
                 Console.WriteLine(rp.BasicOutput());
