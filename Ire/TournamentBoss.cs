@@ -186,7 +186,7 @@ namespace Ire
                     if (ap.getResult(rnd - 1) != 0.5)
                     {
                         Console.WriteLine("Assigning a bye to " + ap.getName());
-                        ;//AssignBye
+                        ap.AssignBye(rnd);//AssignBye adjusts the rnd number
                     }
                 }
 					
