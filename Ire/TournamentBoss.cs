@@ -179,8 +179,10 @@ namespace Ire
 				p.black.setResult (rnd, p.white.Seed, p.BlackScore (), p.GetHandi (), 0);
                 Console.WriteLine("W" + p.white.Seed + ": B " + p.black.Seed);
 			}
-			//now need to update MMS and SOS and MOS for all players in the tournament!
-			//for opponents update SOS
+			//now check for maladjusted bye
+			foreach (Player ap in AllPlayers) {
+				;
+			}
 		}
 
         //Should have some if SOS if MOS if SODOS logic
