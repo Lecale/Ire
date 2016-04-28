@@ -181,7 +181,8 @@ namespace Ire
 			}
 			//now check for maladjusted bye
 			foreach (Player ap in AllPlayers) {
-				;
+				if(ap.getOpponent(rnd-1)==0)
+					;
 			}
 		}
 
