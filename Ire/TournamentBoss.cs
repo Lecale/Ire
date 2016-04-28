@@ -181,8 +181,15 @@ namespace Ire
 			}
 			//now check for maladjusted bye
 			foreach (Player ap in AllPlayers) {
-				if(ap.getOpponent(rnd-1)==0)
-					;
+                if (ap.getOpponent(rnd - 1) == 0)
+                {
+                    if (ap.getResult(rnd - 1) != 0.5)
+                    {
+                        Console.WriteLine("Assigning a bye to " + ap.getName());
+                        ;//AssignBye
+                    }
+                }
+					
 			}
 		}
 
