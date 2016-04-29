@@ -516,20 +516,29 @@ namespace Ire
 						bool[] bull = new bool[nRounds]; //not set via input file
 						for(int k=0; k<bull.Length; k++)
 							bull[k]=true;
-                        for (int i = 5; i < rnd + 5; i++)
+                        if (split.Length > 5) // or no need to handle bye setting
                         {
-                            if (split[i].Equals("") == false)
+                            for (int i = 5; i < rnd + 5; i++)
                             {
-								try{
-									int byeRound = int.Parse(split[i].Trim());
-									if(byeRound > nRounds){
-										Console.WriteLine("Bye cannot be allocated for round which does not exist");
-										Console.WriteLine(tLn);
-									}
-									else
-										bull[byeRound-1]=false; //0 based
-								}
-								catch(Exception e){Console.WriteLine(e.Message);}
+                                if (split[i].Equals("") == false)
+                                {
+                                    try
+                                    {
+                                        int byeRound = int.Parse(split[i].Trim());
+                                        if (byeRound > nRounds)
+                                        {
+                                            Console.WriteLine("Bye cannot be allocated for round which does not exist");
+                                            Console.WriteLine(tLn);
+                                        }
+                                        else
+                                            bull[byeRound - 1] = false; //0 based
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Console.WriteLine("ReadPlayers() ByePart" + split.Length);
+                                        Console.WriteLine(e.Message);
+                                    }
+                                }
                             }
                         }
                         Player j = new Player(pine, split[1], rats, split[3], split[4], bull, split[5]);

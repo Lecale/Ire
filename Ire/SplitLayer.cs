@@ -57,27 +57,35 @@ namespace Ire
                 if (okayToAdd)
                     Filtered.Add(i);
             }
-            if (Filtered.Count % 2 == 1)  //even :)
+            try
             {
-                //fc+1 = 4  then loop is 1, 2, 3
-                //<1> + actually 2 3 4 (5) 6 7 8
-                //first add the midpoint, then alternate 
-                Construct.Add(Filtered[(Filtered.Count + 1) / 2]);
-                for (int fc = 1; fc < ((Filtered.Count + 1) / 2); fc++)
+                if (Filtered.Count % 2 == 1)  //even :)
                 {
-                    Construct.Add(Filtered[fc + ((Filtered.Count + 1) / 2)]);
-                    Construct.Add(Filtered[((Filtered.Count + 1) / 2) - fc ]);
+                    //fc+1 = 4  then loop is 1, 2, 3
+                    //<1> + actually 2 3 4 (5) 6 7 8
+                    //first add the midpoint, then alternate 
+                    Construct.Add(Filtered[(Filtered.Count + 1) / 2]);
+                    for (int fc = 1; fc < ((Filtered.Count + 1) / 2); fc++)
+                    {
+                        Construct.Add(Filtered[fc + ((Filtered.Count + 1) / 2)]);
+                        Construct.Add(Filtered[((Filtered.Count + 1) / 2) - fc]);
+                    }
+                }
+                else //odd
+                {
+                    //fc/2 = 3   loops runs over 0,1,2
+                    //<1> 2 3  (4mid)  5 6 7
+                    for (int fc = 0; fc < (Filtered.Count / 2); fc++)
+                    {
+                        Construct.Add(Filtered[fc + (Filtered.Count / 2)]);
+                        Construct.Add(Filtered[(Filtered.Count / 2) - 1 - fc]);
+                    }
                 }
             }
-            else //odd
+            catch (Exception e)
             {
-                //fc/2 = 3   loops runs over 0,1,2
-                //<1> 2 3  (4mid)  5 6 7
-                for (int fc = 0; fc < (Filtered.Count / 2); fc++)
-                {
-                    Construct.Add(Filtered[fc  + (Filtered.Count / 2)]);
-                    Construct.Add(Filtered[(Filtered.Count / 2) - 1 - fc]);
-                }
+                Console.WriteLine("Exception in Offrage of Split Layer");
+                Console.WriteLine(Filtered.Count / 2);
             }
             return Construct;
 		}

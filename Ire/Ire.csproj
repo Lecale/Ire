@@ -52,7 +52,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TournamentBoss.cs" />
-    <Compile Include="Import.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="PairPerson.cs" />
     <Compile Include="Person.cs" />

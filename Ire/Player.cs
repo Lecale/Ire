@@ -50,6 +50,7 @@ namespace Ire
 
         public void setPlayer(string nom, string cc, string g, int _rat, int tr, int p)
         {
+            Console.WriteLine("========= setPlayer ============= CALLED ");
             Name = nom;
             Country = cc;
             Rank = g;
