@@ -58,14 +58,12 @@ namespace Ire
             FortuneCookie.Add("Go out and party.");
             FortuneCookie.Add("Go forth and conquer.");
             FortuneCookie.Add("Now it is time to eat.");
-            FortuneCookie.Add("Consider the Lily.");
             FortuneCookie.Add("Have you ever thought about changing your life?");
             FortuneCookie.Add("The way back to Earth has been wiped from my memory.");
             FortuneCookie.Add("Leave no prisoners behind.");
             FortuneCookie.Add("Tomorrow is a new day.");
             FortuneCookie.Add("Dispatch war rocket Ajax to collect his body.");
-            
-            return "";
+            return FortuneCookie[d.Next(FortuneCookie.Count)];
         }
     }
 }

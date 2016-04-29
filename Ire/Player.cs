@@ -28,6 +28,7 @@ namespace Ire
 		public static bool SortByRating = false;
 		#endregion
 
+        //INCLUDE GRADE
 		public Player(int _seed, string _nom , int _rat, string _ctry, string _club, bool[] par) 
 			: base (_nom, _rat, _club, _ctry )
         {

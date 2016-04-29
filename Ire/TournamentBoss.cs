@@ -430,20 +430,15 @@ namespace Ire
 			FileInfo fi;
          //   string egfCopyUnZipped = "/Users/iandavis/egzipdata.txt";
             WebClient client = new WebClient ();
-			if (Macintosh) {
-				client.DownloadFile (uri, workDirectory + "/egzipdata.zip");
+			client.DownloadFile (uri, workDirectory + "egzipdata.zip");
 				Console.WriteLine ("DownloadMasterZipEGF file downloaded");
-				fi = new FileInfo (workDirectory + "/egzipdata.zip");
-			} else {
-				client.DownloadFile (uri, workDirectory + "\\egzipdata.zip");
-				Console.WriteLine ("DownloadMasterZipEGF file downloaded");
-				fi = new FileInfo (workDirectory + "\\egzipdata.zip");
-			}
+		    fi = new FileInfo (workDirectory + "/egzipdata.zip");
             using (ZipFile zip = ZipFile.Read(fi.FullName))
             {
                 zip.ExtractAll(workDirectory);
             }
         }
+
 
 		public void ReadByesFromFile(int nextRound){
 			//read players file
@@ -494,7 +489,7 @@ namespace Ire
 		}
 
         //	
-        //  Pin tName tRating tClub tCountry is the expected input order
+        //  Pin tName tRating tClub tCountry is the expected input order THEN GRADE
         // GIGO method, checks for already entered player
 		//
         public void ReadPlayers(bool Supression=false)
@@ -736,7 +731,7 @@ namespace Ire
 		{
 			string tTest = "PIN          Name                              Club     Grade P&D";
 			bool faci = false;	
-			string egfCopy = workDirectory + "egf.tsv";
+			string egfCopy = workDirectory + "egf.txt";
 			if(File.Exists(egfCopy))
 			try{
 				File.Delete(egfCopy);
@@ -750,7 +745,7 @@ namespace Ire
 			using (StreamReader reader = new StreamReader ("/Users/iandavis/egfcopi.txt")) {
 			//using (StreamReader reader = new StreamReader ("/Users/iandavis/egfrawdata.txt")) {
 
-				using (StreamWriter riter = new StreamWriter ("/Users/iandavis/egf.tsv")) {
+				using (StreamWriter riter = new StreamWriter ("/Users/iandavis/egf.txt")) {
 					riter.WriteLine ("pin"+T+"name"+T+"rating"+T+"country"+T+"club"+T+"grade");
 					while ((line = reader.ReadLine ()) != null) {
 						if (faci) {
@@ -759,9 +754,7 @@ namespace Ire
 								Console.WriteLine (line); //Drobeta
 							} 
 							else {
-								/* Want to pretty up the data
-								 * 
-								 * pin - 8 digit  0 7
+								/* pin - 8 digit  0 7
 								 * name - 40 digit 8 47
 								 * club country - 8 digit 48 55
 								 * blank 56 58
@@ -782,7 +775,6 @@ namespace Ire
 									li.Append(T);
 									li.Append(line.Substring(59,3).Trim()); //Grade
 									li.Append(T);
-
 								riter.WriteLine (li);
 								li.Clear ();
 							}
