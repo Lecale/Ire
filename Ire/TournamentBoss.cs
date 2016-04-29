@@ -516,7 +516,7 @@ namespace Ire
 						bool[] bull = new bool[nRounds]; //not set via input file
 						for(int k=0; k<bull.Length; k++)
 							bull[k]=true;
-                        if (split.Length > 5) // or no need to handle bye setting
+                        if (split.Length > 6) // or no need to handle bye setting
                         {
                             for (int i = 5; i < rnd + 5; i++)
                             {
