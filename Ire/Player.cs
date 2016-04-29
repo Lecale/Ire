@@ -23,18 +23,20 @@ namespace Ire
 		protected int eRating; // effective rating, used for lower bar
 		public int EGDPin;
 		public int Deed = -1; //Deed is the draw seeding for a particular round
+        public string grade = "1k";
 
 		private static List<string> Tiebreaker = new List<string> ();
 		public static bool SortByRating = false;
 		#endregion
 
         //INCLUDE GRADE
-		public Player(int _seed, string _nom , int _rat, string _ctry, string _club, bool[] par) 
+		public Player(int _seed, string _nom , int _rat, string _ctry, string _club, bool[] par, string _grd) 
 			: base (_nom, _rat, _club, _ctry )
         {
 			Seed = -1; //When we first read Players in they are not sorted
 			EGDPin = _seed; 
 			eRating = _rat;
+            grade = _grd;
 			//participation does not exist
 			participation = new bool[par.Length];
 			score = new float[par.Length];

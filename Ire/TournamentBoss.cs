@@ -327,7 +327,7 @@ namespace Ire
                     using (StreamWriter sw = new StreamWriter(fn, true))
                     {
                         for (int np = 0; np < nPlayers; np++)
-                            sw.WriteLine(i++ + "," + u.ProvideName() + "," + u.RatingByBox(midpoint, spread) + ",BLF,IE" + end);
+                            sw.WriteLine(i++ + "," + u.ProvideName() + "," + u.RatingByBox(midpoint, spread) + ",BLF,IE,1k" + end);
                     }
                 }
                 else
@@ -458,6 +458,7 @@ namespace Ire
 					try {
 						int pine = int.Parse (split [0]);
 						int rats = int.Parse (split [2]);
+                       // string grd = split[5];
 						bool[] bull = new bool[nRounds]; //not set via input file
 						for(int k=0; k<bull.Length; k++)
 							bull[k]=true;
@@ -475,7 +476,7 @@ namespace Ire
 								catch(Exception e){Console.WriteLine(e.Message);}
 							}
 						}
-						Player j = new Player (pine, split [1], rats, split [3], split [4], bull);
+						Player j = new Player (pine, split [1], rats, split [3], split [4],  bull, split[5]);
 						if (AllPlayers.Contains (j) == true) {
 							for(int ap = 0; ap<AllPlayers.Count; ap++)
 								if(j.Equals(AllPlayers[ap]))
@@ -531,7 +532,7 @@ namespace Ire
 								catch(Exception e){Console.WriteLine(e.Message);}
                             }
                         }
-                        Player j = new Player(pine, split[1], rats, split[3], split[4], bull);
+                        Player j = new Player(pine, split[1], rats, split[3], split[4], bull, split[5]);
                         if (AllPlayers.Contains(j) == false)
                             AllPlayers.Add(j);
                         else
