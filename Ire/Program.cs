@@ -12,13 +12,13 @@ namespace Ire
         {
 
             TournamentBoss tb = new TournamentBoss(true);
+			tb.GenerateTemplateInputFile (); //set working directory
             Console.WriteLine("Do you need to download the EGF Rating List? (yes/no)");
             string s = Console.ReadLine();
             if (s.ToUpper().StartsWith("Y"))
             {
                 tb.DownloadEGFMasterZip();
-            }
-			tb.GenerateTemplateInputFile ();
+            } 
 			tb.GeneratePlayers (); // Cut to become auto
 			tb.ReadPlayers();
 			tb.SortField(true);

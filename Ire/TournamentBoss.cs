@@ -430,13 +430,15 @@ namespace Ire
 			FileInfo fi;
          //   string egfCopyUnZipped = "/Users/iandavis/egzipdata.txt";
             WebClient client = new WebClient ();
-			client.DownloadFile (uri, workDirectory + "egzipdata.zip");
+//			client.DownloadFile (uri, workDirectory + "egzipdata.zip");
 				Console.WriteLine ("DownloadMasterZipEGF file downloaded");
-		    fi = new FileInfo (workDirectory + "/egzipdata.zip");
+		    fi = new FileInfo (workDirectory + "egzipdata.zip");
             using (ZipFile zip = ZipFile.Read(fi.FullName))
             {
-                zip.ExtractAll(workDirectory);
+                try { zip.ExtractAll(workDirectory); }
+                catch (Exception e) { Console.WriteLine(e.Message);  }
             }
+            FormatMasterEGF();
         }
 
 
@@ -729,8 +731,10 @@ namespace Ire
         // the file name this is pointing to is not well defined
         public void FormatMasterEGF()
 		{
+            //Console.WriteLine(DateTime.Now);
 			string tTest = "PIN          Name                              Club     Grade P&D";
-			bool faci = false;	
+			bool faci = false;
+            string tzipfile = workDirectory +"allworld_lp.html"; 
 			string egfCopy = workDirectory + "egf.txt";
 			if(File.Exists(egfCopy))
 			try{
@@ -742,16 +746,15 @@ namespace Ire
 			string T = "\t";
 			StringBuilder li = new StringBuilder("");
 
-			using (StreamReader reader = new StreamReader ("/Users/iandavis/egfcopi.txt")) {
-			//using (StreamReader reader = new StreamReader ("/Users/iandavis/egfrawdata.txt")) {
-
-				using (StreamWriter riter = new StreamWriter ("/Users/iandavis/egf.txt")) {
+			using (StreamReader reader = new StreamReader (tzipfile)) {
+				using (StreamWriter riter = new StreamWriter (egfCopy)) {
 					riter.WriteLine ("pin"+T+"name"+T+"rating"+T+"country"+T+"club"+T+"grade");
 					while ((line = reader.ReadLine ()) != null) {
 						if (faci) {
 							line = line.Trim (); 
 							if (line.Length < 89) {
-								Console.WriteLine (line); //Drobeta
+								//Console.WriteLine (line); //Drobeta
+                                ;
 							} 
 							else {
 								/* pin - 8 digit  0 7
@@ -780,7 +783,7 @@ namespace Ire
 							}
 						} 
 						else {
-							Console.WriteLine (line);
+//							Console.WriteLine (line);
 							line = line.Trim (); 
 							if (line.StartsWith (tTest)) {
 								faci = true;
@@ -792,7 +795,7 @@ namespace Ire
 					riter.Flush ();
 				}
 			}
-
+//            Console.WriteLine(DateTime.Now);
 		}
 
 		/*
