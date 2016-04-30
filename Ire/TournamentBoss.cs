@@ -173,8 +173,10 @@ namespace Ire
 			Console.WriteLine ("ProcessResults: rnd " + rnd + " pairings " + RoundPairings.Count);
 			//lookuptable
 			foreach (Pairing p in RoundPairings) {
-                if(p.white.getParticipation(rnd-1) || p.black.getParticipation(rnd-1))
-                    Console.WriteLine("A player who had been assigned a Bye has played a game.");
+				if(p.white.getParticipation(rnd-1)==false) 
+					Console.WriteLine("The following was originally assigned a bye:" + p.white.getName());
+				if(p.black.getParticipation(rnd-1)==false) 
+					Console.WriteLine("The following was originally assigned a bye:" + p.black.getName());
 				p.white.setResult (rnd, p.black.Seed, p.WhiteScore (), p.GetHandi (), 1);
 				p.black.setResult (rnd, p.white.Seed, p.BlackScore (), p.GetHandi (), 0);
                 Console.WriteLine("W" + p.white.Seed + ": B " + p.black.Seed);
