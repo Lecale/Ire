@@ -44,7 +44,7 @@ namespace Ire
             }
             //end DO WE NEED
             _Split = new List<SplitLayer>();
-            //populate Fold layers which use Seed and not Deed
+            //populate Split layers which use Seed and not Deed
             _Split.Add(new SplitLayer(plys[0].getMMS(), plys[0].Seed));
             for (int i = 1; i < plys.Count; i++)
             {
@@ -57,9 +57,9 @@ namespace Ire
                     _Split.Add(new SplitLayer(plys[i].getMMS(), plys[i].Seed));
                 }
             }
-            //           Console.WriteLine("FoldLayers.Count:" + Fold.Count);
-            //			foreach (FoldLayer _FL in Fold)
-            //				Console.WriteLine ("MMS:"+_FL.MMSKey+" "+_FL.StackSize());
+//			Console.WriteLine("SplitLayers.Count:" + _Split.Count);
+  //          			foreach (SplitLayer _FL in _Split)
+    //        				Console.WriteLine ("MMS:"+_FL.MMSKey+" "+_FL.StackSize());
             DRAW();
         }
 
@@ -99,7 +99,7 @@ namespace Ire
                                     found = true;
                                     Pairs.Add(new Pairing(top, plys[lookUpTable[ls - 1]]));
                                     path += " " + top.Seed + "," + plys[lookUpTable[ls - 1]].Seed;
-                                    //         Console.WriteLine("pathupdate"+path); //seeds match
+                                             Console.WriteLine("pathupdate"+path); //seeds match
                                     mcl.Eject(ls);
                                     if (Pairs.Count == totalPairs)
                                         return; //best way to exit

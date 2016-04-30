@@ -428,11 +428,14 @@ namespace Ire
 		#region ImportFunctions
         public void DownloadEGFMasterZip()
         {
-            string uri = "http://www.europeangodatabase.eu/EGD/EGD_2_0/downloads/allworld_lp.zip";
+			string uri = "http://www.europeangodatabase.eu/EGD/EGD_2_0/downloads/allworld_lp.zip";
+			if( File.Exists(workDirectory + "egzipdata.zip"))
+				File.Delete(workDirectory + "egzipdata.zip");
+			if( File.Exists(workDirectory + "allworld_lp.html"))
+				File.Delete(workDirectory + "allworld_lp.html");
 			FileInfo fi;
-         //   string egfCopyUnZipped = "/Users/iandavis/egzipdata.txt";
             WebClient client = new WebClient ();
-//			client.DownloadFile (uri, workDirectory + "egzipdata.zip");
+			client.DownloadFile (uri, workDirectory + "egzipdata.zip");
 				Console.WriteLine ("DownloadMasterZipEGF file downloaded");
 		    fi = new FileInfo (workDirectory + "egzipdata.zip");
             using (ZipFile zip = ZipFile.Read(fi.FullName))
@@ -455,7 +458,7 @@ namespace Ire
 				for (int i = 0; i < 6; i++)
 					tLn = reader.ReadLine(); //trip through headers
 				while ((tLn = reader.ReadLine ()) != null) {
-					String[] split = tLn.Split (',');
+					String[] split = tLn.Split(new char[] {',','\t'});
 					int rnd = split.Length - 5;
 					try {
 						int pine = int.Parse (split [0]);
@@ -508,7 +511,7 @@ namespace Ire
 
                 while ((tLn = reader.ReadLine()) != null)
                 {
-                    String[] split = tLn.Split(',');
+					String[] split = tLn.Split(new char[] {',','\t'});
                     int rnd = split.Length - 5;
 
                     try
@@ -755,7 +758,7 @@ namespace Ire
 			catch(Exception e){ Console.WriteLine (e.ToString ());
 			}
 			string line;
-			string T = "\t";
+			string T = ",";
 			StringBuilder li = new StringBuilder("");
 
 			using (StreamReader reader = new StreamReader (tzipfile)) {
