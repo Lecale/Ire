@@ -990,9 +990,11 @@ Bd	White	Result	Black	Handicap
 					sw.WriteLine("<tr><td>" + al.Replace("\t","</td><td>") + "</td></tr>");
 				}
 				sw.WriteLine ("</table>");
-				sw.WriteLine ("<p>Rating Bar: " + nTopBar);
-				sw.WriteLine ("<p>Rating Floor: " + nRatingFloor);
-				sw.WriteLine ("<p>Handicap Adjustment: " + HandiAdjust);
+				if(TopBar)
+					sw.WriteLine ("<p>Rating Bar: " + nTopBar);
+				if(RatingFloor)
+					sw.WriteLine ("<p>Rating Floor: " + nRatingFloor);
+				sw.WriteLine ("<p>Handicap Adjustment: " + HandiAdjust + " Max Handicap" + nMaxHandicap);
 				sw.WriteLine ("</html>");
 			}
 		}
