@@ -64,7 +64,7 @@ namespace Ire
 		{
 			Player top = plys [start];
 			Pairing tmp;
-			Console.WriteLine ("Calling Draw() start:" + start + ":depth:" + depth + ":retry:" + retry);
+			Console.WriteLine ("Calling SimpleDraw() start:" + start);
 			bool found = false;
 			for (int i = start+1; i <= plys.Count -1; i++) { //foreachPlayer
 				//Console.WriteLine ("looking at i :" + i);
@@ -112,7 +112,7 @@ namespace Ire
                     {
                         if (Pairs.Count == plys.Count - Pairs.Count)
                             return;
-                        Console.WriteLine("No valid pairing was found. Depth" + Pairs.Count + ":Players:"+plys.Count);
+                    //    Console.WriteLine("No valid pairing was found. Depth" + Pairs.Count + ":Players:"+plys.Count);
 						string sp = path;
                         Paths.Add(sp);
 //                        Console.WriteLine("Blocked Path:"+path);

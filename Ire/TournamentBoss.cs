@@ -706,35 +706,37 @@ namespace Ire
 			using (StreamReader sr = new StreamReader (workDirectory + "settings.txt")) {
 				while(true)	{
 						dbg = sr.ReadLine ();
-						s =dbg.Split(ch);
-						if(s[0].Contains("Tournament Name")){
-							TournamentName = s[1];
-						}
-						if(s[0].Contains("Rounds")){
-							nRounds = int.Parse(s[1].Trim());
-						}
-						if(s[0].Contains("Top Bar Rating")){
-							nTopBar = int.Parse(s[1].Trim());
-						}
-						if(s[0].Contains("Rating Floor")){
-							nRatingFloor = int.Parse(s[1].Trim());
-						}
-						if(s[0].Contains("Handicap Policy")){
-							HandiAdjust = int.Parse(s[1].Trim());
-						}
-						if(s[0].Contains("Max Handicap")){
-							nMaxHandicap = int.Parse(s[1].Trim());
-						}
-						if(s[0].Contains("Grade Width")){
-							nGradeWidth = int.Parse(s[1].Trim());
-						}
-						if(s[0].Contains("Permit handicap above bar")){
-                            if (s[1].ToUpper().StartsWith("Y"))
-                                HandiAboveBar = true;
-						}
-						if(s[0].Contains("Tiebreak ") && s.Length > 1){
-							if(s[1].Trim()!="")
-								Tiebreakers.Add(s[1].ToUpper());
+						if(dbg.Length > 2){
+							s =dbg.Split(ch);
+							if(s[0].Contains("Tournament Name")){
+								TournamentName = s[1];
+							}
+							if(s[0].Contains("Rounds")){
+								nRounds = int.Parse(s[1].Trim());
+							}
+							if(s[0].Contains("Top Bar Rating")){
+								nTopBar = int.Parse(s[1].Trim());
+							}
+							if(s[0].Contains("Rating Floor")){
+								nRatingFloor = int.Parse(s[1].Trim());
+							}
+							if(s[0].Contains("Handicap Policy")){
+								HandiAdjust = int.Parse(s[1].Trim());
+							}
+							if(s[0].Contains("Max Handicap")){
+								nMaxHandicap = int.Parse(s[1].Trim());
+							}
+							if(s[0].Contains("Grade Width")){
+								nGradeWidth = int.Parse(s[1].Trim());
+							}
+							if(s[0].Contains("Permit handicap above bar")){
+	                            if (s[1].ToUpper().StartsWith("Y"))
+	                                HandiAboveBar = true;
+							}
+							if(s[0].Contains("Tiebreak ") && s.Length > 1){
+								if(s[1].Trim()!="")
+									Tiebreakers.Add(s[1].ToUpper());
+							}
 						}
 					}
 				}

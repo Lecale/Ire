@@ -64,7 +64,7 @@ namespace Ire
 		public void DRAW(int start=0)
 		{
 			Player top = plys [start];
-			Console.WriteLine ("Calling Draw() start:" + start);
+			Console.WriteLine ("Calling FoldDraw() start:" + start);
 			bool found = false;
 			for (int i = start+1; i <= plys.Count -1; i++) { //foreachPlayer
 				if (Registry.Contains(plys [i].Seed) == true) {
@@ -112,7 +112,7 @@ namespace Ire
                     {
 						if (Pairs.Count == totalPairs) //should be unreachable
 							return;
-                        Console.WriteLine("No valid pairing was found. Retry.");
+                     //   Console.WriteLine("No valid pairing was found. Retry.");
                         //add to block
 						string sp = path;
 						Paths.Add(sp);
