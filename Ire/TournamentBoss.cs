@@ -519,7 +519,7 @@ namespace Ire
 							bull[k]=true;
                         if (split.Length > 6) // or no need to handle bye setting
                         {
-                            for (int i = 5; i < rnd + 5; i++)
+                            for (int i = 6; i < rnd + 6; i++)
                             {
                                 if (split[i].Equals("") == false)
                                 {
@@ -546,7 +546,7 @@ namespace Ire
                         if (AllPlayers.Contains(j) == false)
                             AllPlayers.Add(j);
                         else
-                        //    if (Supression == false)
+                            if (Supression == false)
                                 Console.WriteLine("Duplicate Entry detected");
                     }
                     catch (Exception e)
