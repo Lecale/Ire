@@ -578,11 +578,16 @@ namespace Ire
 				workDirectory += "\\";
 			Console.WriteLine("Working directory is: "+workDirectory);
 			//does saved data exist
-			if(File.Exists(workDirectory + "settings.txt") && 
-				File.Exists(workDirectory + "players.txt") && 
-				File.Exists(workDirectory + "Store.txt")
-			)
-				Console.WriteLine("Would you like to restore saved tournament data? (yes:no) ");
+            if (File.Exists(workDirectory + "settings.txt") &&
+                File.Exists(workDirectory + "players.txt") &&
+                File.Exists(workDirectory + "Store.txt")
+            )
+            {
+                Console.WriteLine("Would you like to restore saved tournament data? (yes:no) ");
+                string _answer = Console.ReadLine();
+                if (_answer.ToUpper().StartsWith("Y"))
+                    return false; // Enter load stored tournament mode from Program.cs
+            }
             string fOut = workDirectory + "players.txt";
 			Console.WriteLine("Template file created at: "+fOut);
             Console.WriteLine("Setting Tournament Information...");
@@ -883,7 +888,26 @@ Bd	White	Result	Black	Handicap
                 Console.WriteLine("Total pairings count now " + AllPairings.Count);
             }
         }
-			
+
+
+        public void RestoreTournament()
+        {
+            Console.WriteLine("Ire will attempt to restore the tournament to the last round played.");
+            Console.WriteLine("After doing so we will make a new draw. This means the old draw will be overwritten");
+            Console.WriteLine("Enter the number of the last completed round.");
+            int rndRestore = int.Parse(Console.ReadLine());
+            for(int i=1; i<rndRestore+1; i++)
+                if (File.Exists(workDirectory + "Round" + i + "Results.txt") == false )
+                {
+                    Console.WriteLine("Missing results for round " + i);
+                    Console.WriteLine("This is a fatal error. Goodbye.");
+                    throw new Exception();
+                }
+            //read settings file
+            //read players file
+            //read store file
+            //
+        }
 #endregion
 
         #region Export Functions
