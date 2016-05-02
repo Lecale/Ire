@@ -185,7 +185,7 @@ namespace Ire
 			foreach (Player ap in AllPlayers) {
                 if (ap.getOpponent(rnd - 1) == 0)
                 {
-                    if (ap.getResult(rnd - 1) != 0.5)
+                    if (ap.getResult(rnd - 1) != 0.5)  
                     {
                         Console.WriteLine("Assigning a bye to " + ap.getName());
                         ap.AssignBye(rnd);//AssignBye adjusts the rnd number
@@ -455,28 +455,28 @@ namespace Ire
 					tLn = reader.ReadLine(); //trip through headers
 				while ((tLn = reader.ReadLine ()) != null) {
 					String[] split = tLn.Split(new char[] {',','\t'});
-					int rnd = split.Length - 5;
+                    Console.WriteLine(tLn);
 					try {
 						int pine = int.Parse (split [0]);
 						int rats = int.Parse (split [2]);
-                       // string grd = split[5];
 						bool[] bull = new bool[nRounds]; //not set via input file
 						for(int k=0; k<bull.Length; k++)
 							bull[k]=true;
-						for (int i = 5; i < rnd + 5; i++) {
-							if (split [i].Equals ("") == false) {
-								try{
-									int byeRound = int.Parse(split[i].Trim());
-									if(byeRound > nRounds){
-										Console.WriteLine("Bye cannot be allocated for round which does not exist");
-										Console.WriteLine(tLn);
-									}
-									else
-										bull[byeRound-1]=false; //0 based
-								}
-								catch(Exception e){Console.WriteLine(e.Message);}
-							}
-						}
+                        if(split.Length > 6)
+						    for (int i = 6; i < split.Length; i++) {
+							    if (split [i].Equals ("") == false) {
+								    try{
+									    int byeRound = int.Parse(split[i].Trim());
+									    if(byeRound > nRounds){
+										    Console.WriteLine("Bye cannot be allocated for round which does not exist");
+										    Console.WriteLine(tLn);
+									    }
+									    else
+										    bull[byeRound-1]=false; //0 based
+								    }
+								    catch(Exception e){Console.WriteLine(e.Message);}
+							    }
+						    }
 						Player j = new Player (pine, split [1], rats, split [3], split [4],  bull, split[5]);
 						if (AllPlayers.Contains (j) == true) {
 							for(int ap = 0; ap<AllPlayers.Count; ap++)
@@ -646,60 +646,64 @@ namespace Ire
 				PairingStrategy = "Fold";
 			if(pst.Equals("SPLIT"))
 				PairingStrategy = "Split";
+            bool overwritePlayers = true;
             if (File.Exists(fOut))
             {
                 Console.WriteLine("Players file already exists - Overwrite it? y/n");
                 string s = Console.ReadLine().ToUpper();
 				if (s.StartsWith ("N"))
-					;
+                    overwritePlayers = false;
                 else
                     File.Delete(fOut);
 			}
 
-            using (StreamWriter riter = new StreamWriter(fOut))
-            {
-                riter.WriteLine("Tournament Name:\t" + name + ",");
-                riter.WriteLine("Copy Paste the Player information into the sheet,");
-                riter.WriteLine("PIN , Name, Rating, Club, Country,");
-                riter.WriteLine("type X into the round column to mark a Bye,");
-                riter.WriteLine(",");
-                string hdr = "Pin,Name,Rating,Club,Country";
-                string bdy = ",,,,";
-                for (int i = 0; i < nRounds; i++)
+            if(overwritePlayers)
+                using (StreamWriter riter = new StreamWriter(fOut))
                 {
-                    hdr = hdr + ",R" + (i + 1);
-                    bdy = bdy + ",";
+                    riter.WriteLine("Tournament Name:\t" + name + ",");
+                    riter.WriteLine("Copy Paste the Player information into the sheet,");
+                    riter.WriteLine("PIN , Name, Rating, Club, Country,");
+                    riter.WriteLine("type X into the round column to mark a Bye,");
+                    riter.WriteLine(",");
+                    string hdr = "Pin,Name,Rating,Club,Country";
+                    string bdy = ",,,,";
+                    for (int i = 0; i < nRounds; i++)
+                    {
+                        hdr = hdr + ",R" + (i + 1);
+                        bdy = bdy + ",";
+                    }
+                    riter.WriteLine(hdr);
+                    riter.WriteLine(bdy);
                 }
-                riter.WriteLine(hdr);
-                riter.WriteLine(bdy);
-            }
 			//write settings
+            bool overwriteSettings = true;
 			string fSettings = workDirectory + "settings.txt";
 			if (File.Exists(fSettings))
 			{
 				Console.WriteLine("Settings file already exists - Overwrite it? y/n");
 				string s = Console.ReadLine().ToUpper();
 				if (s.StartsWith("N"))
-					;
+					overwriteSettings = false;
 				else
 					File.Delete(fSettings);
 			}
-			using (StreamWriter riter = new StreamWriter (fSettings)) {
-				riter.WriteLine ("Tournament Name:\t" + name);
-				riter.WriteLine ("Rounds:\t" + nRounds);
-				if (TopBar) {
-					riter.WriteLine ("Top Bar Rating:\t");
-					riter.WriteLine ("Permit handicap above bar:\t");
-				}
-				if(RatingFloor)
-					riter.WriteLine ("Rating Floor:\t");
-				riter.WriteLine ("Handicap Policy:\t"+HandiAdjust);
-				riter.WriteLine ("Max Handicap:\t"+nMaxHandicap);		
-				riter.WriteLine ("Grade Width:\t"+nGradeWidth);		
-				riter.WriteLine ("Tiebreak 1:\t");		
-				riter.WriteLine ("Tiebreak 2:\t");		
-				riter.WriteLine ("Tiebreak 3:\t");		
-			}
+            if(overwriteSettings)
+			    using (StreamWriter riter = new StreamWriter (fSettings)) {
+				    riter.WriteLine ("Tournament Name:\t" + name);
+				    riter.WriteLine ("Rounds:\t" + nRounds);
+				    if (TopBar) {
+					    riter.WriteLine ("Top Bar Rating:\t");
+					    riter.WriteLine ("Permit handicap above bar:\t");
+				    }
+				    if(RatingFloor)
+					    riter.WriteLine ("Rating Floor:\t");
+				    riter.WriteLine ("Handicap Policy:\t"+HandiAdjust);
+				    riter.WriteLine ("Max Handicap:\t"+nMaxHandicap);		
+				    riter.WriteLine ("Grade Width:\t"+nGradeWidth);		
+				    riter.WriteLine ("Tiebreak 1:\t");		
+				    riter.WriteLine ("Tiebreak 2:\t");		
+				    riter.WriteLine ("Tiebreak 3:\t");		
+			    }
 
 			return true;
         }

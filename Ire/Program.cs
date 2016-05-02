@@ -24,7 +24,7 @@ namespace Ire
                     tb.DownloadEGFMasterZip();
                 }
                 tb.GeneratePlayers(); // Cut to become auto
-                tb.ReadPlayers();
+                tb.ReadPlayers(true);
                 tb.SortField(true);
                 tb.ShowField();
                 Console.WriteLine("Press any key to read in the Settings File");

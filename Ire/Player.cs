@@ -86,7 +86,7 @@ namespace Ire
 
 		public void SetParticipation(int rnd)
 		{
-			participation[rnd] = false;
+			participation[rnd] = true;
 		}
 		public void AssignBye(int rnd)
 		{
