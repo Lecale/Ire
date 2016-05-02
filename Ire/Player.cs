@@ -294,6 +294,11 @@ namespace Ire
 			return ToString() + ".IM."+ initMMS + " S(" + Seed + ")";
         }
 
+		public string ToStore()
+		{
+			return EGDPin + "\t" + Seed + "\t" + initMMS + Name;
+		}
+
 		public string ToFile()
 		{
 			char[] c = { ' '};

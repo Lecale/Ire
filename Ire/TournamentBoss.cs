@@ -563,7 +563,7 @@ namespace Ire
             }
         }
 
-        public void GenerateTemplateInputFile()
+        public bool GenerateTemplateInputFile()
         {
             try
             {
@@ -581,6 +581,13 @@ namespace Ire
 			else
 				workDirectory += "\\";
 			Console.WriteLine("Working directory is: "+workDirectory);
+			//does saved data exist
+			if(File.Exists(workDirectory + "settings.txt") && 
+				File.Exists(workDirectory + "players.txt") && 
+				File.Exists(workDirectory + "Round1Results.txt") &&
+				File.Exists(workDirectory + "Round1Standings.txt")
+			)
+				Console.WriteLine("Would you like to restore saved tournament data? (yes:no) ");
             string fOut = workDirectory + "players.txt";
 			Console.WriteLine("Template at: "+fOut);
             Console.WriteLine("Setting Tournament Information...");
@@ -645,8 +652,8 @@ namespace Ire
             {
                 Console.WriteLine("Players file already exists - Overwrite it? y/n");
                 string s = Console.ReadLine().ToUpper();
-                if (s.StartsWith("N"))
-                    return;
+				if (s.StartsWith ("N"))
+					;
                 else
                     File.Delete(fOut);
 			}
@@ -675,7 +682,7 @@ namespace Ire
 				Console.WriteLine("Settings file already exists - Overwrite it? y/n");
 				string s = Console.ReadLine().ToUpper();
 				if (s.StartsWith("N"))
-					return;
+					;
 				else
 					File.Delete(fSettings);
 			}
@@ -695,6 +702,8 @@ namespace Ire
 				riter.WriteLine ("Tiebreak 2:\t");		
 				riter.WriteLine ("Tiebreak 3:\t");		
 			}
+
+			return true;
         }
 
 		public void ReadSettings()
@@ -883,6 +892,13 @@ Bd	White	Result	Black	Handicap
 #endregion
 
         #region Export Functions
+
+		public void GenerateStore()
+		{	string fOut = workDirectory + "Init.txt";
+			using (StreamWriter riter = new StreamWriter(fOut))
+				foreach (Player p in AllPlayers)
+					riter.WriteLine(p.ToStore());
+		}
 
         public void GenerateRoundResultsFile(int rnd, List<Pairing> ps)
         {

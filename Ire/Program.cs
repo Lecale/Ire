@@ -10,9 +10,10 @@ namespace Ire
     {
         static void Main(string[] args)
         {
-
+			foreach (string a in args)
+				Console.WriteLine (a);
             TournamentBoss tb = new TournamentBoss(true);
-			tb.GenerateTemplateInputFile (); //set working directory
+			bool newT = tb.GenerateTemplateInputFile (); //set working directory
             Console.WriteLine("Do you need to download the EGF Rating List? (yes/no)");
             string s = Console.ReadLine();
             if (s.ToUpper().StartsWith("Y"))
@@ -34,12 +35,9 @@ namespace Ire
             {
                 tb.MakeDraw(i);
                 tb.ReadResults(i);
-          //      tb.ShowField("Round" + i + "AfterReadResults"); //just a debug method
                 tb.ProcessResults(i);
-			//	tb.ShowField("Round" + i + "AfterProcess"); //just a debug method
                 tb.UpdateTiebreaks(i);
                 tb.SortField();
-           //     tb.ShowField("Round" + i + "AfterSortField"); //just a debug method
                 tb.GenerateStandingsfile(i);
             }
             tb.GenerateEGFExport();
@@ -47,23 +45,7 @@ namespace Ire
 
             Console.WriteLine("The tournament has ended.");
             Console.WriteLine("We hope you enjoyed using Ire to make the pairings.");
-            Console.WriteLine(RandomAdvice());
         }
 
-        static string RandomAdvice()
-        {
-            Random d = new Random();
-            List<string> FortuneCookie = new List<string>();
-            FortuneCookie.Add("Go home and rest.");
-            FortuneCookie.Add("Go out and party.");
-            FortuneCookie.Add("Go forth and conquer.");
-            FortuneCookie.Add("Now it is time to eat.");
-            FortuneCookie.Add("Have you ever thought about changing your life?");
-            FortuneCookie.Add("The way back to Earth has been wiped from my memory.");
-            FortuneCookie.Add("Leave no prisoners behind.");
-            FortuneCookie.Add("Tomorrow is a new day.");
-            FortuneCookie.Add("Dispatch war rocket Ajax to collect his body.");
-            return FortuneCookie[d.Next(FortuneCookie.Count)];
-        }
     }
 }
