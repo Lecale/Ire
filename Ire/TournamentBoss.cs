@@ -890,7 +890,7 @@ Bd	White	Result	Black	Handicap
         }
 
 
-        public void RestoreTournament()
+        public int RestoreTournament()
         {
             Console.WriteLine("Ire will attempt to restore the tournament to the last round played.");
             Console.WriteLine("After doing so we will make a new draw. This means the old draw will be overwritten");
@@ -943,8 +943,10 @@ Bd	White	Result	Black	Handicap
             }
             //Read in results from all rounds
             for (int i = 1; i < rndRestore + 1; i++)
-            { 
+            {
+                ReadResults(i);
             }
+            return rndRestore + 1;
         }
 #endregion
 

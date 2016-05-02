@@ -14,24 +14,32 @@ namespace Ire
 				Console.WriteLine (a);
             TournamentBoss tb = new TournamentBoss(true);
 			bool newT = tb.GenerateTemplateInputFile (); //set working directory
-            Console.WriteLine("Do you need to download the EGF Rating List? (yes/no)");
-            string s = Console.ReadLine();
-            if (s.ToUpper().StartsWith("Y"))
+            int startRound = 1;
+            if (newT)
             {
-                tb.DownloadEGFMasterZip();
-            } 
-			tb.GeneratePlayers (); // Cut to become auto
-			tb.ReadPlayers();
-			tb.SortField(true);
-			tb.ShowField ();
-			Console.WriteLine ("Press any key to read in the Settings File");
-			s = Console.ReadLine();//wait	
-			tb.ReadSettings ();
-			tb.previewTopBar (true);
-			tb.previewFloor (true);
+                Console.WriteLine("Do you need to download the EGF Rating List? (yes/no)");
+                string s = Console.ReadLine();
+                if (s.ToUpper().StartsWith("Y"))
+                {
+                    tb.DownloadEGFMasterZip();
+                }
+                tb.GeneratePlayers(); // Cut to become auto
+                tb.ReadPlayers();
+                tb.SortField(true);
+                tb.ShowField();
+                Console.WriteLine("Press any key to read in the Settings File");
+                s = Console.ReadLine();//wait	
+                tb.ReadSettings();
+                tb.previewTopBar(true);
+                tb.previewFloor(true);
+            }
+            else 
+            {
+                startRound = tb.RestoreTournament();
+            }
             int rounds = tb.nRounds;
 			//now we can start the tournament
-            for (int i = 1; i < rounds+1; i++)
+            for (int i = startRound; i < rounds + 1; i++)
             {
                 tb.MakeDraw(i);
                 tb.ReadResults(i);
