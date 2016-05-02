@@ -903,10 +903,48 @@ Bd	White	Result	Black	Handicap
                     Console.WriteLine("This is a fatal error. Goodbye.");
                     throw new Exception();
                 }
-            //read settings file
-            //read players file
-            //read store file
-            //
+            ReadSettings();
+            ReadPlayers();
+            //read store file which should be in the same order as the players file(?)
+            // look up table based on EGD pin
+            // 
+            List<int> EGD = new List<int>();
+            List<int> Seed = new List<int>();
+            List<float> iMMS = new List<float>();
+            string[] tmp;
+            using (StreamReader sr = new StreamReader(workDirectory + "store.txt"))
+            {
+                try
+                {
+                    while (sr.EndOfStream == false)
+                    {
+                        tmp = sr.ReadLine().Split('\t');
+                        if (tmp.Length > 3)
+                        {
+                            EGD.Add(int.Parse(tmp[0]));
+                            Seed.Add(int.Parse(tmp[1]));
+                            iMMS.Add(float.Parse(tmp[2]));
+                        }
+                    }
+                }
+                catch (Exception e) { Console.WriteLine("Exception in Restore:"+ e.Message);  }
+            }
+            foreach (Player ap in AllPlayers)
+            { //very slow method
+                for (int i = 0; i < EGD.Count; i++)
+                {
+                    if (ap.EGDPin == EGD[i])
+                    {
+                        ap.Seed = Seed[i];
+                        ap.initMMS = iMMS[i];
+                        i = EGD.Count + 42;
+                    }
+                }
+            }
+            //Read in results from all rounds
+            for (int i = 1; i < rndRestore + 1; i++)
+            { 
+            }
         }
 #endregion
 
