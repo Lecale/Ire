@@ -836,7 +836,6 @@ Bd	White	Result	Black	Handicap
 			int[] LUT = new int[AllPlayers.Count];
 			int[] CNT = new int[AllPlayers.Count];
             for (int i = 0; i < AllPlayers.Count; i++)
-                //LUT[i] = AllPlayers[i].Seed - 1; //Seed is not 0 based
                 LUT[AllPlayers[i].Seed - 1] = i; //Seed is not 0 based
             using (StreamReader sr = new StreamReader(workDirectory + "Round" + rnd + "Results.txt"))
             {
@@ -849,7 +848,7 @@ Bd	White	Result	Black	Handicap
 					catch(Exception e){ s = "";
 					}
 					if (s.Length >2 ) {	
-						Console.WriteLine ("Reading: " + s);
+					//	Console.WriteLine ("Reading: " + s);
 						//s.Replace (space, tab);
 						string[] split = s.Split (c);
 						string[] split2 = split [1].Split (c1);
@@ -875,17 +874,16 @@ Bd	White	Result	Black	Handicap
 							if (CNT [LUT [white]] == 1 && CNT [LUT [black]] == 1)
 								actualPairs.Add (p);
 							else
-								throw new Exception ("Player played more than one game in this round");
+								throw new Exception ("A player played more than one game in this round.");
 						else
 							Console.WriteLine ("A duplicate pairing result was detected " + p.ToFile ());
 					}
 				}
 				//and if we did not hit an exception
-				Console.WriteLine("Finished reading in results");
-//                string nimic = Console.ReadLine();
+				Console.WriteLine("Finished reading in results for Round " + rnd);
 				RoundPairings = actualPairs;
                 AllPairings.AddRange(actualPairs);
-                Console.WriteLine("Total pairings count now " + AllPairings.Count);
+//                Console.WriteLine("Total pairings count now " + AllPairings.Count);
             }
         }
 
@@ -1074,7 +1072,7 @@ Bd	White	Result	Black	Handicap
 					sw.WriteLine ("<p>Rating Bar: " + nTopBar);
 				if(RatingFloor)
 					sw.WriteLine ("<p>Rating Floor: " + nRatingFloor);
-				sw.WriteLine ("<p>Handicap Adjustment: " + HandiAdjust + " Max Handicap" + nMaxHandicap);
+				sw.WriteLine ("<p>Handicap Adjustment: " + HandiAdjust + " Max Handicap: " + nMaxHandicap);
 				sw.WriteLine ("</html>");
 			}
 		}
