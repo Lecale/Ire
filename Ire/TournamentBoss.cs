@@ -508,8 +508,6 @@ namespace Ire
                 while ((tLn = reader.ReadLine()) != null)
                 {
 					String[] split = tLn.Split(new char[] {',','\t'});
-                    int rnd = split.Length - 5;
-
                     try
                     {
                         int pine = int.Parse(split[0]);
@@ -519,7 +517,7 @@ namespace Ire
 							bull[k]=true;
                         if (split.Length > 6) // or no need to handle bye setting
                         {
-                            for (int i = 6; i < rnd + 6; i++)
+                            for (int i = 6; i < split.Length; i++)
                             {
                                 if (split[i].Equals("") == false)
                                 {
