@@ -201,13 +201,10 @@ namespace Ire
             int[] lookUp = new int[AllPlayers.Count]; //yuck
             for (int i = 0; i < AllPlayers.Count; i++)
             {
-             //   lookUp[i] = AllPlayers[i].Seed -1;
                 lookUp[AllPlayers[i].Seed - 1] = i;
-            //    Console.WriteLine("i: " + i + " maps to seed " + AllPlayers[i].Seed);
             }
             foreach (Player ap in AllPlayers)
             {
-          //      Console.WriteLine("Processing seed " + ap.Seed);
                 float _SOS = 0;
                 float _MOS = 0; //do not calculate if rnd <3
                 float _SODOS = 0;
@@ -225,7 +222,6 @@ namespace Ire
                         {
                             nGame++;
                             int op = ap.getOpponent(i) -1; 
-              //              Console.WriteLine("op: " + op + " lookUp index: " + lookUp[op]);
 							float f = AllPlayers[lookUp[op]].getMMS() ;
 							f = f + ap.getAdjHandi(i);
                             _SOS += f;
@@ -584,12 +580,11 @@ namespace Ire
 			//does saved data exist
 			if(File.Exists(workDirectory + "settings.txt") && 
 				File.Exists(workDirectory + "players.txt") && 
-				File.Exists(workDirectory + "Round1Results.txt") &&
-				File.Exists(workDirectory + "Round1Standings.txt")
+				File.Exists(workDirectory + "Store.txt")
 			)
 				Console.WriteLine("Would you like to restore saved tournament data? (yes:no) ");
             string fOut = workDirectory + "players.txt";
-			Console.WriteLine("Template at: "+fOut);
+			Console.WriteLine("Template file created at: "+fOut);
             Console.WriteLine("Setting Tournament Information...");
             Console.WriteLine("Please enter the Tournament Name:");
             string name = Console.ReadLine();
