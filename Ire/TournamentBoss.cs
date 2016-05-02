@@ -70,6 +70,8 @@ namespace Ire
 				Console.WriteLine ("Do you want to update player participation (byes) in the players list (yes / no)");
 			 s = Console.ReadLine ();
 				if (s.ToUpper ().Trim ().StartsWith ("Y")) {
+                    Console.WriteLine("After updating the Players file press any key to continue");
+                    string anykey = Console.ReadLine();
 					ReadByesFromFile (currentRound);
 				}
 			}
@@ -455,7 +457,7 @@ namespace Ire
 					tLn = reader.ReadLine(); //trip through headers
 				while ((tLn = reader.ReadLine ()) != null) {
 					String[] split = tLn.Split(new char[] {',','\t'});
-                    Console.WriteLine(tLn);
+//                    Console.WriteLine(tLn);
 					try {
 						int pine = int.Parse (split [0]);
 						int rats = int.Parse (split [2]);
@@ -482,7 +484,7 @@ namespace Ire
 							for(int ap = 0; ap<AllPlayers.Count; ap++)
 								if(j.Equals(AllPlayers[ap]))
 									for(int i2=nextRound-1; i2<nRounds; i2++) //0 based
-										AllPlayers[ap].SetParticipation(i2);
+										AllPlayers[ap].SetParticipation(i2, bull[i2]);
 						}
 					} catch (Exception e) {
 						Console.WriteLine ("An exception was encountered in ReadByesFromFile" + e.Message);

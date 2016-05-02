@@ -84,9 +84,9 @@ namespace Ire
 			setMMS(getMMS ());
 			}
 
-		public void SetParticipation(int rnd)
+		public void SetParticipation(int rnd, bool play=true)
 		{
-			participation[rnd] = true;
+			participation[rnd] = play;
 		}
 		public void AssignBye(int rnd)
 		{
