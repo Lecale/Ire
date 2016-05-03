@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Ire
@@ -472,12 +473,14 @@ namespace Ire
                         try
                         {
                             newPin = regor(wc.DownloadString(baseURL + pin));
+                            Thread.Sleep(9876); //be nice to the EGD
                         }
                         catch (Exception e) { newPin = -1; }
                         if (newPin == -1)
                             storeP.Add(tLn);
                         else
-                        {
+                        { 
+                            Console.WriteLine("Rating updated from: "+ tmp[2] + " to " + newPin);
                             if (tLn.Contains("\t" + tmp[2] + "\t"))
                                 tLn = tLn.Replace("\t" + tmp[2] + "\t", "\t" + newPin + "\t");
                             if (tLn.Contains("," + tmp[2] + ","))
@@ -488,6 +491,14 @@ namespace Ire
                     //else no pin invalid player, redact
                 }
             }
+            using (StreamWriter sw = new StreamWriter(fin))
+            {
+                foreach (string hdr in saveHDR)
+                    sw.WriteLine(hdr);
+                foreach (string sP in storeP) 
+                    sw.WriteLine(sP);
+            }
+ 
         }
 
         private int regor(string json)
