@@ -444,6 +444,64 @@ namespace Ire
             FormatMasterEGF();
         }
 
+        public void RefreshPlayers(bool Supression = false)
+        {
+            string tLn = "";
+            string fin = workDirectory + "players.txt";
+            WebClient wc = new WebClient();
+            string[] tmp;
+            char[] ctsv = { ',', '\t' };
+            string newGor;
+            string pin;
+            int newPin =-1;
+            string baseURL = "http://www.europeangodatabase.eu/EGD/GetPlayerDataByPIN.php?pin=";
+            List<string> saveHDR = new List<string>();
+            List<string> storeP = new List<string>();
+            using (StreamReader reader = new StreamReader(fin))
+            {
+                for (int i = 0; i < 6; i++)                {
+                    tLn = reader.ReadLine(); //trip through headers
+                    saveHDR.Add(tLn);
+                }
+                while ((tLn = reader.ReadLine()) != null)                {
+                    tmp = tLn.Split(ctsv);
+                    pin = tmp[0];
+                    if (pin.Length > 1)
+                    {
+                        try
+                        {
+                            newPin = regor(wc.DownloadString(baseURL + pin));
+                        }
+                        catch (Exception e) { newPin = -1; }
+                        if (newPin == -1)
+                            storeP.Add(tLn);
+                        else
+                        {
+                            ;
+                        }
+                    }
+                    //else no pin invalid player, redact
+                }
+            }
+        }
+
+        private int regor(string json)
+        {
+            json = json.Replace("\"","");
+            string[] split = json.Split(':');
+            try {
+                if (split[1].ToUpper().Equals("OK"))
+                {
+                    for (int i = 2; i < split.Length; i++)
+                        if (split[i].ToUpper().Equals("GOR"))
+                            return int.Parse(split[i + 1]);
+                    return -1;
+                }
+                else
+                    return -1;
+            }
+            catch (Exception e) { return -1; }
+        }
 
 		public void ReadByesFromFile(int nextRound){
 			//read players file
