@@ -217,17 +217,13 @@ namespace Ire
 			try{
 				Player p = (Player) obj;
 
-			//	Console.WriteLine ("Equals()" + EGDPin + "," + p.EGDPin);
-				if(Seed>0)
-				{
-					if(Seed==p.Seed)
-						return true;
-				}
-				//else //EGDPin is also a unique key
-				//{
-					if(EGDPin==p.EGDPin)
+			if(Seed>0)
+			{
+				if(Seed==p.Seed)
 					return true;
-				//}
+			}
+			if(EGDPin==p.EGDPin)
+					return true;
 			}
 			catch(Exception e) {
 				return false;

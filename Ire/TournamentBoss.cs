@@ -274,9 +274,8 @@ namespace Ire
 			//give byes
             for (int i = after; i > before; i--)
             {
-				Console.WriteLine ("Late Loop player:" + i);
+//				Console.WriteLine ("Late Loop player:" + i);
                 AllPlayers[i - 1].SetSeed(i);
-				Console.WriteLine ("Late Loop set seed");
 				AllPlayers [i - 1].topBar = false; //should already be false?
                 if(TopBar)
     				if (AllPlayers [i - 1].getERating () > nTopBar)
@@ -293,14 +292,14 @@ namespace Ire
 
                 //assign bye
 				for (int j = 1; j < rnd; j++) {
-					Console.WriteLine ("Late Loop assign bye round:" + j);
+//					Console.WriteLine ("Late Loop assign bye round:" + j);
 					AllPlayers [i - 1].AssignBye (j);
 				}
 				for (int k = 0; k < nRounds; k++)
 					if (AllPlayers [i - 1].getParticipation (k))
 						Console.WriteLine (AllPlayers [i - 1].ToString () + " plays in "+ (k + 1));
             }
-			Console.WriteLine ("sort field again");
+//			Console.WriteLine ("sort field again");
 			SortField ();
 		}
 		#endregion
@@ -913,8 +912,10 @@ Bd	White	Result	Black	Handicap
 			char[] c1 = { '(',')','?'};
 			int[] LUT = new int[AllPlayers.Count];
 			int[] CNT = new int[AllPlayers.Count];
-            for (int i = 0; i < AllPlayers.Count; i++)
-                LUT[AllPlayers[i].Seed - 1] = i; //Seed is not 0 based
+            for (int i = 0; i < AllPlayers.Count; i++){
+                Console.WriteLine("ReadResults()i:" + i + ":S:" + AllPlayers[i].Seed);
+                LUT[AllPlayers[i].Seed - 1] = i;
+            }
             using (StreamReader sr = new StreamReader(workDirectory + "Round" + rnd + "Results.txt"))
             {
 				sr.ReadLine ();
