@@ -323,7 +323,7 @@ namespace Ire
                     Utility u = new Utility();
                     string end = "";
                     string fn = workDirectory + "players.txt";
-                    int i = 100; //fake EGD pin
+                    int i = 999100; //fake EGD pin
                     using (StreamWriter sw = new StreamWriter(fn, true))
                     {
                         for (int np = 0; np < nPlayers; np++)
@@ -444,7 +444,7 @@ namespace Ire
             FormatMasterEGF();
         }
 
-        public void RefreshPlayers(bool Supression = false)
+        public void RefreshPlayers()
         {
             Console.WriteLine("RefreshPlayers() waits 10 seconds between each call to the EGD");
             string tLn = "";
@@ -469,22 +469,29 @@ namespace Ire
                     pin = tmp[0];
                     if (pin.Length > 1)
                     {
-                        try
+                        if (pin.Length < 8)
                         {
-                            newPin = regor(wc.DownloadString(baseURL + pin));
-                            Thread.Sleep(9876); //be nice to the EGD
+                            storeP.Add(tLn); //fake EGD pin
                         }
-                        catch (Exception e) { newPin = -1; }
-                        if (newPin == -1)
-                            storeP.Add(tLn);
                         else
-                        { 
-                            Console.WriteLine("Rating updated from: "+ tmp[2] + " to " + newPin);
-                            if (tLn.Contains("\t" + tmp[2] + "\t"))
-                                tLn = tLn.Replace("\t" + tmp[2] + "\t", "\t" + newPin + "\t");
-                            if (tLn.Contains("," + tmp[2] + ","))
-                                tLn = tLn.Replace("," + tmp[2] + ",", "," + newPin + ",");
-                            storeP.Add(tLn);
+                        {
+                            try
+                            {
+                                newPin = regor(wc.DownloadString(baseURL + pin));
+                                Thread.Sleep(9876); //be nice to the EGD
+                            }
+                            catch (Exception e) { newPin = -1; }
+                            if (newPin == -1)
+                                storeP.Add(tLn);
+                            else
+                            {
+                                Console.WriteLine("Rating updated from: " + tmp[2] + " to " + newPin);
+                                if (tLn.Contains("\t" + tmp[2] + "\t"))
+                                    tLn = tLn.Replace("\t" + tmp[2] + "\t", "\t" + newPin + "\t");
+                                if (tLn.Contains("," + tmp[2] + ","))
+                                    tLn = tLn.Replace("," + tmp[2] + ",", "," + newPin + ",");
+                                storeP.Add(tLn);
+                            }
                         }
                     }
                     //else no pin invalid player, redact

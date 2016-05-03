@@ -10,7 +10,7 @@ namespace Ire
 		private string[] fn = {"Al","Bob","Cal","Dar","Eoin","Fra","ger","hal","io","jo","ken","lor","meg","nim","olli","peg","rach","sue",};
 		private string[] pre = {"O'","Mc","Ker","Ze","Van","Herr","Mac"};
 		private string[] mid = {"Trah","Row","Land","Sea","Flack","Black","Whit","Red","Ash","Round","Tri"};
-		private string[] end = {"better","lower","water","later","son","morn","mane","ston"};
+		private string[] end = {"better","lower","water","later","son","morn","mane","ston","crake"};
 
 		public Utility ()
 		{
