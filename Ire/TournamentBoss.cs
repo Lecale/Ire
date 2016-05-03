@@ -446,7 +446,7 @@ namespace Ire
 
         public void RefreshPlayers()
         {
-            Console.WriteLine("RefreshPlayers() waits 10 seconds between each call to the EGD");
+            Console.WriteLine("RefreshPlayers() waits 5 seconds between each call to the EGD");
             string tLn = "";
             string fin = workDirectory + "players.txt";
             WebClient wc = new WebClient();
@@ -478,7 +478,7 @@ namespace Ire
                             try
                             {
                                 newPin = regor(wc.DownloadString(baseURL + pin));
-                                Thread.Sleep(9876); //be nice to the EGD
+                                Thread.Sleep(5000); //be nice to the EGD
                             }
                             catch (Exception e) { newPin = -1; }
                             if (newPin == -1)
@@ -920,7 +920,7 @@ Bd	White	Result	Black	Handicap
 			int[] LUT = new int[AllPlayers.Count];
 			int[] CNT = new int[AllPlayers.Count];
             for (int i = 0; i < AllPlayers.Count; i++){
-                Console.WriteLine("ReadResults()i:" + i + ":S:" + AllPlayers[i].Seed);
+            //    Console.WriteLine("ReadResults()i:" + i + ":S:" + AllPlayers[i].Seed);
                 LUT[AllPlayers[i].Seed - 1] = i;
             }
             using (StreamReader sr = new StreamReader(workDirectory + "Round" + rnd + "Results.txt"))
