@@ -576,7 +576,6 @@ namespace Ire
 
         //	
         //  Pin tName tRating tClub tCountry is the expected input order THEN GRADE
-        // GIGO method, checks for already entered player
 		//
         public void ReadPlayers(bool Supression=false)
         {
@@ -771,8 +770,9 @@ namespace Ire
 			}
             if(overwriteSettings)
 			    using (StreamWriter riter = new StreamWriter (fSettings)) {
-				    riter.WriteLine ("Tournament Name:\t" + name);
-				    riter.WriteLine ("Rounds:\t" + nRounds);
+                    riter.WriteLine("Tournament Name:\t" + name);
+                    riter.WriteLine("Rounds:\t" + nRounds);
+                    riter.WriteLine("Pairing Strategy:\t" + PairingStrategy);
 				    if (TopBar) {
 					    riter.WriteLine ("Top Bar Rating:\t");
 					    riter.WriteLine ("Permit handicap above bar:\t");
@@ -803,10 +803,15 @@ namespace Ire
 							s =dbg.Split(ch);
 							if(s[0].Contains("Tournament Name")){
 								TournamentName = s[1];
-							}
-							if(s[0].Contains("Rounds")){
-								nRounds = int.Parse(s[1].Trim());
-							}
+                            }
+                            if (s[0].Contains("Rounds"))
+                            {
+                                nRounds = int.Parse(s[1].Trim());
+                            }
+                            if (s[0].Contains("Pairing Strategy"))
+                            {
+                                PairingStrategy = s[1].Trim();
+                            }
 							if(s[0].Contains("Top Bar Rating")){
 								nTopBar = int.Parse(s[1].Trim());
 							}
