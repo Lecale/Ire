@@ -446,6 +446,7 @@ namespace Ire
 
         public void RefreshPlayers(bool Supression = false)
         {
+            Console.WriteLine("RefreshPlayers() waits 10 seconds between each call to the EGD");
             string tLn = "";
             string fin = workDirectory + "players.txt";
             WebClient wc = new WebClient();
@@ -477,7 +478,11 @@ namespace Ire
                             storeP.Add(tLn);
                         else
                         {
-                            ;
+                            if (tLn.Contains("\t" + tmp[2] + "\t"))
+                                tLn = tLn.Replace("\t" + tmp[2] + "\t", "\t" + newPin + "\t");
+                            if (tLn.Contains("," + tmp[2] + ","))
+                                tLn = tLn.Replace("," + tmp[2] + ",", "," + newPin + ",");
+                            storeP.Add(tLn);
                         }
                     }
                     //else no pin invalid player, redact
