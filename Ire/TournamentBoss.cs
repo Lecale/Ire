@@ -510,7 +510,7 @@ namespace Ire
         private int regor(string json)
         {
             json = json.Replace("\"","");
-            string[] split = json.Split(':');
+            string[] split = json.Split(new char[] {':',','});
             try {
                 if (split[1].ToUpper().Equals("OK"))
                 {
