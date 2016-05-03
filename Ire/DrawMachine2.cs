@@ -6,7 +6,7 @@ namespace Ire
 	public class DrawMachine2 //Aka fold pairing
 	{
 		#region variables
-		private List<Player> plys; //this will be all players for convenience of LookUp
+		private List<Player> plys = new List<Player>(); //this will be all players for convenience of LookUp
 		private List<Pairing> Pairs;
 		private List<int> lSuggestions = new List<int>();
 		private List<FoldLayer> Fold;
@@ -21,7 +21,7 @@ namespace Ire
 		public DrawMachine2 ( List<Player> ply, List<Pairing> _History, int _Rnd,
 			int _MaxHandi = 9, int _AdjHandi = 1, bool _HandiAboveBar = false)
 		{
-			plys = ply; //Careful with Byes
+			plys.AddRange(ply); //Careful with Byes
             History = _History;
 			lookUpTable = new int[ply.Count];
 			Pairs = new List<Pairing>();
