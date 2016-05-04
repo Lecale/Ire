@@ -780,14 +780,14 @@ namespace Ire
                     riter.WriteLine("Pairing Strategy:\t" + PairingStrategy);
 				    if (TopBar) {
 					    riter.WriteLine ("Top Bar Rating:\t");
-					    riter.WriteLine ("Permit handicap above bar:\t");
+					    riter.WriteLine ("Permit handicap above bar:\tNo");
 				    }
 				    if(RatingFloor)
 					    riter.WriteLine ("Rating Floor:\t");
 				    riter.WriteLine ("Handicap Policy:\t"+HandiAdjust);
 				    riter.WriteLine ("Max Handicap:\t"+nMaxHandicap);		
 				    riter.WriteLine ("Grade Width:\t"+nGradeWidth);		
-				    riter.WriteLine ("Tiebreak 1:\t");		
+				    riter.WriteLine ("Tiebreak 1:\tSOS");		
 				    riter.WriteLine ("Tiebreak 2:\t");		
 				    riter.WriteLine ("Tiebreak 3:\t");		
 			    }
