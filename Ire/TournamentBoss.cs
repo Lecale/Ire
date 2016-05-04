@@ -62,8 +62,6 @@ namespace Ire
 		public void MakeDraw(int currentRound = 1)
 		{
 			Console.WriteLine ("We are ready to make the draw for Round "+currentRound);
-			if (currentRound == 1)
-				GenerateStore ();
 			if (currentRound > 1) {
 				Console.WriteLine ("Do you want to add a new player to the players list (yes / no)");
 				string s = Console.ReadLine ();
@@ -174,7 +172,9 @@ namespace Ire
 
 		//It should be possible to reverse Byes using this method
 		public void ProcessResults(int rnd)
-		{
+        {
+            if (rnd == 1)
+                GenerateStore();
 			Console.WriteLine ("ProcessResults: rnd " + rnd + " pairings " + RoundPairings.Count);
 			//lookuptable
 			foreach (Pairing p in RoundPairings) {
@@ -661,7 +661,7 @@ namespace Ire
 			//does saved data exist
             if (File.Exists(workDirectory + "settings.txt") &&
                 File.Exists(workDirectory + "players.txt") &&
-                File.Exists(workDirectory + "Store.txt")
+                File.Exists(workDirectory + "Init.txt")
             )
             {
                 Console.WriteLine("Would you like to restore saved tournament data? (yes:no) ");
@@ -1003,7 +1003,7 @@ Bd	White	Result	Black	Handicap
             List<int> Seed = new List<int>();
             List<float> iMMS = new List<float>();
             string[] tmp;
-            using (StreamReader sr = new StreamReader(workDirectory + "store.txt"))
+            using (StreamReader sr = new StreamReader(workDirectory + "Init.txt"))
             {
                 try
                 {

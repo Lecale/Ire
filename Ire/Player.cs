@@ -292,7 +292,7 @@ namespace Ire
 
 		public string ToStore()
 		{
-			return EGDPin + "\t" + Seed + "\t" + initMMS + Name;
+            return EGDPin + "\t" + Seed + "\t" + initMMS + "\t" + Name;
 		}
 
 		public string ToFile()

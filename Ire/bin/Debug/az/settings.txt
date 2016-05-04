@@ -1,6 +1,0 @@
-Tournament Name:	az
-Rounds:	3
-Top Bar Rating:	1720
-Rating Floor:	1400
-Handicap Policy:	1
-Max Handicap:	9

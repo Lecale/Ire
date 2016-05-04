@@ -46,7 +46,6 @@
   <ItemGroup>
     <Compile Include="Bye.cs" />
     <Compile Include="DrawMachine3.cs" />
-    <Compile Include="Group.cs" />
     <Compile Include="Pairing.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
