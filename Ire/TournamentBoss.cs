@@ -62,6 +62,8 @@ namespace Ire
 		public void MakeDraw(int currentRound = 1)
 		{
 			Console.WriteLine ("We are ready to make the draw for Round "+currentRound);
+			if (currentRound == 1)
+				GenerateStore ();
 			if (currentRound > 1) {
 				Console.WriteLine ("Do you want to add a new player to the players list (yes / no)");
 				string s = Console.ReadLine ();

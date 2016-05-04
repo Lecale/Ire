@@ -26,8 +26,9 @@ namespace Ire
                 tb.GeneratePlayers(); // Cut to become auto
                 tb.ReadPlayers(true);
                 tb.SortField(true);
-                tb.ShowField();
-                Console.WriteLine("Press any key to read in the Settings File");
+				tb.ShowField();
+				Console.WriteLine("Now please complete your data in Settings File.");
+				Console.WriteLine("When you have finished press return.");
                 s = Console.ReadLine();//wait	
                 tb.ReadSettings();
                 tb.previewTopBar(true);
