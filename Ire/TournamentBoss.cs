@@ -989,7 +989,7 @@ Bd	White	Result	Black	Handicap
                 if (File.Exists(workDirectory + "Round" + i + "Results.txt") == false )
                 {
                     Console.WriteLine("Missing results for round " + i);
-                    Console.WriteLine("This is a fatal error. Goodbye.");
+                    Console.WriteLine("This is a fatal error. Ire will exit.");
                     throw new Exception();
                 }
             ReadSettings();
@@ -1035,6 +1035,7 @@ Bd	White	Result	Black	Handicap
             {
                 ReadResults(i);
             }
+			UpdateTiebreaks (rndRestore); 
             return rndRestore + 1;
         }
 #endregion
