@@ -196,7 +196,6 @@ namespace Ire
                         ap.AssignBye(rnd);//AssignBye adjusts the rnd number
                     }
                 }
-					
 			}
 		}
 
@@ -994,6 +993,7 @@ Bd	White	Result	Black	Handicap
                     Console.WriteLine("This is a fatal error. Ire will exit.");
                     throw new Exception();
                 }
+            Console.WriteLine("Loading Settings..");
             ReadSettings();
             ReadPlayers();
             //read store file which should be in the same order as the players file(?)
@@ -1033,10 +1033,13 @@ Bd	White	Result	Black	Handicap
                 }
             }
             //Read in results from all rounds
+            Console.WriteLine("Loading Result History..");
             for (int i = 1; i < rndRestore + 1; i++)
             {
                 ReadResults(i);
+                ProcessResults(i);
             }
+            Console.WriteLine("Updating Tiebreakers..");
 			UpdateTiebreaks (rndRestore); 
             return rndRestore + 1;
         }
