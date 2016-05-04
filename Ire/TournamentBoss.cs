@@ -260,8 +260,8 @@ namespace Ire
                 ap.SOS = _SOS;
                 ap.MOS = _MOS;
                 ap.SODOS = _SODOS;
-                if (ap.getScore(rnd - 1) == 0)
-                    ap.MDOS = _SODOS / ap.getScore(rnd - 1);
+                if (ap.getScore(rnd) == 0 || _SODOS == 0)
+                    ap.MDOS = _SODOS / ap.getScore(rnd);
                 else
                     ap.MDOS = 0;
             }
@@ -1143,9 +1143,11 @@ Bd	White	Result	Black	Handicap
 				if (tb.Equals ("SOS"))
 					s += (p.SOS + "\t");
 				if (tb.Equals ("SODOS"))
-					s += (p.SODOS + "\t");
-				if (tb.Equals ("MOS"))
-					s += (p.MOS + "\t");
+                    s += (p.SODOS + "\t");
+                if (tb.Equals("MOS"))
+                    s += (p.MOS + "\t");
+                if (tb.Equals("MDOS"))
+                    s += (p.MDOS + "\t");
 			}
 			return s;
 		}

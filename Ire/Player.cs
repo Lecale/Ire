@@ -17,10 +17,10 @@ namespace Ire
 		protected int[] handi;
 		protected int[] BlackWhite; //Black0White1
         public bool topBar = false; //potentially no handicap above bar
-        public float SOS = -1;
-		public float MOS = -1; //Middle portion of SOS
-        public float SODOS = -1;
-        public float MDOS = -1;
+        public float SOS = -1; //Solkoff
+		public float MOS = -1; //Median
+        public float SODOS = -1; //Sonnenborg-Bergen
+        public float MDOS = -1; //Tampere
 		protected int eRating; // effective rating, used for lower bar
 		public int EGDPin;
 		public int Deed = -1; //Deed is the draw seeding for a particular round
