@@ -260,10 +260,13 @@ namespace Ire
                 ap.SOS = _SOS;
                 ap.MOS = _MOS;
                 ap.SODOS = _SODOS;
-                if (ap.getScore(rnd) == 0 || _SODOS == 0)
-                    ap.MDOS = _SODOS / ap.getScore(rnd);
-                else
+                if (ap.getScore(rnd) == 0 || ap.SODOS == 0)
                     ap.MDOS = 0;
+                else{
+                    ap.MDOS = ap.SODOS / ap.getScore(rnd);
+                    Console.WriteLine("MDOS:" + ap.MDOS + ":SODOS:" + ap.SODOS + ":Score:"+ap.getScore(rnd));
+                }
+                    
             }
         }
 
