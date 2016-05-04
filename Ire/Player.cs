@@ -20,6 +20,7 @@ namespace Ire
         public float SOS = -1;
 		public float MOS = -1; //Middle portion of SOS
         public float SODOS = -1;
+        public float MDOS = -1;
 		protected int eRating; // effective rating, used for lower bar
 		public int EGDPin;
 		public int Deed = -1; //Deed is the draw seeding for a particular round
@@ -265,14 +266,20 @@ namespace Ire
 						if(p.MOS > MOS)
 							return 1;
 						if(p.MOS < MOS)
-							return -1;	
-					}if(tie.Equals("SODOS"))
-					{
-						if(p.SODOS > SODOS)
-							return 1;
-						if(p.SODOS < SODOS)
 							return -1;
-					}
+                    } if (tie.Equals("SODOS"))
+                    {
+                        if (p.SODOS > SODOS)
+                            return 1;
+                        if (p.SODOS < SODOS)
+                            return -1;
+                    } if (tie.Equals("MDOS"))
+                    {
+                        if (p.MDOS > MDOS)
+                            return 1;
+                        if (p.MDOS < MDOS)
+                            return -1;
+                    }
 				}
 				return 0;
 			}
