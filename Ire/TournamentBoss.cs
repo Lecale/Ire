@@ -251,15 +251,17 @@ namespace Ire
 				float _score = ap.getScore (rnd);
 
 				if (nGame == 0)
-					_SOS = ap.getMMS(); //used to be init;
+					_SOS = ap.getMMS() * rnd; //used to be initMMS();
                 if (nGame < rnd)
                 {
 					if (nGame != 0) {
 						Console.WriteLine ("Tiebreak calculation for Bye");
 						Console.WriteLine ("Rnd:" + rnd + ":nGame:" + nGame + "_score" + _score);
 						_SOS = _SOS * rnd / nGame;
-						if (_score != (rnd - nGame) / 2) //not only byes
-						_SODOS = _SODOS * (_score / (_score - (rnd / (nGame + nGame))));
+						if (_score != 0.5f*(float)(rnd - nGame) ) { //not only byes
+							//Console.WriteLine("_score/"+_score+":rndnGame2:"+(rnd - nGame) / 2);
+							_SODOS = _SODOS * (_score / (_score - (0.5f * (float)(rnd - nGame))));
+						}
 						else
 							_SODOS = 0.5f * _SOS / (rnd); // assign half mean SOS
 					} else {
