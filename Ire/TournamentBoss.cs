@@ -237,7 +237,7 @@ namespace Ire
                         }
                         else
                         {
-                            Console.WriteLine("a bye detected for " +ap.Seed + " in round "+i);
+							;//Console.WriteLine("a bye detected for " +ap.Seed + " in round "+i);
                         }
                     }
                     catch (Exception e) 
@@ -255,18 +255,12 @@ namespace Ire
                 if (nGame < rnd)
                 {
 					if (nGame != 0) {
-						Console.WriteLine ("Tiebreak calculation for Bye");
-						Console.WriteLine ("Rnd:" + rnd + ":nGame:" + nGame + "_score" + _score);
 						_SOS = _SOS * rnd / nGame;
-						if (_score != 0.5f*(float)(rnd - nGame) ) { //not only byes
-							//Console.WriteLine("_score/"+_score+":rndnGame2:"+(rnd - nGame) / 2);
+						if (_score != 0.5f*(float)(rnd - nGame) ) 
 							_SODOS = _SODOS * (_score / (_score - (0.5f * (float)(rnd - nGame))));
-						}
 						else
 							_SODOS = 0.5f * _SOS / (rnd); // assign half mean SOS
 					} else {
-						Console.WriteLine ("Tiebreak calculation for Bye with no real games");
-						Console.WriteLine ("Rnd:" + rnd + ":nGame:" + nGame + "_score" + _score);
 						_SODOS = 0.5f * _SOS / (rnd);
 					}
                 }
