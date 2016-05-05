@@ -248,10 +248,14 @@ namespace Ire
                             Console.WriteLine("Opponent " + ie + " was " + ap.getOpponent(ie));
                     }
                 }
+				float _score = ap.getScore (rnd);
                 if (nGame < rnd && nGame != 0)
                 {
                     _SOS = _SOS * rnd / nGame;
-                    _SODOS = _SODOS * rnd / nGame;
+					if(_score!=(rnd-nGame)/2) //not only byes
+						_SODOS = _SODOS * (_score / (_score - (rnd/(nGame+nGame)) ));
+					else
+						_SODOS = ap.getMMS();
                 }
                 if (nGame == 0)
                     _SOS = ap.initMMS;
@@ -260,11 +264,11 @@ namespace Ire
                 ap.SOS = _SOS;
                 ap.MOS = _MOS;
                 ap.SODOS = _SODOS;
-                if (ap.getScore(rnd) == 0 || ap.SODOS == 0)
+				if (_score == 0 || _SODOS == 0)
                     ap.MDOS = 0;
                 else{
-                    ap.MDOS = ap.SODOS / ap.getScore(rnd);
-                    Console.WriteLine("MDOS:" + ap.MDOS + ":SODOS:" + ap.SODOS + ":Score:"+ap.getScore(rnd));
+                    ap.MDOS = _SODOS / _score;
+                  //  Console.WriteLine("MDOS:" + ap.MDOS + ":SODOS:" + ap.SODOS + ":Score:"+ap.getScore(rnd));
                 }
                     
             }
