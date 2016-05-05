@@ -249,16 +249,27 @@ namespace Ire
                     }
                 }
 				float _score = ap.getScore (rnd);
-                if (nGame < rnd && nGame != 0)
+
+				if (nGame == 0)
+					_SOS = ap.getMMS(); //used to be init;
+                if (nGame < rnd)
                 {
-                    _SOS = _SOS * rnd / nGame;
-					if(_score!=(rnd-nGame)/2) //not only byes
-						_SODOS = _SODOS * (_score / (_score - (rnd/(nGame+nGame)) ));
-					else
-						_SODOS = ap.getMMS();
+					if (nGame != 0) {
+						Console.WriteLine ("Tiebreak calculation for Bye");
+						Console.WriteLine ("Rnd:" + rnd + ":nGame:" + nGame + "_score" + _score);
+						_SOS = _SOS * rnd / nGame;
+						if (_score != (rnd - nGame) / 2) //not only byes
+						_SODOS = _SODOS * (_score / (_score - (rnd / (nGame + nGame))));
+						else
+							_SODOS = 0.5f * _SOS / (rnd); // assign half mean SOS
+					} else {
+						Console.WriteLine ("Tiebreak calculation for Bye with no real games");
+						Console.WriteLine ("Rnd:" + rnd + ":nGame:" + nGame + "_score" + _score);
+						_SODOS = 0.5f * _SOS / (rnd);
+					}
                 }
-                if (nGame == 0)
-                    _SOS = ap.initMMS;
+
+                
                 if (rnd > 2)
                     _MOS = _SOS - maxSOS - minSOS;
                 ap.SOS = _SOS;
