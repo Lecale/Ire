@@ -150,7 +150,7 @@ namespace Ire
 				else
 					p.AssignBye (_rnd);
 			}
-			Console.WriteLine ("for this round we have " + RoundPlayers.Count);
+			Console.WriteLine ("The number of players competing in round " + _rnd + " is " + RoundPlayers.Count);
 		}
 
 		public int AssignBye(int _rnd, int ByeLevel=1)
@@ -166,7 +166,7 @@ namespace Ire
 				}
 			}
 			//emergency
-			Console.WriteLine("Wow no Bye Candidate found...");
+			Console.WriteLine("Strangely, no Candidate for the Bye was found...");
 			return -1;
 		}
 
@@ -809,7 +809,7 @@ namespace Ire
 			return true;
         }
 
-		public void ReadSettings()
+		public void ReadSettings() //Use a switch statement !!!!!1
 		{
 			char[] ch = { '\t'};
 			string[] s;
@@ -865,7 +865,6 @@ namespace Ire
         // the file name this is pointing to is not well defined
         public void FormatMasterEGF()
 		{
-            //Console.WriteLine(DateTime.Now);
 			string tTest = "PIN          Name                              Club     Grade P&D";
 			bool faci = false;
             string tzipfile = workDirectory +"allworld_lp.html"; 
@@ -917,7 +916,6 @@ namespace Ire
 							}
 						} 
 						else {
-//							Console.WriteLine (line);
 							line = line.Trim (); 
 							if (line.StartsWith (tTest)) {
 								faci = true;
@@ -929,7 +927,6 @@ namespace Ire
 					riter.Flush ();
 				}
 			}
-//            Console.WriteLine(DateTime.Now);
 		}
 
 		/*
