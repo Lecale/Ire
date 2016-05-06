@@ -16,14 +16,7 @@ namespace Ire
 			population.Add (Seed);
 			Length = 1;
 		}
-
-		public bool Match(float _mms)
-		{
-			if (_mms == MMSKey)
-				return true;
-			return false;
-		}
-
+			
 		public void Shuffle()//not very random but it will do for now
 		{
 			if (population.Count < 1)
