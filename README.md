@@ -23,4 +23,4 @@ The Swiss Rules it is based upon are those of FIDE:
 <li>The pairing rules must be such transparent that the person who is in charge for the pairing can explain them
 </ul>
 
-Tiebreaking and pairing is done according to MMS, SOS, MOS where MOS is Most of Opponents Scores (we take away the top and bottom results) 
+Pairings are made according to the settings you choose. For simple pairing only MMS is considered. For fold or split pairing the initial rating and the tiebreakers will come into play. We support SOS, SODOS, Median(MOS),and Mean SODOS(MDOS).
