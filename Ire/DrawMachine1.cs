@@ -18,7 +18,6 @@ namespace Ire
         private List<string> Paths = new List<string>();
         private string path = "";
         private string tryPath = "";
-        private int depth = 0;
         private int retry = 0;
 
 		public DrawMachine1 ( List<Player> ply, List<Pairing> _History, 
@@ -56,7 +55,6 @@ namespace Ire
 				mcl.Shuffle ();
 			for (int j = 0; j < LookUpTable.Length; j++)
 				LookUpTable [plys [j].Deed] = j; 
-//			Console.WriteLine ("DrawMachine1 History.Count:"+History.Count);
 			DRAW ();
 		}
 
@@ -67,9 +65,7 @@ namespace Ire
 			Console.WriteLine ("Calling SimpleDraw() start:" + start);
 			bool found = false;
 			for (int i = start+1; i <= plys.Count -1; i++) { //foreachPlayer
-				//Console.WriteLine ("looking at i :" + i);
 				if (LookUpBull [i] == true) {
-//					Console.WriteLine (i + " had been paired previously");
 					found = true;
 				}
                 else
@@ -83,7 +79,6 @@ namespace Ire
                                 tryPath = path + " " + top.Deed + "," + plys[mcl.GetAt(j)].Deed;
                                 if (plys[mcl.GetAt(j)].Deed != top.Deed)
                                 if (LookUpBull[plys[mcl.GetAt(j)].Deed] == false)
-                        //        if( Paths.Contains(tryPath) == false) //already tried this path
                                 if(ValidPath(tryPath)==true)
                                 if (History.Contains(tmp) == false) //cannot allow repeat pairing
                                     {
@@ -99,8 +94,6 @@ namespace Ire
 											k = LookUpBull.Length + 1;
 										}
 									if ((Pairs.Count + Pairs.Count) == plys.Count) {
-//										Console.WriteLine ("All pairings made");
-//                                        Console.ReadLine();
                                         found = true;
                                         return;
                                     }
@@ -112,14 +105,11 @@ namespace Ire
                     {
                         if (Pairs.Count == plys.Count - Pairs.Count)
                             return;
-                    //    Console.WriteLine("No valid pairing was found. Depth" + Pairs.Count + ":Players:"+plys.Count);
 						string sp = path;
                         Paths.Add(sp);
-//                        Console.WriteLine("Blocked Path:"+path);
 						CleanBlocked(sp);
                         int penultimateSpace = path.LastIndexOf(" ");
                         path = path.Remove(penultimateSpace);
-                        //Console.WriteLine("newpath:" + path);
                         //Mandatory removal of last pair
 						//update lookups
 						LookUpBull [Pairs [Pairs.Count - 1].black.Deed]=false;
@@ -127,16 +117,12 @@ namespace Ire
                         //rm last pairing added
                         Pairs.RemoveAt(Pairs.Count - 1);
                         //Now we check the path to see if we need to go deeper
-//                        Console.WriteLine("Number of Blocked Paths is now " + Paths.Count);
-//						foreach (string ppp in Paths)
-//							Console.WriteLine (ppp);
-//						Console.ReadLine ();
                         
                         //why don't we call at highest false
                         for (int re = 0; re < LookUpBull.Length; re++ )
                             if (LookUpBull[re] == false)
                             {
-                                depth = Pairs.Count;
+                            //    depth = Pairs.Count;
                                 retry++;
                                 DRAW(re);
                             }
@@ -163,8 +149,6 @@ namespace Ire
 			for (int i = 0; i < Paths.Count - 1; i++)
 				if(Paths[i].StartsWith(END))
 					iHold.Add (i);
-//			if(iHold.Count>0)
-//				Console.WriteLine ("cleanBlocked() rm " + iHold.Count);
 			for(int j=iHold.Count-1; j>-1; j--)
 				Paths.RemoveAt(iHold[j]);
         }
@@ -178,9 +162,7 @@ namespace Ire
             }
             return true;
         }
-
-
-        //Do we need to make sure that we retain VALID matches for the last player?
+			
         
 	}
 }

@@ -471,7 +471,6 @@ namespace Ire
             WebClient wc = new WebClient();
             string[] tmp;
             char[] ctsv = { ',', '\t' };
-            string newGor;
             string pin;
             int newPin =-1;
             string baseURL = "http://www.europeangodatabase.eu/EGD/GetPlayerDataByPIN.php?pin=";
