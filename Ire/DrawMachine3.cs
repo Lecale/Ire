@@ -57,9 +57,6 @@ namespace Ire
                     _Split.Add(new SplitLayer(plys[i].getMMS(), plys[i].Seed));
                 }
             }
-//			Console.WriteLine("SplitLayers.Count:" + _Split.Count);
-  //          			foreach (SplitLayer _FL in _Split)
-    //        				Console.WriteLine ("MMS:"+_FL.MMSKey+" "+_FL.StackSize());
             DRAW();
         }
 
@@ -88,8 +85,7 @@ namespace Ire
                             // 
                             string test;
                             lSuggestions = mcl.Offer(top.Seed, top.GetOpposition()); //not self, not history
-                            //								Console.WriteLine(mcl.MMSKey+":n.sug:"+lSuggestions.Count+":n.reg:"+Registry.Count);
-                            foreach (int ls in lSuggestions)
+                             foreach (int ls in lSuggestions)
                             {
                                 test = path + " " + top.Seed + "," + ls;
                                 //if not a blocked path AND not a registered suggestion
@@ -99,7 +95,6 @@ namespace Ire
                                     found = true;
                                     Pairs.Add(new Pairing(top, plys[lookUpTable[ls - 1]]));
                                     path += " " + top.Seed + "," + plys[lookUpTable[ls - 1]].Seed;
-                                             Console.WriteLine("pathupdate"+path); //seeds match
                                     mcl.Eject(ls);
                                     if (Pairs.Count == totalPairs)
                                         return; //best way to exit
@@ -168,8 +163,6 @@ namespace Ire
             for (int i = 0; i < Paths.Count - 1; i++)
                 if (Paths[i].StartsWith(END))
                     iHold.Add(i);
-            //			if(iHold.Count>0)
-            //				Console.WriteLine ("cleanBlocked() rm " + iHold.Count);
             for (int j = iHold.Count - 1; j > -1; j--)
                 Paths.RemoveAt(iHold[j]);
         }
