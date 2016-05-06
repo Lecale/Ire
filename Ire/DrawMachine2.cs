@@ -55,9 +55,6 @@ namespace Ire
 					Fold.Add(new FoldLayer(plys [i].getMMS (), plys [i].Seed));
 				}
 			}
- //           Console.WriteLine("FoldLayers.Count:" + Fold.Count);
-//			foreach (FoldLayer _FL in Fold)
-//				Console.WriteLine ("MMS:"+_FL.MMSKey+" "+_FL.StackSize());
 			DRAW ();
 		}
 
@@ -80,16 +77,13 @@ namespace Ire
 								// 
 								string test;
 								lSuggestions = mcl.Offer(top.Seed,top.GetOpposition()); //not self, not history
-//								Console.WriteLine(mcl.MMSKey+":n.sug:"+lSuggestions.Count+":n.reg:"+Registry.Count);
                                 foreach (int ls in lSuggestions) {
 									test = path + " " + top.Seed + "," + ls; 
 								//if not a blocked path AND not a registered suggestion
 								if (Paths.Contains (test) == false && Registry.Contains(ls)==false) { 
-							//		Console.WriteLine ("Found valid pairing:" + test);
 									found = true;
 									Pairs.Add(new Pairing(top,plys[lookUpTable[ls-1]]));
 									path += " " + top.Seed + "," + plys[lookUpTable[ls-1]].Seed;
-                           //         Console.WriteLine("pathupdate"+path); //seeds match
 									mcl.Eject (ls);
 									if (Pairs.Count == totalPairs)
 										return; //best way to exit
@@ -132,7 +126,6 @@ namespace Ire
 							if (Registry.Contains (plys[rp].Seed) == false) {
 								DRAW(rp);
 							}
-							//DRAW(i-2,true); //not correct 
                     }                              
 				}
 
