@@ -44,7 +44,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bye.cs" />
     <Compile Include="DrawMachine3.cs" />
     <Compile Include="Pairing.cs" />
     <Compile Include="Player.cs" />
