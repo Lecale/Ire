@@ -55,6 +55,7 @@ namespace Ire
 					Fold.Add(new FoldLayer(plys [i].getMMS (), plys [i].Seed));
 				}
 			}
+			DebugFold ();
 			DRAW ();
 		}
 
@@ -90,6 +91,8 @@ namespace Ire
 											Fold[ie].Eject (top.Seed);
 											i = Fold.Count + 11;
 										}
+									Console.WriteLine (path);
+									DebugFold ();
 									if (Pairs.Count == totalPairs)
 										return; //best way to exit
 									//Set to true the registered state of top and choice
@@ -159,6 +162,13 @@ namespace Ire
             for (int j = iHold.Count - 1; j > -1; j--)
                 Paths.RemoveAt(iHold[j]);
         }
+
+
+		public void DebugFold(){
+			foreach (FoldLayer sl in Fold)
+				Console.WriteLine (sl);
+			Console.ReadLine ();
+		}
 	}
 }
 

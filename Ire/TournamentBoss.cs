@@ -277,7 +277,6 @@ namespace Ire
                     ap.MDOS = 0;
                 else{
                     ap.MDOS = _SODOS / _score;
-                  //  Console.WriteLine("MDOS:" + ap.MDOS + ":SODOS:" + ap.SODOS + ":Score:"+ap.getScore(rnd));
                 }
                     
             }
