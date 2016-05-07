@@ -26,7 +26,7 @@ namespace Ire
             lookUpTable = new int[ply.Count];
             Pairs = new List<Pairing>();
             Pairing.setStatics(_MaxHandi, _AdjHandi, _HandiAboveBar);
-            plys.Sort(); //just in case
+           // plys.Sort(); //just in case
             foreach (Player pd in plys)
                 if (pd.getParticipation(_Rnd - 1))
                     totalPairs++;
@@ -57,6 +57,7 @@ namespace Ire
                     _Split.Add(new SplitLayer(plys[i].getMMS(), plys[i].Seed));
                 }
             }
+			DebugSplit ();
             DRAW();
         }
 
@@ -76,7 +77,7 @@ namespace Ire
                 while (found == false)
                 {
                     foreach (SplitLayer mcl in _Split)
-                    { //for each Laayer
+                    { //for each Layer
                         if (found == false)
                         {
                             // NEW LOGIC
@@ -91,11 +92,11 @@ namespace Ire
                                 //if not a blocked path AND not a registered suggestion
                                 if (Paths.Contains(test) == false && Registry.Contains(ls) == false)
                                 {
-                                    //		Console.WriteLine ("Found valid pairing:" + test);
                                     found = true;
                                     Pairs.Add(new Pairing(top, plys[lookUpTable[ls - 1]]));
                                     path += " " + top.Seed + "," + plys[lookUpTable[ls - 1]].Seed;
                                     mcl.Eject(ls);
+									mcl.Eject (top.Seed); //Din't we need this too?
                                     if (Pairs.Count == totalPairs)
                                         return; //best way to exit
                                     //Set to true the registered state of top and choice
@@ -108,6 +109,8 @@ namespace Ire
                                             top = plys[rp];
                                             rp = plys.Count + 4;
                                         }
+									Console.WriteLine (path);
+									DebugSplit ();
                                     break;
                                 }
                             }//end foreach suggestion
@@ -120,6 +123,7 @@ namespace Ire
                             return;
                        // Console.WriteLine("No valid pairing was found. Retry.");
                         //add to block
+						Console.WriteLine(path);
                         string sp = path;
                         Paths.Add(sp);
                         CleanBlocked(sp);
@@ -136,10 +140,8 @@ namespace Ire
 
                         for (int rp = 0; rp < plys.Count; rp++)
                             if (Registry.Contains(plys[rp].Seed) == false)
-                            {
                                 DRAW(rp);
-                            }
-                        //DRAW(i-2,true); //not correct 
+                            
                     }
                 }
 
@@ -166,6 +168,12 @@ namespace Ire
             for (int j = iHold.Count - 1; j > -1; j--)
                 Paths.RemoveAt(iHold[j]);
         }
+
+		public void DebugSplit(){
+			foreach (SplitLayer sl in _Split)
+				Console.WriteLine (sl);
+			Console.ReadLine ();
+		}
     }
 }
 

@@ -35,7 +35,7 @@ namespace Ire
 					stack.RemoveAt (i);
 					return Request;
 				}
-			Console.WriteLine ("Horrid error in FoldLayer:Eject()"); 
+			Console.WriteLine ("Horrid error in SplitLayer:Eject()"); 
 			return -1;
 		}
 
@@ -135,10 +135,19 @@ namespace Ire
             if(found==false)
                 stack.Add(_Seed);
         }
-
-
+			
         public int StackSize()
         { return stack.Count;  }
+
+		public override string ToString()
+		{
+			string s = "MMS:" + MMSKey + ":";
+			foreach (int i in stack) {
+				s += i;
+				s += ",";
+			}
+			return s;
+		}
 	}
 }
 
