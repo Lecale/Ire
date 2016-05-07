@@ -38,18 +38,17 @@ namespace Ire
 			EGDPin = _seed; 
 			eRating = _rat;
             grade = _grd;
-			//participation does not exist
+			//Take care, participation does not exist
 			participation = new bool[par.Length];
 			score = new float[par.Length];
 			BlackWhite = new int[par.Length];
 			handi = new int[par.Length];
 			opponent = new int[par.Length];
-		//	Console.WriteLine ("Participation length "+par.Length);
 			for(int i=0; i<par.Length; i++)
 				participation[i]=par[i];
 		}
 
-        public void setPlayer(string nom, string cc, string g, int _rat, int tr, int p)
+   /*     public void setPlayer(string nom, string cc, string g, int _rat, int tr, int p)
         {
             Console.WriteLine("========= setPlayer ============= CALLED ");
             Name = nom;
@@ -71,7 +70,8 @@ namespace Ire
                 score[ii] = -1;
             }
         }
-        #region ResultsByesMMS
+     */
+		#region ResultsByesMMS
 
 		public void setResult(int rnd, int op, float _score, int _handicap=0, int BW =1)
 		{
@@ -92,7 +92,6 @@ namespace Ire
 		public void AssignBye(int rnd)
 		{
             rnd--; //0 based arrary as always
-		//	Console.WriteLine ("AssignBye rnd " + rnd + " par.L" + participation.Length);
 			participation[rnd] = false;
             score[rnd] = 0.5f;
             setMMS(getMMS(rnd));
@@ -152,7 +151,6 @@ namespace Ire
 				return 0;
 			}
 		}
-		//SOS is public?
 		#endregion
 
 		public bool getParticipation(int i)
@@ -200,7 +198,7 @@ namespace Ire
         public void setTop()
         { topBar = true; }
 
-        public int[] GetOpposition() //we could make it so that this skips byes and not played...
+        public int[] GetOpposition() 
         {
            return opponent;
         }
@@ -247,11 +245,9 @@ namespace Ire
 					return 0;
 				return -1;
 			}
-		//	Console.WriteLine ("Sorting by McMahonites" + MMS + " p." + p.MMS);
 			//Sort by MMS
             if (p.MMS > MMS)
                 return 1;
-		//	Console.WriteLine ("Sorting by McMahonites" + MMS + " p." + p.MMS + "did not return 1");
 			if (p.MMS == MMS) {
 				foreach(string tie in Tiebreaker)
 				{
@@ -329,7 +325,7 @@ namespace Ire
 
         public string ToEGF()
         {// http://europeangodatabase.eu/EGD/EGF_rating_system.php#Submissions 
-            string s = Name + " " + Rank + " " + Country + " " + Club + " "; //EGD identifiers
+            string s = Seed + " " +Name + " " + Rank + " " + Country + " " + Club + " "; //EGD identifiers
             for (int i = 0; i < opponent.Length; i++)
             {
                 s = s + opponent[i];
