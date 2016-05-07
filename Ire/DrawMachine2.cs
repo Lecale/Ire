@@ -124,7 +124,9 @@ namespace Ire
                             path = path.Remove(penultimateSpace);
                         else
 							Console.WriteLine("path cannot be removed as too small");//should be unreachable
-
+						//add back into their Fold
+						RestoreToFold(Pairs [Pairs.Count - 1].black.Seed);
+						RestoreToFold(Pairs [Pairs.Count - 1].white.Seed);
 						//update lookups
 						Registry.Remove (Pairs [Pairs.Count - 1].black.Seed);
 						Registry.Remove (Pairs[Pairs.Count - 1].white.Seed);
@@ -168,6 +170,15 @@ namespace Ire
 			foreach (FoldLayer sl in Fold)
 				Console.WriteLine (sl);
 			Console.ReadLine ();
+		}
+		public void RestoreToFold(int i)
+		{
+			for(int f=0; f<Fold.Count; f++)
+				if(Fold[f].Contained(i))
+					{
+						Fold[f].Push(i);
+						f = Fold.Count + 55;
+					}
 		}
 	}
 }
