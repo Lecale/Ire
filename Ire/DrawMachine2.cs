@@ -26,7 +26,7 @@ namespace Ire
 			lookUpTable = new int[ply.Count];
 			Pairs = new List<Pairing>();
 			Pairing.setStatics(_MaxHandi, _AdjHandi, _HandiAboveBar);
-			plys.Sort (); //just in case
+			// plys.Sort (); //just in case
             foreach (Player pd in plys)
                 if (pd.getParticipation(_Rnd-1))
                     totalPairs++;
@@ -85,6 +85,11 @@ namespace Ire
 									Pairs.Add(new Pairing(top,plys[lookUpTable[ls-1]]));
 									path += " " + top.Seed + "," + plys[lookUpTable[ls-1]].Seed;
 									mcl.Eject (ls);
+									for(int ie = 0; ie < Fold.Count; ie++) //we had forgotten to eject Top
+										if(Fold[ie].Contains(top.Seed)==true){
+											Fold[ie].Eject (top.Seed);
+											i = Fold.Count + 11;
+										}
 									if (Pairs.Count == totalPairs)
 										return; //best way to exit
 									//Set to true the registered state of top and choice

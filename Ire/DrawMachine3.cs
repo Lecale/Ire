@@ -57,7 +57,7 @@ namespace Ire
                     _Split.Add(new SplitLayer(plys[i].getMMS(), plys[i].Seed));
                 }
             }
-			DebugSplit ();
+			//DebugSplit ();
             DRAW();
         }
 
@@ -113,8 +113,8 @@ namespace Ire
                                             top = plys[rp];
                                             rp = plys.Count + 4;
                                         }
-									Console.WriteLine (path);
-									DebugSplit ();
+									//Console.WriteLine (path);
+									//DebugSplit ();
                                     break;
                                 }
                             }//end foreach suggestion
