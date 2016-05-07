@@ -266,8 +266,10 @@ namespace Ire
                 }
 
                 
-                if (rnd > 2)
-                    _MOS = _SOS - maxSOS - minSOS;
+				if (rnd > 2)
+					_MOS = _SOS - maxSOS - minSOS;
+				else
+					_MOS = _SOS; //maybe this is normal ??
                 ap.SOS = _SOS;
                 ap.MOS = _MOS;
                 ap.SODOS = _SODOS;
