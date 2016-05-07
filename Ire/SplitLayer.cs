@@ -139,6 +139,14 @@ namespace Ire
         public int StackSize()
         { return stack.Count;  }
 
+		public bool Contains(int i)
+		{
+			foreach (int s in stack)
+				if (s == i)
+					return true;
+			return false;
+		}
+
 		public override string ToString()
 		{
 			string s = "MMS:" + MMSKey + ":";

@@ -96,7 +96,11 @@ namespace Ire
                                     Pairs.Add(new Pairing(top, plys[lookUpTable[ls - 1]]));
                                     path += " " + top.Seed + "," + plys[lookUpTable[ls - 1]].Seed;
                                     mcl.Eject(ls);
-									mcl.Eject (top.Seed); //Din't we need this too?
+									for(int ie = 0; ie < _Split.Count; ie++) //we had forgotten to eject Top
+										if(_Split[ie].Contains(top.Seed)==true){
+											_Split[ie].Eject (top.Seed);
+											i = _Split.Count + 11;
+										}
                                     if (Pairs.Count == totalPairs)
                                         return; //best way to exit
                                     //Set to true the registered state of top and choice
