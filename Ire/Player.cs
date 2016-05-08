@@ -323,6 +323,8 @@ namespace Ire
             return s;
         }
 
+		//This needs to be changed!
+
         public string ToEGF()
         {// http://europeangodatabase.eu/EGD/EGF_rating_system.php#Submissions 
             string s = Seed + " " +Name + " " + Rank + " " + Country + " " + Club + " "; //EGD identifiers
