@@ -26,7 +26,6 @@ namespace Ire
 			lookUpTable = new int[ply.Count];
 			Pairs = new List<Pairing>();
 			Pairing.setStatics(_MaxHandi, _AdjHandi, _HandiAboveBar);
-			// plys.Sort (); //just in case
             foreach (Player pd in plys)
                 if (pd.getParticipation(_Rnd-1))
                     totalPairs++;
@@ -55,7 +54,7 @@ namespace Ire
 					Fold.Add(new FoldLayer(plys [i].getMMS (), plys [i].Seed));
 				}
 			}
-			DebugFold ();
+			//DebugFold ();
 			DRAW ();
 		}
 
@@ -75,7 +74,6 @@ namespace Ire
 								// NEW LOGIC
 								// request suggestions and browse for valid
 								// if find valid, Eject it
-								// 
 								string test;
 								lSuggestions = mcl.Offer(top.Seed,top.GetOpposition()); //not self, not history
                                 foreach (int ls in lSuggestions) {
@@ -91,8 +89,8 @@ namespace Ire
 											Fold[ie].Eject (top.Seed);
 											i = Fold.Count + 11;
 										}
-									Console.WriteLine (path);
-									DebugFold ();
+									//Console.WriteLine (path);
+									//DebugFold ();
 									if (Pairs.Count == totalPairs)
 										return; //best way to exit
 									//Set to true the registered state of top and choice
