@@ -17,14 +17,11 @@ namespace Ire
 			Length = 1;
 		}
 			
-		public void Shuffle()//not very random but it will do for now
+		public void Shuffle()
 		{
-			if (population.Count < 1)
-				;//Console.WriteLine ("Shuffle() but nothing to shuffle"); 
-			else {
-				//Console.WriteLine ("Shuffle()"); 
-				int hold;
-				int tmp;
+			if (population.Count > 0 ){
+				int hold = -1;
+				int tmp = -1;
 				for (int i = 0; i < population.Count; i++) {
 					tmp = r.Next (0, population.Count);
 					hold = population [tmp];
@@ -43,7 +40,6 @@ namespace Ire
 		{
 			population.Add(_seed);
 			Length++;
-//			Console.WriteLine ("Added " + _seed + " to " + MMSKey);
 		}
 
 		public void Remove(int _Seed)
