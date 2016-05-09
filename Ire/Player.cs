@@ -323,19 +323,22 @@ namespace Ire
             return s;
         }
 
-		//This needs to be changed!
-
+		/*
+         * Seed is not acceptable. EGD needs position.
+         */ 
         public string ToEGF()
-        {// http://europeangodatabase.eu/EGD/EGF_rating_system.php#Submissions 
-            string s = Seed + " " +Name + " " + Rank + " " + Country + " " + Club + " "; //EGD identifiers
-            for (int i = 0; i < opponent.Length; i++)
+        {
+           // string s = Seed + " " +Name + " " + Rank + " " + Country + " " + Club + " "; //EGD identifiers
+            string s =  Name + " " + Rank + " " + Country + " " + Club + " "; //EGD identifiers
+/* 
+ * for (int i = 0; i < opponent.Length; i++)
             {
                 s = s + opponent[i];
                 if (score[i] == 0) s = s + "-h" + getAdjHandi(i) + " ";
                 if (score[i] == 1) s = s + "+h" + getAdjHandi(i) + " "; 
                 if (score[i] == 0.5) s = s + "=h" + getAdjHandi(i) + " ";  
             }
-            return s;
+ */           return s;
         }
 		#endregion
     }
