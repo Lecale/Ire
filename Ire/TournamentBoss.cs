@@ -294,7 +294,6 @@ namespace Ire
 			//give byes
             for (int i = after; i > before; i--)
             {
-//				Console.WriteLine ("Late Loop player:" + i);
                 AllPlayers[i - 1].SetSeed(i);
 				AllPlayers [i - 1].topBar = false; //should already be false?
                 if(TopBar)
@@ -311,7 +310,7 @@ namespace Ire
                 AllPlayers[i - 1].setInitMMS(100 - gap);
 
                 //assign bye
-				for (int j = 1; j < rnd; j++) {
+				for (int j = 0; j < rnd; j++) {
 //					Console.WriteLine ("Late Loop assign bye round:" + j);
 					AllPlayers [i - 1].AssignBye (j);
 				}
@@ -1112,6 +1111,7 @@ Bd	White	Result	Black	Handicap
                         if (result == 1f) ln += "+h" + ap.getAdjHandi(r);
                     }
                         sw.WriteLine(ln);
+                        ln = "";
                 }
             }
         }
