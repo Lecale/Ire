@@ -175,7 +175,7 @@ namespace Ire
         {
             if (rnd == 1)
                 GenerateStore();
-			Console.WriteLine ("ProcessResults: rnd " + rnd + " pairings " + RoundPairings.Count);
+			Console.WriteLine ("Processing Results for round " + rnd + " pairing count is " + RoundPairings.Count);
 			//lookuptable
 			foreach (Pairing p in RoundPairings) {
 				if(p.white.getParticipation(rnd-1)==false) 
@@ -818,9 +818,9 @@ namespace Ire
 			string dbg="";
 			try{
 			using (StreamReader sr = new StreamReader (workDirectory + "settings.txt")) {
-				while(true)	{
+				while(sr.EndOfStream == false)	{
 						dbg = sr.ReadLine ();
-						if(dbg.Length > 2){
+						if(dbg.Length > 2 && dbg !=null){
 							s =dbg.Split(ch);
 							if(s[0].Contains("Tournament Name")){
 								TournamentName = s[1];
