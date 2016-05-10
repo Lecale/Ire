@@ -284,8 +284,8 @@ namespace Ire
 
 		public void HandleLatePlayers(int rnd)
 		{
-			Console.WriteLine ("Late entrants should be added to the file players.txt");
-			Console.WriteLine ("Press any key to proceed");
+			Console.WriteLine ("Late entrants should now be added to the file players.txt");
+			Console.WriteLine ("When ready, press return");
 			string s = Console.ReadLine ();
 			int before = AllPlayers.Count;
 			ReadPlayers(false); //later true
@@ -311,14 +311,17 @@ namespace Ire
 
                 //assign bye
 				for (int j = 1; j < rnd; j++) {
-//					Console.WriteLine ("Late Loop assign bye round:" + j);
 					AllPlayers [i - 1].AssignBye (j);
 				}
-				for (int k = 0; k < nRounds; k++)
-					if (AllPlayers [i - 1].getParticipation (k))
-						Console.WriteLine (AllPlayers [i - 1].ToString () + " plays in "+ (k + 1));
+                string registration = "";
+                for (int k = 0; k < nRounds; k++)
+                {
+                    if (AllPlayers[i - 1].getParticipation(k))
+                        registration = (k + 1) + " ";
+                }
+                if(registration.Equals("") == false)
+    				Console.WriteLine (AllPlayers [i - 1].ToFile() + " plays in "+ registration);
             }
-//			Console.WriteLine ("sort field again");
 			SortField ();
 		}
 		#endregion
