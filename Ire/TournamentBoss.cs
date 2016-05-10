@@ -184,7 +184,7 @@ namespace Ire
 					Console.WriteLine("The following was originally assigned a bye:" + p.black.getName());
 				p.white.setResult (rnd, p.black.Seed, p.WhiteScore (), p.GetHandi (), 1);
 				p.black.setResult (rnd, p.white.Seed, p.BlackScore (), p.GetHandi (), 0);
-                Console.WriteLine("W" + p.white.Seed + ": B " + p.black.Seed);
+               // Console.WriteLine("W" + p.white.Seed + ": B " + p.black.Seed);
 			}
 			//now check for maladjusted bye
 			foreach (Player ap in AllPlayers) {
@@ -975,7 +975,7 @@ Bd	White	Result	Black	Handicap
 							result = 3;
 						if (split [2].Equals ("0:0"))
 							result = 7;
-                        Console.WriteLine("Read Pairing: " + AllPlayers[LUT[white]].Seed + ":" + AllPlayers[LUT[black]].Seed);
+                       // Console.WriteLine("Read Pairing: " + AllPlayers[LUT[white]].Seed + ":" + AllPlayers[LUT[black]].Seed);
 						Pairing p = new Pairing (AllPlayers [LUT [white]], AllPlayers [LUT [black]], handicap, result);
 						CNT [LUT [white]]++;
 						CNT [LUT [black]]++;
