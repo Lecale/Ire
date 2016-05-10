@@ -310,7 +310,7 @@ namespace Ire
                 AllPlayers[i - 1].setInitMMS(100 - gap);
 
                 //assign bye
-				for (int j = 0; j < rnd; j++) {
+				for (int j = 1; j < rnd; j++) {
 //					Console.WriteLine ("Late Loop assign bye round:" + j);
 					AllPlayers [i - 1].AssignBye (j);
 				}

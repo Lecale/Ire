@@ -111,6 +111,7 @@ namespace Ire
                                         if (Registry.Contains(plys[rp].Seed) == false)
                                         {
                                             top = plys[rp];
+											i = start; // overkill
                                             rp = plys.Count + 4;
                                         }
 									//Console.WriteLine (path);

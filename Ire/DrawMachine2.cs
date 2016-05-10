@@ -100,6 +100,7 @@ namespace Ire
 									for (int rp = 0; rp < plys.Count; rp++)
 										if (Registry.Contains (plys[rp].Seed) == false) {
 											top = plys [rp];
+											i = start; // overkill
 											rp = plys.Count + 4;
 										}
 									break;
