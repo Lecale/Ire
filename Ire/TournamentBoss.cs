@@ -71,7 +71,7 @@ namespace Ire
 				Console.WriteLine ("Do you want to update player participation (byes) in the players list (yes / no)");
 			 s = Console.ReadLine ();
 				if (s.ToUpper ().Trim ().StartsWith ("Y")) {
-                    Console.WriteLine("After updating the Players file press any key to continue");
+                    Console.WriteLine("After updating the Players file press return to continue");
                     string anykey = Console.ReadLine();
 					ReadByesFromFile (currentRound);
 				}
@@ -117,7 +117,7 @@ namespace Ire
                 Console.WriteLine(rp.BasicOutput());
             GenerateRoundResultsFile(currentRound, RndPairings);
             Console.WriteLine();
-            Console.WriteLine("When you are ready to read in the results, press any key");
+            Console.WriteLine("When you are ready to read in the results, press return");
             Console.WriteLine("Remember that the draw can be overwritten in the input file");
             string anyKey = Console.ReadLine();
             if (anyKey.ToUpper().Equals("AUTO"))
