@@ -285,7 +285,7 @@ namespace Ire
 		public void HandleLatePlayers(int rnd)
 		{
 			Console.WriteLine ("Late entrants should be added to the file players.txt");
-			Console.WriteLine ("Press any key to proceed");
+			Console.WriteLine ("When ready, press return to proceed");
 			string s = Console.ReadLine ();
 			int before = AllPlayers.Count;
 			ReadPlayers(false); //later true
@@ -427,7 +427,7 @@ namespace Ire
                     }
                     else
                     {
-                        Console.WriteLine("Enter a new value for the Rating Top Bar");
+                        Console.WriteLine("Enter a new value for the Rating of the Top Bar");
                         nTopBar = int.Parse(Console.ReadLine().Trim());
                         previewTopBar(true);
                     }
@@ -643,7 +643,7 @@ namespace Ire
                         if (AllPlayers.Contains(j) == false)
                             AllPlayers.Add(j);
                         else
-                            if (Supression == false)
+                            if (Verbose)
                                 Console.WriteLine("Duplicate Entry detected");
                     }
                     catch (Exception e)
