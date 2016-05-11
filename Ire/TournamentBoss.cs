@@ -1001,7 +1001,7 @@ Bd	White	Result	Black	Handicap
 
         public int RestoreTournament()
         {
-            Console.WriteLine("Ire will attempt to restore the tournament to the last round played.");
+            Console.WriteLine("Ire will attempt to restore the tournament to the end of the last round played.");
             Console.WriteLine("After doing so we will make a new draw. This means the old draw will be overwritten");
             Console.WriteLine("Enter the number of the last completed round.");
             int rndRestore = int.Parse(Console.ReadLine());
@@ -1012,8 +1012,9 @@ Bd	White	Result	Black	Handicap
                     Console.WriteLine("This is a fatal error. Ire will exit.");
                     throw new Exception();
                 }
-            Console.WriteLine("Loading Settings..");
-            ReadSettings();
+            Console.WriteLine("Loading Settings ...");
+            ReadSettings(); 
+            Console.WriteLine("Loading Players ...");
             ReadPlayers();
             //read store file which should be in the same order as the players file(?)
             // look up table based on EGD pin
@@ -1052,13 +1053,13 @@ Bd	White	Result	Black	Handicap
                 }
             }
             //Read in results from all rounds
-            Console.WriteLine("Loading Result History..");
+            Console.WriteLine("Loading Result History ...");
             for (int i = 1; i < rndRestore + 1; i++)
             {
                 ReadResults(i);
                 ProcessResults(i);
             }
-            Console.WriteLine("Updating Tiebreakers..");
+            Console.WriteLine("Updating Tiebreakers ...");
 			UpdateTiebreaks (rndRestore); 
             return rndRestore + 1;
         }
