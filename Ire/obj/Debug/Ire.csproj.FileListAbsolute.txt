@@ -4,3 +4,11 @@ c:\users\u0159027\documents\visual studio 2013\Projects\Ire\Ire\bin\Debug\Ire.pd
 c:\users\u0159027\documents\visual studio 2013\Projects\Ire\Ire\obj\Debug\Ire.exe
 c:\users\u0159027\documents\visual studio 2013\Projects\Ire\Ire\obj\Debug\Ire.pdb
 C:\Users\U0159027\Documents\Visual Studio 2013\Projects\Ire\Ire\obj\Debug\Ire.csprojResolveAssemblyReference.cache
+C:\Users\U0159027\Documents\GitHub\Ire\Ire\bin\Debug\Ire.exe.config
+C:\Users\U0159027\Documents\GitHub\Ire\Ire\obj\Debug\Ire.exe
+C:\Users\U0159027\Documents\GitHub\Ire\Ire\obj\Debug\Ire.pdb
+C:\Users\U0159027\Documents\GitHub\Ire\Ire\bin\Debug\Ire.exe
+C:\Users\U0159027\Documents\GitHub\Ire\Ire\bin\Debug\Ire.pdb
+C:\Users\U0159027\Documents\GitHub\Ire\Ire\bin\Debug\Ionic.Zip.dll
+C:\Users\U0159027\Documents\GitHub\Ire\Ire\bin\Debug\Ionic.Zip.xml
+C:\Users\U0159027\Documents\GitHub\Ire\Ire\obj\Debug\Ire.csprojResolveAssemblyReference.cache

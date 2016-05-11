@@ -22,6 +22,7 @@ namespace Ire
 		bool TopBar=false;
 		bool RatingFloor=false;
         bool HandiAboveBar = false;
+        bool Verbose = true;
 		int HandiAdjust=1;
 		int nMaxHandicap = 9;
 		int nTopBar = 5000;
@@ -463,7 +464,7 @@ namespace Ire
 
         public void RefreshPlayers()
         {
-            Console.WriteLine("RefreshPlayers() waits 5 seconds between each call to the EGD");
+            Console.WriteLine("There is a 5 second delay between each call to the EGD");
             string tLn = "";
             string fin = workDirectory + "players.txt";
             WebClient wc = new WebClient();
@@ -501,7 +502,8 @@ namespace Ire
                                 storeP.Add(tLn);
                             else
                             {
-                                Console.WriteLine("Rating updated from: " + tmp[2] + " to " + newPin);
+                                if(Verbose)
+                                    Console.WriteLine("Rating updated from: " + tmp[2] + " to " + newPin);
                                 if (tLn.Contains("\t" + tmp[2] + "\t"))
                                     tLn = tLn.Replace("\t" + tmp[2] + "\t", "\t" + newPin + "\t");
                                 if (tLn.Contains("," + tmp[2] + ","))
@@ -678,7 +680,7 @@ namespace Ire
                 File.Exists(workDirectory + "Init.txt")
             )
             {
-                Console.WriteLine("Would you like to restore saved tournament data? (yes:no) ");
+                Console.WriteLine("Would you like to restore saved tournament data? (yes / no) ");
                 string _answer = Console.ReadLine();
                 if (_answer.ToUpper().StartsWith("Y"))
                     return false; // Enter load stored tournament mode from Program.cs
@@ -737,7 +739,7 @@ namespace Ire
 			catch(Exception e){
 				Console.WriteLine("Grade width set to 100 as it could not be read " + e.Message);
 			}
-			Console.WriteLine ("Pairing Strategy (Fold/Simple/Split)");
+			Console.WriteLine ("Pairing Strategy (Fold / Simple / Split)");
 			string pst = Console.ReadLine().ToUpper().Trim();
 			if(pst.Equals("FOLD"))
 				PairingStrategy = "Fold";
@@ -846,11 +848,16 @@ namespace Ire
 							if(s[0].Contains("Permit handicap above bar")){
 	                            if (s[1].ToUpper().StartsWith("Y"))
 	                                HandiAboveBar = true;
-							}
-							if(s[0].Contains("Tiebreak ") && s.Length > 1){
-								if(s[1].Trim()!="")
-									Tiebreakers.Add(s[1].ToUpper());
-							}
+                            }
+                            if (s[0].Contains("Tiebreak ") && s.Length > 1)
+                            {
+                                if (s[1].Trim() != "")
+                                    Tiebreakers.Add(s[1].ToUpper());
+                            }
+                            if (s[0].Contains("Debug ") && s.Length > 1)
+                            {
+                                Verbose = true;
+                            }
 						}
 					}
 				}
