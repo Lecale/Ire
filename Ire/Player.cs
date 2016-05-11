@@ -312,7 +312,7 @@ namespace Ire
         {
             string s = ToFile() ;
             s = s + "\t(" + Rank + ")\t(" + Rating + ")\t";
-            s = s + getMMS(rnd) + "\t" + getScore(rnd) + "\t";
+            s = s + getMMS() + "\t" + getScore(rnd) + "\t";
             for(int i=0; i<rnd; i++)
             {
                 s = s + opponent[i];
