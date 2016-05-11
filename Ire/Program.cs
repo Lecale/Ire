@@ -17,7 +17,7 @@ namespace Ire
             int startRound = 1;
             if (newT)
             {
-                Console.WriteLine("Do you need to download the EGF Rating List? (yes/no)");
+                Console.WriteLine("Do you need to download the EGF Rating List? (yes / no)");
                 string s = Console.ReadLine();
                 if (s.ToUpper().StartsWith("Y"))
                 {
@@ -26,7 +26,6 @@ namespace Ire
                 tb.GeneratePlayers(); // Cut to become auto
                 tb.ReadPlayers(true);
                 tb.SortField(true);
-				tb.ShowField();
 				Console.WriteLine("Now please complete your data in Settings File.");
 				Console.WriteLine("When you have finished press return.");
                 s = Console.ReadLine();//wait	
