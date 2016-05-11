@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace Ire
 { 
-	//New Class to combine Import and Turn 
     public class TournamentBoss
     {
 		#region variables
@@ -71,7 +70,7 @@ namespace Ire
 				Console.WriteLine ("Do you want to update player participation (byes) in the players list (yes / no)");
 			 s = Console.ReadLine ();
 				if (s.ToUpper ().Trim ().StartsWith ("Y")) {
-                    Console.WriteLine("After updating the Players file press return to continue");
+                    Console.WriteLine("After updating the Players file press any key to continue");
                     string anykey = Console.ReadLine();
 					ReadByesFromFile (currentRound);
 				}
@@ -117,7 +116,7 @@ namespace Ire
                 Console.WriteLine(rp.BasicOutput());
             GenerateRoundResultsFile(currentRound, RndPairings);
             Console.WriteLine();
-            Console.WriteLine("When you are ready to read in the results, press return");
+            Console.WriteLine("When you are ready to read in the results, press any key");
             Console.WriteLine("Remember that the draw can be overwritten in the input file");
             string anyKey = Console.ReadLine();
             if (anyKey.ToUpper().Equals("AUTO"))
@@ -175,7 +174,7 @@ namespace Ire
         {
             if (rnd == 1)
                 GenerateStore();
-			Console.WriteLine ("Processing Results for round " + rnd + " pairing count is " + RoundPairings.Count);
+			Console.WriteLine ("ProcessResults: rnd " + rnd + " pairings " + RoundPairings.Count);
 			//lookuptable
 			foreach (Pairing p in RoundPairings) {
 				if(p.white.getParticipation(rnd-1)==false) 
@@ -184,7 +183,7 @@ namespace Ire
 					Console.WriteLine("The following was originally assigned a bye:" + p.black.getName());
 				p.white.setResult (rnd, p.black.Seed, p.WhiteScore (), p.GetHandi (), 1);
 				p.black.setResult (rnd, p.white.Seed, p.BlackScore (), p.GetHandi (), 0);
-               // Console.WriteLine("W" + p.white.Seed + ": B " + p.black.Seed);
+                Console.WriteLine("W" + p.white.Seed + ": B " + p.black.Seed);
 			}
 			//now check for maladjusted bye
 			foreach (Player ap in AllPlayers) {
@@ -284,8 +283,8 @@ namespace Ire
 
 		public void HandleLatePlayers(int rnd)
 		{
-			Console.WriteLine ("Late entrants should now be added to the file players.txt");
-			Console.WriteLine ("When ready, press return");
+			Console.WriteLine ("Late entrants should be added to the file players.txt");
+			Console.WriteLine ("Press any key to proceed");
 			string s = Console.ReadLine ();
 			int before = AllPlayers.Count;
 			ReadPlayers(false); //later true
@@ -311,16 +310,12 @@ namespace Ire
 
                 //assign bye
 				for (int j = 1; j < rnd; j++) {
+//					Console.WriteLine ("Late Loop assign bye round:" + j);
 					AllPlayers [i - 1].AssignBye (j);
 				}
-                string registration = "";
-                for (int k = 0; k < nRounds; k++)
-                {
-                    if (AllPlayers[i - 1].getParticipation(k))
-                        registration = (k + 1) + " ";
-                }
-                if(registration.Equals("") == false)
-    				Console.WriteLine (AllPlayers [i - 1].ToFile() + " plays in "+ registration);
+				for (int k = 0; k < nRounds; k++)
+					if (AllPlayers [i - 1].getParticipation (k))
+						Console.WriteLine (AllPlayers [i - 1].ToString () + " plays in "+ (k + 1));
             }
 			SortField ();
 		}
@@ -818,9 +813,9 @@ namespace Ire
 			string dbg="";
 			try{
 			using (StreamReader sr = new StreamReader (workDirectory + "settings.txt")) {
-				while(sr.EndOfStream == false)	{
+				while(true)	{
 						dbg = sr.ReadLine ();
-						if(dbg.Length > 2 && dbg !=null){
+						if(dbg.Length > 2){
 							s =dbg.Split(ch);
 							if(s[0].Contains("Tournament Name")){
 								TournamentName = s[1];
@@ -975,7 +970,7 @@ Bd	White	Result	Black	Handicap
 							result = 3;
 						if (split [2].Equals ("0:0"))
 							result = 7;
-                       // Console.WriteLine("Read Pairing: " + AllPlayers[LUT[white]].Seed + ":" + AllPlayers[LUT[black]].Seed);
+                        Console.WriteLine("Read Pairing: " + AllPlayers[LUT[white]].Seed + ":" + AllPlayers[LUT[black]].Seed);
 						Pairing p = new Pairing (AllPlayers [LUT [white]], AllPlayers [LUT [black]], handicap, result);
 						CNT [LUT [white]]++;
 						CNT [LUT [black]]++;
