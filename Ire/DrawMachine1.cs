@@ -19,10 +19,12 @@ namespace Ire
         private string path = "";
         private string tryPath = "";
         private int retry = 0;
+		bool Verbose = false;
 
 		public DrawMachine1 ( List<Player> ply, List<Pairing> _History, 
-			int _MaxHandi = 9, int _AdjHandi = 1, bool _HandiAboveBar = false)
+			int _MaxHandi = 9, int _AdjHandi = 1, bool _HandiAboveBar = false, bool _Verb=false)
 		{
+			Verbose = _Verb;
 			plys = ply;
             History = _History;
 			LookUpTable = new int[ply.Count];
@@ -62,7 +64,7 @@ namespace Ire
 		{
 			Player top = plys [start];
 			Pairing tmp;
-			Console.WriteLine ("Calling SimpleDraw() start:" + start);
+			if(Verbose)	Console.WriteLine ("Calling SimpleDraw() start:" + start);
 			bool found = false;
 			for (int i = start+1; i <= plys.Count -1; i++) { //foreachPlayer
 				if (LookUpBull [i] == true) {

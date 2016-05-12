@@ -100,17 +100,17 @@ namespace Ire
 			Console.WriteLine ("The draw will now be made ...");
             if (PairingStrategy.ToUpper().Equals("SIMPLE"))
             {
-                DrawMachine1 dm1 = new DrawMachine1(RoundPlayers, AllPairings, nMaxHandicap, HandiAdjust, HandiAboveBar);
+				DrawMachine1 dm1 = new DrawMachine1(RoundPlayers, AllPairings, nMaxHandicap, HandiAdjust, HandiAboveBar, Verbose);
                 RndPairings = dm1.GetCurrentPairings();
             }
             if (PairingStrategy.ToUpper().Equals("FOLD"))
             {
-                DrawMachine2 dm2 = new DrawMachine2(AllPlayers, AllPairings, currentRound, nMaxHandicap, HandiAdjust, HandiAboveBar);
+				DrawMachine2 dm2 = new DrawMachine2(AllPlayers, AllPairings, currentRound, nMaxHandicap, HandiAdjust, HandiAboveBar, Verbose);
                 RndPairings = dm2.GetCurrentPairings();
             }
             if (PairingStrategy.ToUpper().Equals("SPLIT"))
             {
-                DrawMachine3 dm3 = new DrawMachine3(AllPlayers, AllPairings, currentRound, nMaxHandicap, HandiAdjust, HandiAboveBar);
+				DrawMachine3 dm3 = new DrawMachine3(AllPlayers, AllPairings, currentRound, nMaxHandicap, HandiAdjust, HandiAboveBar, Verbose);
                 RndPairings = dm3.GetCurrentPairings();
             }
             foreach (Pairing rp in RndPairings)
