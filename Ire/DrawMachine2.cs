@@ -15,12 +15,14 @@ namespace Ire
 		private List<int> Registry = new List<int>();
 		private int[] lookUpTable;
         private string path = "";
-        private int totalPairs = 0; 
+        private int totalPairs = 0;
+        private bool Verbose = false;
 		#endregion
 
 		public DrawMachine2 ( List<Player> ply, List<Pairing> _History, int _Rnd,
-			int _MaxHandi = 9, int _AdjHandi = 1, bool _HandiAboveBar = false)
+			int _MaxHandi = 9, int _AdjHandi = 1, bool _HandiAboveBar = false, bool _Verbose=false)
 		{
+            Verbose = _Verbose;
 			plys.AddRange(ply); //Careful with Byes
             History = _History;
 			lookUpTable = new int[ply.Count];
@@ -54,14 +56,14 @@ namespace Ire
 					Fold.Add(new FoldLayer(plys [i].getMMS (), plys [i].Seed));
 				}
 			}
-			//DebugFold ();
+			if(Verbose) DebugFold ();
 			DRAW ();
 		}
 
 		public void DRAW(int start=0)
 		{
 			Player top = plys [start];
-			Console.WriteLine ("Calling FoldDraw() start:" + start);
+			if(Verbose) Console.WriteLine ("Calling FoldDraw() start:" + start);
 			bool found = false;
 			for (int i = start+1; i <= plys.Count -1; i++) { //foreachPlayer
 				if (Registry.Contains(plys [i].Seed) == true) {
@@ -89,8 +91,8 @@ namespace Ire
 											Fold[ie].Eject (top.Seed);
 											i = Fold.Count + 11;
 										}
-									//Console.WriteLine (path);
-									//DebugFold ();
+                                    if (Verbose) Console.WriteLine(path);
+                                    if (Verbose) DebugFold();
 									if (Pairs.Count == totalPairs)
 										return; //best way to exit
 									//Set to true the registered state of top and choice
