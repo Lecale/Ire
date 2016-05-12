@@ -16,11 +16,13 @@ namespace Ire
         private int[] lookUpTable;
         private string path = "";
         private int totalPairs = 0;
+        private bool Verbose = false;
         #endregion
 
         public DrawMachine3(List<Player> ply, List<Pairing> _History, int _Rnd,
-            int _MaxHandi = 9, int _AdjHandi = 1, bool _HandiAboveBar = false)
+            int _MaxHandi = 9, int _AdjHandi = 1, bool _HandiAboveBar = false, bool _Verbose = false)
         {
+            Verbose = _Verbose;
             plys.AddRange(ply); //Careful with Byes
             History = _History;
             lookUpTable = new int[ply.Count];
@@ -57,7 +59,7 @@ namespace Ire
                     _Split.Add(new SplitLayer(plys[i].getMMS(), plys[i].Seed));
                 }
             }
-			//DebugSplit ();
+			if(Verbose) DebugSplit ();
             DRAW();
         }
 
@@ -114,8 +116,8 @@ namespace Ire
 											i = start; // overkill
                                             rp = plys.Count + 4;
                                         }
-									//Console.WriteLine (path);
-									//DebugSplit ();
+                                    if (Verbose) Console.WriteLine(path);
+                                    if (Verbose) DebugSplit();
                                     break;
                                 }
                             }//end foreach suggestion
