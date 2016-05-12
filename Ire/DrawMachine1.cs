@@ -87,6 +87,7 @@ namespace Ire
 									LookUpBull[top.Deed ] = true;
 									LookUpBull[plys[mcl.GetAt (j)].Deed] = true;
                                     path += " " + top.Deed + "," + plys[mcl.GetAt(j)].Deed;
+									if(Verbose)	Console.WriteLine (path);
             	                    Pairs.Add(tmp);
                 	                found = true;
 									top = plys[0]; 

@@ -113,8 +113,9 @@ namespace Ire
 				DrawMachine3 dm3 = new DrawMachine3(AllPlayers, AllPairings, currentRound, nMaxHandicap, HandiAdjust, HandiAboveBar, Verbose);
                 RndPairings = dm3.GetCurrentPairings();
             }
-            foreach (Pairing rp in RndPairings)
-                Console.WriteLine(rp.BasicOutput());
+			if(Verbose)
+				foreach (Pairing rp in RndPairings)
+                	Console.WriteLine(rp.BasicOutput());
             GenerateRoundResultsFile(currentRound, RndPairings);
             Console.WriteLine();
             Console.WriteLine("When you are ready to read in the results, press any key");
@@ -175,7 +176,7 @@ namespace Ire
         {
             if (rnd == 1)
                 GenerateStore();
-			Console.WriteLine ("ProcessResults: rnd " + rnd + " pairings " + RoundPairings.Count);
+			Console.WriteLine ("Processing Results: rnd " + rnd + " pairings " + RoundPairings.Count);
 			//lookuptable
 			foreach (Pairing p in RoundPairings) {
 				if(p.white.getParticipation(rnd-1)==false) 
@@ -184,7 +185,7 @@ namespace Ire
 					Console.WriteLine("The following was originally assigned a bye:" + p.black.getName());
 				p.white.setResult (rnd, p.black.Seed, p.WhiteScore (), p.GetHandi (), 1);
 				p.black.setResult (rnd, p.white.Seed, p.BlackScore (), p.GetHandi (), 0);
-                Console.WriteLine("W" + p.white.Seed + ": B " + p.black.Seed);
+				if(Verbose)	Console.WriteLine("W" + p.white.Seed + ": B " + p.black.Seed);
 			}
 			//now check for maladjusted bye
 			foreach (Player ap in AllPlayers) {
