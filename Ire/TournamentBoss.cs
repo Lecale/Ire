@@ -22,7 +22,7 @@ namespace Ire
 		bool TopBar=false;
 		bool RatingFloor=false;
         bool HandiAboveBar = false;
-        bool Verbose = true;
+        bool Verbose = false;
 		int HandiAdjust=1;
 		int nMaxHandicap = 9;
 		int nTopBar = 5000;
@@ -157,7 +157,7 @@ namespace Ire
 		public int AssignBye(int _rnd, int ByeLevel=1)
 		{ 
 			for (int i = RoundPlayers.Count - 1; i >-1; i--) {
-				Console.WriteLine (i);
+				//Console.WriteLine (i);
 				if (RoundPlayers [i].nBye() < ByeLevel) {
 					Console.WriteLine ("A bye will be assigned to ...");
 					Console.WriteLine (RoundPlayers [i].ToString ());
@@ -556,7 +556,6 @@ namespace Ire
 					tLn = reader.ReadLine(); //trip through headers
 				while ((tLn = reader.ReadLine ()) != null) {
 					String[] split = tLn.Split(new char[] {',','\t'});
-//                    Console.WriteLine(tLn);
 					try {
 						int pine = int.Parse (split [0]);
 						int rats = int.Parse (split [2]);
@@ -947,7 +946,7 @@ Bd	White	Result	Black	Handicap
 			int[] LUT = new int[AllPlayers.Count];
 			int[] CNT = new int[AllPlayers.Count];
             for (int i = 0; i < AllPlayers.Count; i++){
-            //    Console.WriteLine("ReadResults()i:" + i + ":S:" + AllPlayers[i].Seed);
+                if(Verbose)    Console.WriteLine("ReadResults()i:" + i + ":S:" + AllPlayers[i].Seed);
                 LUT[AllPlayers[i].Seed - 1] = i;
             }
             using (StreamReader sr = new StreamReader(workDirectory + "Round" + rnd + "Results.txt"))
@@ -961,15 +960,12 @@ Bd	White	Result	Black	Handicap
 					catch(Exception e){ s = "";
 					}
 					if (s.Length >2 ) {	
-					//	Console.WriteLine ("Reading: " + s);
-						//s.Replace (space, tab);
 						string[] split = s.Split (c);
 						string[] split2 = split [1].Split (c1);
 						int white = int.Parse (split2 [1]) -1;
 						split2 = split [3].Split (c1);
 						int black = int.Parse (split2 [1]) -1;
 						int handicap = int.Parse (split [4].Replace ("h", ""));
-						//split2 = split [2].Split (c1);
 						int result = 0;
 						if (split [2].Equals ("1:0"))
 							result = 1;
@@ -997,7 +993,6 @@ Bd	White	Result	Black	Handicap
 				Console.WriteLine("Finished reading in results for Round " + rnd);
 				RoundPairings = actualPairs;
                 AllPairings.AddRange(actualPairs);
-//                Console.WriteLine("Total pairings count now " + AllPairings.Count);
             }
         }
 
