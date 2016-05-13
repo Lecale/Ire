@@ -816,8 +816,9 @@ namespace Ire
 			string dbg="";
 			try{
 			using (StreamReader sr = new StreamReader (workDirectory + "settings.txt")) {
-				while(true)	{
+					while(sr.EndOfStream == false)	{
 						dbg = sr.ReadLine ();
+						if(dbg!=null)
 						if(dbg.Length > 2){
 							s =dbg.Split(ch);
 							if(s[0].Contains("Tournament Name")){
