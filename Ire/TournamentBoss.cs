@@ -1110,9 +1110,9 @@ Bd	White	Result	Black	Handicap
                     {
                         ln += " " + lookup[ap.getOpponent(r)];
                         float result = ap.getResult(r);
-                        if (result == 0f) ln += "-h" + ap.getAdjHandi(r);
-                        if (result == 0.5f) ln += "=h" + ap.getAdjHandi(r);
-                        if (result == 1f) ln += "+h" + ap.getAdjHandi(r);
+						if (result == 0f) ln += "-" + ap.EGFColour(r) + ap.getAdjHandi(r);
+						if (result == 0.5f) ln += "=" + ap.EGFColour(r) + ap.getAdjHandi(r);
+						if (result == 1f) ln += "+" + ap.EGFColour(r) + ap.getAdjHandi(r);
                     }
                         sw.WriteLine(ln);
                         ln = "";

@@ -304,23 +304,17 @@ namespace Ire
             return s;
         }
 
-		/*
-         * Seed is not acceptable. EGD needs position.
-         */ 
         public string ToEGF()
         {
-           // string s = Seed + " " +Name + " " + Rank + " " + Country + " " + Club + " "; //EGD identifiers
             string s =  Name + " " + Rank + " " + Country + " " + Club + " "; //EGD identifiers
-/* 
- * for (int i = 0; i < opponent.Length; i++)
-            {
-                s = s + opponent[i];
-                if (score[i] == 0) s = s + "-h" + getAdjHandi(i) + " ";
-                if (score[i] == 1) s = s + "+h" + getAdjHandi(i) + " "; 
-                if (score[i] == 0.5) s = s + "=h" + getAdjHandi(i) + " ";  
-            }
- */           return s;
+	           return s;
         }
+
+		public string EGFColour(int rnd){
+			if(BlackWhite[rnd]==0)
+				return "/b";
+			return "/w";
+		}
 		#endregion
     }
 
