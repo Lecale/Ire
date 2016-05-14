@@ -114,7 +114,7 @@ namespace Ire
 		{
 			return opponent[i];
 		}
-		//This has a bug
+
 		public int getAdjHandi(int i)
 		{
 			//if black substract handicap , if White add handicap to SOS

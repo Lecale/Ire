@@ -66,7 +66,7 @@ namespace Ire
         public void DRAW(int start = 0)
         {
             Player top = plys[start];
-            Console.WriteLine("Calling SplitDraw() start:" + start);
+			if(Verbose)	Console.WriteLine("Calling SplitDraw() start:" + start);
             bool found = false;
             for (int i = start + 1; i <= plys.Count - 1; i++)
             { //foreachPlayer
