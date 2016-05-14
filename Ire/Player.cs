@@ -119,7 +119,10 @@ namespace Ire
 		{
 			//if black substract handicap , if White add handicap to SOS
 			try{
-				return handi[i] * BlackWhite[i];
+				if(BlackWhite[i]==1)
+					return handi[i] * BlackWhite[i];
+				else
+					return handi[i] * -1;
 			}
 			catch(Exception e) {
 				Console.WriteLine ("EXCEPTION in getAdjHandi rnd " + i);
