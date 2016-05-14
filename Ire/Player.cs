@@ -47,30 +47,7 @@ namespace Ire
 			for(int i=0; i<par.Length; i++)
 				participation[i]=par[i];
 		}
-
-   /*     public void setPlayer(string nom, string cc, string g, int _rat, int tr, int p)
-        {
-            Console.WriteLine("========= setPlayer ============= CALLED ");
-            Name = nom;
-            Country = cc;
-            Rank = g;
-            Rating = _rat;
-            score = new float[tr];
-            participation = new bool[tr];
-            opponent = new int[tr]; //positive=player //negative=bye //0=?
-			Seed = p;
-			eRating = _rat;
-
-            for (int ii = 0; ii < tr; ii++)
-            {
-				participation[ii]=true;
-				opponent[ii] = 0;
-				handi[ii] = 0;
-				BlackWhite[ii] = 0;
-                score[ii] = -1;
-            }
-        }
-     */
+			
 		#region ResultsByesMMS
 
 		public void setResult(int rnd, int op, float _score, int _handicap=0, int BW =1)
@@ -137,6 +114,7 @@ namespace Ire
 		{
 			return opponent[i];
 		}
+		//This has a bug
 		public int getAdjHandi(int i)
 		{
 			//if black substract handicap , if White add handicap to SOS
