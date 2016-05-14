@@ -1144,9 +1144,29 @@ Bd	White	Result	Black	Handicap
                 // add tied method to Players
                 foreach (Player ap in AllPlayers)
                 {
-					sw.WriteLine(cnt++ + t + ap.ToStanding(rnd) + TiebreakerOut(ap)); // + tiebreak
+					sw.WriteLine(cnt++ + t + ap.ToStanding(rnd) + TiebreakerOut(ap)); 
                 }
             }
+		}
+
+		public void VerboseStandings(int rnd)
+		{
+			string hdr = "Pl\tName\tRank\tRating\tMMS\tWins\t";
+			for (int i = 0; i < rnd; i++)
+				hdr = hdr + (i+1) + "\t";
+			foreach(string tb in Tiebreakers)
+				hdr = hdr + tb + "\t";
+			using (StreamWriter sw = new StreamWriter (workDirectory + "RoundStandings.txt", true)) {
+				sw.WriteLine ("Standings for Round " + rnd);
+				sw.WriteLine("");
+				sw.WriteLine(hdr);
+				int cnt = 1;
+				foreach (Player ap in AllPlayers)
+				{
+					sw.WriteLine(cnt++ + "\t" + ap.ToStanding(rnd) + TiebreakerOut(ap)); //to mod ToStanding
+				}
+			}
+
 		}
 
 		private string TiebreakerOut(Player p)
