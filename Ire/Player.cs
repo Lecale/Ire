@@ -289,20 +289,39 @@ namespace Ire
 				return split[0] + "(" + Seed + ")";
 		}
 
-        public string ToStanding(int rnd)
-        {
-            string s = ToFile() ;
-            s = s + "\t(" + Rank + ")\t(" + Rating + ")\t";
-            s = s + getMMS() + "\t" + getScore(rnd) + "\t";
-            for(int i=0; i<rnd; i++)
-            {
-                s = s + opponent[i];
-                if (score[i] == 0) s = s + "-\t";
-                if (score[i] == 1) s = s + "+\t";
-                if (score[i] == 0.5) s = s + "=\t";
-            }
-            return s;
-        }
+		public string ToStanding(int rnd)
+		{
+			string s = ToFile() ;
+			s = s + "\t(" + Rank + ")\t(" + Rating + ")\t";
+			s = s + getMMS() + "\t" + getScore(rnd) + "\t";
+			for(int i=0; i<rnd; i++)
+			{
+				s = s + opponent[i];
+				if (score[i] == 0) s = s + "-\t";
+				if (score[i] == 1) s = s + "+\t";
+				if (score[i] == 0.5) s = s + "=\t";
+			}
+			return s;
+		}
+		public string ToStandingVerbose(int rnd)
+		{
+			string s = ToFile() ;
+			s = s + "\t(" + Rank + ")\t(" + Rating + ")\t";
+			s = s + getMMS() + "\t" + getScore(rnd) + "\t";
+			for(int i=0; i<rnd; i++)
+			{
+				s = s + opponent[i];
+				if (score[i] == 0) s = s + "-";
+				if (score[i] == 1) s = s + "+";
+				if (score[i] == 0.5) s = s + "=";
+				if(BlackWhite[i]==0)	s+="b";
+				if(BlackWhite[i]==1)	s+="w";//bye mightbe2
+				s+=getAdjHandi(i);
+				s+="\t";
+			}
+					
+			return s;
+		}
 
         public string ToEGF()
         {
