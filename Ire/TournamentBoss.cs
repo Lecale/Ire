@@ -1147,6 +1147,7 @@ Bd	White	Result	Black	Handicap
 					sw.WriteLine(cnt++ + t + ap.ToStanding(rnd) + TiebreakerOut(ap)); 
                 }
             }
+			VerboseStandings (rnd); //maybethisshouldbeoptional?
 		}
 
 		public void VerboseStandings(int rnd)
@@ -1156,6 +1157,9 @@ Bd	White	Result	Black	Handicap
 				hdr = hdr + (i+1) + "\t";
 			foreach(string tb in Tiebreakers)
 				hdr = hdr + tb + "\t";
+			if (rnd == 0)
+			if (File.Exists (workDirectory + "RoundStandings.txt"))
+				File.Delete (workDirectory + "RoundStandings.txt");
 			using (StreamWriter sw = new StreamWriter (workDirectory + "RoundStandings.txt", true)) {
 				sw.WriteLine ("Standings for Round " + rnd);
 				sw.WriteLine("");
@@ -1163,8 +1167,9 @@ Bd	White	Result	Black	Handicap
 				int cnt = 1;
 				foreach (Player ap in AllPlayers)
 				{
-					sw.WriteLine(cnt++ + "\t" + ap.ToStanding(rnd) + TiebreakerOut(ap)); //to mod ToStanding
+					sw.WriteLine(cnt++ + "\t" + ap.ToStandingVerbose(rnd) + TiebreakerOut(ap)); 
 				}
+				sw.WriteLine("");
 			}
 
 		}
