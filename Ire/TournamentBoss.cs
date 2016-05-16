@@ -320,6 +320,7 @@ namespace Ire
 						hlpDebug += (k + 1) + " ";
 				Console.WriteLine (AllPlayers [i - 1].ToString () + " plays in "+ hlpDebug);
             }
+			GenerateStore (); //Else seeding is not recored and a bug appears
 			SortField ();
 		}
 		#endregion
@@ -953,7 +954,8 @@ Bd	White	Result	Black	Handicap
 			int[] LUT = new int[AllPlayers.Count];
 			int[] CNT = new int[AllPlayers.Count];
             for (int i = 0; i < AllPlayers.Count; i++){
-                if(Verbose)    Console.WriteLine("ReadResults()i:" + i + ":S:" + AllPlayers[i].Seed);
+                if(Verbose) 
+					Console.WriteLine("ReadResults()i:" + i + ":S:" + AllPlayers[i].Seed);
                 LUT[AllPlayers[i].Seed - 1] = i;
             }
             using (StreamReader sr = new StreamReader(workDirectory + "Round" + rnd + "Results.txt"))
@@ -963,7 +965,7 @@ Bd	White	Result	Black	Handicap
 				string s;
 				while (sr.EndOfStream == false) {
 					try{
-						s = sr.ReadLine (); s.Trim (); }
+						s = sr.ReadLine (); s.Trim (); Console.WriteLine(s);}
 					catch(Exception e){ s = "";
 					}
 					if (s.Length >2 ) {	
@@ -981,7 +983,7 @@ Bd	White	Result	Black	Handicap
 						if (split [2].Equals ("0.5:0.5"))
 							result = 3;
 						if (split [2].Equals ("0:0"))
-							result = 7;
+								result = 7;
 						if(Verbose)
 							Console.WriteLine("Read Pairing: " + AllPlayers[LUT[white]].Seed + ":" + AllPlayers[LUT[black]].Seed);
 						Pairing p = new Pairing (AllPlayers [LUT [white]], AllPlayers [LUT [black]], handicap, result);
