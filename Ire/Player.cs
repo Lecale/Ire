@@ -24,7 +24,7 @@ namespace Ire
 		protected int eRating; // effective rating, used for lower bar
 		public int EGDPin;
 		public int Deed = -1; //Deed is the draw seeding for a particular round
-        public string grade = "1k";
+        
 
 		private static List<string> Tiebreaker = new List<string> ();
 		public static bool SortByRating = false;
@@ -37,7 +37,7 @@ namespace Ire
 			Seed = -1; //When we first read Players in they are not sorted
 			EGDPin = _seed; 
 			eRating = _rat;
-            grade = _grd;
+            Rank = _grd;
 			//Take care, participation does not exist
 			participation = new bool[par.Length];
 			score = new float[par.Length];
