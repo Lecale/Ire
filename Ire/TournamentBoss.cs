@@ -71,7 +71,7 @@ namespace Ire
 				Console.WriteLine ("Do you want to update player participation (byes) in the players list (yes / no)");
 			 s = Console.ReadLine ();
 				if (s.ToUpper ().Trim ().StartsWith ("Y")) {
-                    Console.WriteLine("After updating the Players file press any key to continue");
+                    Console.WriteLine("After updating the players file press return to continue");
                     string anykey = Console.ReadLine();
 					ReadByesFromFile (currentRound);
 				}
