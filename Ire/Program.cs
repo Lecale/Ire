@@ -24,9 +24,9 @@ namespace Ire
                     tb.DownloadEGFMasterZip();
                 }
                 tb.GeneratePlayers(); 
-                tb.ReadPlayers(true);
+                tb.ReadPlayers(true,true);
                 tb.SortField(true);
-				Console.WriteLine("Now please complete your data in Settings File.");
+				Console.WriteLine("Now please complete your data in the Settings File.");
 				Console.WriteLine("When you have finished press return.");
                 s = Console.ReadLine();//wait	
                 tb.ReadSettings();

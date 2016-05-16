@@ -97,7 +97,7 @@ namespace Ire
 				}
 			}
             List<Pairing> RndPairings = new List<Pairing>();
-			Console.WriteLine ("The draw will now be made ...");
+			Console.WriteLine ("The draw is being made ...");
             if (PairingStrategy.ToUpper().Equals("SIMPLE"))
             {
 				DrawMachine1 dm1 = new DrawMachine1(RoundPlayers, AllPairings, nMaxHandicap, HandiAdjust, HandiAboveBar, Verbose);
@@ -118,8 +118,9 @@ namespace Ire
                 	Console.WriteLine(rp.BasicOutput());
             GenerateRoundResultsFile(currentRound, RndPairings);
             Console.WriteLine();
-            Console.WriteLine("When you are ready to read in the results, press any key");
-            Console.WriteLine("Remember that the draw can be overwritten in the input file");
+			Console.WriteLine ("The draw is available at Round"+currentRound+"Results.txt");
+			Console.WriteLine("Remember that the draw can be overwritten in the input file");
+            Console.WriteLine("When you are ready to read in the completed results, press return");
             string anyKey = Console.ReadLine();
             if (anyKey.ToUpper().Equals("AUTO"))
             {
@@ -326,7 +327,7 @@ namespace Ire
 		#region TestPreviewFunctions
 		public void GeneratePlayers(int nPlayers=17, int midpoint=1500, int spread=500 )
 		{
-            Console.WriteLine("Generate Dummy Players? ( yes / no)");
+            Console.WriteLine("Generate dummy players? ( yes / no)");
             string s = Console.ReadLine();
             if (s.ToUpper().StartsWith("Y"))
             {
