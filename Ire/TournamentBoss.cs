@@ -965,7 +965,7 @@ Bd	White	Result	Black	Handicap
 				string s;
 				while (sr.EndOfStream == false) {
 					try{
-						s = sr.ReadLine (); s.Trim (); Console.WriteLine(s);}
+						s = sr.ReadLine (); s.Trim (); }
 					catch(Exception e){ s = "";
 					}
 					if (s.Length >2 ) {	
