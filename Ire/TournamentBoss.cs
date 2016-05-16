@@ -596,10 +596,12 @@ namespace Ire
         //	
         //  Pin tName tRating tClub tCountry is the expected input order THEN GRADE
 		//
-        public void ReadPlayers(bool Supression=false)
+		public void ReadPlayers(bool Supression=false, bool Initial = false)
         {
-			Console.WriteLine ("Please press return when you have finished editing players.txt");
-			Console.ReadLine ();
+			if (Initial == true) {
+				Console.WriteLine ("Please press return when you have finished editing players.txt");
+				Console.ReadLine ();
+			}
             string tLn = "";
 			string fin = workDirectory + "players.txt";
             using (StreamReader reader = new StreamReader(fin))
