@@ -326,7 +326,7 @@ namespace Ire
 		#region TestPreviewFunctions
 		public void GeneratePlayers(int nPlayers=17, int midpoint=1500, int spread=500 )
 		{
-            Console.WriteLine("Generate Dummy Players? (Yes/No)");
+            Console.WriteLine("Generate Dummy Players? ( yes / no)");
             string s = Console.ReadLine();
             if (s.ToUpper().StartsWith("Y"))
             {
@@ -444,7 +444,8 @@ namespace Ire
 
 		#region ImportFunctions
         public void DownloadEGFMasterZip()
-        {
+		{
+			Console.WriteLine ("Downloading data file allworld_lp.zip ...");
 			string uri = "http://www.europeangodatabase.eu/EGD/EGD_2_0/downloads/allworld_lp.zip";
 			if( File.Exists(workDirectory + "egzipdata.zip"))
 				File.Delete(workDirectory + "egzipdata.zip");
@@ -453,7 +454,7 @@ namespace Ire
 			FileInfo fi;
             WebClient client = new WebClient ();
 			client.DownloadFile (uri, workDirectory + "egzipdata.zip");
-				Console.WriteLine ("DownloadMasterZipEGF file downloaded");
+				Console.WriteLine ("File downloaded");
 		    fi = new FileInfo (workDirectory + "egzipdata.zip");
             using (ZipFile zip = ZipFile.Read(fi.FullName))
             {
@@ -568,7 +569,7 @@ namespace Ire
 								    try{
 									    int byeRound = int.Parse(split[i].Trim());
 									    if(byeRound > nRounds){
-										    Console.WriteLine("Bye cannot be allocated for round which does not exist");
+										    Console.WriteLine("A bye cannot be allocated for a round which does not exist");
 										    Console.WriteLine(tLn);
 									    }
 									    else
@@ -597,6 +598,8 @@ namespace Ire
 		//
         public void ReadPlayers(bool Supression=false)
         {
+			Console.WriteLine ("Please press return when you have finished editing players.txt");
+			Console.ReadLine ();
             string tLn = "";
 			string fin = workDirectory + "players.txt";
             using (StreamReader reader = new StreamReader(fin))
@@ -932,6 +935,7 @@ namespace Ire
 					riter.Flush ();
 				}
 			}
+			Console.WriteLine ("Player data extracted to the file egf.txt");
 		}
 
 		/*

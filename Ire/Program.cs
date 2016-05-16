@@ -23,7 +23,7 @@ namespace Ire
                 {
                     tb.DownloadEGFMasterZip();
                 }
-                tb.GeneratePlayers(); // Cut to become auto
+                tb.GeneratePlayers(); 
                 tb.ReadPlayers(true);
                 tb.SortField(true);
 				Console.WriteLine("Now please complete your data in Settings File.");
