@@ -311,13 +311,13 @@ namespace Ire
                 AllPlayers[i - 1].setInitMMS(100 - gap);
 
                 //assign bye
-				for (int j = 1; j < rnd; j++) {
-//					Console.WriteLine ("Late Loop assign bye round:" + j);
+				for (int j = 1; j < rnd; j++) 
 					AllPlayers [i - 1].AssignBye (j);
-				}
+				string hlpDebug = "";
 				for (int k = 0; k < nRounds; k++)
 					if (AllPlayers [i - 1].getParticipation (k))
-						Console.WriteLine (AllPlayers [i - 1].ToString () + " plays in "+ (k + 1));
+						hlpDebug += (k + 1) + " ";
+				Console.WriteLine (AllPlayers [i - 1].ToString () + " plays in "+ hlpDebug);
             }
 			SortField ();
 		}
