@@ -1096,7 +1096,7 @@ Bd	White	Result	Black	Handicap
         }
 
         public void GenerateEGFExport()
-        {   //This method needs to use a lookup table!
+        {   
             string fn = workDirectory + TournamentName.Trim().Replace(" ","") + ".h9";
             int[] lookup = new int[AllPlayers.Count + 1];
             string ln="";
@@ -1142,7 +1142,6 @@ Bd	White	Result	Black	Handicap
 
 		public void GenerateStandingsfile(int rnd)
 		{
-			//if file exists , delete it
             if (File.Exists(workDirectory + "Round" + rnd + "Standings.txt"))
             {
                 Console.WriteLine("Warning - Overwriting Round" + rnd + "Standings.txt");
@@ -1161,13 +1160,12 @@ Bd	White	Result	Black	Handicap
                 sw.WriteLine(hdr);
                 int cnt = 1; 
                 string t = "\t";
-                // add tied method to Players
                 foreach (Player ap in AllPlayers)
                 {
 					sw.WriteLine(cnt++ + t + ap.ToStanding(rnd) + TiebreakerOut(ap)); 
                 }
             }
-			VerboseStandings (rnd); //maybethisshouldbeoptional?
+			VerboseStandings (rnd); //To be made optional ?
 		}
 
 		public void VerboseStandings(int rnd)
@@ -1212,7 +1210,7 @@ Bd	White	Result	Black	Handicap
 
 
 		public void ConvertStandingsToHTML(int rnd)
-		{//todo
+		{
             string fName = workDirectory + "Round" + rnd + "Standings.txt";
 			List <string> AllLines = new List<string>();
 			using (StreamReader sr = new StreamReader (fName)) {
