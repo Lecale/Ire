@@ -239,7 +239,7 @@ namespace Ire
                         }
                         else
                         {
-							;//Console.WriteLine("a bye detected for " +ap.Seed + " in round "+i);
+							if(Verbose) Console.WriteLine("a bye detected for " +ap.Seed + " in round "+i);
                         }
                     }
                     catch (Exception e) 
@@ -840,9 +840,11 @@ namespace Ire
                             }
 							if(s[0].Contains("Top Bar Rating")){
 								nTopBar = int.Parse(s[1].Trim());
+								TopBar = true;
 							}
 							if(s[0].Contains("Rating Floor")){
 								nRatingFloor = int.Parse(s[1].Trim());
+								RatingFloor = true;
 							}
 							if(s[0].Contains("Handicap Policy")){
 								HandiAdjust = int.Parse(s[1].Trim());
