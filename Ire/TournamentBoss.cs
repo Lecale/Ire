@@ -1118,10 +1118,21 @@ Bd	White	Result	Black	Handicap
                     for (int r = 0; r < nRounds; r++)
                     {
                         ln += " " + lookup[ap.getOpponent(r)];
-                        float result = ap.getResult(r);
-						if (result == 0f) ln += "-" + ap.EGFColour(r) + ap.getAdjHandi(r);
-						if (result == 0.5f) ln += "=" + ap.EGFColour(r) + ap.getAdjHandi(r);
-						if (result == 1f) ln += "+" + ap.EGFColour(r) + ap.getAdjHandi(r);
+                        if (ap.getOpponent(r) != 0)
+                        {
+                            float result = ap.getResult(r);
+                            if (result == 0f) ln += "-" + ap.EGFColour(r) + ap.getAdjHandi(r);
+                            if (result == 0.5f) ln += "=" + ap.EGFColour(r) + ap.getAdjHandi(r);
+                            if (result == 1f) ln += "+" + ap.EGFColour(r) + ap.getAdjHandi(r);
+                        }
+                        else
+                        {
+                            float result = ap.getResult(r);
+                            if (result == 0f) ln += "-";
+                            if (result == 0.5f) ln += "=";
+                            if (result == 1f) ln += "+";
+
+                        }
                     }
                         sw.WriteLine(ln);
                         ln = "";
