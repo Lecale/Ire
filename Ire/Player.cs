@@ -216,6 +216,11 @@ namespace Ire
 		{
 			Tiebreaker = _tie;
 		}
+		public float qSc()
+		{
+			return MMS - initMMS;
+		}
+
 		public int CompareTo(Player p)
         {
 //            Player p = (Player)o; // how gross is this?
@@ -244,9 +249,15 @@ namespace Ire
 							return 1;
 						if(p.MOS < MOS)
 							return -1;
-                    } if (tie.Equals("SODOS")) //BUG - SODOS should be split by Wins first 
+                    } if (tie.Equals("SODOS"))  
                     {
-                        if (p.SODOS > SODOS)
+						//SODOS should be split by Wins first
+						if (p.qSc() > qSc())
+							return 1;
+						if (p.qSc() < qSc())
+							return -1;
+						//wins are even
+						if (p.SODOS > SODOS)
                             return 1;
                         if (p.SODOS < SODOS)
                             return -1;
