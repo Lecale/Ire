@@ -244,7 +244,7 @@ namespace Ire
 							return 1;
 						if(p.MOS < MOS)
 							return -1;
-                    } if (tie.Equals("SODOS"))
+                    } if (tie.Equals("SODOS")) //BUG - SODOS should be split by Wins first 
                     {
                         if (p.SODOS > SODOS)
                             return 1;

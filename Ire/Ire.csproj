@@ -59,6 +59,8 @@
     <Compile Include="DrawMachine2.cs" />
     <Compile Include="FoldLayer.cs" />
     <Compile Include="SplitLayer.cs" />
+    <Compile Include="DrawMachine4.cs" />
+    <Compile Include="MonradLayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
