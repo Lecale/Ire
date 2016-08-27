@@ -26,6 +26,7 @@ namespace Ire
                 tb.GeneratePlayers(); 
                 tb.ReadPlayers(true,true);
                 tb.SortField(true);
+				Console.Clear();
 				Console.WriteLine("Now please complete your data in the Settings File.");
 				Console.WriteLine("When you have finished press return.");
                 s = Console.ReadLine();//wait	
@@ -51,7 +52,8 @@ namespace Ire
             tb.GenerateEGFExport();
             tb.ConvertStandingsToHTML(rounds);
 
-            Console.WriteLine("The tournament has ended.");
+			Console.Clear();
+			Console.WriteLine("The tournament has ended.");
             Console.WriteLine("We hope you enjoyed using Ire to make the pairings.");
         }
 

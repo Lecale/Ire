@@ -4,3 +4,4 @@
 /Users/iandavis/Documents/Ire/Ire/bin/Debug/Ire.exe
 /Users/iandavis/Documents/Ire/Ire/obj/Debug/Ire.exe
 /Users/iandavis/Documents/Ire/Ire/obj/Debug/Ire.exe.mdb
+/Users/iandavis/Documents/Ire/Ire/bin/Debug/Ionic.Zip.dll
