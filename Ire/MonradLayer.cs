@@ -44,7 +44,10 @@ namespace Ire
 
 		public List<int> Offer(int _Target, int[] opp)
 		{
-			return new List<int>();
+
+			List<int> Construct = new List<int>(); 
+
+			return Construct;
 		}
 
 		/*
