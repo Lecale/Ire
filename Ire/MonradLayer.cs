@@ -45,16 +45,44 @@ namespace Ire
 		public List<int> Offer(int _Target, int[] opp)
 		{
 
-			List<int> Construct = new List<int>(); 
-
+			List<int> Construct = new List<int>();
+			for (int i = 0; i < stack.Count; i++)
+				if (stack[i] != _Target)
+					Construct.Add(stack[i]);
 			return Construct;
 		}
 
 		/*
 		 *  Use to re-inject a player
 		 */
-		public void Push(int _seed)
-		{ 
+		public void Push(int _Seed)
+		{
+			int origin = -1;
+			bool found = false;
+			for (int i = population.Count - 1; i > -1; i--)
+				if (population[i] == _Seed)
+				{
+					origin = i;
+					break;
+				}
+			int nigiro = 99999;
+			for (int j = stack.Count - 1; j > -1; j--)
+			{
+				for (int i = population.Count - 1; i > -1; i--)
+					if (population[i] == stack[j])
+					{
+						nigiro = i;
+						break;
+					}
+				if (nigiro < origin)
+				{
+					stack.Insert(j + 1, _Seed);
+					found = true;
+					j = -2;
+				}
+			}
+			if (found == false)
+				stack.Add(_Seed);
 		}
 
 		public int StackSize()
