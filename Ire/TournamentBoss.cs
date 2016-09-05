@@ -110,8 +110,13 @@ namespace Ire
             }
             if (PairingStrategy.ToUpper().Equals("SPLIT"))
             {
-				DrawMachine3 dm3 = new DrawMachine3(AllPlayers, AllPairings, currentRound, nMaxHandicap, HandiAdjust, HandiAboveBar, Verbose);
+                DrawMachine3 dm3 = new DrawMachine3(AllPlayers, AllPairings, currentRound, nMaxHandicap, HandiAdjust, HandiAboveBar, Verbose);
                 RndPairings = dm3.GetCurrentPairings();
+            }
+            if (PairingStrategy.ToUpper().Equals("ADJACENT"))
+            {
+                DrawMachine4 dm4 = new DrawMachine4(AllPlayers, AllPairings, currentRound, nMaxHandicap, HandiAdjust, HandiAboveBar, Verbose);
+                RndPairings = dm4.GetCurrentPairings();
             }
 			if(Verbose)
 				foreach (Pairing rp in RndPairings)
