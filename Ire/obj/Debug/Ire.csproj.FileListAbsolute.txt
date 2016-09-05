@@ -18,3 +18,4 @@ C:\Users\U0159027\Documents\GitHub\Ire\Ire\Ire\bin\Debug\Ire.pdb
 C:\Users\U0159027\Documents\GitHub\Ire\Ire\Ire\bin\Debug\Ionic.Zip.dll
 C:\Users\U0159027\Documents\GitHub\Ire\Ire\Ire\bin\Debug\Ionic.Zip.xml
 C:\Users\U0159027\Documents\GitHub\Ire\Ire\Ire\obj\Debug\Ire.pdb
+C:\Users\U0159027\Documents\GitHub\Ire\Ire\Ire\obj\Debug\Ire.csprojResolveAssemblyReference.cache

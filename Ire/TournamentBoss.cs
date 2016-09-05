@@ -751,12 +751,14 @@ namespace Ire
 			catch(Exception e){
 				Console.WriteLine("Grade width set to 100 as it could not be read " + e.Message);
 			}
-			Console.WriteLine ("Pairing Strategy (Fold / Simple / Split)");
+			Console.WriteLine ("Pairing Strategy (Fold / Simple / Split / Adjacent)");
 			string pst = Console.ReadLine().ToUpper().Trim();
 			if(pst.Equals("FOLD"))
 				PairingStrategy = "Fold";
-			if(pst.Equals("SPLIT"))
-				PairingStrategy = "Split";
+            if (pst.Equals("SPLIT"))
+                PairingStrategy = "Split";
+            if (pst.Equals("ADJACENT"))
+                PairingStrategy = "Adjacent";
             bool overwritePlayers = true;
             if (File.Exists(fOut))
             {

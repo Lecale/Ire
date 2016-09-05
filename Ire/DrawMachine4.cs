@@ -66,7 +66,8 @@ namespace Ire
         public void DRAW(int start = 0)
         {
             Player top = plys[start];
-            if (Verbose) Console.WriteLine("Calling SplitDraw() start:" + start);
+            if (Verbose) Console.WriteLine("Calling AdjacentDraw() start: {0}", start);
+            if (Verbose) Console.WriteLine("Memory in use: {0}", GC.GetTotalMemory(true));
             bool found = false;
             for (int i = start + 1; i <= plys.Count - 1; i++)
             { //foreachPlayer
