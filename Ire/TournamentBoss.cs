@@ -61,6 +61,7 @@ namespace Ire
 
 		public void MakeDraw(int currentRound = 1)
 		{
+            Console.Clear();
 			Console.WriteLine ("We are ready to make the draw for Round "+currentRound);
 			if (currentRound > 1) {
 				Console.WriteLine ("Do you want to add a new player to the players list (yes / no)");
@@ -288,8 +289,15 @@ namespace Ire
                     
             }
         }
+        #region OPERA
+        public void firstDerivative(int rnd)
+        { }
 
-		public void HandleLatePlayers(int rnd)
+        public void SecondDerivative(int rnd)
+        { }
+        #endregion
+
+        public void HandleLatePlayers(int rnd)
 		{
 			Console.WriteLine ("Late entrants should be added to the file players.txt");
 			Console.WriteLine ("When ready, press return to proceed");
