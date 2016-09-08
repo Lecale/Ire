@@ -1,8 +1,16 @@
 ﻿<Properties StartupItem="Ire/Ire.csproj">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Ire/MonradLayer.cs">
+    <Files>
+      <File FileName="Ire/Program.cs" Line="55" Column="20" />
+      <File FileName="Ire/MonradLayer.cs" Line="60" Column="20" />
+      <File FileName="Ire/SplitLayer.cs" Line="139" Column="14" />
+      <File FileName="Ire/FoldLayer.cs" Line="126" Column="34" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Ire PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>
