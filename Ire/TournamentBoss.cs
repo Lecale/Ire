@@ -212,9 +212,7 @@ namespace Ire
         {
             int[] lookUp = new int[AllPlayers.Count]; //yuck
             for (int i = 0; i < AllPlayers.Count; i++)
-            {
                 lookUp[AllPlayers[i].Seed - 1] = i;
-            }
             foreach (Player ap in AllPlayers)
             {
                 float _SOS = 0;
@@ -290,8 +288,21 @@ namespace Ire
             }
         }
         #region OPERA
-        public void firstDerivative(int rnd)
-        { }
+        public void RatingDerivative(int rnd, int dv)
+        {
+            int[] lookUp = new int[AllPlayers.Count]; //yuck
+            for (int i = 0; i < AllPlayers.Count; i++)
+                lookUp[AllPlayers[i].Seed - 1] = i;
+            Rater Europa = new Rater();
+            float[] oppRatings = new float[rnd];
+            foreach (Player p in AllPlayers)
+            {
+                //we get the opponent
+                //we find the opponent rating
+                //we add to the array
+                //we calculate the new rating
+            }
+        }
 
         public void SecondDerivative(int rnd)
         { }
