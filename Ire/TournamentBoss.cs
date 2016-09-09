@@ -288,24 +288,63 @@ namespace Ire
             }
         }
         #region OPERA
-        public void RatingDerivative(int rnd, int dv)
+        public void FirstRatingDerivative(int rnd, int dv)
         {
-            int[] lookUp = new int[AllPlayers.Count]; //yuck
-            for (int i = 0; i < AllPlayers.Count; i++)
-                lookUp[AllPlayers[i].Seed - 1] = i;
+            //In this method we will use LINQ to make the query, just to practice using LINQ
             Rater Europa = new Rater();
             float[] oppRatings = new float[rnd];
+            float[] theResults = new float[rnd];
+            int[] oppSeeds = new int[rnd];
+            Player linkPlayer;
             foreach (Player p in AllPlayers)
             {
-                //we get the opponent
-                //we find the opponent rating
-                //we add to the array
-                //we calculate the new rating
+                for (int i = 0; i < rnd; i++)
+                {
+                    oppSeeds[i] = p.getOpponent(i);
+                    theResults[i] = p.getResult(i);
+                    //we need to adjust for handi here! if we are white!
+                    //The rating needs to be increased by the number of handi we give.
+                    // if we are black (da da da)
+                    var linkquery = from matchPlayer in AllPlayers
+                                    where matchPlayer.Seed == oppSeeds[i]
+                                    select new { linkRating = matchPlayer.Rating };
+                    foreach (var lq in linkquery)
+                        oppRatings[i] = lq.linkRating;
+                    if (p.getAdjHandi(i) != 0)
+                        oppRatings[i] += 100 * p.getAdjHandi(i);
+                }
+                p.firstRating = Europa.ObtainNewRating(oppRatings, p.Rating, theResults);
+            }
+        }
+        public void SecondRatingDerivative(int rnd, int dv)
+        {
+            //In this method we will use LINQ to make the query, just to practice using LINQ
+            Rater Europa = new Rater();
+            float[] oppRatings = new float[rnd];
+            float[] theResults = new float[rnd];
+            int[] oppSeeds = new int[rnd];
+            Player linkPlayer;
+            foreach (Player p in AllPlayers)
+            {
+                for (int i = 0; i < rnd; i++)
+                {
+                    oppSeeds[i] = p.getOpponent(i);
+                    theResults[i] = p.getResult(i);
+                    //we need to adjust for handi here! if we are white!
+                    //The rating needs to be increased by the number of handi we give.
+                    // if we are black (da da da)
+                    var linkquery = from matchPlayer in AllPlayers
+                                    where matchPlayer.Seed == oppSeeds[i]
+                                    select new { linkRating = matchPlayer.firstRating };
+                    foreach (var lq in linkquery)
+                        oppRatings[i] = lq.linkRating;
+                    if (p.getAdjHandi(i) != 0)
+                        oppRatings[i] += 100 * p.getAdjHandi(i);
+                }
+                p.secondRating = Europa.ObtainNewRating(oppRatings, p.firstRating, theResults);
             }
         }
 
-        public void SecondDerivative(int rnd)
-        { }
         #endregion
 
         public void HandleLatePlayers(int rnd)
