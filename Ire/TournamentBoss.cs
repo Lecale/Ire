@@ -286,6 +286,8 @@ namespace Ire
                 }
                     
             }
+			FirstRatingDerivative(rnd);
+			SecondRatingDerivative(rnd);
         }
         #region OPERA
         public void FirstRatingDerivative(int rnd)
