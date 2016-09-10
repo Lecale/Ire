@@ -26,7 +26,7 @@ namespace Ire
 		public int Deed = -1; //Deed is the draw seeding for a particular round
 
 		public float firstRating = -1; //new tiebreak
-        public float secondRating = -1;
+       // public float secondRating = -1;
         public int OPERA = -1; //Note the precision
 
 		private static List<string> Tiebreaker = new List<string> ();
