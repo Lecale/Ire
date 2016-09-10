@@ -318,8 +318,7 @@ namespace Ire
             }
         }
         public void SecondRatingDerivative(int rnd)
-        {
-            //In this method we will use LINQ to make the query, just to practice using LINQ
+		{
             Rater Europa = new Rater();
             float[] oppRatings = new float[rnd];
             float[] theResults = new float[rnd];
@@ -380,7 +379,7 @@ namespace Ire
 						hlpDebug += (k + 1) + " ";
 				Console.WriteLine (AllPlayers [i - 1].ToString () + " plays in "+ hlpDebug);
             }
-			GenerateStore (); //Else seeding is not recored and a bug appears
+			GenerateStore (); //Else seeding is not recorded and a bug appears
 			SortField ();
 		}
 		#endregion

@@ -265,12 +265,18 @@ namespace Ire
                         if (p.SODOS < SODOS)
                             return -1;
                     } if (tie.Equals("MDOS"))
-                    {
-                        if (p.MDOS > MDOS)
-                            return 1;
-                        if (p.MDOS < MDOS)
-                            return -1;
-                    }
+					{
+						if (p.MDOS > MDOS)
+							return 1;
+						if (p.MDOS < MDOS)
+							return -1;
+					}if (tie.Equals("OPERA"))
+					{
+						if (p.OPERA > OPERA)
+							return 1;
+						if (p.OPERA < OPERA)
+							return -1;
+					}
 				}
 				return 0;
 			}
