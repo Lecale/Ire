@@ -35,7 +35,7 @@ namespace Ire
 					stack.RemoveAt (i);
 					return Request;
 				}
-			Console.WriteLine ("Horrid error in SplitLayer:Eject()"); 
+			Console.WriteLine ("HFatal error in SplitLayer:Eject()"); 
 			return -1;
 		}
 
@@ -150,10 +150,8 @@ namespace Ire
 		public override string ToString()
 		{
 			string s = "MMS:" + MMSKey + ":";
-			foreach (int i in stack) {
-				s += i;
-				s += ",";
-			}
+			foreach (int i in stack) 
+				s = s + i + ",";
 			return s;
 		}
 	}

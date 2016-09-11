@@ -29,7 +29,7 @@ namespace Ire
 				Console.Clear();
 				Console.WriteLine("Now please complete your data in the Settings File.");
 				Console.WriteLine("When you have finished press return.");
-                s = Console.ReadLine();//wait	
+                s = Console.ReadLine();	
                 tb.ReadSettings();
                 tb.previewTopBar(true);
                 tb.previewFloor(true);

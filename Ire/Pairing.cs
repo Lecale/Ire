@@ -190,7 +190,7 @@ namespace Ire
 			return "NotInUse";
         }
 
-        string[] res = {"None","WWin","BWin","Draw","WAdj","BAdj","DAdj","LAdj"};
+//        string[] res = {"None","WWin","BWin","Draw","WAdj","BAdj","DAdj","LAdj"};
         
 		public override bool Equals (object obj)
 		{

@@ -1,10 +1,7 @@
 ﻿<Properties StartupItem="Ire/Ire.csproj">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Ire/MonradLayer.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Ire/Program.cs">
     <Files>
-      <File FileName="Ire/Program.cs" Line="55" Column="20" />
-      <File FileName="Ire/MonradLayer.cs" Line="60" Column="20" />
-      <File FileName="Ire/SplitLayer.cs" Line="139" Column="14" />
-      <File FileName="Ire/FoldLayer.cs" Line="126" Column="34" />
+      <File FileName="Ire/Program.cs" Line="62" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

@@ -933,7 +933,7 @@ namespace Ire
 					}
 				}
 			}
-			catch(Exception e) { Console.WriteLine (e.Message); Console.WriteLine ("exception from: "+dbg);}
+			catch(Exception e) { Console.WriteLine ("exception from: {0} {1}",dbg,e.InnerException);}
 			Player.SetTiebreakers(Tiebreakers);
 		}
 
