@@ -196,18 +196,18 @@ namespace Ire
 		{
 			Pairing p = (Pairing)obj;
 			if (p.white.getSeed() == white.getSeed())
-			if (p.black.getSeed() == black.getSeed())
-				return true;
+				if (p.black.getSeed() == black.getSeed())
+					return true;
 			if (p.white.getSeed() == black.getSeed())
-			if (p.black.getSeed() == white.getSeed())
-				return true;
+				if (p.black.getSeed() == white.getSeed())
+					return true;
 
 			if (p.white.EGDPin == white.EGDPin)
-			if (p.black.EGDPin == black.EGDPin)
-				return true;
+				if (p.black.EGDPin == black.EGDPin)
+					return true;
 			if (p.white.EGDPin == black.EGDPin)
-			if (p.black.EGDPin == white.EGDPin)
-				return true;
+				if (p.black.EGDPin == white.EGDPin)
+					return true;
 			return false;
 		}
     }

@@ -2,7 +2,7 @@
 
 namespace Ire
 {
-	public class Person
+	public class Person : IDisposable
 	{
 		public string Name;
 		public string Club;
@@ -34,6 +34,10 @@ namespace Ire
 		{
 			Seed = s;
 		}
+
+		#region IDisposable Support
+		public void Dispose() { }
+		#endregion
 	}
 }
 

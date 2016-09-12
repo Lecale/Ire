@@ -925,7 +925,7 @@ namespace Ire
                                 if (s[1].Trim() != "")
                                     Tiebreakers.Add(s[1].ToUpper());
                             }
-                            if (s[0].Contains("Debug ") && s.Length > 1)
+                            if (s[0].Contains("Debug") && s.Length > 1)
                             {
                                 Verbose = true;
                             }
