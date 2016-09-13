@@ -44,11 +44,20 @@ namespace Ire
 
 		public List<int> Offer(int _Target, int[] opp)
 		{
-
 			List<int> Construct = new List<int>();
 			for (int i = 0; i < stack.Count; i++)
 				if (stack[i] != _Target)
-					Construct.Add(stack[i]);
+				{
+					bool good = true;
+					for (int j = 0; j < opp.Length; j++)
+					{
+						if (opp[j] == stack[i])
+							good= false;
+						
+					}		
+	 				if (good)
+						Construct.Add(stack[i]);
+				}	
 			return Construct;
 		}
 

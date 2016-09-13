@@ -25,6 +25,9 @@ namespace Ire
             Verbose = _Verbose;
             plys.AddRange(ply); //Careful with Byes
             History = _History;
+			if (Verbose) Console.WriteLine("History count {0}", History.Count);
+			if (Verbose) foreach (Pairing hip in History)
+				Console.WriteLine("History {0} {1} {2} {3} ",hip.white.Seed , hip.black.Seed, hip.white.EGDPin, hip.black.EGDPin);
             lookUpTable = new int[ply.Count];
             Pairs = new List<Pairing>();
             Pairing.setStatics(_MaxHandi, _AdjHandi, _HandiAboveBar);
