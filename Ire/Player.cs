@@ -188,10 +188,6 @@ namespace Ire
         }
 
 		#region Override Methods
-//		public override int GetHashCode ()
-//		{ //Evil grin
-//			return 11; 
-//		}
 
 		public override bool Equals(System.Object obj)
 		{
@@ -354,6 +350,7 @@ namespace Ire
 				return "/b";
 			return "/w";
 		}
+
 		#endregion
     }
 

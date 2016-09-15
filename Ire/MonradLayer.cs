@@ -47,18 +47,11 @@ namespace Ire
 			List<int> Construct = new List<int>();
 			for (int i = 0; i < stack.Count; i++)
 				if (stack[i] != _Target)
-				{
-					bool good = true;
-					for (int j = 0; j < opp.Length; j++)
-					{
-						if (opp[j] == stack[i])
-							good= false;
-						
-					}		
-	 				if (good)
 						Construct.Add(stack[i]);
-				}	
-			return Construct;
+            for (int j = 0; j < opp.Length; j++ ) //clearer logic but maybe slower
+                if(Construct.Contains(opp[j]))
+                    Construct.Remove(opp[j]);
+            return Construct;
 		}
 
 		/*

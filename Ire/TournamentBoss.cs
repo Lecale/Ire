@@ -310,7 +310,9 @@ namespace Ire
                                     where matchPlayer.Seed == oppSeeds[i]
                                     select new { linkRating = matchPlayer.Rating };
                     foreach (var lq in linkquery)
+                    {
                         oppRatings[i] = lq.linkRating;
+                    }
                     if (p.getAdjHandi(i) != 0)
                         oppRatings[i] += 100 * p.getAdjHandi(i);
                 }
@@ -338,6 +340,7 @@ namespace Ire
                         oppRatings[i] += 100 * p.getAdjHandi(i);
                 }
 				p.OPERA = (int) Europa.ObtainNewRating(oppRatings, p.firstRating, theResults);
+
             }
         }
 
@@ -1266,7 +1269,9 @@ Bd	White	Result	Black	Handicap
                 if (tb.Equals("MOS"))
                     s += (p.MOS + "\t");
                 if (tb.Equals("MDOS"))
-                    s += (p.MDOS + "\t");
+                    s += (p.MDOS + "\t"); 
+                if (tb.Equals("OPERA"))
+                    s += (p.OPERA + "\t");
 			}
 			return s;
 		}
