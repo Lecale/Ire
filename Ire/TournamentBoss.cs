@@ -308,7 +308,8 @@ namespace Ire
                     // if we are black (da da da)
                     var linkquery = from matchPlayer in AllPlayers
                                     where matchPlayer.Seed == oppSeeds[i]
-                                    select new { linkRating = matchPlayer.Rating };
+//                                    select new { linkRating = matchPlayer.Rating };
+                                    select new { linkRating = matchPlayer.getERating() }; //Maybe fairer in top group?
                     foreach (var lq in linkquery)
                     {
                         oppRatings[i] = lq.linkRating;
@@ -316,7 +317,7 @@ namespace Ire
                     if (p.getAdjHandi(i) != 0)
                         oppRatings[i] += 100 * p.getAdjHandi(i);
                 }
-                p.firstRating = Europa.ObtainNewRating(oppRatings, p.Rating, theResults);
+                p.firstRating = Europa.ObtainNewRating(oppRatings, p.getERating(), theResults);
             }
         }
         public void SecondRatingDerivative(int rnd)
@@ -361,8 +362,10 @@ namespace Ire
                 AllPlayers[i - 1].SetSeed(i);
 				AllPlayers [i - 1].topBar = false; //should already be false?
                 if(TopBar)
-    				if (AllPlayers [i - 1].getERating () > nTopBar)
-	    				AllPlayers [i - 1].setERating (nTopBar);
+                    if (AllPlayers[i - 1].getERating() > nTopBar)
+                    {
+                        AllPlayers[i - 1].setERating(nTopBar);
+                    }
                 if(RatingFloor)
     				if (AllPlayers [i - 1].getERating () < nRatingFloor)
 	    				AllPlayers [i - 1].setERating (nRatingFloor);

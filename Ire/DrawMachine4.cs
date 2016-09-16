@@ -72,7 +72,8 @@ namespace Ire
             { //foreachPlayer
                 if (Registry.Contains(plys[i].Seed) == true)
                 {
-                    found = true; //should be unreachable
+                    found = true; //should be unreachable?
+//                    Console.WriteLine("this line should not have been reached i:{0} Seed:{1}" ,i, plys[i].Seed);
                 }
                 else
                     found = false;
@@ -142,9 +143,13 @@ namespace Ire
                         else
                             Console.WriteLine("path cannot be removed as too small");//should be unreachable
 
+                        //reInject (Push) Seeds
+                        reInjection(Pairs[Pairs.Count - 1].black.Seed);
+                        reInjection(Pairs[Pairs.Count - 1].white.Seed);
                         //update lookups
                         Registry.Remove(Pairs[Pairs.Count - 1].black.Seed);
                         Registry.Remove(Pairs[Pairs.Count - 1].white.Seed);
+                        //Purge from Pairs
                         Pairs.RemoveAt(Pairs.Count - 1);
 
                         for (int rp = 0; rp < plys.Count; rp++)
@@ -168,6 +173,16 @@ namespace Ire
             History.AddRange(completedRnd);
         }
 
+        public void reInjection(int blockedSeed)
+        {
+            foreach (MonradLayer ml in _Monrad)
+                if (ml.Contained(blockedSeed))
+                {
+                    ml.Push(blockedSeed);
+                    return;
+                }
+        }
+
         public void CleanBlocked(string END)
         {
             List<int> iHold = new List<int>();
@@ -180,8 +195,8 @@ namespace Ire
 
         public void DebugMonrad()
         {
-            foreach (MonradLayer sl in _Monrad)
-                Console.WriteLine(sl);
+            foreach (MonradLayer ml in _Monrad)
+                Console.WriteLine(ml);
             Console.ReadLine();
         }
     }

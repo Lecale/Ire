@@ -12,8 +12,8 @@ namespace Ire
 		public MonradLayer(float MMS, int Seed)
 		{
 			MMSKey = MMS;
-			stack = new List<int>();
-			population = new List<int>();
+			stack = new List<int>(); //available or current
+			population = new List<int>(); //original
 			population.Add(Seed);
 			stack.Add(Seed);
 		}
@@ -28,8 +28,6 @@ namespace Ire
 		}
 
 		//use this after Offer
-		// stack is available 
-		//  population is original
 		public int Eject(int Request)
 		{
 			for (int i = stack.Count - 1; i > -1; i--)
@@ -59,44 +57,45 @@ namespace Ire
 		 */
 		public void Push(int _Seed)
 		{
-			int origin = -1;
-			bool found = false;
-			for (int i = population.Count - 1; i > -1; i--)
-				if (population[i] == _Seed)
-				{
-					origin = i;
-					break;
-				}
-			int nigiro = 99999;
-			for (int j = stack.Count - 1; j > -1; j--)
-			{
-				for (int i = population.Count - 1; i > -1; i--)
-					if (population[i] == stack[j])
-					{
-						nigiro = i;
-						break;
-					}
-				if (nigiro < origin)
-				{
-					stack.Insert(j + 1, _Seed);
-					found = true;
-					j = -2;
-				}
-			}
-			if (found == false)
-				stack.Add(_Seed);
+            int _SeedOrigPosn = OriginalPositionWas(_Seed);
+            int above;
+            for (int i = 0; i < stack.Count; i++)
+            {
+                above = OriginalPositionWas(stack[i]);
+                if(_SeedOrigPosn < above)
+                {
+                    stack.Insert(i, _Seed);
+                    return;                    
+                }
+            }
+            stack.Add(_Seed);
 		}
+
+        private int OriginalPositionWas(int Item)
+        {
+            for (int i = 0; i < population.Count; i++)
+                if (population[i] == Item)
+                    return i;
+                return 99999;
+        }
 
 		public int StackSize()
 		{ return stack.Count; }
 
-		public bool Contains(int i)
-		{
-			foreach (int s in stack)
-				if (s == i)
-					return true;
-			return false;
-		}
+        public bool Contains(int i)
+        {
+            foreach (int s in stack)
+                if (s == i)
+                    return true;
+            return false;
+        }
+        public bool Contained(int i)
+        {
+            foreach (int p in population)
+                if (p == i)
+                    return true;
+            return false;
+        }
 
 		public override string ToString()
 		{
