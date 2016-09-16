@@ -146,6 +146,13 @@ namespace Ire
 					return true;
 			return false;
 		}
+		public bool Contained(int i)
+		{
+			foreach (int s in population)
+				if (s == i)
+					return true;
+			return false;
+		}
 
 		public override string ToString()
 		{
