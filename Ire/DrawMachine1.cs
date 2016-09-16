@@ -112,6 +112,7 @@ namespace Ire
                         Paths.Add(sp);
 						CleanBlocked(sp);
                         int penultimateSpace = path.LastIndexOf(" ");
+                        //check if we need to restore here
                         path = path.Remove(penultimateSpace);
                         //Mandatory removal of last pair
 						//update lookups

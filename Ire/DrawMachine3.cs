@@ -139,7 +139,8 @@ namespace Ire
                             path = path.Remove(penultimateSpace);
                         else
                             Console.WriteLine("path cannot be removed as too small");//should be unreachable
-
+                        //To Check - should we push here
+                        //i.e. restore to Split
                         //update lookups
                         Registry.Remove(Pairs[Pairs.Count - 1].black.Seed);
                         Registry.Remove(Pairs[Pairs.Count - 1].white.Seed);

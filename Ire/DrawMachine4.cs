@@ -72,8 +72,7 @@ namespace Ire
             { //foreachPlayer
                 if (Registry.Contains(plys[i].Seed) == true)
                 {
-                    found = true; //should be unreachable?
-//                    Console.WriteLine("this line should not have been reached i:{0} Seed:{1}" ,i, plys[i].Seed);
+                    found = true; //to check - why this is necessary in current code
                 }
                 else
                     found = false;
