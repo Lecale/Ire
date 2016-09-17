@@ -98,45 +98,39 @@ namespace Ire
 					Console.WriteLine("FC:"+Filtered.Count / 2 + ":Stack:"+stack.Count);
 					Console.WriteLine (e.Message);
 				}
-
-              
+            
             }
             
             return Construct;
 		}
+		/*
+		*  Use to re-inject a player
+		*/
+		public void Push(int _Seed)
+		{
+			int _SeedOrigPosn = OriginalPositionWas(_Seed);
+			int above;
+			for (int i = 0; i < stack.Count; i++)
+			{
+				above = OriginalPositionWas(stack[i]);
+				if (_SeedOrigPosn < above)
+				{
+					stack.Insert(i, _Seed);
+					return;
+				}
+			}
+			stack.Add(_Seed);
+		}
 
-        //Push is only used for re-injection
-        public void Push(int _Seed)
-        {
-            int origin = -1; 
-            bool found = false;
-            for (int i = population.Count-1; i > -1; i--)
-                if (population[i] == _Seed)
-                {
-                    origin = i;
-                    break;
-                }
-            int nigiro = 99999;
-            for (int j = stack.Count-1; j > -1; j--)
-            {
-                for (int i = population.Count-1; i > -1; i--)
-                    if (population[i] == stack[j])
-                    {
-                        nigiro = i;
-                        break;
-                    }
-                if (nigiro < origin)
-                {
-                    stack.Insert(j + 1, _Seed);
-                    found = true;
-                    j = -2;
-                }
-            }
-            if(found==false)
-                stack.Add(_Seed);
-        }
-			
-        public int StackSize()
+		private int OriginalPositionWas(int Item)
+		{
+			for (int i = 0; i < population.Count; i++)
+				if (population[i] == Item)
+					return i;
+			return 99999;
+		}
+
+		public int StackSize()
         { return stack.Count;  }
 
 		public bool Contains(int i)
