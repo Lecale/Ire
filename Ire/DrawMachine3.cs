@@ -141,6 +141,8 @@ namespace Ire
                             Console.WriteLine("path cannot be removed as too small");//should be unreachable
                         //To Check - should we push here
                         //i.e. restore to Split
+                        reInjection(Pairs[Pairs.Count - 1].black.Seed);
+						reInjection(Pairs[Pairs.Count - 1].white.Seed);
                         //update lookups
                         Registry.Remove(Pairs[Pairs.Count - 1].black.Seed);
                         Registry.Remove(Pairs[Pairs.Count - 1].white.Seed);
@@ -166,6 +168,16 @@ namespace Ire
         {
             History.AddRange(completedRnd);
         }
+
+		public void reInjection(int blockedSeed)
+		{
+			foreach (SplitLayer sl in _Split)
+				if (sl.Contained(blockedSeed))
+				{
+					sl.Push(blockedSeed);
+					return;
+				}
+		}
 
         public void CleanBlocked(string END)
         {

@@ -62,6 +62,7 @@
     <Compile Include="SplitLayer.cs" />
     <Compile Include="DrawMachine4.cs" />
     <Compile Include="MonradLayer.cs" />
+    <Compile Include="GenericLayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
