@@ -112,7 +112,8 @@ namespace Ire
                         Paths.Add(sp);
 						CleanBlocked(sp);
                         int penultimateSpace = path.LastIndexOf(" ");
-                        //check if we need to restore here
+                        //DM1 doesn't need restore as we never empty the McLayer
+						//Which makes it super slug like
                         path = path.Remove(penultimateSpace);
                         //Mandatory removal of last pair
 						//update lookups
