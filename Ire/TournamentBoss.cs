@@ -364,7 +364,7 @@ namespace Ire
                 if(TopBar)
                     if (AllPlayers[i - 1].getERating() > nTopBar)
                     {
-                        AllPlayers[i - 1].setERating(nTopBar);
+                        AllPlayers[i - 1].setERating(nTopBar+1);
                     }
                 if(RatingFloor)
     				if (AllPlayers [i - 1].getERating () < nRatingFloor)
@@ -489,7 +489,7 @@ namespace Ire
                             if (nTopBar < pete.getRating() && pete.nBye() == 0)
                             {
                                 pete.topBar = true;
-                                pete.setERating(nTopBar);
+                                pete.setERating(nTopBar+1);
                             }
                         }
                     }
