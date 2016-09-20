@@ -210,6 +210,10 @@ namespace Ire
         //Should have some if SOS if MOS if SODOS logic
         public void UpdateTiebreaks(int rnd)
         {
+            //These are only calculating the derived ratings of each player, not the average opposition
+            FirstRatingDerivative(rnd);
+            SecondRatingDerivative(rnd);
+
             int[] lookUp = new int[AllPlayers.Count]; //yuck
             for (int i = 0; i < AllPlayers.Count; i++)
                 lookUp[AllPlayers[i].Seed - 1] = i;
@@ -217,6 +221,7 @@ namespace Ire
             {
                 float _SOS = 0;
                 float _MOS = 0; //do not calculate if rnd <3
+                float _OPERA = 0;
                 float _SODOS = 0;
                 float maxSOS = -999;
                 float minSOS = 999;
@@ -235,7 +240,8 @@ namespace Ire
 							float f = AllPlayers[lookUp[op]].getMMS() ;
 							f = f + ap.getAdjHandi(i);
                             _SOS += f;
-                            _SODOS += (f * ap.getResult(i)); 
+                            _SODOS += (f * ap.getResult(i));
+                            _OPERA += AllPlayers[lookUp[op]].secondRating; 
                             if (f > maxSOS)
                                 maxSOS = f;
                             if (f < minSOS)
@@ -262,10 +268,14 @@ namespace Ire
                 {
 					if (nGame != 0) {
 						_SOS = _SOS * rnd / nGame;
-						if (_score != 0.5f*(float)(rnd - nGame) ) 
-							_SODOS = _SODOS * (_score / (_score - (0.5f * (float)(rnd - nGame))));
-						else
-							_SODOS = 0.5f * _SOS / (rnd); // assign half mean SOS
+                        if (_score != 0.5f * (float)(rnd - nGame))
+                        {
+                            _SODOS = _SODOS * (_score / (_score - (0.5f * (float)(rnd - nGame))));
+                        }
+                        else
+                        {
+                            _SODOS = 0.5f * _SOS / (rnd); // assign half mean SOS
+                        }
 					} else {
 						_SODOS = 0.5f * _SOS / (rnd);
 					}
@@ -279,15 +289,16 @@ namespace Ire
                 ap.SOS = _SOS;
                 ap.MOS = _MOS;
                 ap.SODOS = _SODOS;
-				if (_score == 0 || _SODOS == 0)
-                    ap.MDOS = 0;
-                else{
-                    ap.MDOS = _SODOS / _score;
+                if(nGame != 0)
+                    ap.OPERA = (int)(_OPERA / nGame); 
+                if (_score == 0 || _SODOS == 0)
+                { ap.MDOS = 0;
                 }
-                    
+                else
+                {
+                    ap.MDOS = _SODOS / _score;
+                }                                    
             }
-			FirstRatingDerivative(rnd);
-			SecondRatingDerivative(rnd);
         }
         #region OPERA
         public void FirstRatingDerivative(int rnd)
@@ -308,8 +319,8 @@ namespace Ire
                     // if we are black (da da da)
                     var linkquery = from matchPlayer in AllPlayers
                                     where matchPlayer.Seed == oppSeeds[i]
-//                                    select new { linkRating = matchPlayer.Rating };
-                                    select new { linkRating = matchPlayer.getERating() }; //Maybe fairer in top group?
+                                    select new { linkRating = matchPlayer.Rating };
+//                                    select new { linkRating = matchPlayer.getERating() }; //Maybe fairer in top group?
                     foreach (var lq in linkquery)
                     {
                         oppRatings[i] = lq.linkRating;
@@ -317,7 +328,8 @@ namespace Ire
                     if (p.getAdjHandi(i) != 0)
                         oppRatings[i] += 100 * p.getAdjHandi(i);
                 }
-                p.firstRating = Europa.ObtainNewRating(oppRatings, p.getERating(), theResults);
+                p.firstRating = Europa.ObtainNewRating(oppRatings, p.Rating, theResults);
+//                p.firstRating = Europa.ObtainNewRating(oppRatings, p.getERating(), theResults);
             }
         }
         public void SecondRatingDerivative(int rnd)
@@ -340,7 +352,7 @@ namespace Ire
                     if (p.getAdjHandi(i) != 0)
                         oppRatings[i] += 100 * p.getAdjHandi(i);
                 }
-				p.OPERA = (int) Europa.ObtainNewRating(oppRatings, p.firstRating, theResults);
+				p.secondRating = (int) Europa.ObtainNewRating(oppRatings, p.firstRating, theResults);
 
             }
         }
