@@ -848,7 +848,7 @@ namespace Ire
                     riter.WriteLine("Tournament Name:\t" + name + ",");
                     riter.WriteLine("Copy Paste the Player information into the sheet,");
                     riter.WriteLine("PIN , Name, Rating, Club, Country,");
-                    riter.WriteLine("type X into the round column to mark a Bye,");
+                    riter.WriteLine("type the number of the round to denote an allocated Bye,");
                     riter.WriteLine(",");
                     string hdr = "Pin,Name,Rating,Club,Country";
                     string bdy = ",,,,";
