@@ -1314,10 +1314,55 @@ Bd	White	Result	Black	Handicap
 					sw.WriteLine ("<p>Rating Bar: " + nTopBar);
 				if(RatingFloor)
 					sw.WriteLine ("<p>Rating Floor: " + nRatingFloor);
-				sw.WriteLine ("<p>Handicap Adjustment: " + HandiAdjust + " Max Handicap: " + nMaxHandicap);
+				sw.WriteLine ("<p>Handicap Adjustment: " + HandiAdjust + "<p>Max Handicap: " + nMaxHandicap);
+                sw.WriteLine("<p>Correlation between Rating and MMS was: {0}", CorrelationRatingMMS());
 				sw.WriteLine ("</html>");
 			}
 		}
+        #endregion
+
+        #region Statistics
+        public string CorrelationRatingMMS()
+        {
+            double[] MMS = new double[AllPlayers.Count];
+            double[] RAT = new double[AllPlayers.Count];
+            for(int ap = 0; ap<AllPlayers.Count; ap++)
+            {
+                MMS[ap]=AllPlayers[ap].getMMS();
+                RAT[ap]=AllPlayers[ap].Rating;
+            }
+
+            double[] array_xy = new double[RAT.Length];
+            double[] array_xp2 = new double[RAT.Length];
+            double[] array_yp2 = new double[RAT.Length];
+            for (int i = 0; i < RAT.Length; i++)
+                array_xy[i] = RAT[i] * MMS[i];
+            for (int i = 0; i < RAT.Length; i++)
+                array_xp2[i] = Math.Pow(RAT[i], 2.0);
+            for (int i = 0; i < RAT.Length; i++)
+                array_yp2[i] = Math.Pow(MMS[i], 2.0);
+            double sum_x = 0;
+            double sum_y = 0;
+            foreach (double n in RAT)
+                sum_x += n;
+            foreach (double n in MMS)
+                sum_y += n;
+            double sum_xy = 0;
+            foreach (double n in array_xy)
+                sum_xy += n;
+            double sum_xpow2 = 0;
+            foreach (double n in array_xp2)
+                sum_xpow2 += n;
+            double sum_ypow2 = 0;
+            foreach (double n in array_yp2)
+                sum_ypow2 += n;
+            double Ex2 = Math.Pow(sum_x, 2.00);
+            double Ey2 = Math.Pow(sum_y, 2.00);
+
+            double answer = (RAT.Length * sum_xy - sum_x * sum_y) /
+               Math.Sqrt((RAT.Length * sum_xpow2 - Ex2) * (RAT.Length * sum_ypow2 - Ey2));
+            return answer.ToString("0.000");
+        }
         #endregion
     }
 }
