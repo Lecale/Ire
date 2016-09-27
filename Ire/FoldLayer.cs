@@ -2,7 +2,7 @@
 
 namespace Ire
 {
-	public class FoldLayer
+	public class FoldLayer //Should extend Generic Layer
 	{
 		public float MMSKey;
 		private List<int> population;
@@ -16,14 +16,8 @@ namespace Ire
 			population.Add (Seed);
             stack.Add(Seed);
 		}
-		//this method is never used i think...
-		public bool Match(float _mms)
-		{
-			if (_mms == MMSKey)
-				return true;
-			return false;
-		}
-		// 1 2 3 (4)
+
+        // 1 2 3 (4)
 		public void Add(int _seed)
 		{
 			if (population.Contains (_seed) == false) {
