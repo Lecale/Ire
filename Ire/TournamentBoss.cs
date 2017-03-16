@@ -1305,7 +1305,9 @@ Bd	White	Result	Black	Handicap
 			string fOut = fName.Replace (".txt", ".html");
 			Console.WriteLine (fOut);
 			using (StreamWriter sw = new StreamWriter (fOut)) {
-				sw.WriteLine ("<html><table border=1>");
+				sw.WriteLine ("<!DOCTYPE html><html lang=\"en\">");
+                sw.WriteLine("head><title>"+TournamentName+"</title></head><body>");
+                sw.WriteLine("<table border=1 caption=\"The final standings of \"" + TournamentName + ">");
 				foreach (string al in AllLines) {
 					sw.WriteLine("<tr><td>" + al.Replace("\t","</td><td>") + "</td></tr>");
 				}
@@ -1316,7 +1318,7 @@ Bd	White	Result	Black	Handicap
 					sw.WriteLine ("<p>Rating Floor: " + nRatingFloor);
 				sw.WriteLine ("<p>Handicap Adjustment: " + HandiAdjust + "<p>Max Handicap: " + nMaxHandicap);
                 sw.WriteLine("<p>Correlation between Rating and MMS was: {0}", CorrelationRatingMMS());
-				sw.WriteLine ("</html>");
+				sw.WriteLine ("</body></html>");
 			}
 		}
         #endregion
