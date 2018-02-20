@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Ire
 { 
@@ -70,7 +69,7 @@ namespace Ire
 					HandleLatePlayers (currentRound);
 				}
 				Console.WriteLine ("Do you want to update player participation (byes) in the players list (yes / no)");
-			 s = Console.ReadLine ();
+		    	s = Console.ReadLine ();
 				if (s.ToUpper ().Trim ().StartsWith ("Y")) {
                     Console.WriteLine("After updating the players file press return to continue");
                     string anykey = Console.ReadLine();
@@ -206,6 +205,18 @@ namespace Ire
                 }
 			}
 		}
+
+        public void awaitText(string instruction, bool clearConsole=true, string keyPhrase="done")
+        {
+            bool awaiting = true;
+            while (awaiting)
+            {
+                Console.WriteLine(instruction);
+                if (keyPhrase.ToLower().Equals(Console.ReadLine()))
+                    awaiting = false;
+            }
+            if (clearConsole) Console.Clear();
+        }
 
         //Should have some if SOS if MOS if SODOS logic
         public void UpdateTiebreaks(int rnd)
@@ -677,16 +688,18 @@ namespace Ire
 		//
 		public void ReadPlayers(bool Supression=false, bool Initial = false)
         {
-			if (Initial == true) {
-				Console.WriteLine ("Please press return when you have finished editing players.txt");
-				Console.ReadLine ();
-			}
+            if (Initial == true) awaitText("Please type 'done' when you have finished editing players.txt", true);
+            /*            {
+                            Console.WriteLine ("Please press return when you have finished editing players.txt");
+                            Console.ReadLine ();
+                        }
+            */
             string tLn = "";
 			string fin = workDirectory + "players.txt";
             using (StreamReader reader = new StreamReader(fin))
             {
                 for (int i = 0; i < 6; i++)
-                    tLn = reader.ReadLine(); //trip through headers
+                    tLn = reader.ReadLine(); //jump through headers
 
                 while ((tLn = reader.ReadLine()) != null)
                 {
@@ -846,11 +859,11 @@ namespace Ire
             if(overwritePlayers)
                 using (StreamWriter riter = new StreamWriter(fOut))
                 {
-                    riter.WriteLine("Tournament Name:\t" + name + ",");
-                    riter.WriteLine("Copy Paste the Player information into the sheet,");
-                    riter.WriteLine("PIN , Name, Rating, Club, Country,");
-                    riter.WriteLine("type the number of the round to denote an allocated Bye,");
-                    riter.WriteLine(",");
+                    riter.WriteLine("= Tournament Name:\t" + name + ",");
+                    riter.WriteLine("= Copy Paste the Player information into the sheet,");
+                    riter.WriteLine("= PIN , Name, Rating, Club, Country,");
+                    riter.WriteLine("= type the number of the round to denote an allocated Bye,");
+                    riter.WriteLine("=======================================================");
                     string hdr = "Pin,Name,Rating,Club,Country";
                     string bdy = ",,,,";
                     for (int i = 0; i < nRounds; i++)
@@ -1044,10 +1057,22 @@ Bd	White	Result	Black	Handicap
 						int black = int.Parse (split2 [1]) -1;
 						int handicap = int.Parse (split [4].Replace ("h", ""));
 						int result = 0;
-						if (split [2].Equals ("1:0")) result = 1;
-                        if (split [2].Equals ("0:1")) result = 2;
-						if (split [2].Equals ("0.5:0.5")) result = 3;
-						if (split [2].Equals ("0:0")) result = 7;
+                        bool validResult = false;
+                        if (split[2].Equals("1:0")) { result = 1; validResult = true; }
+                        if (split [2].Equals ("0:1")) { result = 2; validResult = true; }
+                        if (split [2].Equals ("0.5:0.5")) { result = 3; validResult = true; }
+                        if (split [2].Equals ("0:0")) { result = 7; validResult = true; }
+                        if (validResult == false)
+                        {
+                            Console.WriteLine("The following result could not be processed.");
+                            Console.WriteLine(s);
+                            Console.WriteLine("You MUST choose one of these 4 options");
+                            Console.WriteLine("Type '1' for  1:0");
+                            Console.WriteLine("Type '2' for  0:1");
+                            Console.WriteLine("Type '3' for  0.5:0.5");
+                            Console.WriteLine("Type '7' for  0:0");
+                            result = int.Parse(Console.ReadLine());
+                        }
 						if(Verbose)
 							Console.WriteLine("Read Pairing: " + AllPlayers[LUT[white]].Seed + ":" + AllPlayers[LUT[black]].Seed);
 						Pairing p = new Pairing (AllPlayers [LUT [white]], AllPlayers [LUT [black]], handicap, result);
