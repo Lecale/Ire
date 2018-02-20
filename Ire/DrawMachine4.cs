@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Ire
 {
-    public class DrawMachine4 //Aka monrad pairing
+    public class DrawMachine4 //Aka monrad pairing or adjacent pairing
     {
         #region variables
         private List<Player> plys = new List<Player>(); //this will be all players for convenience of LookUp
