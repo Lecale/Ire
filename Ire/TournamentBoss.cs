@@ -744,8 +744,9 @@ namespace Ire
         {
             try
             {
-                Console.WriteLine("Please enter the name of the working folder for the tournament");
-                if(Macintosh)
+                Console.WriteLine("Please enter the name of the working folder for the tournament.");
+                Console.WriteLine("This path should be relative to the exe file.");
+                if (Macintosh)
                     workDirectory = exeDirectory + "/"+ Console.ReadLine().Trim();
                 else
                     workDirectory = exeDirectory + "\\"+ Console.ReadLine().Trim();
@@ -894,7 +895,7 @@ namespace Ire
 			return true;
         }
 
-		public void ReadSettings() //Use a switch statement !!!!!1
+		public void ReadSettings() // Sorry but I find Switch syntax way too verbose in C#
 		{
 			char[] ch = { '\t'};
 			string[] s;
@@ -904,54 +905,40 @@ namespace Ire
 					while(sr.EndOfStream == false)	{
 						dbg = sr.ReadLine ();
 						if(dbg!=null)
-						if(dbg.Length > 2){
-							s =dbg.Split(ch);
-							if(s[0].Contains("Tournament Name")){
-								TournamentName = s[1];
-                            }
-                            if (s[0].Contains("Rounds"))
+						    if(dbg.Length > 2)
                             {
-                                nRounds = int.Parse(s[1].Trim());
-                            }
-                            if (s[0].Contains("Pairing Strategy"))
-                            {
-                                PairingStrategy = s[1].Trim();
-                            }
-							if(s[0].Contains("Top Bar Rating")){
-								nTopBar = int.Parse(s[1].Trim());
-								TopBar = true;
-							}
-							if(s[0].Contains("Rating Floor")){
-								nRatingFloor = int.Parse(s[1].Trim());
-								RatingFloor = true;
-							}
-							if(s[0].Contains("Handicap Policy")){
-								HandiAdjust = int.Parse(s[1].Trim());
-							}
-							if(s[0].Contains("Max Handicap")){
-								nMaxHandicap = int.Parse(s[1].Trim());
-							}
-							if(s[0].Contains("Grade Width")){
-								nGradeWidth = int.Parse(s[1].Trim());
-							}
-							if(s[0].Contains("Permit handicap above bar")){
-	                            if (s[1].ToUpper().StartsWith("Y"))
-	                                HandiAboveBar = true;
-                            }
-                            if (s[0].Contains("Tiebreak ") && s.Length > 1)
-                            {
-                                if (s[1].Trim() != "")
-                                    Tiebreakers.Add(s[1].ToUpper());
-                            }
-                            if (s[0].Contains("Debug") && s.Length > 1)
-                            {
-                                Verbose = true;
-                            }
+							    s =dbg.Split(ch);
+							    if(s[0].Contains("Tournament Name")) TournamentName = s[1];
+                                if (s[0].Contains("Rounds")) nRounds = int.Parse(s[1].Trim());
+                                if (s[0].Contains("Pairing Strategy")) PairingStrategy = s[1].Trim();
+							    if(s[0].Contains("Handicap Policy")) HandiAdjust = int.Parse(s[1].Trim());
+							    if(s[0].Contains("Max Handicap")) nMaxHandicap = int.Parse(s[1].Trim());
+                                if (s[0].Contains("Grade Width")) nGradeWidth = int.Parse(s[1].Trim());
+                                if (s[0].Contains("Debug") && s.Length > 1) Verbose = true;
+                                if (s[0].Contains("Top Bar Rating"))
+                                {
+                                    nTopBar = int.Parse(s[1].Trim());
+                                    TopBar = true;
+                                }
+                                if (s[0].Contains("Rating Floor"))
+                                {
+                                    nRatingFloor = int.Parse(s[1].Trim());
+                                    RatingFloor = true;
+                                }
+							    if(s[0].Contains("Permit handicap above bar")){
+	                                if (s[1].ToUpper().StartsWith("Y"))
+	                                    HandiAboveBar = true;
+                                }
+                                if (s[0].Contains("Tiebreak ") && s.Length > 1) //should check for secondary marker
+                                {
+                                    if (s[1].Trim() != "")
+                                        Tiebreakers.Add(s[1].ToUpper());
+                                }
 						}
 					}
 				}
 			}
-			catch(Exception e) { Console.WriteLine ("exception from: {0} {1}",dbg,e.InnerException);}
+			catch(Exception e) { Console.WriteLine ("ReadSettings() exception: {0} {1}", dbg,e.InnerException);}
 			Player.SetTiebreakers(Tiebreakers);
 		}
 
@@ -1057,14 +1044,10 @@ Bd	White	Result	Black	Handicap
 						int black = int.Parse (split2 [1]) -1;
 						int handicap = int.Parse (split [4].Replace ("h", ""));
 						int result = 0;
-						if (split [2].Equals ("1:0"))
-							result = 1;
-						if (split [2].Equals ("0:1"))
-							result = 2;
-						if (split [2].Equals ("0.5:0.5"))
-							result = 3;
-						if (split [2].Equals ("0:0"))
-								result = 7;
+						if (split [2].Equals ("1:0")) result = 1;
+                        if (split [2].Equals ("0:1")) result = 2;
+						if (split [2].Equals ("0.5:0.5")) result = 3;
+						if (split [2].Equals ("0:0")) result = 7;
 						if(Verbose)
 							Console.WriteLine("Read Pairing: " + AllPlayers[LUT[white]].Seed + ":" + AllPlayers[LUT[black]].Seed);
 						Pairing p = new Pairing (AllPlayers [LUT [white]], AllPlayers [LUT [black]], handicap, result);
@@ -1299,14 +1282,14 @@ Bd	White	Result	Black	Handicap
 			using (StreamReader sr = new StreamReader (fName)) {
 				sr.ReadLine ();sr.ReadLine ();
 				while (sr.EndOfStream == false) {
-					AllLines.Add (sr.ReadLine ());
+					AllLines.Add (sr.ReadLine ().Trim());  //trim should remove unwanted blank cells
 				}
 			}
 			string fOut = fName.Replace (".txt", ".html");
 			Console.WriteLine (fOut);
 			using (StreamWriter sw = new StreamWriter (fOut)) {
 				sw.WriteLine ("<!DOCTYPE html><html lang=\"en\">");
-                sw.WriteLine("head><title>"+TournamentName+"</title></head><body>");
+                sw.WriteLine("<head><title>"+TournamentName+"</title></head><body>");
                 sw.WriteLine("<table border=1 caption=\"The final standings of \"" + TournamentName + ">");
 				foreach (string al in AllLines) {
 					sw.WriteLine("<tr><td>" + al.Replace("\t","</td><td>") + "</td></tr>");
