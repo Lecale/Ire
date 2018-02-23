@@ -29,12 +29,11 @@ namespace Ire
 		public int RatingByBox(int mid, int width)
 		{
 			double d1 = r.NextDouble ();
-			double d2 = r.NextDouble ();
-
-			double d = (d1 * d2);
-			if (r.NextDouble () > 0.5)
-				d = d * -1;
-			return (int)(d * width + mid);
+            double d2 = r.NextDouble();
+            double d = d1 * d2;
+            double plusMinus = r.NextDouble();
+            if (plusMinus > 0.5)    return (int)((width * d) + mid);
+            else   return (int)( mid - (width * d));
 		}
 
         public void EnterResults(string dir, int rnd)
@@ -79,54 +78,71 @@ namespace Ire
 
         }
 
-        /*
-         * Lets us initialise with the list from another tournament
-         * 
-         * {"retcode":"Ok","Pin_Player":"12913769","AGAID":"17693",
-         * "Last_Name":"Davis","Name":"Ian","Country_Code":"IE",
-         * "Club":"Belf","Grade":"1d","Grade_n":"30","EGF_Placement":"832",
-         * "Gor":"2116","DGor":"0","Proposed_Grade":"","Tot_Tournaments":"73",
-         * "Last_Appearance":"T170304F","Elab_Date":"2009-04-03","Hidden_History":
-         * "0","Real_Last_Name":"Davis","Real_Name":"Ian"}
-         * 
-         */
-        public void ImportTournamentFromEGDTextFile()
+        //Utility::Search by EGD Pin or Country
+        public void egfTextSearchResults(List<string> tokens)
         {
-            WebClient wc = new WebClient();
-            string t;
-            string pin="";
-            string[] tmp;
-            char[] c = { ',', ':' };
-            string baseURL = "http://www.europeangodatabase.eu/EGD/GetPlayerDataByPIN.php?pin=";
-           
-            Console.WriteLine("Please enter the fully qualified filename");
-            string egd = Console.ReadLine();
-//          sw.WriteLine(i++ + "," + u.ProvideName() + "," + u.RatingByBox(midpoint, spread) + ",BLF,IE,1k" + end);
-            int cntr = 1;
-            using (StreamReader sr = new StreamReader(egd))
+            Console.WriteLine("Instead of running a tournament");
+            Console.WriteLine("we are going to search the 'egf.txt' file");
+            Console.WriteLine("please enter the relative directory path for the file");
+            int pin = -1;
+            string fN = "";
+            string lN = "";
+            string tmp = "";
+            
+            string dirpath = Console.ReadLine();
+            if(dirpath.StartsWith("\\"))
+                dirpath = Directory.GetCurrentDirectory() + dirpath ;
+            else
+                dirpath = Directory.GetCurrentDirectory() + "\\" + dirpath;
+            try
             {
-                while (sr.EndOfStream == false)
+                pin = int.Parse(tokens[0].Trim());
+                Console.WriteLine("searching for egd pin {0}", pin);
+            }
+            catch
+            {
+                fN = tokens[0].ToLower().Trim(); lN = tokens[1].ToLower().Trim();
+                Console.WriteLine("searching for string {0} , {1}", fN, lN);
+            }
+            Console.WriteLine(pin);
+            int Matches = 0; int Tries = 0;
+            using (StreamReader sr = new StreamReader(dirpath + "\\egf.txt"))
+            {
+                using (StreamWriter sw = new StreamWriter(dirpath + "\\searchResults.txt"))
                 {
-                    t = sr.ReadLine().Trim();
-                    if ( t.StartsWith(";")== false) //check we are not having a comment
-                    { 
-                        //get pin
-                        tmp = t.Split();    pin = tmp[tmp.Length-1]; 
-                        //http request
-                        t = wc.DownloadString(baseURL + pin).Replace("\"","");  Thread.Sleep(5000);
-                        //dictionary
-                        tmp = t.Split(c);
-                        Dictionary<string, string> d = new Dictionary<string, string>();
-                        for (int i = 0; i < tmp.Length; i += 2)
-                            d.Add(tmp[i],tmp[i+1]);
-                        //text file
-                        t = "" + cntr + d["Last_Name"] + " " + d["Name"] + " ";
-                        t += d["Gor"] + " " + d["Club"] + " " + d["Country"] + " " + d["Grade"];
+                    if (pin != -1)
+                    {
+                        while (sr.EndOfStream == false)
+                        {
+                            Tries++;
+                            tmp = sr.ReadLine();
+                            if (tmp.Contains(pin.ToString()))
+                            {
+                                sw.WriteLine(tmp);
+                                Matches++;
+                            }
+                        }
+                        sw.Flush();
+                    }
+                    else
+                    {
+                        while (sr.EndOfStream == false)
+                        {
+                            Tries++;
+                            tmp = sr.ReadLine().ToLower();
+                            if (tmp.Contains(fN) && tmp.Contains(lN))
+                            {
+                                sw.WriteLine(tmp);
+                                Matches++;
+                            }
+                        }
+                        sw.Flush();
                     }
                 }
             }
+            Console.WriteLine("Checked {0} Matches {1}",Tries,Matches);
+            Environment.Exit(0);
         }
-
 	}
 }
 

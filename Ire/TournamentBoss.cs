@@ -147,7 +147,6 @@ namespace Ire
                 ap.setMMS(100 - gap); 
                 ap.setInitMMS(100 - gap);
 			}
-
 		}
 
 		public void UpdateParticipation(int _rnd)

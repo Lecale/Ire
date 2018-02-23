@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Ire
 {
@@ -6,8 +7,18 @@ namespace Ire
     {
         static void Main(string[] args)
         {
-			foreach (string a in args)
-				Console.WriteLine (a);
+            if (args.Length > 0)
+            {
+                if (args[0].Equals("SRCH"))
+                {
+                    List<string> etsr = new List<string>();
+                    for (int i = 1; i < args.Length; i++)
+                        etsr.Add(args[i]);
+                    Utility u = new Utility();
+                    u.egfTextSearchResults(etsr);
+                }                
+            }
+
             TournamentBoss tb = new TournamentBoss(true);
 			bool newT = tb.GenerateTemplateInputFile (); //set working directory
             int startRound = 1;

@@ -18,7 +18,8 @@ namespace Ire
 		public float MOS = -1; //Median
         public float SODOS = -1; //Sonnenborg-Bergen
         public float MDOS = -1; //Tampere
-		protected int eRating; // effective rating, used for lower bar
+        //public float SOSOS = -1; //To be implemented !
+        protected int eRating; // effective rating, used for lower bar
 		public int EGDPin;
 		public int Deed = -1; //Deed is the draw seeding for a particular round
 
@@ -218,10 +219,6 @@ namespace Ire
 		{
 			return MMS - initMMS;
 		}
-
-        //Essentially CompareTo, which is sorting, relies upon the Tiebreaker list
-        //If we have 2 list of Tiebreakers, we can acheive different results
-        //That is after <Tournament ends> Reset T.List and Resort
 
 		public int CompareTo(Player p)
         {
