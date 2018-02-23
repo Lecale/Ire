@@ -287,7 +287,9 @@ namespace Ire
                         {
                             _SODOS = 0.5f * _SOS / (rnd); // assign half mean SOS
                         }
-					} else {
+					}
+                    else
+                    {
 						_SODOS = 0.5f * _SOS / (rnd);
 					}
                 }
@@ -309,6 +311,43 @@ namespace Ire
                 {
                     ap.MDOS = _SODOS / _score;
                 }                                    
+            }
+            // now that all players are updated, we can calculate SOSOS
+            if (Tiebreakers.Contains("SOSOS") || EndTiebreakers.Contains("SOSOS"))
+            {//if we have to             
+                foreach (Player ap in AllPlayers)
+                {
+                    float _SOSOS = 0;
+                    int nGame = 0;
+                    for (int i = 0; i < rnd; i++)
+                    {
+                        try
+                        {
+                            if (ap.getParticipation(i) == true)
+                            {
+                                nGame++;
+                                int op = ap.getOpponent(i) - 1;
+                                //float f = AllPlayers[lookUp[op]].getMMS();
+                                //f = f + ap.getAdjHandi(i);
+                                //_SOS += f;
+                                _SOSOS += AllPlayers[lookUp[op]].SOS;
+                            }
+                        }
+                        catch {} //would be really odd to have an exception here
+                    }
+                    if (nGame < rnd)
+                    {
+                        if (nGame != 0)
+                        {
+                            _SOSOS = _SOSOS * rnd / nGame;
+                        }
+                        else
+                        {
+                            _SOSOS = rnd * ap.SOS; 
+                        }
+                    }
+                    ap.SOSOS = _SOSOS;
+                }
             }
         }
 
@@ -1341,10 +1380,12 @@ Bd	White	Result	Black	Handicap
                 if (tb.Equals("MOS"))
                     s += (p.MOS + "\t");
                 if (tb.Equals("MDOS"))
-                    s += (p.MDOS + "\t"); 
+                    s += (p.MDOS + "\t");
                 if (tb.Equals("OPERA"))
                     s += (p.OPERA + "\t");
-			}
+                if (tb.Equals("SOSOS"))
+                    s += (p.SOSOS + "\t");
+            }
 			return s;
 		}
 

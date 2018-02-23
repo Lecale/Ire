@@ -18,7 +18,7 @@ namespace Ire
 		public float MOS = -1; //Median
         public float SODOS = -1; //Sonnenborg-Bergen
         public float MDOS = -1; //Tampere
-        //public float SOSOS = -1; //To be implemented !
+        public float SOSOS = -1; //
         protected int eRating; // effective rating, used for lower bar
 		public int EGDPin;
 		public int Deed = -1; //Deed is the draw seeding for a particular round
@@ -235,13 +235,20 @@ namespace Ire
 			if (p.MMS == MMS) {
 				foreach(string tie in Tiebreaker)
 				{
-					if(tie.Equals("SOS"))
-					{
-						if(p.SOS > SOS)
-							return 1;
-						if(p.SOS < SOS)
-							return -1;	
-					}if(tie.Equals("MOS"))
+                    if (tie.Equals("SOS"))
+                    {
+                        if (p.SOS > SOS)
+                            return 1;
+                        if (p.SOS < SOS)
+                            return -1;
+                    }if (tie.Equals("SOSOS"))
+                    {
+                        if (p.SOSOS > SOSOS)
+                            return 1;
+                        if (p.SOSOS < SOSOS)
+                            return -1;
+                    }
+                    if (tie.Equals("MOS"))
 					{
 						if(p.MOS > MOS)
 							return 1;
