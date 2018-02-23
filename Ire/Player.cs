@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ire
 {
@@ -33,7 +30,7 @@ namespace Ire
 		public static bool SortByRating = false;
 		#endregion
 
-        //INCLUDE GRADE
+        //the bool[] par must be changed to a short in order to indicate 0 point byes
 		public Player(int _seed, string _nom , int _rat, string _ctry, string _club, bool[] par, string _grd) 
 			: base (_nom, _rat, _club, _ctry )
         {
@@ -69,6 +66,8 @@ namespace Ire
 		{
 			participation[rnd] = play;
 		}
+
+        //Might be possible to use negative round numbers to create a 0 point bye instead of normal 0.5 points
 		public void AssignBye(int rnd)
 		{
             rnd--; //0 based arrary as always
@@ -220,9 +219,12 @@ namespace Ire
 			return MMS - initMMS;
 		}
 
+        //Essentially CompareTo, which is sorting, relies upon the Tiebreaker list
+        //If we have 2 list of Tiebreakers, we can acheive different results
+        //That is after <Tournament ends> Reset T.List and Resort
+
 		public int CompareTo(Player p)
         {
-//            Player p = (Player)o; // how gross is this?
 			if (SortByRating) {
 				if (p.eRating > eRating)
 					return 1;

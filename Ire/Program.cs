@@ -24,8 +24,7 @@ namespace Ire
                 tb.SortField(true);
 				Console.Clear();
 				Console.WriteLine("Now please complete your data in the Settings File.");
-				Console.WriteLine("When you have finished press return.");
-                s = Console.ReadLine();	
+                awaitText("When you have finished type 'done'", true, "done");
                 tb.ReadSettings();
                 tb.previewTopBar(true);
                 tb.previewFloor(true);
@@ -45,6 +44,7 @@ namespace Ire
                 tb.SortField();
                 tb.GenerateStandingsfile(i);
             }
+                tb.GenerateFinalStandingsFile(rounds);  //Experimental !
             tb.GenerateEGFExport();
             tb.ConvertStandingsToHTML(rounds);
 
@@ -53,5 +53,16 @@ namespace Ire
             Console.WriteLine("We hope you enjoyed using Ire to make the pairings.");
         }
 
+        public static void awaitText(string instruction, bool clearConsole = true, string keyPhrase = "done")
+        {
+            bool awaiting = true;
+            while (awaiting)
+            {
+                Console.WriteLine(instruction);
+                if (keyPhrase.ToLower().Equals(Console.ReadLine()))
+                    awaiting = false;
+            }
+            if (clearConsole) Console.Clear();
+        }
     }
 }

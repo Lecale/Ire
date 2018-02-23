@@ -22,6 +22,7 @@ namespace Ire
 		bool RatingFloor=false;
         bool HandiAboveBar = false;
         bool Verbose = false;
+        bool TeaBreak = false; //EndTiebreakers
 		int HandiAdjust=1;
 		int nMaxHandicap = 9;
 		int nTopBar = 5000;
@@ -33,9 +34,10 @@ namespace Ire
 		List<Pairing> AllPairings = new List<Pairing> ();
 		List<Pairing> RoundPairings = new List<Pairing> ();
         List<string> Tiebreakers = new List<string>(); //to take from Settings
-		#endregion
+        List<string> EndTiebreakers = new List<string>(); //Final round only
+        #endregion
 
-		public TournamentBoss(bool Mac=false)
+        public TournamentBoss(bool Mac=false)
         {
 			Macintosh = Mac;
             exeDirectory = Directory.GetCurrentDirectory();
@@ -43,6 +45,7 @@ namespace Ire
         }
 
 		#region NormalOperations
+        //This would need changes if we add new class of tiebreakers.
 		public void SortField(bool init=false)
 		{
 			if (init)
@@ -71,8 +74,7 @@ namespace Ire
 				Console.WriteLine ("Do you want to update player participation (byes) in the players list (yes / no)");
 		    	s = Console.ReadLine ();
 				if (s.ToUpper ().Trim ().StartsWith ("Y")) {
-                    Console.WriteLine("After updating the players file press return to continue");
-                    string anykey = Console.ReadLine();
+                    awaitText("After updating the players file type 'done' to continue",true);
 					ReadByesFromFile (currentRound);
 				}
 			}
@@ -163,9 +165,8 @@ namespace Ire
 		public int AssignBye(int _rnd, int ByeLevel=1)
 		{ 
 			for (int i = RoundPlayers.Count - 1; i >-1; i--) {
-				//Console.WriteLine (i);
 				if (RoundPlayers [i].nBye() < ByeLevel) {
-					Console.WriteLine ("A bye will be assigned to ...");
+					Console.WriteLine ("A bye will be assigned to:");
 					Console.WriteLine (RoundPlayers [i].ToString ());
 					RoundPlayers [i].AssignBye (_rnd);
 					RoundPlayers.RemoveAt (i);
@@ -311,6 +312,8 @@ namespace Ire
                 }                                    
             }
         }
+
+        //Probably we won't use this
         #region OPERA
         public void FirstRatingDerivative(int rnd)
         {
@@ -689,11 +692,6 @@ namespace Ire
 		public void ReadPlayers(bool Supression=false, bool Initial = false)
         {
             if (Initial == true) awaitText("Please type 'done' when you have finished editing players.txt", true);
-            /*            {
-                            Console.WriteLine ("Please press return when you have finished editing players.txt");
-                            Console.ReadLine ();
-                        }
-            */
             string tLn = "";
 			string fin = workDirectory + "players.txt";
             using (StreamReader reader = new StreamReader(fin))
@@ -745,8 +743,10 @@ namespace Ire
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine("Entry format error" + e.Message);
+                        Console.WriteLine("A format error prevented registration of: {0}", e.Message);
                         Console.WriteLine(tLn);
+                        Console.WriteLine("Press any key to continue");
+                        Console.ReadLine();
                     }
                 }
 				Console.WriteLine ("Number of players now registered is " + AllPlayers.Count);
@@ -895,8 +895,7 @@ namespace Ire
 					    riter.WriteLine ("Top Bar Rating:\t");
 					    riter.WriteLine ("Permit handicap above bar:\tNo");
 				    }
-				    if(RatingFloor)
-					    riter.WriteLine ("Rating Floor:\t");
+				    if(RatingFloor)  riter.WriteLine ("Rating Floor:\t");
 				    riter.WriteLine ("Handicap Policy:\t"+HandiAdjust);
 				    riter.WriteLine ("Max Handicap:\t"+nMaxHandicap);		
 				    riter.WriteLine ("Grade Width:\t"+nGradeWidth);		
@@ -942,10 +941,22 @@ namespace Ire
 	                                if (s[1].ToUpper().StartsWith("Y"))
 	                                    HandiAboveBar = true;
                                 }
-                                if (s[0].Contains("Tiebreak ") && s.Length > 1) //should check for secondary marker
+                                if (s[0].Contains("Tiebreak ") && s.Length > 1) 
                                 {
                                     if (s[1].Trim() != "")
-                                        Tiebreakers.Add(s[1].ToUpper());
+                                    {
+                                        if (s.Length == 3)  //Tiebreakers applying to END or Pairing
+                                        {
+                                            TeaBreak = true;    //There is a difference in 2 lists
+                                            if(s[2].ToUpper().Equals("END")) EndTiebreakers.Add(s[1].ToUpper());
+                                            if (s[2].ToUpper().Equals("PAIR")) Tiebreakers.Add(s[1].ToUpper());
+                                        }
+                                        else //ALL
+                                        {
+                                            Tiebreakers.Add(s[1].ToUpper());
+                                            EndTiebreakers.Add(s[1].ToUpper());
+                                        }
+                                    }
                                 }
 						}
 					}
@@ -1156,7 +1167,12 @@ Bd	White	Result	Black	Handicap
                 ProcessResults(i);
             }
             Console.WriteLine("Updating Tiebreakers ...");
-			UpdateTiebreaks (rndRestore); 
+			UpdateTiebreaks (rndRestore);
+            //BUG FIX #1
+            // What is the situation here, it would be nice to know
+            // Is our field sorted? Difference in restore draw might be explained here.
+                SortField(); 
+            //
             return rndRestore + 1;
         }
 #endregion
@@ -1257,7 +1273,41 @@ Bd	White	Result	Black	Handicap
 			VerboseStandings (rnd); //To be made optional ?
 		}
 
-		public void VerboseStandings(int rnd)
+        //
+        public void GenerateFinalStandingsFile(int rnd)
+        {
+            if (TeaBreak == false)
+                ; //The field does not need to be sorted again
+            else
+            {
+                Console.WriteLine("Regenerating round {0} standings file",rnd);
+                Player.SetTiebreakers(EndTiebreakers);
+                SortField();
+                //
+                string hdr = "Pl\tName\tRank\tRating\tMMS\tWins\t";
+                for (int i = 0; i < rnd; i++)
+                    hdr = hdr + (i + 1) + "\t";
+                foreach (string tb in Tiebreakers)
+                    hdr = hdr + tb + "\t";
+
+                using (StreamWriter sw = new StreamWriter(workDirectory + "Round" + rnd + "Standings.txt"))
+                {
+                    sw.WriteLine("Tournament: " + TournamentName + " Round: " + rnd);
+                    sw.WriteLine("");
+                    sw.WriteLine(hdr);
+                    int cnt = 1;
+                    string t = "\t";
+                    foreach (Player ap in AllPlayers)
+                    {
+                        sw.WriteLine(cnt++ + t + ap.ToStanding(rnd) + TiebreakerOut(ap));
+                    }
+                }
+                VerboseStandings(rnd);
+            }
+         
+        }
+
+        public void VerboseStandings(int rnd)
 		{
 			string hdr = "Pl\tName\tRank\tRating\tMMS\tWins\t";
 			for (int i = 0; i < rnd; i++)
@@ -1265,8 +1315,8 @@ Bd	White	Result	Black	Handicap
 			foreach(string tb in Tiebreakers)
 				hdr = hdr + tb + "\t";
 			if (rnd == 0)
-			if (File.Exists (workDirectory + "RoundStandings.txt"))
-				File.Delete (workDirectory + "RoundStandings.txt");
+			    if (File.Exists (workDirectory + "RoundStandings.txt"))
+				    File.Delete (workDirectory + "RoundStandings.txt");
 			using (StreamWriter sw = new StreamWriter (workDirectory + "RoundStandings.txt", true)) {
 				sw.WriteLine ("Standings for Round " + rnd);
 				sw.WriteLine("");
