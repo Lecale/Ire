@@ -1419,6 +1419,56 @@ Bd	White	Result	Black	Handicap
 				sw.WriteLine ("</body></html>");
 			}
 		}
+
+        //take the row of HTML, find all Floats, convert to fractions
+        public string ConvertFloatToFraction(string s)
+        {
+            List<string> Floats = new List<string>();
+            List<string> Fractions = new List<string>();
+            float _f;
+            int _i;
+            float _fPoint;
+            string[] split = s.Split(new char[] { '>', '<' });
+            foreach (string sp in split)
+            {
+                try {
+                    _f = float.Parse(sp);
+                    try { _i = int.Parse(sp); }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("{1}::{0}", e.Message, sp);
+                        _fPoint = _f - (int)_f;
+
+                        double z = _fPoint;
+                        int previousDenominator = 0;
+                        int denominator = 1;
+                        int numerator;
+
+                        do
+                        {
+                            z = 1.0 / (z - (int)z);
+                            int temp = denominator;
+                            denominator = denominator * (int)z + previousDenominator;
+                            previousDenominator = temp;
+                            numerator = Convert.ToInt32(_fPoint * denominator);
+                        }
+                        while (Math.Abs(_fPoint - (double)numerator / denominator) > 0.001 && z != (int)z);
+
+                        Console.WriteLine("numerator {0}",numerator);
+                        Console.WriteLine("denominator {0}", denominator);
+
+                        Floats.Add(sp);
+                        Fractions.Add("" + (int)_f + "<sup>"+ numerator +"</sup>/<sub>"+ denominator + "</sub>");  
+                    }
+                }
+                catch { }
+            }
+            for (int ii = 0; ii < Floats.Count; ii++)
+            {
+                s = s.Replace(Floats[ii], Fractions[ii]);
+            }
+            return s;
+        }
         #endregion
 
         #region Statistics
@@ -1464,5 +1514,6 @@ Bd	White	Result	Black	Handicap
             return answer.ToString("0.000");
         }
         #endregion
+
     }
 }
