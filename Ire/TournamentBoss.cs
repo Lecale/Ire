@@ -1407,7 +1407,9 @@ Bd	White	Result	Black	Handicap
                 sw.WriteLine("<head><title>"+TournamentName+"</title></head><body>");
                 sw.WriteLine("<table border=1 caption=\"The final standings of \"" + TournamentName + ">");
 				foreach (string al in AllLines) {
-					sw.WriteLine("<tr><td>" + al.Replace("\t","</td><td>") + "</td></tr>");
+                    string al2 = al.Replace("\t", "</td><td>") ;
+                    al2 = ConvertFloatToFraction(al2);
+					sw.WriteLine("<tr><td>" + al2 + "</td></tr>");
 				}
 				sw.WriteLine ("</table>");
 				if(TopBar)
