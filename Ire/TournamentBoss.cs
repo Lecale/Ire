@@ -126,8 +126,8 @@ namespace Ire
             GenerateRoundResultsFile(currentRound, RndPairings);
             Console.WriteLine();
 			Console.WriteLine ("The draw is available at Round"+currentRound+"Results.txt");
-			Console.WriteLine("Remember that the draw can be overwritten in the input file");
-            Console.WriteLine("When you are ready to read in the completed results, press return");
+            Console.WriteLine("Remember that the draw can be overwritten in the input file");
+            Console.WriteLine("When you are ready to read in the results press Return");
             string anyKey = Console.ReadLine();
             if (anyKey.ToUpper().Equals("AUTO"))
             {
@@ -743,7 +743,30 @@ namespace Ire
                     try
                     {
                         int pine = int.Parse(split[0]);
-                        int rats = int.Parse(split[2]);
+                        int rats = -1;
+                        string[] magic;
+                        try { rats = int.Parse(split[2]); }
+                        catch(Exception e) //allow something like *2*dan* to be entered
+                        {
+                            Console.WriteLine("conversion magic");
+                            if (split[2].StartsWith("*"))
+                            {
+                                if (split[2].ToLower().Contains("kyu"))
+                                {
+                                    magic = split[2].Split(new char[] { '*' },StringSplitOptions.RemoveEmptyEntries);
+                                    rats = (20 - int.Parse(magic[0])) * 100;
+                                }
+                                if (split[2].ToLower().Contains("dan"))
+                                {
+                                    magic = split[2].Split(new char[] { '*' });
+                                    rats = (19 + int.Parse(magic[0])) * 100;
+                                }
+                                if (rats == -1)
+                                    throw new Exception(e.Message);
+                                else
+                                    Console.WriteLine("converted {0} to {1}", split[2],rats );
+                            }
+                        }
 						bool[] bull = new bool[nRounds]; //not set via input file
 						for(int k=0; k<bull.Length; k++)
 							bull[k]=true;
@@ -1438,7 +1461,6 @@ Bd	White	Result	Black	Handicap
                     try { _i = int.Parse(sp); }
                     catch (Exception e)
                     {
-                        Console.WriteLine("{1}::{0}", e.Message, sp);
                         _fPoint = _f - (int)_f;
 
                         double z = _fPoint;
@@ -1455,10 +1477,6 @@ Bd	White	Result	Black	Handicap
                             numerator = Convert.ToInt32(_fPoint * denominator);
                         }
                         while (Math.Abs(_fPoint - (double)numerator / denominator) > 0.001 && z != (int)z);
-
-                        Console.WriteLine("numerator {0}",numerator);
-                        Console.WriteLine("denominator {0}", denominator);
-
                         Floats.Add(sp);
                         Fractions.Add("" + (int)_f + "<sup>"+ numerator +"</sup>/<sub>"+ denominator + "</sub>");  
                     }
